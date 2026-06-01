@@ -1,3 +1,4 @@
+@@ -1,159 +1,226 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -86,6 +87,7 @@ def search_semantic_scholar(query: str):
 # =====================================================
 def build_research_context(openalex_papers, semantic_papers):
 
+
     all_papers = openalex_papers + semantic_papers
 
     # Remove papers with no useful content
@@ -119,6 +121,7 @@ def evaluate_technology(
 
     try:
 
+
         # -----------------------------
         # STEP 1: RETRIEVE FROM BOTH SOURCES
         # -----------------------------
@@ -135,7 +138,7 @@ def evaluate_technology(
             semantic_papers
         )
 
-        # -----------------------------
+
         # STEP 3: SEND TO GPT
         # -----------------------------
         response = client.chat.completions.create(
