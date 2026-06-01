@@ -13,7 +13,7 @@ export default function TechnologiesPage() {
   useEffect(() => {
 
     axios
-      .get("http://127.0.0.1:8000/technologies")
+      .get("http:calgary-compass-self.vercel.app/technologies")
       .then((response) => {
 
         setTechnologies(response.data);
