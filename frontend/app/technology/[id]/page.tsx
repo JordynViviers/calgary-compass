@@ -53,7 +53,7 @@ export default function TechnologyDetailPage() {
     // TECHNOLOGY INFO
 
     axios
-      .get("https://calgary-compass-ai.onrender.com/technologies")
+      .get("https://calgary-compass-api.onrender.com/technologies")
       .then((response) => {
 
         const foundTechnology = response.data.find(
@@ -76,7 +76,7 @@ export default function TechnologyDetailPage() {
 
     axios
       .get(
-        `https://calgary-compass-ai.onrender.com/technology/${id}/weighted-scores`
+        `https://calgary-compass-api.onrender.com/technology/${id}/weighted-scores`
       )
       .then((response) => {
 
@@ -100,7 +100,7 @@ export default function TechnologyDetailPage() {
 
     axios
       .get(
-        `https://calgary-compass-ai.onrender.com/technology/${id}/comparison`
+        `https://calgary-compass-api.onrender.com/technology/${id}/comparison`
       )
       .then((response) => {
 
@@ -131,7 +131,7 @@ export default function TechnologyDetailPage() {
     try {
 
       await axios.post(
-        "https://calgary-compass-ai.onrender.com/vote",
+        "https://calgary-compass-api.onrender.com/vote",
         {
 
           technology_id: Number(id),
