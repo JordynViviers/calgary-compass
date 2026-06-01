@@ -1,0 +1,16 @@
+import requests
+
+query = "smart cities"
+
+response = requests.get(
+    "https://api.openalex.org/works",
+    params={
+        "search": query,
+        "per-page": 5
+    }
+)
+
+papers = response.json()["results"]
+
+for paper in papers:
+    print(paper["title"])
