@@ -16,7 +16,7 @@ export default function AdminPage() {
     try {
 
       await axios.post(
-        "http://127.0.0.1:8000/technology",
+        "https://calgary-compass-api.onrender.com/technology",
         {
           name,
           description,
