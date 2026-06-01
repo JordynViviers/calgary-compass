@@ -362,3 +362,27 @@ def technology_comparison(
 
         "ai": ai_scores
     }
+
+@app.delete("/technology/{technology_id}")
+def delete_technology(
+    technology_id: int,
+    db: Session = Depends(get_db)
+):
+
+    technology = db.query(Technology).filter(
+        Technology.id == technology_id
+    ).first()
+
+    if not technology:
+
+        return {
+            "error": "Technology not found"
+        }
+
+    db.delete(technology)
+
+    db.commit()
+
+    return {
+        "message": "Technology deleted"
+    }
