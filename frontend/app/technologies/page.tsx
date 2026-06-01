@@ -16,9 +16,12 @@ export default function TechnologiesPage() {
       .get("https://calgary-compass-api.onrender.com/technologies")
       .then((response) => {
 
-        setTechnologies(response.data);
+       console.log("API RESPONSE:", response.data);
+
+       setTechnologies(response.data);
 
       })
+
       .catch((error) => {
 
         console.error(error);
