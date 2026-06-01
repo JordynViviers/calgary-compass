@@ -9,7 +9,7 @@ export default function TechnologiesPage() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/technologies")
+      .get("https://calgary-compass-api.onrender.com/technologies")
       .then((response) => {
         setTechnologies(response.data);
       })
