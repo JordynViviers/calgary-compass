@@ -53,7 +53,7 @@ export default function TechnologyDetailPage() {
     // TECHNOLOGY INFO
 
     axios
-      .get("http://127.0.0.1:8000/technologies")
+      .get("https://calgary-compass-ai.onrender.com/technologies")
       .then((response) => {
 
         const foundTechnology = response.data.find(
@@ -76,7 +76,7 @@ export default function TechnologyDetailPage() {
 
     axios
       .get(
-        `http://127.0.0.1:8000/technology/${id}/weighted-scores`
+        `https://calgary-compass-ai.onrender.com/technology/${id}/weighted-scores`
       )
       .then((response) => {
 
@@ -100,7 +100,7 @@ export default function TechnologyDetailPage() {
 
     axios
       .get(
-        `http://127.0.0.1:8000/technology/${id}/comparison`
+        `https://calgary-compass-ai.onrender.com/technology/${id}/comparison`
       )
       .then((response) => {
 
@@ -131,7 +131,7 @@ export default function TechnologyDetailPage() {
     try {
 
       await axios.post(
-        "http://127.0.0.1:8000/vote",
+        "https://calgary-compass-ai.onrender.com/vote",
         {
 
           technology_id: Number(id),
