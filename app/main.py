@@ -390,24 +390,36 @@ def delete_technology(
 @app.put("/technology/{technology_id}")
 def update_technology(
     technology_id: int,
-    technology_data: TechnologyCreate,
+    technology_data: TechnologyRequest,
     db: Session = Depends(get_db)
 ):
 
-    technology = db.query(Technology).filter(
+    technology = db.query(
+        Technology
+    ).filter(
         Technology.id == technology_id
     ).first()
 
     if not technology:
+
         return {
             "error": "Technology not found"
         }
 
-    technology.name = technology_data.name
-    technology.description = technology_data.description
-    technology.current_status = technology_data.current_status
+    technology.name = (
+        technology_data.name
+    )
+
+    technology.description = (
+        technology_data.description
+    )
+
+    technology.current_status = (
+        technology_data.current_status
+    )
 
     db.commit()
+
     db.refresh(technology)
 
     return technology
