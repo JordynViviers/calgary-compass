@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 import os
 import json
+import requests
 
 load_dotenv()
 
@@ -10,6 +11,50 @@ client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY")
 )
 
+
+# -----------------------------
+# STEP 1: OPENALEX SEARCH
+# -----------------------------
+def search_openalex(query: str):
+
+    try:
+        response = requests.get(
+            "https://api.openalex.org/works",
+            params={
+                "search": query,
+                "per-page": 5
+            },
+            timeout=10
+        )
+
+        data = response.json().get("results", [])
+
+        context = ""
+
+        for paper in data:
+
+            title = paper.get("title", "No title")
+            abstract = paper.get("abstract", None)
+
+            # OpenAlex sometimes does NOT return abstracts in search results
+            # so we safely handle missing data
+            context += f"""
+Title: {title}
+Abstract: {abstract if abstract else "Not available"}
+
+---
+"""
+
+        return context
+
+    except Exception as e:
+        print("OPENALEX ERROR:", str(e))
+        return "No research context available."
+
+
+# -----------------------------
+# STEP 2: MAIN FUNCTION
+# -----------------------------
 def evaluate_technology(
     technology_name,
     technology_description
@@ -17,6 +62,14 @@ def evaluate_technology(
 
     try:
 
+        # Build research query (this is your RAG step)
+        research_context = search_openalex(
+            f"{technology_name} smart city urban technology governance"
+        )
+
+        # -----------------------------
+        # STEP 3: CALL OPENAI WITH RAG CONTEXT
+        # -----------------------------
         response = client.chat.completions.create(
 
             model="gpt-4.1-mini",
@@ -27,44 +80,55 @@ def evaluate_technology(
                     "role": "system",
                     "content": """
 
-                    You are a smart city governance analyst.
+You are a smart city governance analyst.
 
-                    Return ONLY valid JSON.
+You MUST use the provided academic research context when available.
 
-                    """
+Do NOT invent research findings.
+
+Return ONLY valid JSON.
+
+"""
                 },
 
                 {
                     "role": "user",
                     "content": f"""
 
-                    Evaluate this technology from 1-10:
+Evaluate this technology from 1-10:
 
-                    Technology:
-                    {technology_name}
+Technology:
+{technology_name}
 
-                    Description:
-                    {technology_description}
+Description:
+{technology_description}
 
-                    Categories:
-                    - financial_sustainability
-                    - operational_excellence
-                    - people_culture
-                    - trusted_governance
-                    - innovation_agility
+-------------------------
+ACADEMIC RESEARCH (OpenAlex)
+-------------------------
+{research_context}
 
-                    Return JSON like:
+-------------------------
+CATEGORIES
+-------------------------
+- financial_sustainability
+- operational_excellence
+- people_culture
+- trusted_governance
+- innovation_agility
 
-                    {{
-                        "financial_sustainability": 7,
-                        "operational_excellence": 8,
-                        "people_culture": 6,
-                        "trusted_governance": 5,
-                        "innovation_agility": 9,
-                        "summary": "..."
-                    }}
+Return JSON like:
 
-                    """
+{{
+    "financial_sustainability": 7,
+    "operational_excellence": 8,
+    "people_culture": 6,
+    "trusted_governance": 5,
+    "innovation_agility": 9,
+    "summary": "..."
+}}
+
+"""
                 }
             ],
 
