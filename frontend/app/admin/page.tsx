@@ -9,12 +9,8 @@ const API_URL =
 export default function AdminPage() {
 
   const [name, setName] = useState("");
-
-  const [description, setDescription] =
-    useState("");
-
-  const [status, setStatus] =
-    useState("Identified");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("Identified");
 
   const [editingId, setEditingId] =
     useState<number | null>(null);
@@ -140,6 +136,31 @@ export default function AdminPage() {
     }
   };
 
+  const evaluateTechnology = async (
+    technologyId: number
+  ) => {
+
+    try {
+
+      await axios.post(
+        `${API_URL}/technology/${technologyId}/ai-evaluate`
+      );
+
+      alert(
+        "AI evaluation completed!"
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "AI evaluation failed."
+      );
+
+    }
+  };
+
   const editTechnology = (
     technology: any
   ) => {
@@ -187,9 +208,7 @@ export default function AdminPage() {
         </h2>
 
         <label className="block mb-2">
-
           Technology Name
-
         </label>
 
         <input
@@ -203,9 +222,7 @@ export default function AdminPage() {
         />
 
         <label className="block mb-2">
-
           Description
-
         </label>
 
         <textarea
@@ -220,9 +237,7 @@ export default function AdminPage() {
         />
 
         <label className="block mb-2">
-
           Status
-
         </label>
 
         <select
@@ -253,6 +268,7 @@ export default function AdminPage() {
           <option>
             Completed
           </option>
+
         </select>
 
         <div className="flex gap-3">
@@ -351,6 +367,19 @@ export default function AdminPage() {
                     >
 
                       Edit
+
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        evaluateTechnology(
+                          technology.id
+                        )
+                      }
+                      className="bg-green-600 px-4 py-2 rounded-xl"
+                    >
+
+                      AI Evaluate
 
                     </button>
 
