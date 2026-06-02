@@ -442,3 +442,25 @@ def get_technology(
         }
 
     return technology
+
+@app.get("/technology/{technology_id}/ai-evaluation")
+def get_ai_evaluation(
+    technology_id: int,
+    db: Session = Depends(get_db)
+):
+
+    evaluation = db.query(
+        AIEvaluation
+    ).filter(
+        AIEvaluation.technology_id
+        == technology_id
+    ).first()
+
+    if not evaluation:
+
+        return {
+            "error":
+            "No AI evaluation found"
+        }
+
+    return evaluation
