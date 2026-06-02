@@ -423,3 +423,22 @@ def update_technology(
     db.refresh(technology)
 
     return technology
+
+@app.get("/technology/{technology_id}")
+def get_technology(
+    technology_id: int,
+    db: Session = Depends(get_db)
+):
+
+    technology = db.query(
+        Technology
+    ).filter(
+        Technology.id == technology_id
+    ).first()
+
+    if not technology:
+        return {
+            "error": "Technology not found"
+        }
+
+    return technology
