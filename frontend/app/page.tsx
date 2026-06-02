@@ -44,7 +44,7 @@ export default function Home() {
       <section className="relative flex flex-col justify-center items-center min-h-[85vh] px-10 overflow-hidden">
 
         {/* Background Compass */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none translate-y-[18px]">
 
           {/* Compass Body */}
           <div className="relative w-[90vw] max-w-[700px] aspect-square opacity-15">
