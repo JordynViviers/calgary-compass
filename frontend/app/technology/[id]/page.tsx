@@ -583,3 +583,19 @@ export default function TechnologyDetailPage() {
     </main>
   );
 }
+
+<Link
+  href={`/technology/${id}/vote`}
+>
+  <button
+    className="
+      bg-blue-600
+      px-6
+      py-3
+      rounded-xl
+      mt-6
+    "
+  >
+    Submit Stakeholder Vote
+  </button>
+</Link>
