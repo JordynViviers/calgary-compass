@@ -3,20 +3,48 @@
 import { useState } from "react";
 import Link from "next/link";
 
+const technologies = [
+  "Artificial Intelligence",
+  "Digital Twins",
+  "Smart Mobility",
+  "IoT Sensors",
+  "Cybersecurity",
+];
+
+const criteria = [
+  "Financial Sustainability",
+  "Operational Excellence",
+  "Innovation and Agility",
+  "Trusted and Transparent Governance",
+  "People and Culture First",
+];
+
 export default function CommunityInputPage() {
   const [sector, setSector] = useState("");
-  const [technology, setTechnology] = useState("");
-  const [reason, setReason] = useState("");
   const [signals, setSignals] = useState("");
-  const [futureVision, setFutureVision] = useState("");
+  const [ratings, setRatings] = useState<Record<string, Record<string, string>>>(
+    {}
+  );
+
+  function updateRating(
+    technology: string,
+    criterion: string,
+    value: string
+  ) {
+    setRatings((previousRatings) => ({
+      ...previousRatings,
+      [technology]: {
+        ...previousRatings[technology],
+        [criterion]: value,
+      },
+    }));
+  }
 
   function handleSubmit() {
     console.log({
       sector,
-      technology,
-      reason,
+      ratings,
       signals,
-      futureVision,
     });
 
     alert("Community input submitted!");
@@ -53,25 +81,30 @@ export default function CommunityInputPage() {
           </h1>
 
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Help shape Calgary&apos;s smart city future by sharing your
-            perspectives, priorities, and observations.
+            Rate how emerging technologies align with Calgary&apos;s smart city
+            governance priorities.
           </p>
         </section>
 
-        <section className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl shadow-sm p-8">
-          <div className="mb-10">
-            <h2 className="text-3xl font-bold text-red-700 mb-3">
-              1. Which sector do you represent?
-            </h2>
+        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-12">
+          <h2 className="text-3xl font-bold text-red-700 mb-3">
+            Section 1: Technology Ratings
+          </h2>
 
-            <p className="text-gray-700 mb-5">
-              Select the sector that best describes your perspective.
-            </p>
+          <p className="text-gray-700 mb-8">
+            First, tell us which sector you represent. Then rate each technology
+            from 1 to 10 across the five governance criteria.
+          </p>
+
+          <div className="mb-10">
+            <label className="block text-xl font-semibold mb-3">
+              Which sector do you represent?
+            </label>
 
             <select
               value={sector}
               onChange={(event) => setSector(event.target.value)}
-              className="w-full border border-gray-300 rounded-xl p-3"
+              className="w-full border border-gray-300 rounded-xl p-3 bg-white"
             >
               <option value="">Select a sector</option>
               <option value="Citizen">Citizen</option>
@@ -89,94 +122,88 @@ export default function CommunityInputPage() {
             </select>
           </div>
 
-          <div className="mb-10">
-            <h2 className="text-3xl font-bold text-red-700 mb-3">
-              2. Which technology should Calgary prioritize?
-            </h2>
+          <div className="space-y-8">
+            {technologies.map((technology) => (
+              <div
+                key={technology}
+                className="border border-gray-200 rounded-2xl p-6 bg-gray-50"
+              >
+                <h3 className="text-2xl font-bold text-red-700 mb-6">
+                  {technology}
+                </h3>
 
-            <p className="text-gray-700 mb-5">
-              Vote for the technology you feel is most likely to be needed.
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {criteria.map((criterion) => (
+                    <div key={criterion}>
+                      <label className="block font-semibold mb-2">
+                        {criterion}
+                      </label>
+
+                      <select
+                        disabled={!sector}
+                        value={ratings[technology]?.[criterion] || ""}
+                        onChange={(event) =>
+                          updateRating(
+                            technology,
+                            criterion,
+                            event.target.value
+                          )
+                        }
+                        className="w-full border border-gray-300 rounded-xl p-3 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                      >
+                        <option value="">Rate 1-10</option>
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => (
+                          <option key={number} value={number}>
+                            {number}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {!sector && (
+            <p className="text-sm text-gray-500 mt-6">
+              Please select your sector before rating technologies.
             </p>
-
-            <select
-              value={technology}
-              onChange={(event) => setTechnology(event.target.value)}
-              className="w-full border border-gray-300 rounded-xl p-3"
-              disabled={!sector}
-            >
-              <option value="">Select a technology</option>
-              <option value="Artificial Intelligence">
-                Artificial Intelligence
-              </option>
-              <option value="Digital Twins">Digital Twins</option>
-              <option value="Smart Mobility">Smart Mobility</option>
-              <option value="IoT Sensors">IoT Sensors</option>
-              <option value="Cybersecurity">Cybersecurity</option>
-              <option value="Autonomous Vehicles">Autonomous Vehicles</option>
-            </select>
-
-            {!sector && (
-              <p className="text-sm text-gray-500 mt-2">
-                Please select your sector before voting.
-              </p>
-            )}
-          </div>
-
-          <div className="mb-10">
-            <h2 className="text-3xl font-bold text-red-700 mb-3">
-              3. Why is this technology needed?
-            </h2>
-
-            <textarea
-              value={reason}
-              onChange={(event) => setReason(event.target.value)}
-              disabled={!sector || !technology}
-              placeholder="Describe the opportunity, challenge, or community need this technology could address."
-              className="w-full border border-gray-300 rounded-xl p-4 min-h-36"
-            />
-          </div>
-
-          <div className="mb-10">
-            <h2 className="text-3xl font-bold text-red-700 mb-3">
-              4. Community signals and concerns
-            </h2>
-
-            <p className="text-gray-700 mb-4">
-              Share any emerging issues, concerns, trends, or signals you are
-              noticing in your community.
-            </p>
-
-            <textarea
-              value={signals}
-              onChange={(event) => setSignals(event.target.value)}
-              disabled={!sector}
-              placeholder="Examples: housing affordability, traffic congestion, climate resilience, public safety, digital inclusion..."
-              className="w-full border border-gray-300 rounded-xl p-4 min-h-36"
-            />
-          </div>
-
-          <div className="mb-10">
-            <h2 className="text-3xl font-bold text-red-700 mb-3">
-              5. What should Calgary look like in 10 years?
-            </h2>
-
-            <textarea
-              value={futureVision}
-              onChange={(event) => setFutureVision(event.target.value)}
-              disabled={!sector}
-              placeholder="Describe one outcome you would like smart city technologies to help Calgary achieve."
-              className="w-full border border-gray-300 rounded-xl p-4 min-h-36"
-            />
-          </div>
-
-          <button
-            onClick={handleSubmit}
-            disabled={!sector || !technology || !reason}
-            className="w-full bg-red-700 text-white px-6 py-3 rounded-xl text-lg font-semibold hover:bg-red-800 transition disabled:bg-gray-300 disabled:cursor-not-allowed"
-          >
-            Submit Community Input
-          </button>
+          )}
         </section>
+
+        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-12">
+          <h2 className="text-3xl font-bold text-red-700 mb-3">
+            Section 2: Community Concerns and Signals
+          </h2>
+
+          <p className="text-gray-700 mb-6">
+            Are there any concerns, community needs, or early signals pointing
+            toward an upcoming technology that Calgary should be aware of?
+          </p>
+
+          <textarea
+            value={signals}
+            onChange={(event) => setSignals(event.target.value)}
+            disabled={!sector}
+            placeholder="Examples: new transportation needs, climate resilience concerns, privacy concerns, public safety trends, accessibility issues, infrastructure pressure, digital inclusion..."
+            className="w-full border border-gray-300 rounded-xl p-4 min-h-40 disabled:bg-gray-100 disabled:cursor-not-allowed"
+          />
+
+          {!sector && (
+            <p className="text-sm text-gray-500 mt-3">
+              Please select your sector before adding comments.
+            </p>
+          )}
+        </section>
+
+        <button
+          onClick={handleSubmit}
+          disabled={!sector}
+          className="w-full bg-red-700 text-white px-6 py-4 rounded-xl text-lg font-semibold hover:bg-red-800 transition disabled:bg-gray-300 disabled:cursor-not-allowed"
+        >
+          Submit Community Input
+        </button>
       </div>
     </main>
   );
