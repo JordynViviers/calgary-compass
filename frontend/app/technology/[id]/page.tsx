@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import Link from "next/link";
-
 import { useParams } from "next/navigation";
 
 import {
@@ -586,18 +584,3 @@ export default function TechnologyDetailPage() {
   );
 }
 
-<Link
-  href={`/technology/${id}/vote`}
->
-  <button
-    className="
-      bg-blue-600
-      px-6
-      py-3
-      rounded-xl
-      mt-6
-    "
-  >
-    Submit Stakeholder Vote
-  </button>
-</Link>
