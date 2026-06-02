@@ -84,21 +84,89 @@ export default function CommunityInputPage() {
 
   }
 
-  function handleSubmit() {
+async function handleSubmit() {
 
-    console.log({
+  try {
 
-      sector,
-      ratings,
-      signals,
+    for (const technology of technologies) {
 
-    });
+      const techRatings =
+        ratings[
+          technology.name
+        ];
+
+      if (!techRatings) {
+        continue;
+      }
+
+      await axios.post(
+        `${API_URL}/vote`,
+        {
+
+          technology_id:
+            technology.id,
+
+          stakeholder:
+            sector,
+
+          financial_sustainability:
+            Number(
+              techRatings[
+                "Financial Sustainability"
+              ] || 0
+            ),
+
+          operational_excellence:
+            Number(
+              techRatings[
+                "Operational Excellence"
+              ] || 0
+            ),
+
+          innovation_agility:
+            Number(
+              techRatings[
+                "Innovation and Agility"
+              ] || 0
+            ),
+
+          trusted_governance:
+            Number(
+              techRatings[
+                "Trusted and Transparent Governance"
+              ] || 0
+            ),
+
+          people_culture:
+            Number(
+              techRatings[
+                "People and Culture First"
+              ] || 0
+            )
+
+        }
+      );
+
+    }
 
     alert(
-      "Community input submitted!"
+      "Community input submitted successfully!"
+    );
+
+    setRatings({});
+    setSignals("");
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Failed to submit community input."
     );
 
   }
+
+}
 
   return (
 
