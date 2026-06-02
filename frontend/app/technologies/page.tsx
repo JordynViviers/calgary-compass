@@ -6,12 +6,30 @@ import Link from "next/link";
 
 export default function TechnologiesPage() {
   const [technologies, setTechnologies] = useState<any[]>([]);
+  const [aiScores, setAiScores] = useState<any>({});
 
   useEffect(() => {
     axios
       .get("https://calgary-compass-api.onrender.com/technologies")
       .then((response) => {
         setTechnologies(response.data);
+
+        // AFTER loading technologies → load AI scores
+        response.data.forEach((tech: any) => {
+          axios
+            .get(
+              `https://calgary-compass-api.onrender.com/technology/${tech.id}/comparison`
+            )
+            .then((res) => {
+              setAiScores((prev: any) => ({
+                ...prev,
+                [tech.id]: res.data.ai,
+              }));
+            })
+            .catch((err) => {
+              console.error("AI load error:", err);
+            });
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -21,90 +39,77 @@ export default function TechnologiesPage() {
   return (
     <main className="min-h-screen bg-gray-50 text-black">
 
-      {/* Calgary Red Banner */}
       <div className="h-2 bg-red-700 w-full"></div>
 
       <div className="max-w-7xl mx-auto px-8 py-12">
 
-        {/* Header */}
-        <div className="relative mb-16">
+        <div className="relative mb-16 text-center">
 
-          <div className="text-center">
-            <h1 className="text-6xl font-bold text-red-700 mb-4">
-              Smart City Technologies
-            </h1>
+          <h1 className="text-6xl font-bold text-red-700 mb-4">
+            Smart City Technologies
+          </h1>
 
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-              Governance evaluations, strategic foresight,
-              and AI-assisted analysis of emerging technologies.
-            </p>
-          </div>
-
-          <div className="absolute top-0 right-0">
-            <Link href="/">
-              <button className="border-2 border-red-700 text-red-700 px-5 py-2 rounded-xl font-semibold hover:bg-red-700 hover:text-white transition-all duration-200">
-                Home
-              </button>
-            </Link>
-          </div>
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            Governance evaluations, strategic foresight,
+            and AI-assisted analysis of emerging technologies.
+          </p>
 
         </div>
 
-        {/* Results Count */}
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        {technologies.length > 0 && (
-          <div className="mb-8 text-gray-600 text-sm uppercase tracking-wide">
-            {technologies.length} Technologies Available
-          </div>
-        )}
+          {technologies.map((technology) => (
+            <Link
+              key={technology.id}
+              href={`/technology/${technology.id}`}
+            >
+              <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all">
 
-        {/* Empty State */}
+                {/* TITLE */}
+                <h2 className="text-2xl font-bold text-red-700 mb-2">
+                  {technology.name}
+                </h2>
 
-        {technologies.length === 0 ? (
-          <div className="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-200">
-            <h2 className="text-2xl font-semibold mb-3">
-              No Technologies Found
-            </h2>
+                <p className="text-gray-700 mb-4">
+                  {technology.description}
+                </p>
 
-            <p className="text-gray-600">
-              Technologies will appear here once they have been added to the platform.
-            </p>
-          </div>
-        ) : (
+                {/* STATUS */}
+                <span className="bg-red-700 text-white text-xs px-3 py-1 rounded-full">
+                  {technology.current_status}
+                </span>
 
-          /* Technology Grid */
+                {/* AI PREVIEW (NEW) */}
+                {aiScores[technology.id] && (
+                  <div className="mt-4 text-sm text-gray-800 border-t pt-3">
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <p className="font-semibold text-red-700 mb-1">
+                      AI Insight
+                    </p>
 
-            {technologies.map((technology) => (
-              <Link
-                key={technology.id}
-                href={`/technology/${technology.id}`}
-              >
-                <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer h-full">
+                    <p>
+                      Innovation:{" "}
+                      {aiScores[technology.id].innovation_agility}
+                    </p>
 
-                  <div className="flex items-start justify-between mb-5">
+                    <p>
+                      Governance:{" "}
+                      {aiScores[technology.id].trusted_governance}
+                    </p>
 
-                    <h2 className="text-2xl font-bold text-red-700 pr-4">
-                      {technology.name}
-                    </h2>
-
-                    <span className="bg-red-700 text-white text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full whitespace-nowrap">
-                      {technology.current_status}
-                    </span>
+                    <p className="text-gray-600 mt-2 italic">
+                      {aiScores[technology.id].summary}
+                    </p>
 
                   </div>
+                )}
 
-                  <p className="text-gray-700 leading-relaxed">
-                    {technology.description}
-                  </p>
+              </div>
+            </Link>
+          ))}
 
-                </div>
-              </Link>
-            ))}
-
-          </div>
-        )}
+        </div>
       </div>
     </main>
   );
