@@ -47,7 +47,7 @@ export default function Home() {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none translate-y-[18px]">
 
           {/* Compass Body */}
-          <div className="relative w-[90vw] max-w-[700px] aspect-square opacity-15">
+          <div className="relative w-[90vw] max-w-[620px] aspect-square opacity-15">
 
             {/* Outer Ring */}
             <div className="absolute inset-0 rounded-full border-[6px] border-red-700" />
@@ -93,7 +93,7 @@ export default function Home() {
           <div className="absolute inset-0 flex items-center justify-center">
 
             <div
-              className="relative w-[90vw] max-w-[700px] aspect-square"
+              className="relative w-[90vw] max-w-[620px] aspect-square"
               style={{
                 animation: "spin 12s ease-in-out infinite",
               }}
