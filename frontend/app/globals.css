@@ -32,6 +32,6 @@ body {
 
 /* GLOBAL TITLE POSITIONING */
 
-.page-title {
-  transform: translateY(2mm);
+h1 {
+  margin-top: 2mm;
 }
