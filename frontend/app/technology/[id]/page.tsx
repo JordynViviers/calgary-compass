@@ -232,7 +232,7 @@ export default function TechnologyDetailPage() {
           {technology.description}
         </p>
 
-        <span className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+        <span className="bg-gray-200 text-red-700 px-4 py-2 rounded-full text-sm font-semibold border border-red-200">
 
           {technology.current_status}
 
@@ -272,6 +272,7 @@ export default function TechnologyDetailPage() {
           These examples are illustrative only and do not
           represent the full range of possible applications
           for this technology.
+
         </p>
 
       </div>
@@ -431,15 +432,20 @@ export default function TechnologyDetailPage() {
 
                 <p className="text-gray-600 leading-relaxed">
 
-                  The AI assessment reflects the
-                  technology’s perceived potential
-                  benefits, implementation feasibility,
-                  governance considerations, and long-term
-                  innovation value in civic and municipal
-                  settings. Higher scores indicate stronger
-                  anticipated alignment with sustainable,
-                  efficient, and community-oriented smart
-                  city objectives.
+                  The AI assessment for {technology.name}
+                  reflects its expected value for municipal
+                  operations, public impact, governance,
+                  and long-term innovation potential.
+
+                  <br /><br />
+
+                  Higher scores indicate stronger projected
+                  benefits in areas such as efficiency,
+                  scalability, service delivery, and smart
+                  city integration, while lower scores
+                  reflect potential challenges related to
+                  cost, implementation complexity,
+                  governance, or public trust.
 
                 </p>
 
