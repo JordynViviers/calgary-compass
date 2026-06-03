@@ -29,9 +29,3 @@ body {
 body {
   overflow-x: hidden;
 }
-
-/* GLOBAL TITLE POSITIONING */
-
-h1 {
-  margin-top: 2mm;
-}
