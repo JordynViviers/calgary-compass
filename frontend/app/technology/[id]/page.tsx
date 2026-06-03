@@ -232,7 +232,7 @@ export default function TechnologyDetailPage() {
           {technology.description}
         </p>
 
-        <span className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+        <span className="bg-gray-200 text-red-700 px-4 py-2 rounded-full text-sm font-semibold border border-red-200">
 
           {technology.current_status}
 
@@ -272,6 +272,7 @@ export default function TechnologyDetailPage() {
           These examples are illustrative only and do not
           represent the full range of possible applications
           for this technology.
+
         </p>
 
       </div>
