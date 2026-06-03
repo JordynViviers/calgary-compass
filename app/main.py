@@ -1,4 +1,3 @@
-```python
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -13,10 +12,12 @@ from app.models import (
     AIEvaluation,
     CommunitySignal,
     Application,
+    Event,
     VoteRequest,
     TechnologyRequest,
     CommunitySignalRequest,
     ApplicationRequest,
+    EventRequest,
     Base
 )
 
@@ -689,5 +690,102 @@ def get_applications(
     return db.query(
         Application
     ).all()
-```
 
+
+# =========================
+# EVENTS
+# =========================
+
+@app.post("/event")
+def create_event(
+    data: EventRequest,
+    db: Session = Depends(get_db)
+):
+
+    event = Event(
+        title=data.title,
+        date=data.date,
+        location=data.location,
+        description=data.description,
+        link=data.link
+    )
+
+    db.add(event)
+
+    db.commit()
+
+    db.refresh(event)
+
+    return event
+
+
+@app.get("/events")
+def get_events(
+    db: Session = Depends(get_db)
+):
+
+    return db.query(
+        Event
+    ).all()
+
+
+@app.put("/event/{event_id}")
+def update_event(
+    event_id: int,
+    data: EventRequest,
+    db: Session = Depends(get_db)
+):
+
+    event = db.query(
+        Event
+    ).filter(
+        Event.id == event_id
+    ).first()
+
+    if not event:
+
+        return {
+            "error":
+                "Event not found"
+        }
+
+    event.title = data.title
+    event.date = data.date
+    event.location = data.location
+    event.description = data.description
+    event.link = data.link
+
+    db.commit()
+
+    db.refresh(event)
+
+    return event
+
+
+@app.delete("/event/{event_id}")
+def delete_event(
+    event_id: int,
+    db: Session = Depends(get_db)
+):
+
+    event = db.query(
+        Event
+    ).filter(
+        Event.id == event_id
+    ).first()
+
+    if not event:
+
+        return {
+            "error":
+                "Event not found"
+        }
+
+    db.delete(event)
+
+    db.commit()
+
+    return {
+        "message":
+            "Event deleted"
+    }
