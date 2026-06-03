@@ -5,6 +5,11 @@ import { useState, useEffect } from "react";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
+const inputClass =
+  "w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-red-700 transition";
+const labelClass = "block text-lg font-semibold mb-1";
+const helpClass = "text-sm text-gray-500 mb-2";
+
 function AdminNav() {
   return (
     <nav className="flex flex-wrap justify-between items-center gap-4 mb-10">
@@ -18,10 +23,7 @@ function AdminNav() {
         >
           Technologies
         </Link>
-        <Link
-          href="/admin/events"
-          className="text-red-700 font-semibold"
-        >
+        <Link href="/admin/events" className="text-red-700 font-semibold">
           In-Person Events
         </Link>
         <Link
@@ -49,10 +51,33 @@ function Detail({ label, value }) {
 }
 
 export default function AdminEventsPage() {
+  // ----- Events -----
+  const [events, setEvents] = useState([]);
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
+  const [link, setLink] = useState("");
+  const [editingEventId, setEditingEventId] = useState(null);
+  const [eventSaving, setEventSaving] = useState(false);
+  const [eventError, setEventError] = useState("");
+
+  // ----- Applications -----
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
+
+  const loadEvents = async () => {
+    try {
+      const res = await fetch(`${API_URL}/events`);
+      if (!res.ok) throw new Error("Request failed");
+      setEvents(await res.json());
+    } catch (err) {
+      console.error(err);
+      setEventError("Could not load events.");
+    }
+  };
 
   const loadApplications = async () => {
     setLoading(true);
@@ -60,8 +85,7 @@ export default function AdminEventsPage() {
     try {
       const res = await fetch(`${API_URL}/applications`);
       if (!res.ok) throw new Error("Request failed");
-      const data = await res.json();
-      setApplications(data);
+      setApplications(await res.json());
     } catch (err) {
       console.error(err);
       setError(
@@ -73,8 +97,75 @@ export default function AdminEventsPage() {
   };
 
   useEffect(() => {
+    loadEvents();
     loadApplications();
   }, []);
+
+  const clearEventForm = () => {
+    setTitle("");
+    setDate("");
+    setLocation("");
+    setDescription("");
+    setLink("");
+    setEditingEventId(null);
+    setEventError("");
+  };
+
+  const submitEvent = async () => {
+    if (!title.trim()) {
+      setEventError("Please enter a title.");
+      return;
+    }
+    setEventSaving(true);
+    setEventError("");
+    try {
+      const payload = { title, date, location, description, link };
+      const url = editingEventId
+        ? `${API_URL}/event/${editingEventId}`
+        : `${API_URL}/event`;
+      const method = editingEventId ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Save failed");
+
+      clearEventForm();
+      loadEvents();
+    } catch (err) {
+      console.error(err);
+      setEventError("Something went wrong saving the event. Please try again.");
+    } finally {
+      setEventSaving(false);
+    }
+  };
+
+  const editEvent = (ev) => {
+    setEditingEventId(ev.id);
+    setTitle(ev.title || "");
+    setDate(ev.date || "");
+    setLocation(ev.location || "");
+    setDescription(ev.description || "");
+    setLink(ev.link || "");
+    setEventError("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const deleteEvent = async (id) => {
+    if (!confirm("Delete this event?")) return;
+    try {
+      const res = await fetch(`${API_URL}/event/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Delete failed");
+      loadEvents();
+    } catch (err) {
+      console.error(err);
+      setEventError("Could not delete the event.");
+    }
+  };
 
   const exportCsv = () => {
     const columns = [
@@ -107,10 +198,10 @@ export default function AdminEventsPage() {
 
     const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "applications.csv";
-    link.click();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "applications.csv";
+    a.click();
     URL.revokeObjectURL(url);
   };
 
@@ -139,20 +230,155 @@ export default function AdminEventsPage() {
             In-Person Events
           </h1>
           <p className="text-gray-600 mt-1">
-            Manage events and review World Café applications.
+            Add or edit events, and review World Café applications.
           </p>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-2xl p-5 mb-10 text-gray-600 shadow-sm">
-          Event editing is coming in a future update. For now, this page
-          shows the applications coming in for the World Café.
-        </div>
+        {/* ===== Event editor ===== */}
+        <section className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm mb-8">
+          <h2 className="text-2xl font-bold text-red-700 mb-6">
+            {editingEventId ? "Edit Event" : "Add an Event"}
+          </h2>
 
+          <div className="space-y-5">
+            <div>
+              <label className={labelClass}>Title</label>
+              <input
+                className={inputClass}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label className={labelClass}>Date</label>
+              <p className={helpClass}>
+                Type it how it should appear, e.g. July 21, 2026
+              </p>
+              <input
+                className={inputClass}
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label className={labelClass}>Location</label>
+              <input
+                className={inputClass}
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label className={labelClass}>Description</label>
+              <textarea
+                rows={3}
+                className={inputClass}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label className={labelClass}>Learn More link</label>
+              <p className={helpClass}>
+                Optional. Where the &quot;Learn More&quot; button goes, e.g.
+                /apply. Leave blank for no button.
+              </p>
+              <input
+                className={inputClass}
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+              />
+            </div>
+
+            {eventError && (
+              <p className="text-red-700 font-medium">{eventError}</p>
+            )}
+
+            <div className="flex gap-3">
+              <button
+                onClick={submitEvent}
+                disabled={eventSaving}
+                className="bg-red-700 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-800 transition disabled:opacity-60"
+              >
+                {eventSaving
+                  ? "Saving…"
+                  : editingEventId
+                    ? "Update Event"
+                    : "Add Event"}
+              </button>
+              {editingEventId && (
+                <button
+                  onClick={clearEventForm}
+                  className="bg-gray-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition"
+                >
+                  Cancel
+                </button>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Current events ===== */}
+        <section className="mb-14">
+          <h2 className="text-2xl font-bold mb-5">Current Events</h2>
+
+          {events.length === 0 ? (
+            <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center text-gray-600 shadow-sm">
+              No events yet. Add one with the form above.
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {events.map((ev) => (
+                <div
+                  key={ev.id}
+                  className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex justify-between items-start gap-4"
+                >
+                  <div>
+                    <h3 className="text-xl font-bold text-red-700">
+                      {ev.title}
+                    </h3>
+                    <p className="text-gray-600">
+                      {ev.date}
+                      {ev.date && ev.location ? " · " : ""}
+                      {ev.location}
+                    </p>
+                    {ev.description && (
+                      <p className="text-gray-700 mt-2">{ev.description}</p>
+                    )}
+                    {ev.link && (
+                      <p className="text-sm text-gray-500 mt-2">
+                        Link: {ev.link}
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex gap-2 shrink-0">
+                    <button
+                      onClick={() => editEvent(ev)}
+                      className="bg-yellow-500 text-white px-4 py-2 rounded-xl font-medium hover:bg-yellow-600 transition"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => deleteEvent(ev.id)}
+                      className="bg-red-600 text-white px-4 py-2 rounded-xl font-medium hover:bg-red-700 transition"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* ===== Applications ===== */}
         <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
           <div>
-            <h2 className="text-2xl font-bold">
-              World Café Applications
-            </h2>
+            <h2 className="text-2xl font-bold">World Café Applications</h2>
             <p className="text-gray-600 mt-1">
               {applications.length} total
               {search.trim() && ` · ${visible.length} matching`}
@@ -185,9 +411,7 @@ export default function AdminEventsPage() {
           className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-8 focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-red-700 transition"
         />
 
-        {error && (
-          <p className="text-red-700 font-medium mb-6">{error}</p>
-        )}
+        {error && <p className="text-red-700 font-medium mb-6">{error}</p>}
 
         {loading && applications.length === 0 ? (
           <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center text-gray-600 shadow-sm">
