@@ -1,0 +1,223 @@
+"use client";
+
+import Link from "next/link";
+import { useState, useEffect } from "react";
+
+const API_URL = "https://calgary-compass-api.onrender.com";
+
+const CRITERIA = [
+  { key: "financial_sustainability", label: "Financial Sustainability" },
+  { key: "operational_excellence", label: "Operational Excellence" },
+  { key: "innovation_agility", label: "Innovation and Agility" },
+  { key: "trusted_governance", label: "Trusted and Transparent Governance" },
+  { key: "people_culture", label: "People and Culture First" },
+];
+
+function AdminNav() {
+  return (
+    <nav className="flex flex-wrap justify-between items-center gap-4 mb-10">
+      <Link href="/admin" className="text-2xl font-bold text-red-700">
+        Calgary Compass <span className="text-black">Admin</span>
+      </Link>
+      <div className="flex gap-8 text-lg font-medium">
+        <Link
+          href="/admin/technologies"
+          className="hover:text-red-700 transition"
+        >
+          Technologies
+        </Link>
+        <Link
+          href="/admin/events"
+          className="hover:text-red-700 transition"
+        >
+          In-Person Events
+        </Link>
+        <Link
+          href="/admin/community-input"
+          className="text-red-700 font-semibold"
+        >
+          Community Input
+        </Link>
+      </div>
+    </nav>
+  );
+}
+
+export default function AdminCommunityInputPage() {
+  const [technologies, setTechnologies] = useState([]);
+  const [votes, setVotes] = useState([]);
+  const [signals, setSignals] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const loadResults = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const [techRes, votesRes, signalsRes] = await Promise.all([
+        fetch(`${API_URL}/technologies`),
+        fetch(`${API_URL}/votes`),
+        fetch(`${API_URL}/community-signals`),
+      ]);
+
+      if (!techRes.ok || !votesRes.ok || !signalsRes.ok) {
+        throw new Error("Request failed");
+      }
+
+      setTechnologies(await techRes.json());
+      setVotes(await votesRes.json());
+      setSignals(await signalsRes.json());
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong loading results. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadResults();
+  }, []);
+
+  const techResults = technologies
+    .map((t) => {
+      const tVotes = votes.filter((v) => v.technology_id === t.id);
+      const averages = {};
+      CRITERIA.forEach((c) => {
+        if (tVotes.length === 0) {
+          averages[c.key] = null;
+        } else {
+          const sum = tVotes.reduce(
+            (acc, v) => acc + (Number(v[c.key]) || 0),
+            0,
+          );
+          averages[c.key] = sum / tVotes.length;
+        }
+      });
+      return { id: t.id, name: t.name, count: tVotes.length, averages };
+    })
+    .sort((a, b) => b.count - a.count);
+
+  return (
+    <main className="min-h-screen bg-gray-50 text-black">
+      <div className="h-2 bg-red-700 w-full"></div>
+
+      <div className="max-w-5xl mx-auto px-8 py-12">
+
+        <AdminNav />
+
+        <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
+          <div>
+            <h1 className="text-4xl font-bold text-red-700">
+              Community Input
+            </h1>
+            <p className="text-gray-600 mt-1">
+              {votes.length} ratings · {signals.length} written responses
+            </p>
+          </div>
+          <button
+            onClick={loadResults}
+            disabled={loading}
+            className="border-2 border-red-700 text-red-700 px-4 py-2 rounded-xl font-semibold hover:bg-red-700 hover:text-white transition disabled:opacity-60"
+          >
+            {loading ? "Refreshing…" : "Refresh"}
+          </button>
+        </div>
+
+        {error && (
+          <p className="text-red-700 font-medium mb-6">{error}</p>
+        )}
+
+        {loading && technologies.length === 0 ? (
+          <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center text-gray-600 shadow-sm">
+            Loading results…
+          </div>
+        ) : (
+          <>
+            <h2 className="text-2xl font-bold mb-5">Technology Ratings</h2>
+
+            {techResults.length === 0 ? (
+              <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center text-gray-600 shadow-sm mb-12">
+                No technologies yet.
+              </div>
+            ) : (
+              <div className="space-y-6 mb-14">
+                {techResults.map((t) => (
+                  <div
+                    key={t.id}
+                    className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
+                  >
+                    <div className="flex flex-wrap justify-between items-baseline gap-2 mb-5">
+                      <h3 className="text-2xl font-bold text-red-700">
+                        {t.name}
+                      </h3>
+                      <span className="text-sm text-gray-500">
+                        {t.count} {t.count === 1 ? "rating" : "ratings"}
+                      </span>
+                    </div>
+
+                    {t.count === 0 ? (
+                      <p className="text-gray-500">No ratings yet.</p>
+                    ) : (
+                      <div className="space-y-4">
+                        {CRITERIA.map((c) => {
+                          const avg = t.averages[c.key];
+                          const pct = avg ? (avg / 10) * 100 : 0;
+                          return (
+                            <div key={c.key}>
+                              <div className="flex justify-between text-sm mb-1">
+                                <span className="font-medium text-gray-700">
+                                  {c.label}
+                                </span>
+                                <span className="text-gray-900 font-semibold">
+                                  {avg.toFixed(1)} / 10
+                                </span>
+                              </div>
+                              <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div
+                                  className="bg-red-700 h-2 rounded-full"
+                                  style={{ width: `${pct}%` }}
+                                ></div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <h2 className="text-2xl font-bold mb-5">Concerns &amp; Signals</h2>
+
+            {signals.length === 0 ? (
+              <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center text-gray-600 shadow-sm">
+                No written responses yet.
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {signals
+                  .slice()
+                  .sort((a, b) => (b.id || 0) - (a.id || 0))
+                  .map((s) => (
+                    <div
+                      key={s.id}
+                      className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
+                    >
+                      <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">
+                        {s.stakeholder || "Unknown sector"}
+                      </p>
+                      <p className="text-gray-900 whitespace-pre-wrap">
+                        {s.signal_text}
+                      </p>
+                    </div>
+                  ))}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </main>
+  );
+}
