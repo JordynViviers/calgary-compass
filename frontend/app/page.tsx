@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
 export default function Home() {
@@ -7,38 +8,7 @@ export default function Home() {
     <main className="relative min-h-screen bg-white text-black overflow-hidden">
 
       {/* Navigation */}
-      <nav className="relative z-20 flex justify-between items-center px-10 py-6 border-b border-gray-200">
-
-        <h1 className="text-2xl font-bold text-red-700">
-          Calgary Compass
-        </h1>
-
-        <div className="flex items-center gap-8 text-lg font-medium">
-
-          <Link
-            href="/technologies"
-            className="hover:text-red-700 transition"
-          >
-            Explore Technologies
-          </Link>
-
-          <Link
-            href="/events"
-            className="hover:text-red-700 transition"
-          >
-            In-Person Events
-          </Link>
-
-          <Link
-            href="/community-input"
-            className="hover:text-red-700 transition"
-          >
-            Community Input
-          </Link>
-
-        </div>
-
-      </nav>
+      <Navbar />
 
       {/* Hero */}
       <section className="relative flex flex-col justify-center items-center min-h-[85vh] px-10 overflow-hidden">
