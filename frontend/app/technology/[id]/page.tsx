@@ -137,9 +137,9 @@ export default function TechnologyDetailPage() {
 
     return (
 
-      <main className="p-10">
+      <main className="min-h-screen p-10 bg-white text-black">
 
-        <h1 className="text-3xl">
+        <h1 className="text-3xl text-red-700">
           Loading technology...
         </h1>
 
@@ -190,21 +190,21 @@ export default function TechnologyDetailPage() {
 
   return (
 
-    <main className="min-h-screen p-10">
+    <main className="min-h-screen p-10 bg-white text-black">
 
       {/* HEADER */}
 
       <div className="mb-10">
 
-        <h1 className="text-5xl font-bold mb-3">
+        <h1 className="text-5xl font-bold text-red-700 mb-3">
           {technology.name}
         </h1>
 
-        <p className="text-xl text-gray-400 mb-4">
+        <p className="text-xl text-gray-500 mb-4">
           {technology.description}
         </p>
 
-        <span className="bg-blue-600 px-4 py-2 rounded-full text-sm">
+        <span className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
 
           {technology.current_status}
 
@@ -220,7 +220,7 @@ export default function TechnologyDetailPage() {
           href="/community-input"
         >
 
-          <button className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl text-white font-semibold">
+          <button className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl text-white font-semibold transition">
 
             Provide Community Feedback
 
@@ -232,9 +232,9 @@ export default function TechnologyDetailPage() {
 
       {/* AI EVALUATION */}
 
-      <div className="border rounded-2xl p-8 shadow mb-10">
+      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
 
-        <h2 className="text-3xl font-semibold mb-6">
+        <h2 className="text-3xl font-semibold text-red-700 mb-6">
 
           AI Governance Assessment
 
@@ -280,13 +280,13 @@ export default function TechnologyDetailPage() {
 
             <div className="mt-8">
 
-              <h3 className="text-xl font-semibold mb-3">
+              <h3 className="text-xl font-semibold text-red-700 mb-3">
 
                 AI Summary
 
               </h3>
 
-              <p className="text-gray-400">
+              <p className="text-gray-500 leading-relaxed">
 
                 {aiEvaluation.summary}
 
@@ -308,11 +308,11 @@ export default function TechnologyDetailPage() {
 
       </div>
 
-      {/* AI VS HUMAN */}
+      {/* AI VS COMMUNITY */}
 
-      <div className="border rounded-2xl p-8 shadow mb-10">
+      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
 
-        <h2 className="text-3xl font-semibold mb-6">
+        <h2 className="text-3xl font-semibold text-red-700 mb-6">
 
           AI vs Community Comparison
 
@@ -322,11 +322,17 @@ export default function TechnologyDetailPage() {
 
           <div style={{ width: "100%", height: 500 }}>
 
-            <ResponsiveContainer>
+            <ResponsiveContainer width="98%" height="100%">
 
               <BarChart
                 data={chartData}
                 layout="vertical"
+                margin={{
+                  top: 20,
+                  right: 30,
+                  left: 60,
+                  bottom: 20
+                }}
               >
 
                 <CartesianGrid strokeDasharray="3 3" />
@@ -339,15 +345,24 @@ export default function TechnologyDetailPage() {
                 <YAxis
                   dataKey="category"
                   type="category"
+                  width={130}
                 />
 
                 <Tooltip />
 
                 <Legend />
 
-                <Bar dataKey="Human" />
+                <Bar
+                  dataKey="Human"
+                  fill="#dc2626"
+                  radius={[0, 6, 6, 0]}
+                />
 
-                <Bar dataKey="AI" />
+                <Bar
+                  dataKey="AI"
+                  fill="#f87171"
+                  radius={[0, 6, 6, 0]}
+                />
 
               </BarChart>
 
@@ -378,16 +393,23 @@ export default function TechnologyDetailPage() {
 
               <div
                 key={key}
-                className="border rounded-2xl p-6 shadow"
+                className="
+                  border
+                  border-gray-200
+                  rounded-2xl
+                  p-6
+                  shadow-sm
+                  bg-white
+                "
               >
 
-                <h3 className="text-xl font-semibold capitalize">
+                <h3 className="text-xl font-semibold text-red-700 capitalize mb-3">
 
                   {key.replaceAll("_", " ")}
 
                 </h3>
 
-                <p className="text-4xl font-bold">
+                <p className="text-4xl font-bold text-black">
 
                   {value}/10
 
