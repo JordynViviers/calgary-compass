@@ -14,15 +14,17 @@ from app.models import (
     TimelineEvent,
     AIEvaluation,
     CommunitySignal,
+    Application,
     VoteRequest,
     TechnologyRequest,
     CommunitySignalRequest,
+    ApplicationRequest,
     Base
 )
 
 from app.crud import (
     create_technology,
-    create_vote, 
+    create_vote,
     create_ai_evaluation
 )
 
@@ -494,3 +496,49 @@ def get_signals(
     return db.query(
         CommunitySignal
     ).all()
+
+# =========================
+# CREATE APPLICATION
+# =========================
+
+@app.post("/application")
+def submit_application(
+    data: ApplicationRequest,
+    db: Session = Depends(get_db)
+):
+
+    application = Application(
+        name=data.name,
+        email=data.email,
+        field_of_work=data.field_of_work,
+        role=data.role,
+        role_other=data.role_other,
+        hear_about=data.hear_about,
+        tech_1_year=data.tech_1_year,
+        tech_2_year=data.tech_2_year,
+        tech_5_year=data.tech_5_year,
+        dietary=data.dietary,
+        dietary_other=data.dietary_other,
+        accessibility=data.accessibility,
+        recording_consent=data.recording_consent,
+        anything_else=data.anything_else
+    )
+
+    db.add(application)
+
+    db.commit()
+
+    db.refresh(application)
+
+    return application
+
+# =========================
+# GET APPLICATIONS
+# =========================
+
+@app.get("/applications")
+def get_applications(
+    db: Session = Depends(get_db)
+):
+
+    return db.query(Application).all()
