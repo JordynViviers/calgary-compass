@@ -105,7 +105,7 @@ export default function AdminPage() {
   };
 
   const deleteTechnology = async (
-    technologyId: number
+    technology_id: number
   ) => {
 
     const confirmed = confirm(
@@ -117,7 +117,7 @@ export default function AdminPage() {
     try {
 
       await axios.delete(
-        `${API_URL}/technology/${technologyId}`
+        `${API_URL}/technology/${technology_id}`
       );
 
       alert(
@@ -138,13 +138,13 @@ export default function AdminPage() {
   };
 
   const evaluateTechnology = async (
-    technologyId: number
+    technology_id: number
   ) => {
 
     try {
 
       await axios.post(
-        `${API_URL}/technology/${technologyId}/ai-evaluate`
+        `${API_URL}/technology/${technology_id}/ai-evaluate`
       );
 
       alert(
