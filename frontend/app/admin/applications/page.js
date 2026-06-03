@@ -102,16 +102,24 @@ export default function AdminPage() {
 
       <div className="max-w-5xl mx-auto px-8 py-12">
 
-        <nav className="flex justify-between items-center mb-12">
+        <nav className="flex flex-wrap justify-between items-center gap-4 mb-12">
           <Link href="/" className="text-2xl font-bold text-red-700">
             Calgary Compass
           </Link>
-          <Link
-            href="/admin"
-            className="text-lg font-medium hover:text-red-700 transition"
-          >
-            Technologies Admin
-          </Link>
+          <div className="flex gap-6 text-lg font-medium">
+            <Link
+              href="/admin"
+              className="hover:text-red-700 transition"
+            >
+              Technologies Admin
+            </Link>
+            <Link
+              href="/admin/results"
+              className="hover:text-red-700 transition"
+            >
+              Survey Results
+            </Link>
+          </div>
         </nav>
 
         <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
