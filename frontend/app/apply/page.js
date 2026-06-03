@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 
+const API_URL = "https://calgary-compass-api.onrender.com";
+
 // TODO: Replace these with the 20 technologies generated for this event.
 // Each option appears in all three dropdowns, but a technology already
 // chosen in one dropdown is automatically hidden from the others.
@@ -67,6 +69,8 @@ export default function ApplyPage() {
     anythingElse: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const update = (key, value) =>
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -80,24 +84,52 @@ export default function ApplyPage() {
       return !chosenElsewhere.includes(tech);
     });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     if (form.consent !== "Yes, I consent") {
-      alert(
+      setError(
         "Consent to recording is required to participate in the event.",
       );
       return;
     }
 
-    // TODO: Connect this to a real destination so applications are saved.
-    // Options: a Next.js API route, a form service (Formspree, Tally,
-    // Google Forms), or an email service. Right now the data only lives
-    // in component state and is logged to the browser console.
-    console.log("Application submitted:", form);
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API_URL}/application`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          field_of_work: form.fieldOfWork,
+          role: form.role,
+          role_other: form.roleOther,
+          hear_about: form.hearAbout,
+          tech_1_year: form.tech1,
+          tech_2_year: form.tech2,
+          tech_5_year: form.tech5,
+          dietary: form.dietary,
+          dietary_other: form.dietaryOther,
+          accessibility: form.accessibility,
+          recording_consent: form.consent,
+          anything_else: form.anythingElse,
+        }),
+      });
 
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+      if (!res.ok) throw new Error("Submission failed");
+
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      console.error(err);
+      setError(
+        "Sorry — something went wrong saving your application. Please try again.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputClass =
@@ -448,11 +480,15 @@ export default function ApplyPage() {
               </section>
 
               <div className="text-center">
+                {error && (
+                  <p className="text-red-700 font-medium mb-4">{error}</p>
+                )}
                 <button
                   type="submit"
-                  className="bg-red-700 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-red-800 transition"
+                  disabled={submitting}
+                  className="bg-red-700 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-red-800 transition disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Submit Application
+                  {submitting ? "Submitting…" : "Submit Application"}
                 </button>
                 <p className="text-sm text-gray-500 mt-4 max-w-xl mx-auto">
                   Applications are reviewed on a rolling basis. You&apos;ll
