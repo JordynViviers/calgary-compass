@@ -73,6 +73,7 @@ export default function AdminPage() {
     const rows = applications.map((a) =>
       columns.map((c) => escape(a[c])).join(","),
     );
+
     const csv = [columns.join(","), ...rows].join("\n");
 
     const blob = new Blob([csv], { type: "text/csv" });
@@ -101,27 +102,34 @@ export default function AdminPage() {
       <div className="h-2 bg-red-700 w-full"></div>
 
       <div className="max-w-5xl mx-auto px-8 py-12">
-
+        {/* NAVIGATION */}
         <nav className="flex flex-wrap justify-between items-center gap-4 mb-12">
           <Link href="/" className="text-2xl font-bold text-red-700">
             Calgary Compass
           </Link>
+
           <div className="flex gap-6 text-lg font-medium">
-            <Link
-              href="/admin"
-              className="hover:text-red-700 transition"
-            >
+            <Link href="/admin" className="hover:text-red-700 transition">
               Technologies Admin
             </Link>
+
             <Link
               href="/admin/results"
               className="hover:text-red-700 transition"
             >
               Survey Results
             </Link>
+
+            <Link
+              href="/admin/community-input-responses"
+              className="hover:text-red-700 transition"
+            >
+              Community Input
+            </Link>
           </div>
         </nav>
 
+        {/* HEADER */}
         <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
           <div>
             <h1 className="text-4xl font-bold text-red-700">
@@ -141,6 +149,7 @@ export default function AdminPage() {
             >
               {loading ? "Refreshing…" : "Refresh"}
             </button>
+
             <button
               onClick={exportCsv}
               disabled={applications.length === 0}
@@ -151,6 +160,7 @@ export default function AdminPage() {
           </div>
         </div>
 
+        {/* SEARCH */}
         <input
           type="text"
           value={search}
@@ -159,10 +169,12 @@ export default function AdminPage() {
           className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-8 focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-red-700 transition"
         />
 
+        {/* ERROR */}
         {error && (
           <p className="text-red-700 font-medium mb-6">{error}</p>
         )}
 
+        {/* LOADING / EMPTY STATES */}
         {loading && applications.length === 0 ? (
           <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center text-gray-600 shadow-sm">
             Loading applications…
@@ -184,7 +196,9 @@ export default function AdminPage() {
                   <h2 className="text-2xl font-bold text-red-700">
                     {a.name || "Unnamed applicant"}
                   </h2>
-                  <span className="text-sm text-gray-500">#{a.id}</span>
+                  <span className="text-sm text-gray-500">
+                    #{a.id}
+                  </span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
