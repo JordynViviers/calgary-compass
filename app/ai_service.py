@@ -1,6 +1,5 @@
 from openai import OpenAI
 from dotenv import load_dotenv
-
 import os
 import json
 import requests
@@ -13,40 +12,35 @@ client = OpenAI(
 
 
 # =====================================================
-# 1. OPENALEX RETRIEVAL
+# OPENALEX
 # =====================================================
 def search_openalex(query: str):
 
     try:
         response = requests.get(
             "https://api.openalex.org/works",
-            params={
-                "search": query,
-                "per-page": 5
-            },
+            params={"search": query, "per-page": 5},
             timeout=10
         )
 
         results = response.json().get("results", [])
 
-        papers = []
-
-        for p in results:
-            papers.append({
-                "title": p.get("title"),
-                "abstract": p.get("abstract"),
+        return [
+            {
+                "title": r.get("title"),
+                "abstract": r.get("abstract"),
                 "source": "OpenAlex"
-            })
-
-        return papers
+            }
+            for r in results
+        ]
 
     except Exception as e:
-        print("OPENALEX ERROR:", str(e))
+        print("OPENALEX ERROR:", e)
         return []
 
 
 # =====================================================
-# 2. SEMANTIC SCHOLAR RETRIEVAL
+# SEMANTIC SCHOLAR
 # =====================================================
 def search_semantic_scholar(query: str):
 
@@ -63,158 +57,144 @@ def search_semantic_scholar(query: str):
 
         data = response.json().get("data", [])
 
-        papers = []
-
-        for p in data:
-            papers.append({
+        return [
+            {
                 "title": p.get("title"),
                 "abstract": p.get("abstract"),
                 "year": p.get("year"),
                 "citations": p.get("citationCount"),
                 "source": "Semantic Scholar"
-            })
-
-        return papers
+            }
+            for p in data
+        ]
 
     except Exception as e:
-        print("SEMANTIC SCHOLAR ERROR:", str(e))
+        print("SEMANTIC SCHOLAR ERROR:", e)
         return []
 
 
 # =====================================================
-# 3. MERGE + CLEAN CONTEXT
+# CONTEXT BUILDER
 # =====================================================
 def build_research_context(openalex_papers, semantic_papers):
 
     all_papers = openalex_papers + semantic_papers
 
-    # Remove papers with no useful content
-    filtered = [
-        p for p in all_papers
-        if p.get("title") and p.get("abstract")
-    ]
+    filtered = [p for p in all_papers if p.get("title") and p.get("abstract")]
 
     context = ""
 
-    for i, p in enumerate(filtered[:10], start=1):
-
+    for i, p in enumerate(filtered[:8], 1):
         context += f"""
 [{i}] Title: {p['title']}
 Source: {p.get('source')}
-Abstract: {p.get('abstract')}
+Abstract: {p['abstract']}
 ---
-
 """
 
     return context
 
 
 # =====================================================
-# 4. MAIN FUNCTION (UPDATED RAG PIPELINE)
+# MAIN AI FUNCTION (CIVIC INTELLIGENCE ENGINE)
 # =====================================================
-def evaluate_technology(
-    technology_name,
-    technology_description
-):
+def evaluate_technology(technology_name, technology_description):
 
     try:
 
-        # -----------------------------
-        # STEP 1: RETRIEVE FROM BOTH SOURCES
-        # -----------------------------
-        query = f"{technology_name} smart city urban governance"
+        query = f"{technology_name} smart city urban infrastructure governance"
 
-        openalex_papers = search_openalex(query)
-        semantic_papers = search_semantic_scholar(query)
+        openalex = search_openalex(query)
+        semantic = search_semantic_scholar(query)
 
-        # -----------------------------
-        # STEP 2: BUILD CONTEXT
-        # -----------------------------
-        research_context = build_research_context(
-            openalex_papers,
-            semantic_papers
-        )
+        context = build_research_context(openalex, semantic)
 
-        # -----------------------------
-        # STEP 3: SEND TO GPT
-        # -----------------------------
         response = client.chat.completions.create(
-
             model="gpt-4.1-mini",
-
             messages=[
-
                 {
                     "role": "system",
                     "content": """
+You are a Smart City AI Governance Analyst for the City of Calgary.
 
-You are a smart city governance analyst.
-
-You must use the provided academic research context.
-
-If evidence is missing, say so in the summary reasoning.
+You evaluate technologies for real-world municipal deployment.
 
 Return ONLY valid JSON.
 
+Be precise, realistic, and evidence-based.
 """
                 },
-
                 {
                     "role": "user",
                     "content": f"""
+Evaluate this technology for municipal use in Calgary.
 
-Evaluate this technology from 1-10:
-
-Technology:
+Technology Name:
 {technology_name}
 
 Description:
 {technology_description}
 
-=========================
-ACADEMIC RESEARCH CONTEXT
-=========================
-{research_context}
+========================
+RESEARCH CONTEXT
+========================
+{context}
 
-=========================
-CATEGORIES
-=========================
+========================
+OUTPUT REQUIREMENTS
+========================
+
+Return JSON ONLY with:
+
+1. Scores (1-10):
 - financial_sustainability
 - operational_excellence
 - people_culture
 - trusted_governance
 - innovation_agility
 
-Return JSON like:
+2. Analysis Fields:
+- summary: 2-3 sentence high level assessment
+- technology_summary: what the technology does (plain language)
+- calgary_problem: what municipal challenge in Calgary it solves
+- global_examples: real cities using similar systems (be factual, no hallucinations)
+- implementation_statistics: measurable outcomes (cost, efficiency, emissions, safety, etc.)
+- governance_recommendation: one of [pilot, scale, monitor, avoid]
 
-{{
-    "financial_sustainability": 7,
-    "operational_excellence": 8,
-    "people_culture": 6,
-    "trusted_governance": 5,
-    "innovation_agility": 9,
-    "summary": "..."
-}}
+If data is uncertain, explicitly say so.
 
+========================
+RETURN FORMAT EXAMPLE
+========================
+
+{
+  "financial_sustainability": 7,
+  "operational_excellence": 8,
+  "people_culture": 6,
+  "trusted_governance": 7,
+  "innovation_agility": 8,
+
+  "summary": "...",
+
+  "technology_summary": "...",
+  "calgary_problem": "...",
+  "global_examples": "...",
+  "implementation_statistics": "...",
+  "governance_recommendation": "pilot"
+}
 """
                 }
             ],
-
-            response_format={
-                "type": "json_object"
-            }
+            response_format={"type": "json_object"}
         )
 
         content = response.choices[0].message.content
-
-        print("RAW OPENAI RESPONSE:")
-        print(content)
 
         return json.loads(content)
 
     except Exception as e:
 
-        print("ERROR:", str(e))
+        print("AI ERROR:", e)
 
         return {
             "financial_sustainability": 5,
@@ -222,5 +202,12 @@ Return JSON like:
             "people_culture": 5,
             "trusted_governance": 5,
             "innovation_agility": 5,
-            "summary": f"AI evaluation failed: {str(e)}"
+
+            "summary": "AI evaluation failed.",
+
+            "technology_summary": "",
+            "calgary_problem": "",
+            "global_examples": "",
+            "implementation_statistics": "",
+            "governance_recommendation": "monitor"
         }
