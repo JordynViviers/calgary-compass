@@ -52,37 +52,7 @@ export default function TechnologiesPage() {
       <div className="max-w-7xl mx-auto px-8 py-12">
 
         {/* Navigation Bar */}
-        <nav className="flex justify-between items-center mb-16">
-          <Link
-            href="/"
-            className="text-2xl font-bold text-red-700"
-          >
-            Calgary Compass
-          </Link>
-
-          <div className="flex gap-8 text-lg font-medium">
-            <Link
-              href="/technologies"
-              className="text-red-700 font-semibold"
-            >
-              Explore Technologies
-            </Link>
-
-            <Link
-              href="/events"
-              className="hover:text-red-700 transition"
-            >
-              In-Person Events
-            </Link>
-
-            <Link
-              href="/community-input"
-              className="hover:text-red-700 transition"
-            >
-              Community Input
-            </Link>
-          </div>
-        </nav>
+        <Navbar />
 
         {/* Header */}
         <div className="text-center mb-16">
