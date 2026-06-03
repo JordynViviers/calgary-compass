@@ -51,41 +51,7 @@ export default function SignalsPage() {
 
       <div className="max-w-6xl mx-auto px-8 py-12">
 
-        <nav className="flex justify-between items-center mb-16">
-
-          <Link
-            href="/"
-            className="text-2xl font-bold text-red-700"
-          >
-
-            Calgary Compass
-
-          </Link>
-
-          <div className="flex gap-8">
-
-            <Link
-              href="/technologies"
-            >
-              Technologies
-            </Link>
-
-            <Link
-              href="/community-input"
-            >
-              Community Input
-            </Link>
-
-            <Link
-              href="/signals"
-              className="font-semibold text-red-700"
-            >
-              Signals
-            </Link>
-
-          </div>
-
-        </nav>
+        <Navbar />
 
         <h1 className="text-5xl font-bold text-red-700 mb-4">
 
