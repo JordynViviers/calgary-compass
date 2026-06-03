@@ -105,7 +105,7 @@ export default function AdminPage() {
   };
 
   const deleteTechnology = async (
-    technology_id: number
+    technologyId: number
   ) => {
 
     const confirmed = confirm(
@@ -117,7 +117,7 @@ export default function AdminPage() {
     try {
 
       await axios.delete(
-        `${API_URL}/technology/${technology_id}`
+        `${API_URL}/technology/${technologyId}`
       );
 
       alert(
@@ -138,13 +138,13 @@ export default function AdminPage() {
   };
 
   const evaluateTechnology = async (
-    technology_id: number
+    technologyId: number
   ) => {
 
     try {
 
       await axios.post(
-        `${API_URL}/technology/${technology_id}/ai-evaluate`
+        `${API_URL}/technology/${technologyId}/ai-evaluate`
       );
 
       alert(
@@ -202,14 +202,27 @@ export default function AdminPage() {
 
         </h1>
 
-        <Link
-          href="/admin/applications"
-          className="text-lg font-medium text-red-700 hover:text-red-800 transition"
-        >
+        <div className="flex gap-6 text-lg font-medium">
 
-          View Applications &rarr;
+          <Link
+            href="/admin/applications"
+            className="text-red-700 hover:text-red-800 transition"
+          >
 
-        </Link>
+            Applications
+
+          </Link>
+
+          <Link
+            href="/admin/results"
+            className="text-red-700 hover:text-red-800 transition"
+          >
+
+            Survey Results
+
+          </Link>
+
+        </div>
 
       </div>
 
