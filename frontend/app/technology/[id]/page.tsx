@@ -27,7 +27,7 @@ export default function TechnologyDetailPage() {
   const [technology, setTechnology] =
     useState<any>(null);
 
-  const [scores, setScores] =
+  const [weightedScores, setWeightedScores] =
     useState<any>(null);
 
   const [comparison, setComparison] =
@@ -85,7 +85,7 @@ export default function TechnologyDetailPage() {
           );
 
           if (!scoreRes.data.error) {
-            setScores(scoreRes.data);
+            setWeightedScores(scoreRes.data);
           }
 
         } catch (err) {
@@ -189,32 +189,38 @@ export default function TechnologyDetailPage() {
     : [];
 
   const aiAverage =
-    aiEvaluation
-      ? (
-          aiEvaluation.financial_sustainability +
-          aiEvaluation.operational_excellence +
-          aiEvaluation.people_culture +
-          aiEvaluation.trusted_governance +
-          aiEvaluation.innovation_agility
-        ) / 5
-      : 0;
+  aiEvaluation
+    ? (
+        aiEvaluation.financial_sustainability +
+        aiEvaluation.operational_excellence +
+        aiEvaluation.people_culture +
+        aiEvaluation.trusted_governance +
+        aiEvaluation.innovation_agility
+      ) / 5
+    : 0;
 
-  const communityAverage =
-    scores
-      ? (
-          scores.financial_sustainability +
-          scores.operational_excellence +
-          scores.people_culture +
-          scores.trusted_governance +
-          scores.innovation_agility
-        ) / 5
-      : 0;
+const communityAverage =
+  comparison
+    ? (
+        comparison.human.financial_sustainability +
+        comparison.human.operational_excellence +
+        comparison.human.people_culture +
+        comparison.human.trusted_governance +
+        comparison.human.innovation_agility
+      ) / 5
+    : 0;
 
-  const overallAverage =
-    (
-      aiAverage +
-      communityAverage
-    ) / 2;
+const weightedAverage =
+  weightedScores
+    ? (
+        weightedScores.financial_sustainability +
+        weightedScores.operational_excellence +
+        weightedScores.people_culture +
+        weightedScores.trusted_governance +
+        weightedScores.innovation_agility
+      ) / 5
+    : 0;
+
 
   return (
 
@@ -491,160 +497,151 @@ export default function TechnologyDetailPage() {
 
           </h2>
 
-          {scores ? (
+          {comparison ? (
 
             <>
 
-              <div className="space-y-3 text-gray-700">
+              <>
+  <div className="space-y-3 text-gray-700">
 
-                <div>
-                  Financial Sustainability:
-                  {" "}
-                  {scores.financial_sustainability}/10
-                </div>
+    <div>
+      Financial Sustainability:{" "}
+      {comparison.human.financial_sustainability.toFixed(1)}/10
+    </div>
 
-                <div>
-                  Operational Excellence:
-                  {" "}
-                  {scores.operational_excellence}/10
-                </div>
+    <div>
+      Operational Excellence:{" "}
+      {comparison.human.operational_excellence.toFixed(1)}/10
+    </div>
 
-                <div>
-                  People & Culture:
-                  {" "}
-                  {scores.people_culture}/10
-                </div>
+    <div>
+      People & Culture:{" "}
+      {comparison.human.people_culture.toFixed(1)}/10
+    </div>
 
-                <div>
-                  Trusted Governance:
-                  {" "}
-                  {scores.trusted_governance}/10
-                </div>
+    <div>
+      Trusted Governance:{" "}
+      {comparison.human.trusted_governance.toFixed(1)}/10
+    </div>
 
-                <div>
-                  Innovation & Agility:
-                  {" "}
-                  {scores.innovation_agility}/10
-                </div>
+    <div>
+      Innovation & Agility:{" "}
+      {comparison.human.innovation_agility.toFixed(1)}/10
+    </div>
 
-              </div>
+  </div>
 
-              <div className="mt-6">
+  <div className="mt-6">
 
-                <h3 className="text-lg font-semibold text-red-700 mb-2">
+    <h3 className="text-lg font-semibold text-red-700 mb-2">
+      Community Participation
+    </h3>
 
-                  Community Participation
+    <p className="text-gray-600">
+      Community votes represent the aggregated
+      perspectives of platform participants.
+    </p>
 
-                </h3>
+    <p className="mt-4 text-gray-700 font-medium">
+      Total Community Participants:{" "}
+      {comparison?.vote_count ?? 0}
+    </p>
 
-                <p className="text-gray-600">
+  </div>
 
-                  Community votes represent the
-                  aggregated perspectives of platform
-                  participants evaluating this
-                  technology’s potential impacts and
-                  governance considerations.
+  <div className="mt-6">
 
-                </p>
+    <p className="text-4xl font-bold text-black">
+      {communityAverage.toFixed(1)}/10
+    </p>
 
-                <p className="mt-4 text-gray-700 font-medium">
+    <p className="text-gray-500 mt-1">
+      Average Community Score
+    </p>
 
-                  Total Community Participants:
-                  {" "}
-                  {comparison?.vote_count ?? 0}
-
-                </p>
-
-              </div>
-
-              <div className="mt-6">
-
-                <p className="text-4xl font-bold text-black">
-
-                  {communityAverage.toFixed(1)}/10
-
-                </p>
-
-                <p className="text-gray-500 mt-1">
-
-                  Average Community Score
-
-                </p>
-
-              </div>
-
-            </>
-
-          ) : (
-
-            <p className="text-gray-500">
-
-              Community assessment not available yet.
-
-            </p>
-
-          )}
-
-        </div>
+  </div>
+</>
 
         {/* OVERALL ASSESSMENT */}
 
-        <div className="border border-gray-200 rounded-2xl p-6 shadow-sm bg-white">
+<div className="border border-gray-200 rounded-2xl p-6 shadow-sm bg-white">
 
-          <h2 className="text-2xl font-bold text-red-700 mb-6">
+  <h2 className="text-2xl font-bold text-red-700 mb-6">
 
-            Overall Assessment
+    Weighted Assessment
 
-          </h2>
+  </h2>
 
-          <p className="text-gray-600 leading-relaxed mb-6">
+  {weightedScores ? (
 
-            The overall assessment combines both
-            AI-generated governance analysis and
-            community evaluation data to provide a
-            balanced perspective on the technology’s
-            potential role within civic and smart city
-            environments.
+    <>
 
-          </p>
+      <div className="space-y-3 text-gray-700">
 
-          <div className="space-y-4">
+        <div>
+          Financial Sustainability:{" "}
+          {weightedScores.financial_sustainability}/10
+        </div>
 
-            <div className="flex justify-between border-b pb-2">
+        <div>
+          Operational Excellence:{" "}
+          {weightedScores.operational_excellence}/10
+        </div>
 
-              <span className="font-medium">
-                AI Average
-              </span>
+        <div>
+          People & Culture:{" "}
+          {weightedScores.people_culture}/10
+        </div>
 
-              <span>
-                {aiAverage.toFixed(1)}/10
-              </span>
+        <div>
+          Trusted Governance:{" "}
+          {weightedScores.trusted_governance}/10
+        </div>
 
-            </div>
+        <div>
+          Innovation & Agility:{" "}
+          {weightedScores.innovation_agility}/10
+        </div>
 
-            <div className="flex justify-between border-b pb-2">
+      </div>
 
-              <span className="font-medium">
-                Community Average
-              </span>
+      <div className="mt-6">
 
-              <span>
-                {communityAverage.toFixed(1)}/10
-              </span>
+        <h3 className="text-lg font-semibold text-red-700 mb-2">
+          Combined Assessment
+        </h3>
 
-            </div>
+        <p className="text-gray-600">
+          These scores combine AI evaluation and
+          community voting using the platform's
+          weighting methodology.
+        </p>
 
-            <div className="flex justify-between pt-2">
+      </div>
 
-              <span className="text-xl font-bold text-red-700">
-                Combined Score
-              </span>
+      <div className="mt-6">
 
-              <span className="text-2xl font-bold">
-                {overallAverage.toFixed(1)}/10
-              </span>
+        <p className="text-4xl font-bold text-black">
+          {weightedAverage.toFixed(1)}/10
+        </p>
 
-            </div>
+        <p className="text-gray-500 mt-1">
+          Weighted Score
+        </p>
+
+      </div>
+
+    </>
+
+  ) : (
+
+    <p className="text-gray-500">
+      Weighted assessment not available yet.
+    </p>
+
+  )}
+
+</div>
 
           </div>
 
