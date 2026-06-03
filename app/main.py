@@ -12,10 +12,12 @@ from app.models import (
     Technology,
     Vote,
     TimelineEvent,
+    AIEvaluation,
+    CommunitySignal,
     VoteRequest,
     TechnologyRequest,
-    Base, 
-    AIEvaluation
+    CommunitySignalRequest,
+    Base
 )
 
 from app.crud import (
@@ -464,3 +466,31 @@ def get_ai_evaluation(
         }
 
     return evaluation
+
+@app.post("/community-signal")
+def submit_signal(
+    data: CommunitySignalRequest,
+    db: Session = Depends(get_db)
+):
+
+    signal = CommunitySignal(
+        stakeholder=data.stakeholder,
+        signal_text=data.signal_text
+    )
+
+    db.add(signal)
+
+    db.commit()
+
+    db.refresh(signal)
+
+    return signal
+
+@app.get("/community-signals")
+def get_signals(
+    db: Session = Depends(get_db)
+):
+
+    return db.query(
+        CommunitySignal
+    ).all()
