@@ -29,3 +29,9 @@ body {
 body {
   overflow-x: hidden;
 }
+
+/* GLOBAL TITLE POSITIONING */
+
+.page-title {
+  transform: translateY(2mm);
+}
