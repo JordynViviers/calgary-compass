@@ -149,12 +149,32 @@ async function handleSubmit() {
 
     }
 
+    if (
+      signals.trim()
+    ) {
+
+      await axios.post(
+        `${API_URL}/community-signal`,
+        {
+
+          stakeholder:
+            sector,
+
+          signal_text:
+            signals
+
+        }
+      );
+
+    }
+
     alert(
       "Community input submitted successfully!"
     );
 
     setRatings({});
     setSignals("");
+    setSector("");
 
   } catch (error) {
 
