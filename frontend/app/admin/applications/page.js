@@ -101,7 +101,7 @@ export default function AdminPage() {
     <main className="min-h-screen bg-gray-50 text-black">
       <div className="h-2 bg-red-700 w-full"></div>
 
-      <div className="max-w-5xl mx-auto px-8 py-12">
+      <div className="max-w-5xl mx-auto px-8 pt-6 pb-12">
         {/* NAVIGATION */}
         <nav className="flex flex-wrap justify-between items-center gap-4 mb-12">
           <Link href="/" className="text-2xl font-bold text-red-700">
