@@ -189,17 +189,19 @@ export default function AdminPage() {
 
   return (
 
-    <main className="min-h-screen p-10">
+    <main className="min-h-screen p-10 bg-white text-black">
 
-      <h1 className="text-5xl font-bold mb-8">
+      {/* Page Title */}
+      <h1 className="text-5xl font-bold text-red-700 mb-8">
 
         Technology Administration
 
       </h1>
 
-      <div className="max-w-2xl border rounded-2xl p-6 mb-10">
+      {/* Form Card */}
+      <div className="max-w-2xl border border-gray-200 rounded-2xl p-6 mb-10 bg-white shadow-sm">
 
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 className="text-2xl font-semibold text-red-700 mb-4">
 
           {editingId
             ? "Edit Technology"
@@ -207,12 +209,24 @@ export default function AdminPage() {
 
         </h2>
 
-        <label className="block mb-2">
+        <label className="block mb-2 font-medium">
           Technology Name
         </label>
 
         <input
-          className="w-full border rounded-xl p-3 mb-6 bg-black"
+          className="
+            w-full
+            border
+            border-gray-300
+            rounded-xl
+            p-3
+            mb-6
+            bg-white
+            text-black
+            focus:outline-none
+            focus:ring-2
+            focus:ring-red-400
+          "
           value={name}
           onChange={(e) =>
             setName(
@@ -221,12 +235,24 @@ export default function AdminPage() {
           }
         />
 
-        <label className="block mb-2">
+        <label className="block mb-2 font-medium">
           Description
         </label>
 
         <textarea
-          className="w-full border rounded-xl p-3 mb-6 bg-black"
+          className="
+            w-full
+            border
+            border-gray-300
+            rounded-xl
+            p-3
+            mb-6
+            bg-white
+            text-black
+            focus:outline-none
+            focus:ring-2
+            focus:ring-red-400
+          "
           rows={6}
           value={description}
           onChange={(e) =>
@@ -236,12 +262,24 @@ export default function AdminPage() {
           }
         />
 
-        <label className="block mb-2">
+        <label className="block mb-2 font-medium">
           Status
         </label>
 
         <select
-          className="w-full border rounded-xl p-3 mb-6 bg-black"
+          className="
+            w-full
+            border
+            border-gray-300
+            rounded-xl
+            p-3
+            mb-6
+            bg-white
+            text-black
+            focus:outline-none
+            focus:ring-2
+            focus:ring-red-400
+          "
           value={status}
           onChange={(e) =>
             setStatus(
@@ -277,7 +315,16 @@ export default function AdminPage() {
             onClick={
               submitTechnology
             }
-            className="bg-blue-600 px-6 py-3 rounded-xl"
+            className="
+              bg-red-600
+              hover:bg-red-700
+              text-white
+              px-6
+              py-3
+              rounded-xl
+              font-semibold
+              transition
+            "
           >
 
             {editingId
@@ -292,7 +339,16 @@ export default function AdminPage() {
               onClick={
                 clearForm
               }
-              className="bg-gray-600 px-6 py-3 rounded-xl"
+              className="
+                bg-gray-500
+                hover:bg-gray-600
+                text-white
+                px-6
+                py-3
+                rounded-xl
+                font-semibold
+                transition
+              "
             >
 
               Cancel
@@ -305,9 +361,10 @@ export default function AdminPage() {
 
       </div>
 
+      {/* Existing Technologies */}
       <div>
 
-        <h2 className="text-3xl font-bold mb-6">
+        <h2 className="text-3xl font-bold text-red-700 mb-6">
 
           Existing Technologies
 
@@ -315,7 +372,7 @@ export default function AdminPage() {
 
         {technologies.length === 0 ? (
 
-          <p>
+          <p className="text-gray-500">
             No technologies found.
           </p>
 
@@ -332,12 +389,24 @@ export default function AdminPage() {
                   key={
                     technology.id
                   }
-                  className="border rounded-2xl p-6 flex justify-between items-center"
+                  className="
+                    border
+                    border-gray-200
+                    rounded-2xl
+                    p-6
+                    flex
+                    justify-between
+                    items-center
+                    bg-white
+                    shadow-sm
+                    hover:shadow-md
+                    transition
+                  "
                 >
 
                   <div>
 
-                    <h3 className="text-xl font-semibold">
+                    <h3 className="text-xl font-semibold text-red-700">
 
                       {
                         technology.name
@@ -345,7 +414,7 @@ export default function AdminPage() {
 
                     </h3>
 
-                    <p className="text-gray-400">
+                    <p className="text-gray-500">
 
                       {
                         technology.current_status
@@ -363,7 +432,16 @@ export default function AdminPage() {
                           technology
                         )
                       }
-                      className="bg-yellow-600 px-4 py-2 rounded-xl"
+                      className="
+                        bg-yellow-500
+                        hover:bg-yellow-600
+                        text-white
+                        px-4
+                        py-2
+                        rounded-xl
+                        font-medium
+                        transition
+                      "
                     >
 
                       Edit
@@ -376,7 +454,16 @@ export default function AdminPage() {
                           technology.id
                         )
                       }
-                      className="bg-green-600 px-4 py-2 rounded-xl"
+                      className="
+                        bg-green-600
+                        hover:bg-green-700
+                        text-white
+                        px-4
+                        py-2
+                        rounded-xl
+                        font-medium
+                        transition
+                      "
                     >
 
                       AI Evaluate
@@ -389,7 +476,16 @@ export default function AdminPage() {
                           technology.id
                         )
                       }
-                      className="bg-red-600 px-4 py-2 rounded-xl"
+                      className="
+                        bg-red-600
+                        hover:bg-red-700
+                        text-white
+                        px-4
+                        py-2
+                        rounded-xl
+                        font-medium
+                        transition
+                      "
                     >
 
                       Delete
