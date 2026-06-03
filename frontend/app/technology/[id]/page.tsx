@@ -340,6 +340,7 @@ export default function TechnologyDetailPage() {
                 <XAxis
                   type="number"
                   domain={[0, 10]}
+                  tickCount={11}
                 />
 
                 <YAxis
@@ -360,7 +361,7 @@ export default function TechnologyDetailPage() {
 
                 <Bar
                   dataKey="AI"
-                  fill="#f87171"
+                  fill="#6b7280"
                   radius={[0, 6, 6, 0]}
                 />
 
