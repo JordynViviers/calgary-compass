@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 const API_URL =
   "https://calgary-compass-api.onrender.com";
