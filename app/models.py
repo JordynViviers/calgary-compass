@@ -121,3 +121,19 @@ class TechnologyRequest(BaseModel):
     description: str
 
     current_status: str
+
+class CommunitySignal(Base):
+
+    __tablename__ = "community_signals"
+
+    id = Column(Integer, primary_key=True)
+
+    stakeholder = Column(String)
+
+    signal_text = Column(String)
+
+class CommunitySignalRequest(BaseModel):
+
+    stakeholder: str
+
+    signal_text: str
