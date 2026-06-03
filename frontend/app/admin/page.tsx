@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 const API_URL =
   "https://calgary-compass-api.onrender.com";
@@ -191,12 +192,26 @@ export default function AdminPage() {
 
     <main className="min-h-screen p-10 bg-white text-black">
 
-      {/* Page Title */}
-      <h1 className="text-5xl font-bold text-red-700 mb-8">
+      {/* Header */}
+      <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
 
-        Technology Administration
+        {/* Page Title */}
+        <h1 className="text-5xl font-bold text-red-700">
 
-      </h1>
+          Technology Administration
+
+        </h1>
+
+        <Link
+          href="/admin/applications"
+          className="text-lg font-medium text-red-700 hover:text-red-800 transition"
+        >
+
+          View Applications &rarr;
+
+        </Link>
+
+      </div>
 
       {/* Form Card */}
       <div className="max-w-2xl border border-gray-200 rounded-2xl p-6 mb-10 bg-white shadow-sm">
