@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="relative z-20 flex justify-between items-center px-10 h-16 border-b border-gray-200 bg-white">
+    <nav className="relative z-20 flex justify-between items-center px-10 py-3 border-b border-gray-200 bg-white">
 
       <Link
         href="/"
@@ -13,7 +13,7 @@ export default function Navbar() {
         Calgary Compass
       </Link>
 
-      <div className="flex items-center gap-8 text-base font-medium">
+      <div className="flex items-center gap-8 text-lg font-medium">
 
         <Link
           href="/technologies"
