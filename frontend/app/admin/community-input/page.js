@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import AdminNavbar from "@/components/AdminNavbar";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
@@ -13,35 +14,6 @@ const CRITERIA = [
   { key: "people_culture", label: "People and Culture First" },
 ];
 
-function AdminNav() {
-  return (
-    <nav className="flex flex-wrap justify-between items-center gap-4 mb-10">
-      <Link href="/admin" className="text-2xl font-bold text-red-700">
-        Calgary Compass <span className="text-black">Admin</span>
-      </Link>
-      <div className="flex gap-8 text-lg font-medium">
-        <Link
-          href="/admin/technologies"
-          className="hover:text-red-700 transition"
-        >
-          Technologies
-        </Link>
-        <Link
-          href="/admin/events"
-          className="hover:text-red-700 transition"
-        >
-          In-Person Events
-        </Link>
-        <Link
-          href="/admin/community-input"
-          className="text-red-700 font-semibold"
-        >
-          Community Input
-        </Link>
-      </div>
-    </nav>
-  );
-}
 
 export default function AdminCommunityInputPage() {
   const [technologies, setTechnologies] = useState([]);
@@ -123,7 +95,7 @@ export default function AdminCommunityInputPage() {
 
       <div className="max-w-5xl mx-auto px-8 py-12">
 
-        <AdminNav />
+        <AdminNavbar />
 
         <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
           <div>
