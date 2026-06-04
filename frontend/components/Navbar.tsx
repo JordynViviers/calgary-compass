@@ -6,12 +6,11 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-[1600px] mx-auto px-8">
 
         <div className="flex items-center justify-between h-20">
 
           {/* Logo */}
-
           <Link
             href="/"
             className="flex items-center gap-3"
@@ -27,15 +26,14 @@ export default function Navbar() {
                 CALGARY
               </p>
 
-              <p className="text-3xl font-bold text-gray-800">
+              <p className="text-2xl font-bold text-gray-800">
                 COMPASS
               </p>
             </div>
           </Link>
 
           {/* Navigation */}
-
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden xl:flex items-center gap-12">
 
             <Link
               href="/"
@@ -96,7 +94,6 @@ export default function Navbar() {
           </nav>
 
           {/* CTA Button */}
-
           <Link
             href="/community-input"
             className="
