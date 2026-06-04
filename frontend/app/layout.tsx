@@ -5,6 +5,24 @@ import { useState, useEffect } from "react";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
+type Application = {
+  id?: number;
+  name?: string;
+  email?: string;
+  field_of_work?: string;
+  role?: string;
+  role_other?: string;
+  hear_about?: string;
+  tech_1_year?: string;
+  tech_2_year?: string;
+  tech_5_year?: string;
+  dietary?: string;
+  dietary_other?: string;
+  accessibility?: string;
+  recording_consent?: string;
+  anything_else?: string;
+};
+
 type DetailProps = {
   label: string;
   value: string | number | null | undefined;
@@ -30,7 +48,8 @@ function Detail({
 }
 
 export default function AdminPage() {
-  const [applications, setApplications] = useState([]);
+  const [applications, setApplications] =
+  useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
@@ -46,7 +65,8 @@ export default function AdminPage() {
         throw new Error("Request failed");
       }
 
-      const data = await res.json();
+      const data: Application[] =
+        await res.json();
       setApplications(data);
     } catch (err) {
       console.error(err);
@@ -82,14 +102,31 @@ export default function AdminPage() {
       "anything_else",
     ];
 
-    const escape = (val) => {
-      const s = val === null || val === undefined ? "" : String(val);
+const escape = (
+  val: string | number | null | undefined
+) => {
 
-      return `"${s.replace(/"/g, '""')}"`;
-    };
+  const s =
+    val === null ||
+    val === undefined
+      ? ""
+      : String(val);
 
-    const rows = applications.map((a) =>
-      columns.map((c) => escape(a[c])).join(","),
+  return `"${s.replace(/"/g, '""')}"`;
+
+};
+
+    const rows = applications.map(
+      (a: Application) =>
+        columns
+          .map((c) =>
+            escape(
+              a[
+                c as keyof Application
+              ]
+            )
+          )
+          .join(",")
     );
 
     const csv = [columns.join(","), ...rows].join("\n");
@@ -110,7 +147,7 @@ export default function AdminPage() {
   };
 
   const visible = applications
-    .filter((a) => {
+    .filter((a: Application) => {
       const q = search.trim().toLowerCase();
 
       if (!q) return true;
@@ -121,7 +158,11 @@ export default function AdminPage() {
         (a.field_of_work || "").toLowerCase().includes(q)
       );
     })
-    .sort((a, b) => (b.id || 0) - (a.id || 0));
+    .sort(
+      (
+        a: Application,
+        b: Application
+      ) => (b.id || 0) - (a.id || 0));
 
   return (
     <main className="min-h-screen bg-gray-50 text-black">
@@ -227,11 +268,13 @@ export default function AdminPage() {
 
           /* APPLICATIONS */
           <div className="space-y-6">
-            {visible.map((a) => (
-              <div
-                key={a.id}
-                className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
-              >
+            {visible.map(
+              {visible.map(
+                (a: Application) => (
+                  <div
+                    key={a.id}
+                    className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
+                  >
                 {/* CARD HEADER */}
                 <div className="flex flex-wrap justify-between items-baseline gap-2 mb-5">
                   <h2 className="text-2xl font-bold text-red-700">
