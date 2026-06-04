@@ -33,7 +33,7 @@ export default function Navbar() {
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden xl:flex items-center gap-12">
+          <nav className="hidden lg:flex items-center gap-5">
 
             <Link
               href="/"
@@ -58,35 +58,65 @@ export default function Navbar() {
 
             <Link
               href="/events"
-              className="font-medium text-gray-700 hover:text-red-700 transition"
+              className="
+               text-lg
+               font-semibold
+               text-gray-800
+               hover:text-red-700
+               transition
+               "
             >
               In-Person Events
             </Link>
 
             <Link
               href="/community-input"
-              className="font-medium text-gray-700 hover:text-red-700 transition"
+              className="
+               text-lg
+               font-semibold
+               text-gray-800
+               hover:text-red-700
+               transition
+               "
             >
               Community Input
             </Link>
 
             <Link
               href="/signals"
-              className="font-medium text-gray-700 hover:text-red-700 transition"
+              className="
+               text-lg
+               font-semibold
+               text-gray-800
+               hover:text-red-700
+               transition
+               "
             >
               Signals
             </Link>
 
             <Link
               href="/foresight"
-              className="font-medium text-gray-700 hover:text-red-700 transition"
+              className="
+               text-lg
+               font-semibold
+               text-gray-800
+               hover:text-red-700
+               transition
+               "
             >
               Foresight
             </Link>
 
             <Link
               href="/analytics"
-              className="font-medium text-gray-700 hover:text-red-700 transition"
+              className="
+               text-lg
+               font-semibold
+               text-gray-800
+               hover:text-red-700
+               transition
+               "
             >
               Analytics
             </Link>
