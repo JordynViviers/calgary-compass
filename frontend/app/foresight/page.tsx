@@ -1,21 +1,25 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
+
 export default function ForesightPage() {
-
   return (
+    <main className="min-h-screen bg-gray-50 text-black">
+      <div className="h-2 bg-red-700 w-full"></div>
 
-    <main className="min-h-screen bg-gray-50 p-10">
+      <Navbar />
 
-      <h1 className="text-5xl font-bold text-red-700 mb-4">
-        Foresight & Trend Scanning
-      </h1>
+      <div className="max-w-7xl mx-auto px-8 py-12">
+        <section className="text-center mb-16">
+          <h1 className="text-6xl font-bold text-red-700 mb-4">
+            Foresight & Trend Scanning
+          </h1>
 
-      <p className="text-xl text-gray-600">
-        Coming soon.
-      </p>
-
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            Coming soon.
+          </p>
+        </section>
+      </div>
     </main>
-
   );
-
 }
