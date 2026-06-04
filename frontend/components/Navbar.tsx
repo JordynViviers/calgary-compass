@@ -4,61 +4,119 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="relative z-20 flex justify-between items-center px-10 py-3 border-b border-gray-200 bg-white">
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
 
-      <Link
-        href="/"
-        className="text-2xl font-bold text-red-700 hover:text-red-800 transition"
-      >
-        Calgary Compass
-      </Link>
+      <div className="max-w-7xl mx-auto px-6">
 
-      <div className="flex items-center gap-8 text-lg font-medium">
+        <div className="flex items-center justify-between h-20">
 
-        <Link
-          href="/technologies"
-          className="hover:text-red-700 transition"
-        >
-          Explore Technologies
-        </Link>
+          {/* Logo */}
 
-        <Link
-          href="/events"
-          className="hover:text-red-700 transition"
-        >
-          In-Person Events
-        </Link>
+          <Link
+            href="/"
+            className="flex items-center gap-3"
+          >
+            <img
+              src="/compass-logo.png"
+              alt="Calgary Compass"
+              className="h-12 w-auto"
+            />
 
-        <Link
-          href="/community-input"
-          className="hover:text-red-700 transition"
-        >
-          Community Input
-        </Link>
+            <div>
+              <p className="text-red-700 text-sm tracking-wider">
+                CALGARY
+              </p>
 
-        <Link
-          href="/signals"
-          className="hover:text-red-700 transition"
-        >
-          Signals
-        </Link>
+              <p className="text-3xl font-bold text-gray-800">
+                COMPASS
+              </p>
+            </div>
+          </Link>
 
-        <Link
-          href="/foresight"
-          className="hover:text-red-700 transition"
-        >
-          Foresight
-        </Link>
+          {/* Navigation */}
 
-        <Link
-          href="/analytics"
-          className="hover:text-red-700 transition"
-        >
-          Analytics
-        </Link>
+          <nav className="hidden lg:flex items-center gap-8">
+
+            <Link
+              href="/"
+              className="font-medium text-gray-700 hover:text-red-700 transition"
+            >
+              Home
+            </Link>
+
+            <Link
+              href="/about"
+              className="font-medium text-gray-700 hover:text-red-700 transition"
+            >
+              About
+            </Link>
+
+            <Link
+              href="/technologies"
+              className="font-medium text-gray-700 hover:text-red-700 transition"
+            >
+              Explore Technologies
+            </Link>
+
+            <Link
+              href="/events"
+              className="font-medium text-gray-700 hover:text-red-700 transition"
+            >
+              In-Person Events
+            </Link>
+
+            <Link
+              href="/community-input"
+              className="font-medium text-gray-700 hover:text-red-700 transition"
+            >
+              Community Input
+            </Link>
+
+            <Link
+              href="/signals"
+              className="font-medium text-gray-700 hover:text-red-700 transition"
+            >
+              Signals
+            </Link>
+
+            <Link
+              href="/foresight"
+              className="font-medium text-gray-700 hover:text-red-700 transition"
+            >
+              Foresight
+            </Link>
+
+            <Link
+              href="/analytics"
+              className="font-medium text-gray-700 hover:text-red-700 transition"
+            >
+              Analytics
+            </Link>
+
+          </nav>
+
+          {/* CTA Button */}
+
+          <Link
+            href="/community-input"
+            className="
+              bg-red-600
+              hover:bg-red-700
+              text-white
+              px-6
+              py-3
+              rounded-lg
+              font-semibold
+              transition
+            "
+          >
+            Community Input
+          </Link>
+
+        </div>
 
       </div>
 
-    </nav>
+    </header>
   );
 }
