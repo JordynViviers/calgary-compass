@@ -1,153 +1,120 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminNavbar from "@/components/AdminNavbar";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
-const TECHNOLOGIES = [
-  "Artificial Intelligence",
-  "Autonomous Vehicles",
-  "Smart Grids",
-  "Renewable Energy Storage",
-  "Digital Twins",
-  "Internet of Things (IoT)",
-  "5G / Advanced Connectivity",
-  "Drones / UAVs",
-  "Carbon Capture",
-  "Blockchain",
-  "Augmented & Virtual Reality",
-  "Robotics & Automation",
-  "Precision Agriculture",
-  "Advanced Water Treatment",
-  "Quantum Computing",
-  "Green Hydrogen",
-  "Biometrics & Digital ID",
-  "3D Printing / Additive Manufacturing",
-  "Edge Computing",
-  "Geothermal Energy",
-];
+const EMPTY_FORM = {
+  title: "",
+  date: "",
+  location: "",
+  description: "",
+  link: "",
+};
 
-const ROLES = [
-  "Working professional",
-  "Student",
-  "Researcher / Academic",
-  "Entrepreneur / Startup",
-  "City / Government employee",
-  "Retired",
-  "Other",
-];
+export default function AdminEventsPage() {
+  const [events, setEvents] = useState([]);
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [editingId, setEditingId] = useState(null);
 
-const DIETARY = [
-  "No restrictions",
-  "Vegetarian",
-  "Vegan",
-  "Gluten free",
-  "Halal",
-  "Kosher",
-  "Other",
-];
-
-export default function ApplyPage() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    fieldOfWork: "",
-    role: "",
-    roleOther: "",
-    hearAbout: "",
-    tech1: "",
-    tech2: "",
-    tech5: "",
-    dietary: "",
-    dietaryOther: "",
-    accessibility: "",
-    consent: "",
-    anythingElse: "",
-  });
-
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
   const update = (key, value) =>
-    setForm((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    setForm((prev) => ({ ...prev, [key]: value }));
 
-  const optionsFor = (current) =>
-    TECHNOLOGIES.filter((tech) => {
-      const chosenElsewhere = [
-        form.tech1,
-        form.tech2,
-        form.tech5,
-      ].filter((t) => t !== form[current] && t !== "");
+  const loadEvents = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(`${API_URL}/events`);
+      if (!res.ok) throw new Error("Request failed");
+      setEvents(await res.json());
+    } catch (err) {
+      console.error(err);
+      setError("Could not load events. Please refresh and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-      return !chosenElsewhere.includes(tech);
-    });
+  useEffect(() => {
+    loadEvents();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setError("");
 
-    if (form.consent !== "Yes, I consent") {
-      setError(
-        "Consent to recording is required to participate in the event.",
-      );
+    if (!form.title.trim()) {
+      setError("Title is required.");
       return;
     }
 
-    setSubmitting(true);
+    setSaving(true);
 
     try {
-      const res = await fetch(`${API_URL}/application`, {
-        method: "POST",
+      const url = editingId
+        ? `${API_URL}/event/${editingId}`
+        : `${API_URL}/event`;
 
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const method = editingId ? "PUT" : "POST";
 
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          field_of_work: form.fieldOfWork,
-          role: form.role,
-          role_other: form.roleOther,
-          hear_about: form.hearAbout,
-          tech_1_year: form.tech1,
-          tech_2_year: form.tech2,
-          tech_5_year: form.tech5,
-          dietary: form.dietary,
-          dietary_other: form.dietaryOther,
-          accessibility: form.accessibility,
-          recording_consent: form.consent,
-          anything_else: form.anythingElse,
+          title: form.title,
+          date: form.date,
+          location: form.location,
+          description: form.description,
+          link: form.link,
         }),
       });
 
-      if (!res.ok) {
-        throw new Error("Submission failed");
-      }
+      if (!res.ok) throw new Error("Save failed");
 
-      setSubmitted(true);
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-
+      setForm(EMPTY_FORM);
+      setEditingId(null);
+      await loadEvents();
     } catch (err) {
       console.error(err);
-
-      setError(
-        "Sorry — something went wrong saving your application. Please try again.",
-      );
-
+      setError("Something went wrong saving the event. Please try again.");
     } finally {
-      setSubmitting(false);
+      setSaving(false);
+    }
+  };
+
+  const startEdit = (ev) => {
+    setEditingId(ev.id);
+    setForm({
+      title: ev.title || "",
+      date: ev.date || "",
+      location: ev.location || "",
+      description: ev.description || "",
+      link: ev.link || "",
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setForm(EMPTY_FORM);
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this event? This cannot be undone.")) return;
+
+    try {
+      const res = await fetch(`${API_URL}/event/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Delete failed");
+      if (editingId === id) cancelEdit();
+      await loadEvents();
+    } catch (err) {
+      console.error(err);
+      setError("Could not delete that event. Please try again.");
     }
   };
 
@@ -160,225 +127,169 @@ export default function ApplyPage() {
 
   return (
     <main className="min-h-screen bg-gray-50 text-black">
-
       {/* Top Red Bar */}
       <div className="h-2 bg-red-700 w-full"></div>
 
-      {/* Main Container */}
       <div className="max-w-3xl mx-auto px-8 pt-6 pb-12">
-
-        {/* Navigation */}
         <AdminNavbar />
 
-        {submitted ? (
+        {/* Page Heading */}
+        <div className="text-center mb-8">
+          <h1 className="text-5xl font-bold text-red-700 mb-3">
+            In-Person Events
+          </h1>
+          <p className="text-gray-600 max-w-xl mx-auto">
+            Add, edit, or remove the events shown on the public Events page.
+          </p>
+        </div>
 
-          <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center shadow-sm">
+        {/* Add / Edit Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm space-y-6"
+        >
+          <h2 className="text-2xl font-bold">
+            {editingId ? "Edit Event" : "Add an Event"}
+          </h2>
 
-            <h1 className="text-4xl font-bold text-red-700 mb-4">
-              Thank you for applying!
-            </h1>
-
-            <p className="text-gray-700 text-lg mb-3">
-              We&apos;ve received your application successfully.
-            </p>
-
-            <p className="text-gray-600">
-              Applications are reviewed on a rolling basis.
-            </p>
-
-            <Link
-              href="/events"
-              className="inline-block mt-8 bg-red-700 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-800 transition"
-            >
-              Back to Events
-            </Link>
-
+          <div>
+            <label className={labelClass}>Title</label>
+            <input
+              type="text"
+              required
+              value={form.title}
+              onChange={(e) => update("title", e.target.value)}
+              className={inputClass}
+            />
           </div>
 
-        ) : (
+          <div>
+            <label className={labelClass}>Date</label>
+            <p className={helpClass}>
+              Type it how it should appear, e.g. July 21, 2026
+            </p>
+            <input
+              type="text"
+              value={form.date}
+              onChange={(e) => update("date", e.target.value)}
+              className={inputClass}
+            />
+          </div>
 
-          <>
-            {/* Page Heading */}
-            <div className="text-center mb-8">
+          <div>
+            <label className={labelClass}>Location</label>
+            <input
+              type="text"
+              value={form.location}
+              onChange={(e) => update("location", e.target.value)}
+              className={inputClass}
+            />
+          </div>
 
-              <h1 className="text-5xl font-bold text-red-700 mb-3">
-                Wave Tech World Café
-              </h1>
+          <div>
+            <label className={labelClass}>Description</label>
+            <textarea
+              rows={4}
+              value={form.description}
+              onChange={(e) => update("description", e.target.value)}
+              className={inputClass}
+            />
+          </div>
 
-              <p className="text-xl text-gray-700 mb-2">
-                Event Application
-              </p>
+          <div>
+            <label className={labelClass}>Learn More link</label>
+            <p className={helpClass}>
+              Optional. Where the &quot;Learn More&quot; button goes, e.g. /apply.
+              Leave blank for no button.
+            </p>
+            <input
+              type="text"
+              value={form.link}
+              onChange={(e) => update("link", e.target.value)}
+              className={inputClass}
+            />
+          </div>
 
-              <p className="text-gray-600 max-w-xl mx-auto">
-                We&apos;re excited you&apos;re interested in joining us.
-              </p>
+          {error && <p className="text-red-700 font-medium">{error}</p>}
 
+          <div className="flex gap-3">
+            <button
+              type="submit"
+              disabled={saving}
+              className="bg-red-700 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-800 transition disabled:opacity-60"
+            >
+              {saving
+                ? "Saving…"
+                : editingId
+                  ? "Save Changes"
+                  : "Add Event"}
+            </button>
+
+            {editingId && (
+              <button
+                type="button"
+                onClick={cancelEdit}
+                className="border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition"
+              >
+                Cancel
+              </button>
+            )}
+          </div>
+        </form>
+
+        {/* Current Events */}
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold mb-6">Current Events</h2>
+
+          {loading ? (
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center text-gray-600 shadow-sm">
+              Loading events…
             </div>
-
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-8">
-
-              {/* About You */}
-              <section className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
-
-                <h2 className="text-2xl font-bold mb-6">
-                  About You
-                </h2>
-
-                <div className="space-y-6">
-
-                  <div>
-                    <label className={labelClass}>
-                      Name
-                    </label>
-
-                    <p className={helpClass}>
-                      First and last name
-                    </p>
-
-                    <input
-                      type="text"
-                      required
-                      value={form.name}
-                      onChange={(e) => update("name", e.target.value)}
-                      className={inputClass}
-                    />
-                  </div>
-
-                  <div>
-                    <label className={labelClass}>
-                      Email Address
-                    </label>
-
-                    <input
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={(e) => update("email", e.target.value)}
-                      className={inputClass}
-                    />
-                  </div>
-
-                  <div>
-                    <label className={labelClass}>
-                      Field of Work or Study
-                    </label>
-
-                    <input
-                      type="text"
-                      value={form.fieldOfWork}
-                      onChange={(e) =>
-                        update("fieldOfWork", e.target.value)
-                      }
-                      className={inputClass}
-                    />
-                  </div>
-
-                </div>
-
-              </section>
-
-              {/* Technology Questions */}
-              <section className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
-
-                <h2 className="text-2xl font-bold mb-6">
-                  Technology Priorities
-                </h2>
-
-                <div className="space-y-6">
-
-                  <div>
-                    <label className={labelClass}>
-                      Greatest impact in 1 year?
-                    </label>
-
-                    <select
-                      value={form.tech1}
-                      onChange={(e) => update("tech1", e.target.value)}
-                      className={inputClass}
-                    >
-                      <option value="">
-                        Select a technology…
-                      </option>
-
-                      {optionsFor("tech1").map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className={labelClass}>
-                      Greatest impact in 2 years?
-                    </label>
-
-                    <select
-                      value={form.tech2}
-                      onChange={(e) => update("tech2", e.target.value)}
-                      className={inputClass}
-                    >
-                      <option value="">
-                        Select a technology…
-                      </option>
-
-                      {optionsFor("tech2").map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className={labelClass}>
-                      Greatest impact in 5 years?
-                    </label>
-
-                    <select
-                      value={form.tech5}
-                      onChange={(e) => update("tech5", e.target.value)}
-                      className={inputClass}
-                    >
-                      <option value="">
-                        Select a technology…
-                      </option>
-
-                      {optionsFor("tech5").map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                </div>
-
-              </section>
-
-              {/* Submit */}
-              <div className="text-center">
-
-                {error && (
-                  <p className="text-red-700 font-medium mb-4">
-                    {error}
-                  </p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="bg-red-700 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-red-800 transition disabled:opacity-60"
+          ) : events.length === 0 ? (
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center text-gray-600 shadow-sm">
+              No events yet. Add one with the form above.
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {events.map((ev) => (
+                <div
+                  key={ev.id}
+                  className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex items-start justify-between gap-4"
                 >
-                  {submitting ? "Submitting…" : "Submit Application"}
-                </button>
+                  <div>
+                    <h3 className="text-xl font-bold text-red-700">
+                      {ev.title}
+                    </h3>
+                    {ev.date && ev.date.trim() && (
+                      <p className="text-gray-600">{ev.date}</p>
+                    )}
+                    {ev.location && ev.location.trim() && (
+                      <p className="text-gray-600">{ev.location}</p>
+                    )}
+                    {ev.description && ev.description.trim() && (
+                      <p className="text-gray-700 mt-2">{ev.description}</p>
+                    )}
+                  </div>
 
-              </div>
-
-            </form>
-          </>
-        )}
+                  <div className="flex flex-col gap-2 shrink-0">
+                    <button
+                      onClick={() => startEdit(ev)}
+                      className="border-2 border-red-700 text-red-700 px-4 py-2 rounded-xl font-semibold hover:bg-red-700 hover:text-white transition"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(ev.id)}
+                      className="border-2 border-gray-300 text-gray-600 px-4 py-2 rounded-xl font-semibold hover:bg-gray-100 transition"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
       </div>
     </main>
   );
