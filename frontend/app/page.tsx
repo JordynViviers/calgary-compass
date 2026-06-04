@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-white text-black overflow-hidden">
+
+      <Navbar />
 
       {/* HERO (PRIMARY FOCUS) */}
       <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
