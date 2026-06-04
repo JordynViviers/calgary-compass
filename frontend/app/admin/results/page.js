@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import AdminNavbar from "@/components/AdminNavbar";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
@@ -80,25 +81,7 @@ export default function SurveyResultsPage() {
 
       <div className="max-w-5xl mx-auto px-8 py-12">
 
-        <nav className="flex flex-wrap justify-between items-center gap-4 mb-12">
-          <Link href="/" className="text-2xl font-bold text-red-700">
-            Calgary Compass
-          </Link>
-          <div className="flex gap-6 text-lg font-medium">
-            <Link
-              href="/admin"
-              className="hover:text-red-700 transition"
-            >
-              Technologies Admin
-            </Link>
-            <Link
-              href="/admin/applications"
-              className="hover:text-red-700 transition"
-            >
-              Applications
-            </Link>
-          </div>
-        </nav>
+        <AdminNavbar />
 
         <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
           <div>
