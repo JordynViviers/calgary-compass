@@ -22,7 +22,7 @@ function LearnMoreButton({ link }: { link?: string }) {
 
   if (isExternal) {
     return (
-      
+      <a
         href={link}
         target="_blank"
         rel="noopener noreferrer"
@@ -76,3 +76,62 @@ export default function EventsPage() {
         <div className="text-center mb-16">
           <h1 className="text-6xl font-bold text-red-700 mb-4">
             In-Person Events
+          </h1>
+
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            Join foresight conversations shaping Calgary&apos;s smart city
+            future.
+          </p>
+        </div>
+
+        <section className="mb-16">
+          <h2 className="text-4xl font-bold mb-10 text-center">
+            Upcoming Events
+          </h2>
+
+          {loading ? (
+            <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center text-gray-600 shadow-sm">
+              Loading events…
+            </div>
+          ) : error ? (
+            <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center text-red-700 shadow-sm">
+              {error}
+            </div>
+          ) : events.length === 0 ? (
+            <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center text-gray-600 shadow-sm">
+              No upcoming events right now. Please check back soon.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {events.map((ev) => (
+                <div
+                  key={ev.id}
+                  className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
+                >
+                  <h3 className="text-2xl font-bold text-red-700 mb-3">
+                    {ev.title}
+                  </h3>
+
+                  {ev.date && ev.date.trim() && (
+                    <p className="text-gray-600 mb-2">{ev.date}</p>
+                  )}
+
+                  {ev.location && ev.location.trim() && (
+                    <p className="text-gray-600 mb-4">{ev.location}</p>
+                  )}
+
+                  {ev.description && ev.description.trim() && (
+                    <p className="text-gray-700 mb-6">{ev.description}</p>
+                  )}
+
+                  <LearnMoreButton link={ev.link} />
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+
+      </div>
+    </main>
+  );
+}
