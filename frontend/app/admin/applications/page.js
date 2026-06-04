@@ -214,7 +214,6 @@ export default function AdminPage() {
                   <Detail label="Tech — 1 year" value={a.tech_1_year} />
                   <Detail label="Tech — 2 years" value={a.tech_2_year} />
                   <Detail label="Tech — 5 years" value={a.tech_5_year} />
-                  />
 
                   <Detail
                     label="Dietary"
