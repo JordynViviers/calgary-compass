@@ -39,7 +39,6 @@ export default function TechnologiesPage() {
 
   return (
     <main className="min-h-screen bg-gray-50 text-black">
-      <Navbar />
 
       <div className="max-w-7xl mx-auto px-8 py-12">
         <div className="text-center mb-16">
