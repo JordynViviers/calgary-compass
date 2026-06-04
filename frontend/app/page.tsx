@@ -7,9 +7,6 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-white text-black overflow-hidden">
 
-      {/* Navigation */}
-      <Navbar />
-
       {/* Hero */}
       <section className="relative flex flex-col justify-center items-center min-h-[85vh] px-10 overflow-hidden">
 
