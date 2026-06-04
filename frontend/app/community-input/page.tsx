@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
 
 const API_URL =
   "https://calgary-compass-api.onrender.com";
@@ -196,8 +195,6 @@ async function handleSubmit() {
       <div className="h-2 bg-red-700 w-full"></div>
 
       <div className="max-w-7xl mx-auto px-8 py-12">
-
-        <Navbar />
 
         <section className="text-center mb-16">
 
