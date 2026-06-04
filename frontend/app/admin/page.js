@@ -1,43 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import AdminNavbar from "@/components/AdminNavbar";
 
 export default function AdminHome() {
   return (
     <main className="relative min-h-screen bg-white text-black overflow-hidden">
 
       {/* Admin Navigation */}
-      <nav className="relative z-10 flex justify-between items-center px-10 py-6">
-        <Link href="/admin" className="text-2xl font-bold text-red-700">
-          Calgary Compass <span className="text-black">Admin</span>
-        </Link>
-        <div className="flex gap-8 text-lg font-medium">
-          <Link
-            href="/admin/technologies"
-            className="hover:text-red-700 transition"
-          >
-            Technologies
-          </Link>
-          <Link
-            href="/admin/events"
-            className="hover:text-red-700 transition"
-          >
-            In-Person Events
-          </Link>
-          <Link
-            href="/admin/community-input"
-            className="hover:text-red-700 transition"
-          >
-            Community Input
-          </Link>
-          <Link
-            href="/admin/applications"
-            className="hover:text-red-700 transition"
-          >
-            Applications
-          </Link>
-        </div>
-      </nav>
+      <AdminNavbar />
 
       {/* Hero */}
       <section className="relative flex flex-col justify-center items-center min-h-[80vh] px-10 overflow-hidden">
