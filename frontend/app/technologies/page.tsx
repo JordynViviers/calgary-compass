@@ -30,8 +30,6 @@ export default function TechnologiesPage() {
       <main className="min-h-screen bg-gray-50 text-black">
         <div className="h-2 bg-red-700 w-full"></div>
 
-        <Navbar />
-
         <div className="max-w-7xl mx-auto px-8 py-12">
           <h1 className="text-4xl font-bold">
             Loading technologies...
