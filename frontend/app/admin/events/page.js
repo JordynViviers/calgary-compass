@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import AdminNavbar from "@/components/AdminNavbar";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
@@ -167,23 +168,7 @@ export default function ApplyPage() {
       <div className="max-w-3xl mx-auto px-8 pt-6 pb-12">
 
         {/* Navigation */}
-        <nav className="flex justify-between items-center mb-8 border-b border-gray-200 pb-4">
-
-          <Link
-            href="/"
-            className="text-2xl font-bold text-red-700"
-          >
-            Calgary Compass
-          </Link>
-
-          <Link
-            href="/events"
-            className="text-base font-medium hover:text-red-700 transition"
-          >
-            ← Back to Events
-          </Link>
-
-        </nav>
+        <AdminNavbar />
 
         {submitted ? (
 
