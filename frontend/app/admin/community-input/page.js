@@ -49,6 +49,7 @@ export default function AdminCommunityInputPage() {
   const [signals, setSignals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [togglingId, setTogglingId] = useState(null);
 
   const loadResults = async () => {
     setLoading(true);
@@ -72,6 +73,24 @@ export default function AdminCommunityInputPage() {
       setError("Something went wrong loading results. Please try again.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const toggleSignalVisibility = async (signalId, currentIsPublic) => {
+    setTogglingId(signalId);
+    try {
+      const res = await fetch(`${API_URL}/community-signal/${signalId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ is_public: !currentIsPublic }),
+      });
+      if (!res.ok) throw new Error("Toggle failed");
+      loadResults();
+    } catch (err) {
+      console.error(err);
+      setError("Could not update signal visibility. Please try again.");
+    } finally {
+      setTogglingId(null);
     }
   };
 
@@ -203,11 +222,41 @@ export default function AdminCommunityInputPage() {
                   .map((s) => (
                     <div
                       key={s.id}
-                      className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
+                      className={`rounded-2xl p-6 shadow-sm border ${
+                        s.is_public === false
+                          ? "bg-gray-100 border-gray-300"
+                          : "bg-white border-gray-200"
+                      }`}
                     >
-                      <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">
-                        {s.stakeholder || "Unknown sector"}
-                      </p>
+                      <div className="flex flex-wrap justify-between items-start gap-3 mb-3">
+                        <div className="flex gap-2 items-center">
+                          <p className="text-xs uppercase tracking-wide text-gray-500">
+                            {s.stakeholder || "Unknown sector"}
+                          </p>
+                          {s.is_public === false && (
+                            <span className="bg-gray-400 text-white text-xs px-2 py-1 rounded font-semibold">
+                              Hidden
+                            </span>
+                          )}
+                        </div>
+                        <button
+                          onClick={() =>
+                            toggleSignalVisibility(s.id, s.is_public !== false)
+                          }
+                          disabled={togglingId === s.id}
+                          className={`text-sm px-3 py-1 rounded-lg font-medium transition ${
+                            s.is_public === false
+                              ? "bg-green-600 text-white hover:bg-green-700"
+                              : "bg-red-600 text-white hover:bg-red-700"
+                          } disabled:opacity-60`}
+                        >
+                          {togglingId === s.id
+                            ? "Updating…"
+                            : s.is_public === false
+                              ? "Show"
+                              : "Hide"}
+                        </button>
+                      </div>
                       <p className="text-gray-900 whitespace-pre-wrap">
                         {s.signal_text}
                       </p>
