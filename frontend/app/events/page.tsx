@@ -71,7 +71,6 @@ export default function EventsPage() {
 
       <div className="max-w-7xl mx-auto px-8 py-12">
 
-        <Navbar />
 
         <div className="text-center mb-16">
           <h1 className="text-6xl font-bold text-red-700 mb-4">
