@@ -129,28 +129,122 @@ export default function Home() {
 
       </section>
 
-      {/* FINAL CTA (CLEAN, NOT BLOCKY) */}
-      <section className="bg-gray-50 py-20">
+      {/* STATS */}
 
-        <div className="max-w-4xl mx-auto text-center px-6">
+<section className="py-20 bg-gray-50">
 
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 mb-4">
-            Build the future of Calgary together
-          </h2>
+  <div className="max-w-7xl mx-auto px-6">
 
-          <p className="text-gray-600 mb-8 leading-relaxed">
-            Join a collaborative platform where technology meets public insight.
-          </p>
+    <div className="text-center mb-12">
 
-          <Link href="/community-input">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-semibold transition">
-              Get Involved
-            </button>
-          </Link>
+      <h2 className="text-4xl font-semibold text-gray-900 mb-3">
+        Calgary Compass at a Glance
+      </h2>
 
-        </div>
+      <p className="text-gray-600">
+        Bringing together technology, community insight,
+        and strategic foresight.
+      </p>
 
-      </section>
+    </div>
+
+    <div className="grid md:grid-cols-4 gap-8">
+
+      <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
+
+        <p className="text-5xl font-bold text-red-700">
+          50+
+        </p>
+
+        <p className="mt-3 text-gray-600">
+          Technologies Evaluated
+        </p>
+
+      </div>
+
+      <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
+
+        <p className="text-5xl font-bold text-red-700">
+          500+
+        </p>
+
+        <p className="mt-3 text-gray-600">
+          Community Responses
+        </p>
+
+      </div>
+
+      <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
+
+        <p className="text-5xl font-bold text-red-700">
+          20+
+        </p>
+
+        <p className="mt-3 text-gray-600">
+          Signals & Trends
+        </p>
+
+      </div>
+
+      <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
+
+        <p className="text-5xl font-bold text-red-700">
+          10+
+        </p>
+
+        <p className="mt-3 text-gray-600">
+          Community Events
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+   {/* FEATURED CTA */}
+
+<section className="py-24 bg-white">
+
+  <div className="max-w-6xl mx-auto px-6">
+
+    <div className="bg-gradient-to-r from-red-700 to-red-600 rounded-3xl p-12 md:p-16 text-white shadow-xl">
+
+      <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        Help Shape Calgary's Future
+      </h2>
+
+      <p className="text-xl max-w-3xl mb-8 leading-relaxed">
+        Join citizens, researchers, industry leaders,
+        and city staff in exploring emerging technologies,
+        evaluating smart city initiatives, and helping
+        build a more innovative Calgary.
+      </p>
+
+      <Link
+        href="/community-input"
+        className="
+          inline-block
+          bg-white
+          text-red-700
+          px-8
+          py-4
+          rounded-xl
+          font-semibold
+          hover:bg-gray-100
+          transition
+        "
+      >
+        Get Involved
+      </Link>
+
+    </div>
+
+  </div>
+
+</section>
 
       {/* Animation */}
       <style>{`
