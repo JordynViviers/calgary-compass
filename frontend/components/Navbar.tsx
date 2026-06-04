@@ -37,21 +37,39 @@ export default function Navbar() {
 
             <Link
               href="/"
-              className="font-medium text-gray-700 hover:text-red-700 transition"
+              className="
+               text-lg
+               font-semibold
+               text-gray-800
+               hover:text-red-700
+               transition
+               "
             >
               Home
             </Link>
 
             <Link
               href="/about"
-              className="font-medium text-gray-700 hover:text-red-700 transition"
+              className="
+               text-lg
+               font-semibold
+               text-gray-800
+               hover:text-red-700
+               transition
+               "
             >
               About
             </Link>
 
             <Link
               href="/technologies"
-              className="font-medium text-gray-700 hover:text-red-700 transition"
+              className="
+               text-lg
+               font-semibold
+               text-gray-800
+               hover:text-red-700
+               transition
+               "
             >
               Explore Technologies
             </Link>
