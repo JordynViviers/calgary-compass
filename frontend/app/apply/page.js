@@ -103,7 +103,7 @@ export default function ApplyPage() {
     setSubmitting(true);
 
     try {
-      const res = await fetch(`${API_URL}/application`, {
+   const res = await fetch(API_URL + "/application", {
         method: "POST",
 
         headers: {
