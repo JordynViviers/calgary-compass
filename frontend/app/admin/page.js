@@ -149,6 +149,18 @@ export default function AdminHome() {
               </p>
             </Link>
 
+            <Link
+              href="/admin/applications"
+              className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-red-300 transition"
+            >
+              <h2 className="text-2xl font-bold text-red-700 mb-2">
+                View Applications
+              </h2>
+              <p className="text-gray-600">
+                See application responses.
+              </p>
+            </Link>
+
           </div>
         </div>
       </section>
