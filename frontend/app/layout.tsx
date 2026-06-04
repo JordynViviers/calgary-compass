@@ -5,7 +5,15 @@ import { useState, useEffect } from "react";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
-function Detail({ label, value }) {
+type DetailProps = {
+  label: string;
+  value: string | number | null | undefined;
+};
+
+function Detail({
+  label,
+  value,
+}: DetailProps) {
   return (
     <div>
       <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
@@ -13,7 +21,9 @@ function Detail({ label, value }) {
       </p>
 
       <p className="text-gray-900">
-        {value && String(value).trim() ? value : "—"}
+        {value && String(value).trim()
+          ? value
+          : "—"}
       </p>
     </div>
   );
