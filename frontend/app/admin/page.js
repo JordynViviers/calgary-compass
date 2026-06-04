@@ -30,6 +30,12 @@ export default function AdminHome() {
           >
             Community Input
           </Link>
+          <Link
+            href="/admin/applications"
+            className="hover:text-red-700 transition"
+          >
+            Applications
+          </Link>
         </div>
       </nav>
 
