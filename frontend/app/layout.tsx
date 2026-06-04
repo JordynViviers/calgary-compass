@@ -269,12 +269,11 @@ const escape = (
           /* APPLICATIONS */
           <div className="space-y-6">
             {visible.map(
-              {visible.map(
-                (a: Application) => (
-                  <div
-                    key={a.id}
-                    className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
-                  >
+              (a: Application) => (
+                <div
+                  key={a.id}
+                  className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
+                >
                 {/* CARD HEADER */}
                 <div className="flex flex-wrap justify-between items-baseline gap-2 mb-5">
                   <h2 className="text-2xl font-bold text-red-700">
