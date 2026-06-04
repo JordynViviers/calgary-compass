@@ -158,6 +158,198 @@ export default function Home() {
 
       </section>
 
+            {/* PURPOSE */}
+
+      <section className="py-24 bg-white">
+
+        <div className="max-w-5xl mx-auto text-center px-6">
+
+          <p className="text-red-600 font-semibold uppercase tracking-wider mb-3">
+            Our Purpose
+          </p>
+
+          <h2 className="text-5xl font-bold text-gray-900 mb-6">
+            Evidence. Collaboration. Impact.
+          </h2>
+
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Calgary Compass empowers citizens,
+            industry, academia, and government to
+            explore emerging technologies,
+            participate in foresight activities,
+            and shape Calgary's future together.
+          </p>
+
+        </div>
+
+      </section>
+
+      {/* FEATURES */}
+
+      <section className="py-16 bg-white">
+
+        <div className="max-w-7xl mx-auto px-6">
+
+          <div className="grid md:grid-cols-4 gap-10">
+
+            <div className="text-center border-r border-gray-200">
+
+              <h3 className="text-2xl font-bold text-red-700 mb-4">
+                Explore Technologies
+              </h3>
+
+              <p className="text-gray-600">
+                Discover emerging technologies
+                being evaluated for smart city
+                applications.
+              </p>
+
+            </div>
+
+            <div className="text-center border-r border-gray-200">
+
+              <h3 className="text-2xl font-bold text-red-700 mb-4">
+                Community Input
+              </h3>
+
+              <p className="text-gray-600">
+                Share perspectives and help
+                evaluate future technology pilots.
+              </p>
+
+            </div>
+
+            <div className="text-center border-r border-gray-200">
+
+              <h3 className="text-2xl font-bold text-red-700 mb-4">
+                Signals & Trends
+              </h3>
+
+              <p className="text-gray-600">
+                Monitor emerging trends and weak
+                signals impacting cities worldwide.
+              </p>
+
+            </div>
+
+            <div className="text-center">
+
+              <h3 className="text-2xl font-bold text-red-700 mb-4">
+                Foresight
+              </h3>
+
+              <p className="text-gray-600">
+                Participate in scenario planning
+                and strategic foresight exercises.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* STATS */}
+
+      <section className="py-20 bg-gray-50">
+
+        <div className="max-w-7xl mx-auto px-6">
+
+          <div className="grid md:grid-cols-4 gap-8">
+
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+
+              <p className="text-5xl font-bold text-red-700">
+                50+
+              </p>
+
+              <p className="mt-3 text-gray-600">
+                Technologies Evaluated
+              </p>
+
+            </div>
+
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+
+              <p className="text-5xl font-bold text-red-700">
+                500+
+              </p>
+
+              <p className="mt-3 text-gray-600">
+                Community Responses
+              </p>
+
+            </div>
+
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+
+              <p className="text-5xl font-bold text-red-700">
+                20+
+              </p>
+
+              <p className="mt-3 text-gray-600">
+                Signals & Trends
+              </p>
+
+            </div>
+
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+
+              <p className="text-5xl font-bold text-red-700">
+                1
+              </p>
+
+              <p className="mt-3 text-gray-600">
+                Smarter Calgary
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* GET INVOLVED */}
+
+      <section className="py-24 bg-white">
+
+        <div className="max-w-6xl mx-auto px-6">
+
+          <div className="bg-gradient-to-r from-red-700 to-red-600 rounded-3xl p-12 text-white">
+
+            <h2 className="text-5xl font-bold mb-4">
+              Help Shape Calgary's Future
+            </h2>
+
+            <p className="text-xl max-w-3xl mb-8">
+
+              Join citizens, researchers,
+              industry leaders, and city staff
+              in evaluating emerging technologies
+              and building a smarter Calgary.
+
+            </p>
+
+            <Link href="/community-input">
+
+              <button className="bg-white text-red-700 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold transition">
+
+                Get Involved
+
+              </button>
+
+            </Link>
+
+          </div>
+
+        </div>
+
+      </section>
+
       {/* Animation Styles */}
       <style>{`
         @keyframes spin {
