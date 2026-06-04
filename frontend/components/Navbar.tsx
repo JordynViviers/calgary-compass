@@ -38,7 +38,7 @@ export default function Navbar() {
             <Link
               href="/"
               className="
-               text-base
+               text-sm
                font-semibold
                text-gray-800
                hover:text-red-700
@@ -51,7 +51,7 @@ export default function Navbar() {
             <Link
               href="/about"
               className="
-               text-base
+               text-sm
                font-semibold
                text-gray-800
                hover:text-red-700
@@ -64,7 +64,7 @@ export default function Navbar() {
             <Link
               href="/technologies"
               className="
-               text-base
+               text-sm
                font-semibold
                text-gray-800
                hover:text-red-700
@@ -77,7 +77,7 @@ export default function Navbar() {
             <Link
               href="/events"
               className="
-               text-base
+               text-sm
                font-semibold
                text-gray-800
                hover:text-red-700
@@ -90,7 +90,7 @@ export default function Navbar() {
             <Link
               href="/community-input"
               className="
-               text-base
+               text-sm
                font-semibold
                text-gray-800
                hover:text-red-700
@@ -103,7 +103,7 @@ export default function Navbar() {
             <Link
               href="/signals"
               className="
-               text-base
+               text-sm
                font-semibold
                text-gray-800
                hover:text-red-700
@@ -116,7 +116,7 @@ export default function Navbar() {
             <Link
               href="/foresight"
               className="
-               text-base
+               text-sm
                font-semibold
                text-gray-800
                hover:text-red-700
@@ -129,7 +129,7 @@ export default function Navbar() {
             <Link
               href="/analytics"
               className="
-               text-base
+               text-sm
                font-semibold
                text-gray-800
                hover:text-red-700
