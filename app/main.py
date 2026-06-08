@@ -1075,8 +1075,73 @@ def collect_sources(
 
     db.commit()
 
+    paper_count = db.query(
+        Source
+    ).filter(
+        Source.technology_id == technology.id
+    ).count()
+
+    citation_count = sum(
+
+        source.citation_count or 0
+
+        for source in db.query(
+            Source
+        ).filter(
+            Source.technology_id ==
+            technology.id
+        ).all()
+    )
+
+    evidence = db.query(
+        TechnologyEvidence
+    ).filter(
+        TechnologyEvidence.technology_id
+        == technology.id
+    ).first()
+
+    if not evidence:
+
+        evidence = TechnologyEvidence(
+
+            technology_id=
+                technology.id,
+
+            paper_count=
+                paper_count,
+
+            citation_count=
+                citation_count,
+
+            patent_count=0,
+
+            funding_count=0
+        )
+
+        db.add(evidence)
+
+    else:
+
+        evidence.paper_count = paper_count
+
+        evidence.citation_count = citation_count
+
+    db.commit()
+
     return {
-        "technology": technology.name,
-        "added": added,
-        "skipped": skipped
+
+        "technology":
+            technology.name,
+
+        "added":
+            added,
+
+        "skipped":
+            skipped,
+
+        "paper_count":
+            paper_count,
+
+        "citation_count":
+            citation_count
     }
