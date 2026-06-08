@@ -578,7 +578,6 @@ def delete_technology(
             "error":
                 "Technology not found"
         }
-    }
 
 
 # =========================
