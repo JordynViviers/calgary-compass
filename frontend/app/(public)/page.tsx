@@ -16,7 +16,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-white/80"></div>
 
         {/* Background Compass */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none translate-y-[18px]">
+        <div className="absolute inset-y-0 right-0 w-1/2 flex items-center justify-center pointer-events-none translate-y-[18px]">
           <div className="relative w-[90vw] max-w-[620px] aspect-square opacity-15">
             <div className="absolute inset-0 rounded-full border-[6px] border-red-700" />
             <div className="absolute inset-10 rounded-full border-2 border-red-700" />
@@ -60,33 +60,40 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-3xl text-center">
-          <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-black mb-5">
-            Calgary Compass
-          </h1>
+        <div className="relative z-10 max-w-7xl w-full mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="text-left">
+              <h1 className="text-5xl md:text-7xl font-semibold tracking-tight text-black mb-5">
+                Calgary Compass
+              </h1>
 
-          <p className="text-xl md:text-2xl font-medium text-black mb-6">
-            AI-powered civic intelligence for evaluating emerging technologies.
-          </p>
+              <p className="text-xl md:text-2xl font-medium text-black mb-6">
+                AI-powered civic intelligence for evaluating emerging
+                technologies.
+              </p>
 
-          <p className="text-base md:text-lg text-black leading-relaxed max-w-xl mx-auto mb-10">
-            A platform for governments, industry, academia, and citizens to
-            collaborate on foresight, governance analytics, and technology
-            evaluation for smarter cities.
-          </p>
+              <p className="text-base md:text-lg text-black leading-relaxed max-w-xl mb-10">
+                A platform for governments, industry, academia, and citizens to
+                collaborate on foresight, governance analytics, and technology
+                evaluation for smarter cities.
+              </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/technologies">
-              <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-semibold transition">
-                Explore Technologies
-              </button>
-            </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/technologies">
+                  <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-semibold transition">
+                    Explore Technologies
+                  </button>
+                </Link>
 
-            <Link href="/community-input">
-              <button className="border border-gray-300 text-black hover:border-gray-500 px-6 py-3 rounded-xl font-semibold transition bg-white/70">
-                Get Involved
-              </button>
-            </Link>
+                <Link href="/community-input">
+                  <button className="border border-gray-300 text-black hover:border-gray-500 px-6 py-3 rounded-xl font-semibold transition bg-white/70">
+                    Get Involved
+                  </button>
+                </Link>
+              </div>
+            </div>
+
+            <div />
           </div>
         </div>
       </section>
