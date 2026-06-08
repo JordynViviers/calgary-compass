@@ -18,7 +18,8 @@ from app.models import (
     CommunitySignalRequest,
     ApplicationRequest,
     EventRequest,
-    Base
+    Base.
+    TechnologyEvidence
 )
 
 from app.crud import (
@@ -799,3 +800,29 @@ def add_source(
         db,
         source.dict()
     )
+
+@app.get(
+    "/technology/{technology_id}/evidence"
+)
+def get_evidence(
+    technology_id: int,
+    db: Session = Depends(get_db)
+):
+
+    evidence = db.query(
+        TechnologyEvidence
+    ).filter(
+        TechnologyEvidence.technology_id
+        == technology_id
+    ).first()
+
+    if not evidence:
+
+        return {
+            "paper_count": 0,
+            "citation_count": 0,
+            "patent_count": 0,
+            "funding_count": 0
+        }
+
+    return evidence
