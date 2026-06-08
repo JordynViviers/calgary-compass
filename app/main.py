@@ -789,3 +789,13 @@ def delete_event(
         "message":
             "Event deleted"
     }
+
+@app.post("/sources/")
+def add_source(
+    source: SourceCreate,
+    db: Session = Depends(get_db)
+):
+    return create_source(
+        db,
+        source.dict()
+    )
