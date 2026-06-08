@@ -30,7 +30,7 @@ from app.crud import (
 
 from app.ai_service import evaluate_technology
 
-from backend.app.services.openalex import search_openalex
+from app.services.openalex import search_openalex
 
 
 # =========================
