@@ -19,7 +19,9 @@ from app.models import (
     ApplicationRequest,
     EventRequest,
     Base,
-    TechnologyEvidence
+    TechnologyEvidence,
+    Source, 
+    SourceCreate
 )
 
 from app.crud import (
@@ -137,7 +139,9 @@ def ai_evaluate_technology(
             "error":
                 "Technology not found"
         }
-
+    papers = search_openalex(
+        technology.name
+    )
     # =========================
     # RUN AI ENGINE
     # =========================
@@ -574,14 +578,6 @@ def delete_technology(
             "error":
                 "Technology not found"
         }
-
-    db.delete(tech)
-
-    db.commit()
-
-    return {
-        "message":
-            "Deleted"
     }
 
 
@@ -838,3 +834,91 @@ def openalex_test(
     return search_openalex(
         technology_name
     )
+
+@app.post("/technology/{technology_id}/collect-sources")
+def collect_sources(
+    technology_id: int,
+    db: Session = Depends(get_db)
+):
+
+    technology = db.query(
+        Technology
+    ).filter(
+        Technology.id == technology_id
+    ).first()
+
+    if not technology:
+        return {
+            "error": "Technology not found"
+        }
+
+    papers = search_openalex(
+        technology.name
+    )
+
+    added = 0
+
+    for paper in papers:
+
+        source = Source(
+
+            technology_id=technology.id,
+
+            title=paper.get(
+                "title",
+                ""
+            ),
+
+            source_type="academic_paper",
+
+            source_database="OpenAlex",
+
+            source_name=paper.get(
+                "primary_location",
+                {}
+            ).get(
+                "source",
+                {}
+            ).get(
+                "display_name",
+                ""
+            ),
+
+            publication_date=paper.get(
+                "publication_date",
+                ""
+            ),
+
+            doi=paper.get(
+                "doi",
+                ""
+            ),
+
+            citation_count=paper.get(
+                "cited_by_count",
+                0
+            )
+        )
+
+        db.add(source)
+
+        added += 1
+
+    db.commit()
+
+    return {
+        "message": f"Added {added} sources",
+        "technology": technology.name
+    }
+
+@app.get("/technology/{technology_id}/sources")
+def get_sources(
+    technology_id: int,
+    db: Session = Depends(get_db)
+):
+
+    return db.query(
+        Source
+    ).filter(
+        Source.technology_id == technology_id
+    ).all()
