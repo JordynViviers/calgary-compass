@@ -8,7 +8,7 @@ export default function Navbar() {
 
       <div className="max-w-[1600px] mx-auto px-8">
 
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center h-20">
 
           {/* Logo */}
           <Link
