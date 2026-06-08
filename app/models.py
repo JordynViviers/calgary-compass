@@ -11,10 +11,17 @@ from app.database import Base
 # =========================
 class Technology(Base):
     __tablename__ = "technologies"
-    id = Column(Integer, primary_key=True)
+
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     description = Column(String)
     current_status = Column(String)
+
+    sources = relationship(
+        "Source",
+        backref="technology",
+        cascade="all, delete-orphan"
+    )
 class Vote(Base):
     __tablename__ = "votes"
     id = Column(Integer, primary_key=True)
