@@ -826,3 +826,15 @@ def get_evidence(
         }
 
     return evidence
+
+from app.services.openalex import search_openalex
+
+
+@app.get("/openalex-test/{technology_name}")
+def openalex_test(
+    technology_name: str
+):
+
+    return search_openalex(
+        technology_name
+    )
