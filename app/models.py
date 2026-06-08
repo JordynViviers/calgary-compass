@@ -217,3 +217,22 @@ class SourceCreate(BaseModel):
     citation_count: int = 0
 
     abstract: str = ""
+
+class TechnologyEvidence(Base):
+    __tablename__ = "technology_evidence"
+
+    id = Column(Integer, primary_key=True)
+
+    technology_id = Column(
+        Integer,
+        ForeignKey("technologies.id"),
+        unique=True
+    )
+
+    paper_count = Column(Integer, default=0)
+
+    citation_count = Column(Integer, default=0)
+
+    patent_count = Column(Integer, default=0)
+
+    funding_count = Column(Integer, default=0)
