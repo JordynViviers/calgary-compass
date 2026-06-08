@@ -6,7 +6,15 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-white text-black overflow-hidden">
       {/* HERO */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+      <section
+        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/calgary-bg.jpg')",
+        }}
+      >
+        {/* Translucent Overlay */}
+        <div className="absolute inset-0 bg-white/75"></div>
+
         {/* Background Compass */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none translate-y-[18px]">
           <div className="relative w-[90vw] max-w-[620px] aspect-square opacity-15">
