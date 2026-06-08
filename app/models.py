@@ -194,3 +194,26 @@ class Source(Base):
     abstract = Column(Text)
 
     created_at = Column(DateTime, default=datetime.utcnow)
+
+class SourceCreate(BaseModel):
+    technology_id: int
+
+    title: str
+
+    authors: str = ""
+
+    source_type: str = ""
+
+    source_name: str = ""
+
+    source_database: str = ""
+
+    publication_date: str = ""
+
+    doi: str = ""
+
+    url: str = ""
+
+    citation_count: int = 0
+
+    abstract: str = ""
