@@ -95,13 +95,72 @@ def create_new_technology(
     db: Session = Depends(get_db)
 ):
 
-    return create_technology(
+    technology = create_technology(
         db,
         name=data.name,
         description=data.description,
         current_status=data.current_status
     )
 
+    try:
+
+        papers = search_openalex(
+            technology.name
+        )
+
+        for paper in papers:
+
+            source = Source(
+
+                technology_id=technology.id,
+
+                title=paper.get(
+                    "title",
+                    ""
+                ),
+
+                source_type="academic_paper",
+
+                source_database="OpenAlex",
+
+                source_name=paper.get(
+                    "primary_location",
+                    {}
+                ).get(
+                    "source",
+                    {}
+                ).get(
+                    "display_name",
+                    ""
+                ),
+
+                publication_date=paper.get(
+                    "publication_date",
+                    ""
+                ),
+
+                doi=paper.get(
+                    "doi",
+                    ""
+                ),
+
+                citation_count=paper.get(
+                    "cited_by_count",
+                    0
+                )
+            )
+
+            db.add(source)
+
+        db.commit()
+
+    except Exception as e:
+
+        print(
+            f"Source collection failed: {e}"
+        )
+
+    return technology
 
 # =========================
 # GET TECHNOLOGIES
