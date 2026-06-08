@@ -9,7 +9,7 @@ export default function Home() {
       <section
         className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-cover bg-center"
         style={{
-          backgroundImage: "url('/calgary-bg.jpg')",
+          backgroundImage: "url(/calgary-bg.avif)",
         }}
       >
         {/* Translucent Overlay */}
