@@ -1,14 +1,22 @@
+
+
+from sqlalchemy.orm import relationship
+
+from app.database import Base
+
+from pydantic import BaseModel
+
 from sqlalchemy import (
     Column,
     Integer,
     String,
     Float,
-    ForeignKey
+    ForeignKey,
+    Text,
+    DateTime
 )
 
-from sqlalchemy.orm import relationship
-
-from app.database import Base
+from datetime import datetime
 # =========================
 # DATABASE TABLES
 # =========================
