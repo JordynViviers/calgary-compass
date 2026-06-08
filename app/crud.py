@@ -4,9 +4,9 @@ from app.models import (
     Technology,
     Vote,
     AIEvaluation,
-    Source
+    Source,
+    TechnologyEvidence
 )
-
 
 def create_technology(
     db: Session,
