@@ -18,7 +18,7 @@ from app.models import (
     CommunitySignalRequest,
     ApplicationRequest,
     EventRequest,
-    Base.
+    Base,
     TechnologyEvidence
 )
 
