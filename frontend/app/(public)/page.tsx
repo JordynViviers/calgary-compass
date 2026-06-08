@@ -13,7 +13,7 @@ export default function Home() {
         }}
       >
         {/* Translucent Overlay */}
-        <div className="absolute inset-0 bg-white/75"></div>
+        <div className="absolute inset-0 bg-white/80"></div>
 
         {/* Background Compass */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none translate-y-[18px]">
@@ -28,10 +28,21 @@ export default function Home() {
               <div className="absolute top-1/2 left-0 w-full h-[1px] bg-red-700 -translate-y-1/2" />
             </div>
 
-            <span className="absolute top-4 left-1/2 -translate-x-1/2 text-3xl font-bold text-red-700">N</span>
-            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-3xl font-bold text-red-700">S</span>
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-3xl font-bold text-red-700">W</span>
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-3xl font-bold text-red-700">E</span>
+            <span className="absolute top-4 left-1/2 -translate-x-1/2 text-3xl font-bold text-red-700">
+              N
+            </span>
+
+            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-3xl font-bold text-red-700">
+              S
+            </span>
+
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-3xl font-bold text-red-700">
+              W
+            </span>
+
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-3xl font-bold text-red-700">
+              E
+            </span>
           </div>
 
           <div className="absolute inset-0 flex items-center justify-center">
@@ -50,15 +61,15 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-3xl text-center">
-          <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-gray-900 mb-5">
+          <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-black mb-5">
             Calgary Compass
           </h1>
 
-          <p className="text-xl md:text-2xl font-medium text-gray-700 mb-6">
+          <p className="text-xl md:text-2xl font-medium text-black mb-6">
             AI-powered civic intelligence for evaluating emerging technologies.
           </p>
 
-          <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-xl mx-auto mb-10">
+          <p className="text-base md:text-lg text-black leading-relaxed max-w-xl mx-auto mb-10">
             A platform for governments, industry, academia, and citizens to
             collaborate on foresight, governance analytics, and technology
             evaluation for smarter cities.
@@ -72,7 +83,7 @@ export default function Home() {
             </Link>
 
             <Link href="/community-input">
-              <button className="border border-gray-300 text-gray-700 hover:border-gray-400 px-6 py-3 rounded-xl font-semibold transition">
+              <button className="border border-gray-300 text-black hover:border-gray-500 px-6 py-3 rounded-xl font-semibold transition bg-white/70">
                 Get Involved
               </button>
             </Link>
@@ -87,6 +98,7 @@ export default function Home() {
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Evaluate Technologies
             </h3>
+
             <p className="text-gray-600 text-sm leading-relaxed">
               Assess emerging innovations using structured data and AI insight.
             </p>
@@ -96,6 +108,7 @@ export default function Home() {
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Engage Citizens
             </h3>
+
             <p className="text-gray-600 text-sm leading-relaxed">
               Collect meaningful input from community stakeholders.
             </p>
@@ -105,6 +118,7 @@ export default function Home() {
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Guide Decisions
             </h3>
+
             <p className="text-gray-600 text-sm leading-relaxed">
               Support smarter city planning with foresight analytics.
             </p>
@@ -128,23 +142,43 @@ export default function Home() {
 
           <div className="grid md:grid-cols-4 gap-8">
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
-              <p className="text-5xl font-bold text-red-700">50+</p>
-              <p className="mt-3 text-gray-600">Technologies Evaluated</p>
+              <p className="text-5xl font-bold text-red-700">
+                50+
+              </p>
+
+              <p className="mt-3 text-gray-600">
+                Technologies Evaluated
+              </p>
             </div>
 
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
-              <p className="text-5xl font-bold text-red-700">500+</p>
-              <p className="mt-3 text-gray-600">Community Responses</p>
+              <p className="text-5xl font-bold text-red-700">
+                500+
+              </p>
+
+              <p className="mt-3 text-gray-600">
+                Community Responses
+              </p>
             </div>
 
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
-              <p className="text-5xl font-bold text-red-700">20+</p>
-              <p className="mt-3 text-gray-600">Signals & Trends</p>
+              <p className="text-5xl font-bold text-red-700">
+                20+
+              </p>
+
+              <p className="mt-3 text-gray-600">
+                Signals & Trends
+              </p>
             </div>
 
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
-              <p className="text-5xl font-bold text-red-700">10+</p>
-              <p className="mt-3 text-gray-600">Community Events</p>
+              <p className="text-5xl font-bold text-red-700">
+                10+
+              </p>
+
+              <p className="mt-3 text-gray-600">
+                Community Events
+              </p>
             </div>
           </div>
         </div>
