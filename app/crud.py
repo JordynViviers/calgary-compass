@@ -106,3 +106,64 @@ def create_source(
     db.refresh(source)
 
     return source
+
+def update_technology_evidence(
+    db: Session,
+    technology_id: int
+):
+
+    sources = db.query(
+        Source
+    ).filter(
+        Source.technology_id == technology_id
+    ).all()
+
+    paper_count = len([
+        s for s in sources
+        if s.source_type == "academic_paper"
+    ])
+
+    citation_count = sum(
+        s.citation_count or 0
+        for s in sources
+    )
+
+    patent_count = len([
+        s for s in sources
+        if s.source_type == "patent"
+    ])
+
+    funding_count = len([
+        s for s in sources
+        if s.source_type == "funding"
+    ])
+
+    evidence = db.query(
+        TechnologyEvidence
+    ).filter(
+        TechnologyEvidence.technology_id
+        == technology_id
+    ).first()
+
+    if evidence:
+
+        evidence.paper_count = paper_count
+        evidence.citation_count = citation_count
+        evidence.patent_count = patent_count
+        evidence.funding_count = funding_count
+
+    else:
+
+        evidence = TechnologyEvidence(
+            technology_id=technology_id,
+            paper_count=paper_count,
+            citation_count=citation_count,
+            patent_count=patent_count,
+            funding_count=funding_count
+        )
+
+        db.add(evidence)
+
+    db.commit()
+
+    return evidence
