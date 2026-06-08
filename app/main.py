@@ -973,14 +973,110 @@ def collect_sources(
 
         db.add(source)
 
-@app.get("/technology/{technology_id}/sources")
-def get_sources(
+@app.post("/technology/{technology_id}/collect-sources")
+def collect_sources(
     technology_id: int,
     db: Session = Depends(get_db)
 ):
 
-    return db.query(
-        Source
+    technology = db.query(
+        Technology
     ).filter(
-        Source.technology_id == technology_id
-    ).all()
+        Technology.id == technology_id
+    ).first()
+
+    if not technology:
+        return {
+            "error": "Technology not found"
+        }
+
+    papers = search_openalex(
+        technology.name
+    )
+
+    added = 0
+    skipped = 0
+
+    for paper in papers:
+
+        doi = paper.get(
+            "doi",
+            ""
+        )
+
+        title = paper.get(
+            "title",
+            ""
+        )
+
+        existing = None
+
+        # Check DOI first
+        if doi:
+
+            existing = db.query(
+                Source
+            ).filter(
+                Source.doi == doi
+            ).first()
+
+        # Check title if DOI doesn't exist
+        if not existing:
+
+            existing = db.query(
+                Source
+            ).filter(
+                Source.title == title
+            ).first()
+
+        # Skip duplicates
+        if existing:
+
+            skipped += 1
+            continue
+
+        source = Source(
+
+            technology_id=technology.id,
+
+            title=title,
+
+            source_type="academic_paper",
+
+            source_database="OpenAlex",
+
+            source_name=paper.get(
+                "primary_location",
+                {}
+            ).get(
+                "source",
+                {}
+            ).get(
+                "display_name",
+                ""
+            ),
+
+            publication_date=paper.get(
+                "publication_date",
+                ""
+            ),
+
+            doi=doi,
+
+            citation_count=paper.get(
+                "cited_by_count",
+                0
+            )
+        )
+
+        db.add(source)
+
+        added += 1
+
+    db.commit()
+
+    return {
+        "technology": technology.name,
+        "added": added,
+        "skipped": skipped
+    }
