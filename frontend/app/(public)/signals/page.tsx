@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
 
 const API_URL =
   "https://calgary-compass-api.onrender.com";
@@ -49,7 +48,6 @@ export default function SignalsPage() {
     <main className="min-h-screen bg-gray-50 text-black">
 
       <div className="h-2 bg-red-700 w-full"></div>
-      <Navbar />
 
       <div className="max-w-6xl mx-auto px-8 py-12">
 
