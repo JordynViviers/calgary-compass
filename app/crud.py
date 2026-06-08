@@ -79,6 +79,17 @@ def create_ai_evaluation(
         governance_recommendation=governance_recommendation
     )
 
+def create_source(
+    db: Session,
+    source_data: dict
+):
+    source = Source(**source_data)
+
+    db.add(source)
+    db.commit()
+    db.refresh(source)
+
+    return source
     db.add(evaluation)
     db.commit()
     db.refresh(evaluation)
