@@ -918,6 +918,22 @@ def collect_sources(
 
     for paper in papers:
 
+        doi = paper.get(
+            "doi",
+            ""
+        )
+
+        if doi:
+
+            existing = db.query(
+                Source
+            ).filter(
+                Source.doi == doi
+            ).first()
+
+            if existing:
+                continue
+
         source = Source(
 
             technology_id=technology.id,
@@ -947,10 +963,7 @@ def collect_sources(
                 ""
             ),
 
-            doi=paper.get(
-                "doi",
-                ""
-            ),
+            doi=doi,
 
             citation_count=paper.get(
                 "cited_by_count",
@@ -959,15 +972,6 @@ def collect_sources(
         )
 
         db.add(source)
-
-        added += 1
-
-    db.commit()
-
-    return {
-        "message": f"Added {added} sources",
-        "technology": technology.name
-    }
 
 @app.get("/technology/{technology_id}/sources")
 def get_sources(
