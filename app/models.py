@@ -131,3 +131,48 @@ class EventRequest(BaseModel):
     location: str = ""
     description: str = ""
     link: str = ""
+
+class Source(Base):
+    __tablename__ = "sources"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    technology_id = Column(
+        Integer,
+        ForeignKey("technologies.id"),
+        nullable=False
+    )
+
+    title = Column(String, nullable=False)
+
+    authors = Column(String)
+
+    source_type = Column(String)
+    # academic_paper
+    # patent
+    # funding
+    # industry_report
+    # market_signal
+
+    source_name = Column(String)
+    # Nature
+    # IEEE
+    # USPTO
+    # DARPA
+
+    source_database = Column(String)
+    # OpenAlex
+    # SemanticScholar
+    # GooglePatents
+
+    publication_date = Column(String)
+
+    doi = Column(String)
+
+    url = Column(String)
+
+    citation_count = Column(Integer)
+
+    abstract = Column(Text)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
