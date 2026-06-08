@@ -1,8 +1,19 @@
 from sqlalchemy.orm import Session
-from app.models import Technology, Vote, AIEvaluation
+
+from app.models import (
+    Technology,
+    Vote,
+    AIEvaluation,
+    Source
+)
 
 
-def create_technology(db: Session, name: str, description: str, current_status: str):
+def create_technology(
+    db: Session,
+    name: str,
+    description: str,
+    current_status: str
+):
 
     tech = Technology(
         name=name,
@@ -13,6 +24,7 @@ def create_technology(db: Session, name: str, description: str, current_status: 
     db.add(tech)
     db.commit()
     db.refresh(tech)
+
     return tech
 
 
@@ -40,19 +52,18 @@ def create_vote(
     db.add(vote)
     db.commit()
     db.refresh(vote)
+
     return vote
 
 
 def create_ai_evaluation(
     db: Session,
     technology_id: int,
-
     financial_sustainability: int,
     operational_excellence: int,
     people_culture: int,
     trusted_governance: int,
     innovation_agility: int,
-
     summary: str,
     technology_summary: str,
     calgary_problem: str,
@@ -63,15 +74,12 @@ def create_ai_evaluation(
 
     evaluation = AIEvaluation(
         technology_id=technology_id,
-
         financial_sustainability=financial_sustainability,
         operational_excellence=operational_excellence,
         people_culture=people_culture,
         trusted_governance=trusted_governance,
         innovation_agility=innovation_agility,
-
         summary=summary,
-
         technology_summary=technology_summary,
         calgary_problem=calgary_problem,
         global_examples=global_examples,
@@ -79,10 +87,18 @@ def create_ai_evaluation(
         governance_recommendation=governance_recommendation
     )
 
+    db.add(evaluation)
+    db.commit()
+    db.refresh(evaluation)
+
+    return evaluation
+
+
 def create_source(
     db: Session,
     source_data: dict
 ):
+
     source = Source(**source_data)
 
     db.add(source)
@@ -90,8 +106,3 @@ def create_source(
     db.refresh(source)
 
     return source
-    db.add(evaluation)
-    db.commit()
-    db.refresh(evaluation)
-
-    return evaluation
