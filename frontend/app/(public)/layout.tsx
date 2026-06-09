@@ -10,17 +10,21 @@ export default function PublicLayout({
 }) {
   return (
     <LanguageProvider>
+      <div className="min-h-screen flex flex-col">
 
-      <Navbar />
+        <Navbar />
 
-      <div className="flex justify-end px-8 py-3 bg-white">
-        <LanguageSelector />
+        <div className="flex justify-end px-8 py-3 bg-white">
+          <LanguageSelector />
+        </div>
+
+        <main className="flex-1">
+          {children}
+        </main>
+
+        <Footer />
+
       </div>
-
-      {children}
-
-      <Footer />
-
     </LanguageProvider>
   );
 }
