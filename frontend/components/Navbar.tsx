@@ -2,9 +2,24 @@
 
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import {
+  useLanguage
+} from "@/components/LanguageProvider";
+
+import {
+  translations
+} from "@/lib/translations";
 
 export default function Navbar() {
-  const { t, i18n } = useTranslation();
+  const { language } =
+    useLanguage();
+
+  const t =
+    translations[
+      language as keyof typeof translations
+    ] ||
+    translations.English;
+  
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
 
