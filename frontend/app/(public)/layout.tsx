@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import LanguageSelector from "@/components/LanguageSelector";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import Footer from "@/components/Footer";
 
 export default function PublicLayout({
   children,
@@ -17,6 +18,8 @@ export default function PublicLayout({
       </div>
 
       {children}
+
+      <Footer />
 
     </LanguageProvider>
   );
