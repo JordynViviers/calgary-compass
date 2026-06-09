@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AdminNavbar from "@/components/AdminNavbar";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
@@ -131,7 +130,6 @@ export default function AdminEventsPage() {
       <div className="h-2 bg-red-700 w-full"></div>
 
       <div className="max-w-3xl mx-auto px-8 pt-6 pb-12">
-        <AdminNavbar />
 
         {/* Page Heading */}
         <div className="text-center mb-8">
