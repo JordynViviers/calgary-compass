@@ -1,14 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import AdminNavbar from "@/components/AdminNavbar";
 
 export default function AdminHome() {
   return (
     <main className="relative min-h-screen bg-white text-black overflow-hidden">
-
-      {/* Admin Navigation */}
-      <AdminNavbar />
 
       {/* Hero */}
       <section className="relative flex flex-col justify-center items-center min-h-[80vh] px-10 overflow-hidden">
