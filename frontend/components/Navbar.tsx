@@ -1,8 +1,11 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
 import Link from "next/link";
+  const { t, i18n } = useTranslation();
 
 export default function Navbar() {
+  const { t, i18n } = useTranslation();
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
 
@@ -41,49 +44,49 @@ export default function Navbar() {
                 href="/"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                Home
+                {t("home")}
               </Link>
 
               <Link
                 href="/about"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                About
+                {t("About")}
               </Link>
 
               <Link
                 href="/technologies"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                Explore Technologies
+                {t("Explore Technologies")}
               </Link>
 
               <Link
                 href="/events"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                In-Person Events
+                {t("In-Person Events")}
               </Link>
 
               <Link
                 href="/signals"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                Signals
+                {t("Signals")}
               </Link>
 
               <Link
                 href="/foresight"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                Foresight
+                {t("Foresight")}
               </Link>
 
               <Link
                 href="/analytics"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                Analytics
+                {t("Analytics")}
               </Link>
 
             </nav>
