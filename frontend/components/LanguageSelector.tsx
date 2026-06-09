@@ -1,26 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import {
-  useLanguage
-} from "@/components/LanguageProvider";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function LanguageSelector() {
 
-  const [language, setLanguage] =
-    useState("English");
-
-  useEffect(() => {
-
-    const savedLanguage =
-      localStorage.getItem("language");
-
-    if (savedLanguage) {
-      setLanguage(savedLanguage);
-    }
-
-  }, []);
+  const {
+    language,
+    setLanguage,
+  } = useLanguage();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -41,7 +28,7 @@ export default function LanguageSelector() {
     <div className="flex items-center gap-2">
 
       <span className="text-sm text-gray-600">
-        🌐 
+        🌐
       </span>
 
       <select
