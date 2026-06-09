@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import LanguageSelector from "@/components/LanguageSelector";
-import { LanguageProvider } from "@/components/LanguageProvider";
 
 export default function PublicLayout({
   children,
