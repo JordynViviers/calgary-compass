@@ -58,6 +58,7 @@ export default function LanguageSelector() {
         <option>English</option>
         <option>Français canadien</option>
         <option>Español latinoamericano</option>
+        <option>Filipino</option>
         <option>العربية</option>
         <option>हिन्दी</option>
         <option>한국어</option>
