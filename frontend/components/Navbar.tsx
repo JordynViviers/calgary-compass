@@ -58,49 +58,49 @@ export default function Navbar() {
                 href="/"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t("Home")}
+                {t.Home}
               </Link>
 
               <Link
                 href="/about"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t("About")}
+                {t.About}
               </Link>
 
               <Link
                 href="/technologies"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t("Explore Technologies")}
+                {t.Explore_Technologies}
               </Link>
 
               <Link
                 href="/events"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t("In-Person Events")}
+                {t.Events}
               </Link>
 
               <Link
                 href="/signals"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t("Signals")}
+                {t.Signals}
               </Link>
 
               <Link
                 href="/foresight"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t("Foresight")}
+                {t.Foresight}
               </Link>
 
               <Link
                 href="/analytics"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t("Analytics")}
+                {t.Analytics}
               </Link>
 
             </nav>
