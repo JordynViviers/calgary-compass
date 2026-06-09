@@ -66,13 +66,6 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/community-input"
-                className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
-              >
-                Community Input
-              </Link>
-
-              <Link
                 href="/signals"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
