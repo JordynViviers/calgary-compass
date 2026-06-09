@@ -7,7 +7,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <LanguageProvider>
+    <>
       <>
         <Navbar />
 
@@ -17,6 +17,6 @@ export default function PublicLayout({
 
         {children}
       </>
-    </LanguageProvider>
+    </>
   );
 }
