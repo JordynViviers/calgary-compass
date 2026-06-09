@@ -2,6 +2,10 @@
 
 import { useEffect, useState } from "react";
 
+import {
+  useLanguage
+} from "@/components/LanguageProvider";
+
 export default function LanguageSelector() {
 
   const [language, setLanguage] =
