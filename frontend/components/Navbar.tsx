@@ -43,7 +43,7 @@ export default function Navbar() {
                 href="/"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t("home")}
+                {t("Home")}
               </Link>
 
               <Link
