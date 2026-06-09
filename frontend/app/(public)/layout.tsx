@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import LanguageSelector from "@/components/LanguageSelector";
-import { LanguageProvider }
-from "@/components/LanguageProvider";
+import { LanguageProvider } from "@/components/LanguageProvider";
 
 export default function PublicLayout({
   children,
@@ -10,15 +9,15 @@ export default function PublicLayout({
 }) {
   return (
     <LanguageProvider>
-      <Navbar />
+      <>
+        <Navbar />
 
-      <div className="flex justify-end px-8 py-3 bg-white">
-        <LanguageSelector />
-      </div>
+        <div className="flex justify-end px-8 py-3 bg-white">
+          <LanguageSelector />
+        </div>
 
-      {children}
-    <LanguageProvider />
+        {children}
+      </>
+    </LanguageProvider>
   );
 }
-
-      
