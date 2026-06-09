@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import LanguageSelector from "@/components/LanguageSelector";
+import { LanguageProvider } from "@/components/LanguageProvider";
 
 export default function PublicLayout({
   children,
@@ -7,16 +8,16 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <>
-        <Navbar />
+    <LanguageProvider>
 
-        <div className="flex justify-end px-8 py-3 bg-white">
-          <LanguageSelector />
-        </div>
+      <Navbar />
 
-        {children}
-      </>
-    </>
+      <div className="flex justify-end px-8 py-3 bg-white">
+        <LanguageSelector />
+      </div>
+
+      {children}
+
+    </LanguageProvider>
   );
 }
