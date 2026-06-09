@@ -2,7 +2,6 @@
 
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
-  const { t, i18n } = useTranslation();
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
