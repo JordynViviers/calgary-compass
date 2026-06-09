@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import AdminNavbar from "@/components/AdminNavbar";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
@@ -94,8 +93,6 @@ export default function AdminCommunityInputPage() {
       <div className="h-2 bg-red-700 w-full"></div>
 
       <div className="max-w-5xl mx-auto px-8 py-12">
-
-        <AdminNavbar />
 
         <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
           <div>
