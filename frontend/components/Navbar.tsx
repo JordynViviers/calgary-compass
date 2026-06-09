@@ -58,49 +58,49 @@ export default function Navbar() {
                 href="/"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t.Home}
+                {t.home}
               </Link>
 
               <Link
                 href="/about"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t.About}
+                {t.about}
               </Link>
 
               <Link
                 href="/technologies"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t.Explore_Technologies}
+                {t.technologies}
               </Link>
 
               <Link
                 href="/events"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t.Events}
+                {t.events}
               </Link>
 
               <Link
                 href="/signals"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t.Signals}
+                {t.signals}
               </Link>
 
               <Link
                 href="/foresight"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t.Foresight}
+                {t.foresight}
               </Link>
 
               <Link
                 href="/analytics"
                 className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
               >
-                {t.Analytics}
+                {t.analytics}
               </Link>
 
             </nav>
