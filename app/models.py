@@ -279,18 +279,10 @@ class TechnologyCandidate(Base):
         server_default=func.now()
     )
 
-
-class TechnologyCandidateRequest(Base):
-    __tablename__ = "technology_candidate_requests"
-
-    id = Column(Integer, primary_key=True, index=True)
-
-    technology_name = Column(String, nullable=False)
-    description = Column(Text, nullable=True)
-
-    source_url = Column(String, nullable=True)
-    source_name = Column(String, nullable=True)
-
-    status = Column(String, default="pending")
+class TechnologyCandidateRequest(BaseModel):
+    name: str
+    summary: str | None = None
+    source: str | None = None
+    confidence: int | None = None
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
