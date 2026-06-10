@@ -1373,20 +1373,15 @@ def discover_technologies(
 
     for paper in data.get("results", []):
 
-        title = paper.get(
-            "title",
-            ""
-        )
+        title = paper.get("title", "")
 
         if title:
-
             papers.append(title)
 
     if not papers:
 
         return {
-            "error":
-                "No papers found from OpenAlex"
+            "error": "No papers found from OpenAlex"
         }
 
     prompt = f"""
@@ -1396,10 +1391,7 @@ Below are academic paper titles from OpenAlex:
 
 {papers}
 
-Identify emerging technologies that could
-be relevant to cities like Calgary.
-
-Group similar papers together.
+Identify emerging technologies relevant to cities like Calgary.
 
 Return ONLY valid JSON.
 
@@ -1410,11 +1402,6 @@ Example:
     "name": "AI Road Inspection",
     "summary": "Computer vision systems that automatically inspect road infrastructure.",
     "confidence": 92
-  }},
-  {{
-    "name": "Digital Twin Infrastructure",
-    "summary": "Virtual city models used for planning and operations.",
-    "confidence": 88
   }}
 ]
 """
@@ -1429,73 +1416,88 @@ Example:
         ]
     )
 
-    content = (
-        ai_response
-        .choices[0]
-        .message.content
-    )
+    content = ai_response.choices[0].message.content
 
     try:
 
-        candidates = json.loads(
-            content
-        )
-        print(candidates)
+        candidates = json.loads(content)
 
-    except Exception:
+        print("========== AI CANDIDATES ==========")
+        print(candidates)
+        print("===================================")
+
+    except Exception as e:
+
+        print("JSON PARSE FAILED")
+        print(content)
 
         return {
-            "error":
-                "AI returned invalid JSON",
-            "response":
-                content
+            "error": "AI returned invalid JSON",
+            "response": content
         }
 
     created_count = 0
 
     for item in candidates:
 
+        print(f"Processing: {item}")
+
         existing_candidate = db.query(
             TechnologyCandidate
         ).filter(
-            TechnologyCandidate.name ==
-            item["name"]
+            TechnologyCandidate.name == item["name"]
         ).first()
 
         existing_technology = db.query(
             Technology
         ).filter(
-            Technology.name ==
-            item["name"]
+            Technology.name == item["name"]
         ).first()
 
-        if (
-            existing_candidate
-            or existing_technology
-        ):
-            continue
+        if existing_candidate:
 
-        db.add(
-
-            TechnologyCandidate(
-                name=item["name"],
-                summary=item["summary"],
-                source="OpenAlex + AI",
-                confidence=item["confidence"],
-                status="Pending"
+            print(
+                f"Skipped existing candidate: {item['name']}"
             )
 
+            continue
+
+        if existing_technology:
+
+            print(
+                f"Skipped existing technology: {item['name']}"
+            )
+
+            continue
+
+        candidate = TechnologyCandidate(
+            name=item["name"],
+            summary=item.get("summary", ""),
+            source="OpenAlex + AI",
+            confidence=item.get("confidence", 50),
+            status="Pending"
         )
+
+        db.add(candidate)
 
         created_count += 1
 
+        print(
+            f"Added candidate: {item['name']}"
+        )
+
     db.commit()
 
+    all_candidates = db.query(
+        TechnologyCandidate
+    ).all()
+
+    print(
+        f"TOTAL CANDIDATES IN DB: {len(all_candidates)}"
+    )
+
     return {
-        "message":
-            "Discovery complete",
-        "created":
-            created_count
+        "message": "Discovery complete",
+        "created": created_count,
+        "total_candidates": len(all_candidates)
     }
-
-
