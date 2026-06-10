@@ -20,8 +20,7 @@ from app.models import (
     TechnologyEvidence,
     Source, 
     SourceCreate, 
-    TechnologyCandidate,
-    TechnologyCandidateRequest
+    TechnologyCandidate
 )
 
 from app.crud import (
