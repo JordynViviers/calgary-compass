@@ -32,6 +32,26 @@ export default function WatchlistPage() {
     loadCandidates();
   }, []);
 
+  const discoverTechnologies = async () => {
+    try {
+      await axios.post(
+        `${API_URL}/discover-technologies`
+      );
+
+      alert(
+        "Technology discovery completed!"
+      );
+
+      loadCandidates();
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        "Failed to discover technologies."
+      );
+    }
+  };
+
   const approveCandidate = async (
     candidateId: number
   ) => {
@@ -90,33 +110,53 @@ export default function WatchlistPage() {
           </h1>
 
           <p className="text-gray-600 mt-2">
-            Potential technologies awaiting review.
+            AI-discovered technologies awaiting review.
           </p>
 
         </div>
 
-        <Link
-          href="/admin"
-          className="
-            bg-gray-100
-            hover:bg-gray-200
-            px-5
-            py-3
-            rounded-xl
-            transition
-          "
-        >
-          ← Back to Dashboard
-        </Link>
+        <div className="flex gap-3">
+
+          <button
+            onClick={discoverTechnologies}
+            className="
+              bg-red-600
+              hover:bg-red-700
+              text-white
+              px-5
+              py-3
+              rounded-xl
+              font-medium
+              transition
+            "
+          >
+            🔍 Discover Technologies
+          </button>
+
+          <Link
+            href="/admin"
+            className="
+              bg-gray-100
+              hover:bg-gray-200
+              px-5
+              py-3
+              rounded-xl
+              transition
+            "
+          >
+            ← Back to Dashboard
+          </Link>
+
+        </div>
 
       </div>
 
-      {/* Content */}
+      {/* Candidate List */}
 
       {loading ? (
 
         <div className="text-gray-500">
-          Loading candidates...
+          Loading technologies...
         </div>
 
       ) : candidates.length === 0 ? (
@@ -133,11 +173,12 @@ export default function WatchlistPage() {
         >
 
           <h2 className="text-2xl font-semibold mb-2">
-            No technologies waiting for review
+            No technologies awaiting review
           </h2>
 
           <p className="text-gray-500">
-            The watchlist is currently empty.
+            Click "Discover Technologies" to
+            generate new candidates.
           </p>
 
         </div>
@@ -259,6 +300,4 @@ export default function WatchlistPage() {
 
     </main>
   );
-}
-
 }
