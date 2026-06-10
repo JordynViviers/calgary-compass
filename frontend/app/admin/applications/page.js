@@ -49,6 +49,8 @@ export default function AdminPage() {
   const exportCsv = () => {
     const columns = [
       "id",
+      "event_id",
+      "event_title",
       "name",
       "email",
       "field_of_work",
@@ -175,6 +177,14 @@ export default function AdminPage() {
                     #{a.id}
                   </span>
                 </div>
+
+                {a.event_title && String(a.event_title).trim() && (
+                  <div className="mb-5">
+                    <span className="inline-block text-xs font-semibold uppercase tracking-wide bg-red-50 text-red-700 border border-red-200 rounded-full px-3 py-1">
+                      Event: {a.event_title}
+                    </span>
+                  </div>
+                )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   <Detail label="Email" value={a.email} />
