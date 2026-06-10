@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
@@ -48,7 +49,11 @@ const DIETARY = [
   "Other",
 ];
 
-export default function ApplyPage() {
+function ApplyForm() {
+  const searchParams = useSearchParams();
+  const eventId = searchParams.get("event");
+  const [eventTitle, setEventTitle] = useState("");
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -75,6 +80,33 @@ export default function ApplyPage() {
       ...prev,
       [key]: value,
     }));
+
+  // If the form was opened from a specific event (/apply?event=ID),
+  // look up that event's title so we can show it and tag the submission.
+  useEffect(() => {
+    if (!eventId) return;
+
+    let cancelled = false;
+
+    const loadEvent = async () => {
+      try {
+        const res = await fetch(`${API_URL}/event/${eventId}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!cancelled && data && data.title) {
+          setEventTitle(data.title);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    loadEvent();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [eventId]);
 
   const optionsFor = (current) =>
     TECHNOLOGIES.filter((tech) => {
@@ -112,6 +144,8 @@ export default function ApplyPage() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
+          event_id: eventId ? Number(eventId) : null,
+          event_title: eventTitle,
           field_of_work: form.fieldOfWork,
           role: form.role,
           role_other: form.roleOther,
@@ -217,7 +251,7 @@ export default function ApplyPage() {
             <div className="text-center mb-8">
 
               <h1 className="text-5xl font-bold text-red-700 mb-3">
-                Wave Tech World Café
+                {eventTitle || "Wave Tech World Café"}
               </h1>
 
               <p className="text-xl text-gray-700 mb-2">
@@ -396,5 +430,22 @@ export default function ApplyPage() {
         )}
       </div>
     </main>
+  );
+}
+
+export default function ApplyPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-gray-50 text-black">
+          <div className="h-2 bg-red-700 w-full"></div>
+          <div className="max-w-3xl mx-auto px-8 pt-10 text-center text-gray-600">
+            Loading…
+          </div>
+        </main>
+      }
+    >
+      <ApplyForm />
+    </Suspense>
   );
 }
