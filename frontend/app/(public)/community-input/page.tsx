@@ -109,6 +109,10 @@ export default function CommunityInputPage() {
             Rate how emerging technologies align with Calgary&apos;s smart city
             governance priorities.
           </p>
+
+          <div className="mt-6 inline-block bg-red-50 border border-red-200 text-red-700 px-6 py-3 rounded-xl font-medium">
+            1 is the lowest ranking and 10 is the highest ranking.
+          </div>
         </section>
 
         <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-12">
