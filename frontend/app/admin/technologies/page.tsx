@@ -187,46 +187,6 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen p-10 bg-white text-black">
 
-      {/* Admin Nav */}
-      <nav className="flex flex-wrap justify-between items-center gap-4 mb-10">
-
-        <Link
-          href="/admin"
-          className="text-2xl font-bold text-red-700"
-        >
-          Calgary Compass{" "}
-          <span className="text-black">
-            Admin
-          </span>
-        </Link>
-
-        <div className="flex gap-8 text-lg font-medium">
-
-          <Link
-            href="/admin/technologies"
-            className="text-red-700 font-semibold"
-          >
-            Technologies
-          </Link>
-
-          <Link
-            href="/admin/events"
-            className="hover:text-red-700 transition"
-          >
-            In-Person Events
-          </Link>
-
-          <Link
-            href="/admin/community-input"
-            className="hover:text-red-700 transition"
-          >
-            Community Input
-          </Link>
-
-        </div>
-
-      </nav>
-
       {/* Page Title */}
       <h1 className="text-5xl font-bold text-red-700 mb-8">
         Technology Administration
