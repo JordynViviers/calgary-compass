@@ -266,3 +266,21 @@ class TechnologyCandidateRequest(BaseModel):
     summary: str
     source: str
     confidence: int
+
+class TechnologyCandidate(Base):
+    __tablename__ = "technology_candidates"
+
+    id = Column(Integer, primary_key=True)
+
+    name = Column(String)
+
+    summary = Column(Text)
+
+    source = Column(String)
+
+    confidence = Column(Integer)
+
+    status = Column(
+        String,
+        default="Pending"
+    )
