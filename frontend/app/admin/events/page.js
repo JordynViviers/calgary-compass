@@ -10,6 +10,7 @@ const EMPTY_FORM = {
   location: "",
   description: "",
   link: "",
+  has_application: false,
 };
 
 export default function AdminEventsPage() {
@@ -70,6 +71,7 @@ export default function AdminEventsPage() {
           location: form.location,
           description: form.description,
           link: form.link,
+          has_application: form.has_application,
         }),
       });
 
@@ -94,6 +96,7 @@ export default function AdminEventsPage() {
       location: ev.location || "",
       description: ev.description || "",
       link: ev.link || "",
+      has_application: !!ev.has_application,
     });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -208,6 +211,29 @@ export default function AdminEventsPage() {
             />
           </div>
 
+          {/* Attach Application */}
+          <div className="border-t border-gray-100 pt-6">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.has_application}
+                onChange={(e) => update("has_application", e.target.checked)}
+                className="mt-1 h-5 w-5 accent-red-700"
+              />
+              <span>
+                <span className="block text-lg font-semibold">
+                  Attach the event application form
+                </span>
+                <span className="block text-sm text-gray-500">
+                  When checked, an &quot;Apply Now&quot; button appears on this
+                  event on the public Events page. It opens our built-in
+                  application form, and submissions show up under Applications
+                  in the admin, tagged with this event.
+                </span>
+              </span>
+            </label>
+          </div>
+
           {error && <p className="text-red-700 font-medium">{error}</p>}
 
           <div className="flex gap-3">
@@ -266,6 +292,11 @@ export default function AdminEventsPage() {
                     )}
                     {ev.description && ev.description.trim() && (
                       <p className="text-gray-700 mt-2">{ev.description}</p>
+                    )}
+                    {ev.has_application && (
+                      <span className="inline-block mt-3 text-xs font-semibold uppercase tracking-wide bg-red-50 text-red-700 border border-red-200 rounded-full px-3 py-1">
+                        Application attached
+                      </span>
                     )}
                   </div>
 
