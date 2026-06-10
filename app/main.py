@@ -1370,3 +1370,55 @@ def reject_candidate(
         "message":
             "Technology rejected"
     }
+
+@app.post("/discover-technologies")
+def discover_technologies(
+    db: Session = Depends(get_db)
+):
+
+    response = requests.get(
+        "https://api.openalex.org/works",
+        params={
+            "search":
+                "smart city technology",
+            "per-page":
+                10
+        }
+    )
+
+    data = response.json()
+
+    for paper in data["results"]:
+
+        title = paper.get(
+            "title",
+            "Unknown"
+        )
+
+        existing = db.query(
+            TechnologyCandidate
+        ).filter(
+            TechnologyCandidate.name == title
+        ).first()
+
+        if existing:
+            continue
+
+        db.add(
+
+            TechnologyCandidate(
+                name=title,
+                summary="Imported from OpenAlex",
+                source="OpenAlex",
+                confidence=80,
+                status="Pending"
+            )
+
+        )
+
+    db.commit()
+
+    return {
+        "message":
+            "Discovery complete"
+    }
