@@ -12,6 +12,7 @@ type EventItem = {
   location?: string;
   description?: string;
   link?: string;
+  has_application?: boolean;
 };
 
 function LearnMoreButton({ link }: { link?: string }) {
@@ -21,7 +22,7 @@ function LearnMoreButton({ link }: { link?: string }) {
 
   if (isExternal) {
     return (
-      <a
+      
         href={link}
         target="_blank"
         rel="noopener noreferrer"
@@ -123,7 +124,17 @@ export default function EventsPage() {
                     <p className="text-gray-700 mb-6">{ev.description}</p>
                   )}
 
-                  <LearnMoreButton link={ev.link} />
+                  <div className="flex flex-wrap gap-3">
+                    {ev.has_application && (
+                      <Link
+                        href={`/apply?event=${ev.id}`}
+                        className="inline-block bg-red-700 text-white px-5 py-2 rounded-xl font-semibold hover:bg-red-800 transition"
+                      >
+                        Apply Now
+                      </Link>
+                    )}
+                    <LearnMoreButton link={ev.link} />
+                  </div>
                 </div>
               ))}
             </div>
