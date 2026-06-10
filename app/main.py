@@ -1298,3 +1298,73 @@ def create_candidate(
     db.refresh(candidate)
 
     return candidate
+
+@app.post(
+    "/technology-candidates/{candidate_id}/approve"
+)
+def approve_candidate(
+    candidate_id: int,
+    db: Session = Depends(get_db)
+):
+
+    candidate = db.query(
+        TechnologyCandidate
+    ).filter(
+        TechnologyCandidate.id == candidate_id
+    ).first()
+
+    if not candidate:
+
+        return {
+            "error":
+                "Candidate not found"
+        }
+
+    technology = Technology(
+        name=candidate.name,
+        description=candidate.summary,
+        current_status="Identified"
+    )
+
+    db.add(
+        technology
+    )
+
+    candidate.status = "Approved"
+
+    db.commit()
+
+    return {
+        "message":
+            "Technology approved"
+    }
+
+@app.post(
+    "/technology-candidates/{candidate_id}/reject"
+)
+def reject_candidate(
+    candidate_id: int,
+    db: Session = Depends(get_db)
+):
+
+    candidate = db.query(
+        TechnologyCandidate
+    ).filter(
+        TechnologyCandidate.id == candidate_id
+    ).first()
+
+    if not candidate:
+
+        return {
+            "error":
+                "Candidate not found"
+        }
+
+    candidate.status = "Rejected"
+
+    db.commit()
+
+    return {
+        "message":
+            "Technology rejected"
+    }
