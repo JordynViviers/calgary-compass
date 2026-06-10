@@ -1276,6 +1276,8 @@ def get_candidates(
 
     return db.query(
         TechnologyCandidate
+    ).filter(
+        TechnologyCandidate.status == "Pending"
     ).all()
 
 @app.post("/technology-candidates")
