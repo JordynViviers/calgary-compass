@@ -1,10 +1,7 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-
 from sqlalchemy.orm import Session
-
 from app.database import engine, SessionLocal
-
 from app.models import (
     Technology,
     Vote,
@@ -33,8 +30,8 @@ from app.crud import (
 )
 
 from app.ai_service import evaluate_technology
-
 from app.services.openalex import search_openalex
+import requests
 
 
 # =========================
