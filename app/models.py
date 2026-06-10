@@ -254,3 +254,11 @@ class TechnologyEvidence(Base):
     patent_count = Column(Integer, default=0)
 
     funding_count = Column(Integer, default=0)
+
+class TechnologyCandidate(Base):
+    __tablename__ = "technology_candidates"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    description = Column(Text)
+    source_url = Column(String)
