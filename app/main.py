@@ -638,6 +638,15 @@ def delete_technology(
                 "Technology not found"
         }
 
+    db.delete(tech)
+
+    db.commit()
+
+    return {
+        "message":
+            "Technology deleted"
+    }
+
 
 # =========================
 # UPDATE TECHNOLOGY
