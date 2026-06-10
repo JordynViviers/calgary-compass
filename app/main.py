@@ -2,7 +2,6 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from app.database import engine, SessionLocal
-from pydantic import BaseModel
 from app.models import (
     Technology,
     Vote,
@@ -36,7 +35,13 @@ import os
 import json
 
 from openai import OpenAI
+from pydantic import BaseModel
 
+class TechnologyCandidateRequest(BaseModel):
+    name: str
+    summary: str | None = None
+    source: str | None = None
+    confidence: float | None = None
 
 # =========================
 # DATABASE INIT
@@ -1519,8 +1524,4 @@ Example:
             created_count
     }
 
-class TechnologyCandidateRequestSchema(BaseModel):
-    technology_name: str
-    description: str | None = None
-    source_url: str | None = None
-    source_name: str | None = None
+
