@@ -1,11 +1,6 @@
-
-
 from sqlalchemy.orm import relationship
-
 from app.database import Base
-
 from pydantic import BaseModel
-
 from sqlalchemy import (
     Column,
     Integer,
@@ -13,26 +8,15 @@ from sqlalchemy import (
     Float,
     ForeignKey,
     Text,
-    DateTime
+    DateTime, 
+    Boolean
 )
 
 from datetime import datetime
 # =========================
 # DATABASE TABLES
 # =========================
-class Technology(Base):
-    __tablename__ = "technologies"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
-    description = Column(String)
-    current_status = Column(String)
-
-    sources = relationship(
-        "Source",
-        backref="technology",
-        cascade="all, delete-orphan"
-    )
 class Vote(Base):
     __tablename__ = "votes"
     id = Column(Integer, primary_key=True)
@@ -43,6 +27,8 @@ class Vote(Base):
     people_culture = Column(Integer)
     trusted_governance = Column(Integer)
     innovation_agility = Column(Integer)
+
+    
 class TimelineEvent(Base):
     __tablename__ = "timeline_events"
     id = Column(Integer, primary_key=True)
@@ -121,13 +107,17 @@ class VoteRequest(BaseModel):
     people_culture: int
     trusted_governance: int
     innovation_agility: int
+    
 class TechnologyRequest(BaseModel):
     name: str
     description: str
     current_status: str
+    is_active: bool = True
+    
 class CommunitySignalRequest(BaseModel):
     stakeholder: str
     signal_text: str
+    
 class ApplicationRequest(BaseModel):
     name: str
     email: str
@@ -143,6 +133,7 @@ class ApplicationRequest(BaseModel):
     accessibility: str = ""
     recording_consent: str = ""
     anything_else: str = ""
+    
 class EventRequest(BaseModel):
     title: str
     date: str = ""
