@@ -634,21 +634,38 @@ def delete_technology(
     ).first()
 
     if not tech:
-
         return {
             "error":
                 "Technology not found"
         }
+
+    db.query(Vote).filter(
+        Vote.technology_id == technology_id
+    ).delete()
+
+    db.query(AIEvaluation).filter(
+        AIEvaluation.technology_id == technology_id
+    ).delete()
+
+    db.query(TimelineEvent).filter(
+        TimelineEvent.technology_id == technology_id
+    ).delete()
+
+    db.query(TechnologyEvidence).filter(
+        TechnologyEvidence.technology_id == technology_id
+    ).delete()
+
+    db.query(Source).filter(
+        Source.technology_id == technology_id
+    ).delete()
 
     db.delete(tech)
 
     db.commit()
 
     return {
-        "message":
-            "Technology deleted"
+        "message": "Technology deleted"
     }
-
 
 # =========================
 # UPDATE TECHNOLOGY
