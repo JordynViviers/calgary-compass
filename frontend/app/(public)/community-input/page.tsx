@@ -159,6 +159,11 @@ export default function CommunityInputPage() {
               >
                 <h3 className="text-2xl font-bold text-red-700 mb-6">
                   {technology.name}
+                  {technology.description && (
+                    <p className="text-gray-600 mb-6">
+                      {technology.description}
+                    </p>
+                  )}
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -168,29 +173,99 @@ export default function CommunityInputPage() {
                         {criterion}
                       </label>
 
-                      <select
-                        disabled={!sector}
-                        value={ratings[technology.name]?.[criterion] || ""}
-                        onChange={(event) =>
-                          updateRating(
-                            technology.name,
-                            criterion,
-                            event.target.value
-                          )
-                        }
-                        className="w-full border border-gray-300 rounded-xl p-3 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
-                      >
-                        <option value="">Rate 1-10</option>
+                      <div className="space-y-2">
 
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => (
-                          <option key={number} value={number}>
-                            {number}
-                          </option>
-                        ))}
-                      </select>
+                        <div className="flex justify-between text-sm text-gray-600">
+                          <span>1</span>
+
+                          <span className="font-bold text-red-700 text-lg">
+                            {ratings[technology.name]?.[criterion] || 5}
+                          </span>
+
+                          <span>10</span>
+                        </div>
+
+                        <input
+                          type="range"
+                          min="1"
+                          max="10"
+                          step="1"
+                          disabled={!sector}
+                          value={
+                            ratings[technology.name]?.[criterion] || 5
+                          }
+                          onChange={(event) =>
+                            updateRating(
+                              technology.name,
+                              criterion,
+                              event.target.value
+                            )
+                          }
+                          className="
+                            w-full
+                            accent-red-700
+                            cursor-pointer
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                          "
+                        />
+
+                      </div>
                     </div>
                   ))}
                 </div>
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <h4 className="text-lg font-semibold mb-4">
+                      Which applications would you support?
+                    </h4>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+                      <label className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          disabled={!sector}
+                        />
+                        Application #1
+                      </label>
+
+                      <label className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          disabled={!sector}
+                        />
+                        Application #2
+                      </label>
+
+                      <label className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          disabled={!sector}
+                        />
+                        Application #3
+                      </label>
+
+                      <label className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          disabled={!sector}
+                        />
+                        Application #4
+                      </label>
+
+                      <label className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          disabled={!sector}
+                        />
+                        Application #5
+                      </label>
+
+                    </div>
+
+                  </div>
+
+                
               </div>
             ))}
           </div>
