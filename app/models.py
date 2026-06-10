@@ -16,7 +16,25 @@ from datetime import datetime
 # =========================
 # DATABASE TABLES
 # =========================
+class Technology(Base):
+    __tablename__ = "technologies"
 
+    id = Column(Integer, primary_key=True, index=True)
+
+    name = Column(String)
+
+    description = Column(String)
+
+    current_status = Column(String)
+
+    is_active = Column(Boolean, default=True)
+
+    sources = relationship(
+        "Source",
+        backref="technology",
+        cascade="all, delete-orphan"
+    ) 
+    
 class Vote(Base):
     __tablename__ = "votes"
     id = Column(Integer, primary_key=True)
