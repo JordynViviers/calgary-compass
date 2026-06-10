@@ -1440,6 +1440,7 @@ Example:
         candidates = json.loads(
             content
         )
+        print(candidates)
 
     except Exception:
 
