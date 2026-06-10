@@ -17,6 +17,8 @@ export default function CommunityInputPage() {
   const [technologies, setTechnologies] = useState<any[]>([]);
   const [sector, setSector] = useState("");
   const [signals, setSignals] = useState("");
+  const [selectedChallenges, setSelectedChallenges] = useState<string[]>([]);
+  const [otherChallenge, setOtherChallenge] = useState("");
 
   const [ratings, setRatings] = useState<Record<string, Record<string, string>>>(
     {}
@@ -46,7 +48,13 @@ export default function CommunityInputPage() {
       },
     }));
   }
-
+  function toggleChallenge(challenge: string) {
+    setSelectedChallenges((previous) =>
+      previous.includes(challenge)
+        ? previous.filter((item) => item !== challenge)
+        : [...previous, challenge]
+    );
+  }
   async function handleSubmit() {
     try {
       for (const technology of technologies) {
@@ -277,6 +285,79 @@ export default function CommunityInputPage() {
           )}
         </section>
 
+        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-12">
+
+          <h2 className="text-3xl font-bold text-red-700 mb-3">
+            Section 2: Calgary Challenges
+          </h2>
+
+          <p className="text-gray-700 mb-6">
+            Which challenges facing Calgary are most important to you?
+            Select all that apply.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+            {[
+              "Housing Affordability",
+              "Transportation & Traffic",
+              "Climate Resilience",
+              "Public Safety",
+              "Infrastructure Maintenance",
+              "Economic Diversification",
+              "Downtown Revitalization",
+              "Accessibility & Inclusion",
+              "Digital Services",
+              "Water Management",
+            ].map((challenge) => (
+
+              <label
+                key={challenge}
+                className="flex items-center gap-3"
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedChallenges.includes(challenge)}
+                  onChange={() =>
+                    toggleChallenge(challenge)
+                  }
+                  disabled={!sector}
+                />
+
+                {challenge}
+              </label>
+
+            ))}
+
+          </div>
+
+          <div className="mt-6">
+
+            <label className="block font-semibold mb-2">
+              Other challenge not listed?
+            </label>
+
+            <input
+              type="text"
+              value={otherChallenge}
+              onChange={(event) =>
+                setOtherChallenge(event.target.value)
+              }
+              disabled={!sector}
+              placeholder="Describe another challenge facing Calgary..."
+              className="
+                w-full
+                border
+                border-gray-300
+                rounded-xl
+                p-3
+                disabled:bg-gray-100
+              "
+            />
+
+          </div>
+
+        </section>
         <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-12">
           <h2 className="text-3xl font-bold text-red-700 mb-3">
             Section 2: Community Concerns and Signals
