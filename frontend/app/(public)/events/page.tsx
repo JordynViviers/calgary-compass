@@ -22,7 +22,7 @@ function LearnMoreButton({ link }: { link?: string }) {
 
   if (isExternal) {
     return (
-      
+      <a
         href={link}
         target="_blank"
         rel="noopener noreferrer"
