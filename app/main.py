@@ -32,6 +32,10 @@ from app.crud import (
 from app.ai_service import evaluate_technology
 from app.services.openalex import search_openalex
 import requests
+import os
+import json
+
+from openai import OpenAI
 
 
 # =========================
@@ -44,7 +48,11 @@ Base.metadata.create_all(bind=engine)
 # =========================
 # APP SETUP
 # =========================
-
+client = OpenAI(
+    api_key=os.getenv(
+        "OPENAI_API_KEY"
+    )
+)
 app = FastAPI()
 
 app.add_middleware(
@@ -1376,46 +1384,138 @@ def discover_technologies(
     response = requests.get(
         "https://api.openalex.org/works",
         params={
-            "search":
-                "smart city technology",
-            "per-page":
-                10
+            "search": "smart city technology",
+            "per-page": 20
         }
     )
 
     data = response.json()
 
-    for paper in data["results"]:
+    papers = []
+
+    for paper in data.get("results", []):
 
         title = paper.get(
             "title",
-            "Unknown"
+            ""
         )
 
-        existing = db.query(
+        if title:
+
+            papers.append(title)
+
+    if not papers:
+
+        return {
+            "error":
+                "No papers found from OpenAlex"
+        }
+
+    prompt = f"""
+You are a municipal innovation analyst.
+
+Below are academic paper titles from OpenAlex:
+
+{papers}
+
+Identify emerging technologies that could
+be relevant to cities like Calgary.
+
+Group similar papers together.
+
+Return ONLY valid JSON.
+
+Example:
+
+[
+  {{
+    "name": "AI Road Inspection",
+    "summary": "Computer vision systems that automatically inspect road infrastructure.",
+    "confidence": 92
+  }},
+  {{
+    "name": "Digital Twin Infrastructure",
+    "summary": "Virtual city models used for planning and operations.",
+    "confidence": 88
+  }}
+]
+"""
+
+    ai_response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    )
+
+    content = (
+        ai_response
+        .choices[0]
+        .message.content
+    )
+
+    try:
+
+        candidates = json.loads(
+            content
+        )
+
+    except Exception:
+
+        return {
+            "error":
+                "AI returned invalid JSON",
+            "response":
+                content
+        }
+
+    created_count = 0
+
+    for item in candidates:
+
+        existing_candidate = db.query(
             TechnologyCandidate
         ).filter(
-            TechnologyCandidate.name == title
+            TechnologyCandidate.name ==
+            item["name"]
         ).first()
 
-        if existing:
+        existing_technology = db.query(
+            Technology
+        ).filter(
+            Technology.name ==
+            item["name"]
+        ).first()
+
+        if (
+            existing_candidate
+            or existing_technology
+        ):
             continue
 
         db.add(
 
             TechnologyCandidate(
-                name=title,
-                summary="Imported from OpenAlex",
-                source="OpenAlex",
-                confidence=80,
+                name=item["name"],
+                summary=item["summary"],
+                source="OpenAlex + AI",
+                confidence=item["confidence"],
                 status="Pending"
             )
 
         )
 
+        created_count += 1
+
     db.commit()
 
     return {
         "message":
-            "Discovery complete"
+            "Discovery complete",
+        "created":
+            created_count
     }
+
