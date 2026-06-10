@@ -260,10 +260,24 @@ class TechnologyCandidate(Base):
     __tablename__ = "technology_candidates"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    description = Column(Text)
-    source_url = Column(String)
 
+    name = Column(String, nullable=False)
+
+    summary = Column(Text)
+
+    source = Column(String)
+
+    confidence = Column(Integer)
+
+    status = Column(
+        String,
+        default="Pending"
+    )
+
+    created_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now()
+    )
 
 
 class TechnologyCandidateRequest(Base):
