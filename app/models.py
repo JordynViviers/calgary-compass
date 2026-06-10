@@ -89,6 +89,9 @@ class CommunitySignal(Base):
 class Application(Base):
     __tablename__ = "applications"
     id = Column(Integer, primary_key=True)
+    # Which event this application was submitted for (optional).
+    event_id = Column(Integer)
+    event_title = Column(String)
     name = Column(String)
     email = Column(String)
     field_of_work = Column(String)
@@ -114,6 +117,9 @@ class Event(Base):
     location = Column(String)
     description = Column(String)
     link = Column(String)
+    # When True, the built-in application form is attached to this event
+    # and an "Apply" button is shown on the public events page.
+    has_application = Column(Boolean, default=False)
 # =========================
 # REQUEST MODELS
 # =========================
@@ -139,6 +145,8 @@ class CommunitySignalRequest(BaseModel):
 class ApplicationRequest(BaseModel):
     name: str
     email: str
+    event_id: int | None = None
+    event_title: str = ""
     field_of_work: str = ""
     role: str = ""
     role_other: str = ""
@@ -158,6 +166,7 @@ class EventRequest(BaseModel):
     location: str = ""
     description: str = ""
     link: str = ""
+    has_application: bool = False
 
 class Source(Base):
     __tablename__ = "sources"
@@ -245,26 +254,3 @@ class TechnologyEvidence(Base):
     patent_count = Column(Integer, default=0)
 
     funding_count = Column(Integer, default=0)
-
-class TechnologyCandidate(Base):
-    __tablename__ = "technology_candidates"
-
-    id = Column(Integer, primary_key=True)
-
-    name = Column(String)
-
-    summary = Column(Text)
-
-    source = Column(String)
-
-    confidence = Column(Integer)
-
-    status = Column(String, default="Pending")
-
-class TechnologyCandidateRequest(BaseModel):
-    name: str
-    summary: str
-    source: str
-    confidence: int
-
-
