@@ -56,53 +56,94 @@ export default function CommunityInputPage() {
     );
   }
   async function handleSubmit() {
-    try {
-      for (const technology of technologies) {
-        const techRatings = ratings[technology.name];
+  try {
 
-        if (!techRatings) {
-          continue;
-        }
+    console.log("Selected Challenges:");
+    console.log(selectedChallenges);
 
-        await axios.post(`${API_URL}/vote`, {
+    console.log("Other Challenge:");
+    console.log(otherChallenge);
+
+    for (const technology of technologies) {
+
+      const techRatings =
+        ratings[technology.name];
+
+      if (!techRatings) {
+        continue;
+      }
+
+      await axios.post(
+        `${API_URL}/vote`,
+        {
           technology_id: technology.id,
           stakeholder: sector,
-          financial_sustainability: Number(
-            techRatings["Financial Sustainability"] || 0
-          ),
-          operational_excellence: Number(
-            techRatings["Operational Excellence"] || 0
-          ),
-          innovation_agility: Number(
-            techRatings["Innovation and Agility"] || 0
-          ),
-          trusted_governance: Number(
-            techRatings["Trusted and Transparent Governance"] || 0
-          ),
-          people_culture: Number(
-            techRatings["People and Culture First"] || 0
-          ),
-        });
-      }
 
-      if (signals.trim()) {
-        await axios.post(`${API_URL}/community-signal`, {
+          financial_sustainability: Number(
+            techRatings[
+              "Financial Sustainability"
+            ] || 0
+          ),
+
+          operational_excellence: Number(
+            techRatings[
+              "Operational Excellence"
+            ] || 0
+          ),
+
+          innovation_agility: Number(
+            techRatings[
+              "Innovation and Agility"
+            ] || 0
+          ),
+
+          trusted_governance: Number(
+            techRatings[
+              "Trusted and Transparent Governance"
+            ] || 0
+          ),
+
+          people_culture: Number(
+            techRatings[
+              "People and Culture First"
+            ] || 0
+          ),
+        }
+      );
+    }
+
+    if (signals.trim()) {
+
+      await axios.post(
+        `${API_URL}/community-signal`,
+        {
           stakeholder: sector,
           signal_text: signals,
-        });
-      }
-
-      alert("Community input submitted successfully!");
-
-      setRatings({});
-      setSignals("");
-      setSector("");
-    } catch (error) {
-      console.error(error);
-      alert("Failed to submit community input.");
+        }
+      );
     }
-  }
 
+    alert(
+      "Community input submitted successfully!"
+    );
+
+    setRatings({});
+    setSignals("");
+    setSector("");
+
+    setSelectedChallenges([]);
+    setOtherChallenge("");
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Failed to submit community input."
+    );
+  }
+}
+  
   return (
     <main className="min-h-screen bg-gray-50 text-black">
       <div className="h-2 bg-red-700 w-full"></div>
@@ -360,7 +401,7 @@ export default function CommunityInputPage() {
         </section>
         <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-12">
           <h2 className="text-3xl font-bold text-red-700 mb-3">
-            Section 2: Community Concerns and Signals
+            Section 3: Community Concerns and Signals
           </h2>
 
           <p className="text-gray-700 mb-6">
