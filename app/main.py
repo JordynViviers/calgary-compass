@@ -1236,3 +1236,33 @@ def get_all_technologies(
     return db.query(
         Technology
     ).all()
+
+
+@app.get("/technology-candidates")
+def get_candidates(
+    db: Session = Depends(get_db)
+):
+    return db.query(
+        TechnologyCandidate
+    ).all()
+
+@app.post("/technology-candidates")
+def create_candidate(
+    data: TechnologyCandidateRequest,
+    db: Session = Depends(get_db)
+):
+
+    candidate = TechnologyCandidate(
+        name=data.name,
+        summary=data.summary,
+        source=data.source,
+        confidence=data.confidence
+    )
+
+    db.add(candidate)
+
+    db.commit()
+
+    db.refresh(candidate)
+
+    return candidate
