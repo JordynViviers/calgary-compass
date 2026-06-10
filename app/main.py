@@ -172,11 +172,11 @@ def create_new_technology(
 def get_technologies(
     db: Session = Depends(get_db)
 ):
-
     return db.query(
         Technology
+    ).filter(
+        Technology.is_active == True
     ).all()
-
 
 # =========================
 # AI EVALUATION
@@ -698,6 +698,7 @@ def update_technology(
     tech.name = data.name
     tech.description = data.description
     tech.current_status = data.current_status
+    tech.is_active = data.is_active
 
     db.commit()
 
@@ -1173,3 +1174,65 @@ def collect_sources(
         "citation_count":
             citation_count
     }
+
+@app.put("/technology/{technology_id}/hide")
+def hide_technology(
+    technology_id: int,
+    db: Session = Depends(get_db)
+):
+
+    tech = db.query(
+        Technology
+    ).filter(
+        Technology.id == technology_id
+    ).first()
+
+    if not tech:
+        return {
+            "error": "Technology not found"
+        }
+
+    tech.is_active = False
+
+    db.commit()
+
+    db.refresh(tech)
+
+    return {
+        "message": "Technology hidden"
+    }
+
+@app.put("/technology/{technology_id}/show")
+def show_technology(
+    technology_id: int,
+    db: Session = Depends(get_db)
+):
+
+    tech = db.query(
+        Technology
+    ).filter(
+        Technology.id == technology_id
+    ).first()
+
+    if not tech:
+        return {
+            "error": "Technology not found"
+        }
+
+    tech.is_active = True
+
+    db.commit()
+
+    db.refresh(tech)
+
+    return {
+        "message": "Technology shown"
+    }
+
+@app.get("/admin/technologies")
+def get_all_technologies(
+    db: Session = Depends(get_db)
+):
+    return db.query(
+        Technology
+    ).all()
