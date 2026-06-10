@@ -284,5 +284,3 @@ class TechnologyCandidateRequest(BaseModel):
     summary: str | None = None
     source: str | None = None
     confidence: int | None = None
-
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
