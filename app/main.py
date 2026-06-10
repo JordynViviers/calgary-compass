@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from app.database import engine, SessionLocal
+from pydantic import BaseModel
 from app.models import (
     Technology,
     Vote,
@@ -1519,3 +1520,8 @@ Example:
             created_count
     }
 
+class TechnologyCandidateRequestSchema(BaseModel):
+    technology_name: str
+    description: str | None = None
+    source_url: str | None = None
+    source_name: str | None = None
