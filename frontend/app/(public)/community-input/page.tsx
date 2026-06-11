@@ -13,11 +13,31 @@ const criteria = [
   "People and Culture First",
 ];
 
+const challengeOptions = [
+  "Housing Affordability",
+  "Transportation & Traffic",
+  "Climate Resilience",
+  "Public Safety",
+  "Infrastructure Maintenance",
+  "Economic Diversification",
+  "Downtown Revitalization",
+  "Accessibility & Inclusion",
+  "Digital Services",
+  "Water Management",
+];
+
 export default function CommunityInputPage() {
   const [technologies, setTechnologies] = useState<any[]>([]);
   const [sector, setSector] = useState("");
   const [signals, setSignals] = useState("");
-  const [selectedChallenges, setSelectedChallenges] = useState<string[]>([]);
+  const [challengeRanking, setChallengeRanking] =
+    useState({
+      first: "",
+      second: "",
+      third: "",
+      fourth: "",
+      fifth: "",
+    });
   const [otherChallenge, setOtherChallenge] = useState("");
 
   const [ratings, setRatings] = useState<Record<string, Record<string, string>>>(
@@ -364,36 +384,58 @@ export default function CommunityInputPage() {
             Select all that apply.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="space-y-4">
 
             {[
-              "Housing Affordability",
-              "Transportation & Traffic",
-              "Climate Resilience",
-              "Public Safety",
-              "Infrastructure Maintenance",
-              "Economic Diversification",
-              "Downtown Revitalization",
-              "Accessibility & Inclusion",
-              "Digital Services",
-              "Water Management",
-            ].map((challenge) => (
+              ["first", "Priority #1"],
+              ["second", "Priority #2"],
+              ["third", "Priority #3"],
+              ["fourth", "Priority #4"],
+              ["fifth", "Priority #5"],
+            ].map(([key, label]) => (
 
-              <label
-                key={challenge}
-                className="flex items-center gap-3"
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedChallenges.includes(challenge)}
-                  onChange={() =>
-                    toggleChallenge(challenge)
+              <div key={key}>
+
+                <label className="block font-semibold mb-2">
+                  {label}
+                </label>
+
+                <select
+                  value={
+                    challengeRanking[
+                      key as keyof typeof challengeRanking
+                    ]
                   }
-                  disabled={!sector}
-                />
+                  onChange={(event) =>
+                    setChallengeRanking({
+                      ...challengeRanking,
+                      [key]: event.target.value,
+                    })
+                  }
+                  className="
+                    w-full
+                    border
+                    border-gray-300
+                    rounded-xl
+                    p-3
+                  "
+                >
+                  <option value="">
+                    Select a challenge
+                  </option>
 
-                {challenge}
-              </label>
+                  {challengeOptions.map((challenge) => (
+                    <option
+                      key={challenge}
+                      value={challenge}
+                    >
+                      {challenge}
+                    </option>
+                  ))}
+
+                </select>
+
+              </div>
 
             ))}
 
