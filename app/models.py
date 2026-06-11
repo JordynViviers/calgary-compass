@@ -322,7 +322,9 @@ class TechnologyApplication(Base):
 
 class TechnologyApplicationRequest(BaseModel):
     technology_id: int
+
     name: str
+
     description: str = ""
 
 class ApplicationSupportVote(Base):
