@@ -26,34 +26,61 @@ export default function TechApplicationsPage() {
   }, []);
 
   async function loadData() {
-
+  
+    // Load technologies
+  
     try {
-
+  
       const techResponse =
         await axios.get(
           `${API_URL}/technologies`
         );
-
+  
+      console.log(
+        "Loaded technologies:",
+        techResponse.data
+      );
+  
+      setTechnologies(
+        techResponse.data
+      );
+  
+    } catch (error) {
+  
+      console.error(
+        "Failed to load technologies",
+        error
+      );
+  
+    }
+  
+    // Load applications
+  
+    try {
+  
       const appResponse =
         await axios.get(
           `${API_URL}/technology-applications`
         );
-
-      setTechnologies(
-        techResponse.data
+  
+      console.log(
+        "Loaded applications:",
+        appResponse.data
       );
-
+  
       setApplications(
         appResponse.data
       );
-
+  
     } catch (error) {
-
-      console.error(error);
-
+  
+      console.error(
+        "Failed to load applications",
+        error
+      );
+  
     }
   }
-
   async function createApplication() {
 
     if (
