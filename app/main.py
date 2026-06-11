@@ -1525,7 +1525,7 @@ def submit_challenge_vote(
         "message": "Challenge vote recorded"
     }
 
-    @app.get("/challenge-summary")
+@app.get("/challenge-summary")
 def challenge_summary(
     db: Session = Depends(get_db)
 ):
@@ -1533,17 +1533,20 @@ def challenge_summary(
     results = (
         db.query(
             CalgaryChallengeVote.challenge,
+            func.avg(
+                CalgaryChallengeVote.rank
+            ).label("average_rank"),
             func.count(
                 CalgaryChallengeVote.id
-            ).label("count")
+            ).label("votes")
         )
         .group_by(
             CalgaryChallengeVote.challenge
         )
         .order_by(
-            func.count(
-                CalgaryChallengeVote.id
-            ).desc()
+            func.avg(
+                CalgaryChallengeVote.rank
+            )
         )
         .all()
     )
@@ -1551,7 +1554,11 @@ def challenge_summary(
     return [
         {
             "challenge": r.challenge,
-            "count": r.count
+            "average_rank": round(
+                float(r.average_rank),
+                2
+            ),
+            "votes": r.votes,
         }
         for r in results
     ]
