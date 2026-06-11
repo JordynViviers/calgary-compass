@@ -325,6 +325,17 @@ class TechnologyApplicationRequest(BaseModel):
     name: str
     description: str = ""
 
+class ApplicationSupportVote(Base):
+    __tablename__ = "application_support_votes"
+
+    id = Column(Integer, primary_key=True)
+
+    application_id = Column(Integer)
+
+    stakeholder = Column(String)
+
+    supported = Column(Boolean)
+
 
 
 
