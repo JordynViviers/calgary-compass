@@ -320,6 +320,11 @@ class TechnologyApplication(Base):
 
     description = Column(Text)
 
+    is_active = Column(
+        Boolean,
+        default=True
+    )
+
 class TechnologyApplicationRequest(BaseModel):
     technology_id: int
 
