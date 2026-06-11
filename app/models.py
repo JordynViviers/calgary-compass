@@ -306,4 +306,31 @@ class CalgaryChallengeVoteRequest(BaseModel):
     challenge: str
     rank: int
 
+class TechnologyApplication(Base):
+    __tablename__ = "technology_applications"
+
+    id = Column(Integer, primary_key=True)
+
+    technology_id = Column(
+        Integer,
+        ForeignKey("technologies.id")
+    )
+
+    name = Column(String, nullable=False)
+
+    description = Column(Text)
+
+class TechnologyApplicationRequest(BaseModel):
+    technology_id: int
+    name: str
+    description: str = ""
+
+
+
+
+
+
+
+
+
 
