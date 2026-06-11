@@ -68,13 +68,7 @@ export default function CommunityInputPage() {
       },
     }));
   }
-  function toggleChallenge(challenge: string) {
-    setSelectedChallenges((previous) =>
-      previous.includes(challenge)
-        ? previous.filter((item) => item !== challenge)
-        : [...previous, challenge]
-    );
-  }
+
 
   async function handleSubmit() {
     try {
