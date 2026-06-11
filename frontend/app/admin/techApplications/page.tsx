@@ -286,62 +286,91 @@ export default function TechApplicationsPage() {
           <h2 className="text-2xl font-bold mb-6">
             Existing Applications
           </h2>
-
-          <div className="space-y-3">
-
-            {applications.map(
-              (application) => (
-
+          
+          <div className="space-y-8">
+          
+            {technologies.map((technology) => {
+          
+              const techApplications =
+                applications.filter(
+                  (application) =>
+                    application.technology_id ===
+                    technology.id
+                );
+          
+              if (techApplications.length === 0) {
+                return null;
+              }
+          
+              return (
+          
                 <div
-                  key={application.id}
+                  key={technology.id}
                   className="
                     border
                     border-gray-200
-                    rounded-xl
-                    p-4
-                    flex
-                    justify-between
-                    items-center
+                    rounded-2xl
+                    p-5
                   "
                 >
-
-                  <div>
-
-                    <div className="font-semibold">
-                      {application.name}
-                    </div>
-
-                    <div className="text-sm text-gray-500">
-                      {getTechnologyName(
-                        application.technology_id
-                      )}
-                    </div>
-
-                  </div>
-
-                  <button
-                    onClick={() =>
-                      deleteApplication(
-                        application.id
+          
+                  <h3 className="text-xl font-bold text-red-700 mb-4">
+                    {technology.name}
+                  </h3>
+          
+                  <div className="space-y-2">
+          
+                    {techApplications.map(
+                      (application) => (
+          
+                        <div
+                          key={application.id}
+                          className="
+                            flex
+                            justify-between
+                            items-center
+                            border
+                            border-gray-100
+                            rounded-lg
+                            p-3
+                          "
+                        >
+          
+                          <span>
+                            {application.name}
+                          </span>
+          
+                          <button
+                            onClick={() =>
+                              deleteApplication(
+                                application.id
+                              )
+                            }
+                            className="
+                              bg-red-600
+                              hover:bg-red-700
+                              text-white
+                              px-3
+                              py-1
+                              rounded-lg
+                            "
+                          >
+                            Delete
+                          </button>
+          
+                        </div>
+          
                       )
-                    }
-                    className="
-                      bg-red-600
-                      hover:bg-red-700
-                      text-white
-                      px-4
-                      py-2
-                      rounded-lg
-                    "
-                  >
-                    Delete
-                  </button>
-
+                    )}
+          
+                  </div>
+          
                 </div>
-
-              )
-            )}
-
+          
+              );
+          
+            })}
+          
           </div>
 
         </div>
