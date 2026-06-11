@@ -1505,7 +1505,7 @@ Example:
         "message": "Discovery complete",
         "created": created_count,
         "total_candidates": len(all_candidates)
-
+    }
 
 @app.post("/challenge-vote")
 def submit_challenge_vote(
