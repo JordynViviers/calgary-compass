@@ -37,35 +37,35 @@ export default function AdminNavbar() {
 
             <Link
               href="/admin/technologies"
-              className="hover:text-red-700 transition"
+              className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
             >
               Technologies
             </Link>
 
             <Link
               href="/admin/events"
-              className="hover:text-red-700 transition"
+              className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
             >
               In-Person Events
             </Link>
 
             <Link
               href="/admin/community-input"
-              className="hover:text-red-700 transition"
+              className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
             >
               Community Input
             </Link>
 
             <Link
               href="/admin/applications"
-              className="hover:text-red-700 transition"
+              className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
             >
               Applications
             </Link>
 
             <Link
               href="/admin/techApplications"
-              className="hover:text-red-700 transition"
+              className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
             >
               Technology Applications
             </Link>
