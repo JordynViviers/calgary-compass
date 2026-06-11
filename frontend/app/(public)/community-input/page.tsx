@@ -279,11 +279,21 @@ export default function CommunityInputPage() {
           </div>
 
           <div className="space-y-8">
-            {technologies.map((technology: any) => (
-              <div
-                key={technology.id}
-                className="border border-gray-200 rounded-2xl p-6 bg-gray-50"
-              >
+            {technologies.map((technology: any) => {
+
+              const techApplications =
+                applications.filter(
+                  (application) =>
+                    application.technology_id ===
+                    technology.id
+                );
+            
+              return (
+            
+                <div
+                  key={technology.id}
+                  className="border border-gray-200 rounded-2xl p-6 bg-gray-50"
+                >
                 <h3 className="text-2xl font-bold text-red-700 mb-6">
                   {technology.name}
                   {technology.description && (
@@ -342,55 +352,44 @@ export default function CommunityInputPage() {
                   ))}
                 </div>
                 <div className="mt-8 pt-6 border-t border-gray-200">
+
                   <h4 className="text-lg font-semibold mb-4">
-                      Which applications would you support?
-                    </h4>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-
-                      <label className="flex items-center gap-3">
-                        <input
-                          type="checkbox"
-                          disabled={!sector}
-                        />
-                        Application #1
-                      </label>
-
-                      <label className="flex items-center gap-3">
-                        <input
-                          type="checkbox"
-                          disabled={!sector}
-                        />
-                        Application #2
-                      </label>
-
-                      <label className="flex items-center gap-3">
-                        <input
-                          type="checkbox"
-                          disabled={!sector}
-                        />
-                        Application #3
-                      </label>
-
-                      <label className="flex items-center gap-3">
-                        <input
-                          type="checkbox"
-                          disabled={!sector}
-                        />
-                        Application #4
-                      </label>
-
-                      <label className="flex items-center gap-3">
-                        <input
-                          type="checkbox"
-                          disabled={!sector}
-                        />
-                        Application #5
-                      </label>
-
-                    </div>
-
+                    Which applications would you support?
+                  </h4>
+                
+                  <div className="space-y-2">
+                
+                    {techApplications.map(
+                      (application: any) => (
+                
+                        <label
+                          key={application.id}
+                          className="flex items-center gap-3"
+                        >
+                
+                          <input
+                            type="checkbox"
+                            disabled={!sector}
+                          />
+                
+                          {application.name}
+                
+                        </label>
+                
+                      )
+                    )}
+                
+                    {techApplications.length === 0 && (
+                
+                      <p className="text-gray-500 text-sm">
+                        No applications available.
+                      </p>
+                
+                    )}
+                
                   </div>
+                
+                </div>
 
                 
               </div>
