@@ -390,7 +390,6 @@ export default function TechApplicationsPage() {
                       (application) => (
           
                         <div
-                          key={application.id}
                           className="
                             flex
                             justify-between
@@ -401,77 +400,84 @@ export default function TechApplicationsPage() {
                             p-3
                           "
                         >
-          
+                        
                           <span>
                             {application.name}
                           </span>
-          
-                          <button
-                            onClick={() =>
-                              deleteApplication(
-                                application.id
-                              )
-                            }
-                            className="
-                              bg-red-600
-                              hover:bg-red-700
-                              text-white
-                              px-3
-                              py-1
-                              rounded-lg
-                            "
-                          >
-                            Delete
-                          </button>
-
-                          <button
-                            onClick={() => {
-
-                              setEditingId(
-                                application.id
-                              );
-                            
-                              setEditingName(
-                                application.name
-                              );
-                            
-                              setEditingTechnologyId(
-                                application.technology_id
-                              );
-                            
-                            }}
-                            className="
-                              bg-blue-600
-                              hover:bg-blue-700
-                              text-white
-                              px-3
-                              py-1
-                              rounded-lg
-                            "
-                          >
-                            Edit
-                          </button>
-
-                          <button
-                            onClick={() =>
-                              toggleApplication(
-                                application.id
-                              )
-                            }
-                            className="
-                              bg-gray-600
-                              hover:bg-gray-700
-                              text-white
-                              px-3
-                              py-1
-                              rounded-lg
-                            "
-                          >
-                            {application.is_active
-                              ? "Hide"
-                              : "Show"}
-                          </button>
-          
+                        
+                          <div className="flex items-center gap-2 ml-auto">
+                        
+                            <button
+                              onClick={() => {
+                        
+                                setEditingId(
+                                  application.id
+                                );
+                        
+                                setEditingName(
+                                  application.name
+                                );
+                        
+                                setEditingTechnologyId(
+                                  application.technology_id
+                                );
+                        
+                              }}
+                              className="
+                                bg-yellow-500
+                                hover:bg-yellow-600
+                                text-white
+                                px-3
+                                py-1
+                                rounded-lg
+                                text-sm
+                              "
+                            >
+                              Edit
+                            </button>
+                        
+                            <button
+                              onClick={() =>
+                                toggleApplication(
+                                  application.id
+                                )
+                              }
+                              className="
+                                bg-gray-600
+                                hover:bg-gray-700
+                                text-white
+                                px-3
+                                py-1
+                                rounded-lg
+                                text-sm
+                              "
+                            >
+                              {application.is_active
+                                ? "Hide"
+                                : "Show"}
+                            </button>
+                        
+                            <button
+                              onClick={() =>
+                                deleteApplication(
+                                  application.id
+                                )
+                              }
+                              className="
+                                bg-red-600
+                                hover:bg-red-700
+                                text-white
+                                px-3
+                                py-1
+                                rounded-lg
+                                text-sm
+                              "
+                            >
+                              Delete
+                            </button>
+                        
+                          </div>
+                        
                         </div>
           
                       )
