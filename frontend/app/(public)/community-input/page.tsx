@@ -79,15 +79,26 @@ export default function CommunityInputPage() {
   async function handleSubmit() {
     try {
 
-      // Save challenge selections
+      // Save ranked Calgary challenges
 
-      for (const challenge of selectedChallenges) {
+      const rankings = [
+        challengeRanking.first,
+        challengeRanking.second,
+        challengeRanking.third,
+        challengeRanking.fourth,
+        challengeRanking.fifth,
+      ];
+
+      for (let i = 0; i < rankings.length; i++) {
+
+        if (!rankings[i]) continue;
 
         await axios.post(
           `${API_URL}/challenge-vote`,
           {
             stakeholder: sector,
-            challenge: challenge,
+            challenge: rankings[i],
+            rank: i + 1,
           }
         );
       }
@@ -101,51 +112,52 @@ export default function CommunityInputPage() {
           {
             stakeholder: sector,
             challenge: otherChallenge,
+            rank: 99,
           }
         );
       }
 
       // Save technology ratings
-
+  
       for (const technology of technologies) {
-
+  
         const techRatings =
           ratings[technology.name];
-
+  
         if (!techRatings) {
           continue;
         }
-
+  
         await axios.post(
           `${API_URL}/vote`,
           {
             technology_id: technology.id,
             stakeholder: sector,
-
+  
             financial_sustainability: Number(
               techRatings[
                 "Financial Sustainability"
               ] || 0
             ),
-
+  
             operational_excellence: Number(
               techRatings[
                 "Operational Excellence"
               ] || 0
             ),
-
+  
             innovation_agility: Number(
               techRatings[
                 "Innovation and Agility"
               ] || 0
             ),
-
+  
             trusted_governance: Number(
               techRatings[
                 "Trusted and Transparent Governance"
               ] || 0
             ),
-
+  
             people_culture: Number(
               techRatings[
                 "People and Culture First"
@@ -154,11 +166,11 @@ export default function CommunityInputPage() {
           }
         );
       }
-
-      // Save community signal
-
+  
+      // Save community signals
+  
       if (signals.trim()) {
-
+  
         await axios.post(
           `${API_URL}/community-signal`,
           {
@@ -167,24 +179,31 @@ export default function CommunityInputPage() {
           }
         );
       }
-
+  
       alert(
         "Community input submitted successfully!"
       );
-
+  
       // Reset form
-
+  
       setRatings({});
       setSignals("");
       setSector("");
-
-      setSelectedChallenges([]);
+  
+      setChallengeRanking({
+        first: "",
+        second: "",
+        third: "",
+        fourth: "",
+        fifth: "",
+      });
+  
       setOtherChallenge("");
-
+  
     } catch (error) {
-
+  
       console.error(error);
-
+  
       alert(
         "Failed to submit community input."
       );
