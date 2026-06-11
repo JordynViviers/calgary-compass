@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 from app.database import engine, SessionLocal
 from app.models import (
@@ -19,7 +20,9 @@ from app.models import (
     TechnologyEvidence,
     Source, 
     SourceCreate, 
-    TechnologyCandidate
+    TechnologyCandidate, 
+    CalgaryChallengeVote,
+    CalgaryChallengeVoteRequest,
 )
 
 from app.crud import (
@@ -1500,4 +1503,55 @@ Example:
         "message": "Discovery complete",
         "created": created_count,
         "total_candidates": len(all_candidates)
+
+
+@app.post("/challenge-vote")
+def submit_challenge_vote(
+    vote: CalgaryChallengeVoteRequest,
+    db: Session = Depends(get_db)
+):
+
+    db_vote = CalgaryChallengeVote(
+        stakeholder=vote.stakeholder,
+        challenge=vote.challenge
+    )
+
+    db.add(db_vote)
+
+    db.commit()
+
+    return {
+        "message": "Challenge vote recorded"
+    }
+
+    @app.get("/challenge-summary")
+def challenge_summary(
+    db: Session = Depends(get_db)
+):
+
+    results = (
+        db.query(
+            CalgaryChallengeVote.challenge,
+            func.count(
+                CalgaryChallengeVote.id
+            ).label("count")
+        )
+        .group_by(
+            CalgaryChallengeVote.challenge
+        )
+        .order_by(
+            func.count(
+                CalgaryChallengeVote.id
+            ).desc()
+        )
+        .all()
+    )
+
+    return [
+        {
+            "challenge": r.challenge,
+            "count": r.count
+        }
+        for r in results
+    ]
     }
