@@ -1572,8 +1572,10 @@ def get_technology_applications(
 
     return db.query(
         TechnologyApplication
+    ).filter(
+        TechnologyApplication.is_active == True
     ).all()
-
+    
 @app.post("/technology-applications")
 def create_technology_application(
     data: TechnologyApplicationRequest,
