@@ -1622,3 +1622,72 @@ def delete_technology_application(
         "message": "Deleted"
     }
 
+@app.put(
+    "/technology-applications/{application_id}"
+)
+def update_technology_application(
+    application_id: int,
+    data: TechnologyApplicationRequest,
+    db: Session = Depends(get_db)
+):
+
+    application = db.query(
+        TechnologyApplication
+    ).filter(
+        TechnologyApplication.id
+        == application_id
+    ).first()
+
+    if not application:
+        return {
+            "error": "Not found"
+        }
+
+    application.name = data.name
+
+    application.description = (
+        data.description
+    )
+
+    application.technology_id = (
+        data.technology_id
+    )
+
+    db.commit()
+
+    db.refresh(application)
+
+    return application
+
+@app.post(
+    "/technology-applications/{application_id}/toggle"
+)
+def toggle_application(
+    application_id: int,
+    db: Session = Depends(get_db)
+):
+
+    application = db.query(
+        TechnologyApplication
+    ).filter(
+        TechnologyApplication.id
+        == application_id
+    ).first()
+
+    if not application:
+        return {
+            "error": "Not found"
+        }
+
+    application.is_active = (
+        not application.is_active
+    )
+
+    db.commit()
+
+    return {
+        "message": "Updated"
+    }
+
+
+
