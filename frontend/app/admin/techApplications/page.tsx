@@ -18,6 +18,12 @@ export default function TechApplicationsPage() {
   const [technologyId, setTechnologyId] =
     useState("");
 
+  const [editingId, setEditingId] =
+    useState<number | null>(null);
+
+  const [editingName, setEditingName] =
+    useState("");
+
   const [applicationName, setApplicationName] =
     useState("");
 
@@ -140,6 +146,25 @@ export default function TechApplicationsPage() {
         "Failed to delete application."
       );
     }
+  }
+
+  async function saveApplication() {
+
+    await axios.put(
+      `${API_URL}/technology-applications/${editingId}`,
+      {
+        technology_id:
+          application.technology_id,
+  
+        name: editingName,
+  
+        description: "",
+      }
+    );
+  
+    setEditingId(null);
+  
+    loadData();
   }
 
   function getTechnologyName(
@@ -356,6 +381,50 @@ export default function TechApplicationsPage() {
                             "
                           >
                             Delete
+                          </button>
+
+                          <button
+                            onClick={() => {
+                          
+                              setEditingId(
+                                application.id
+                              );
+                          
+                              setEditingName(
+                                application.name
+                              );
+                          
+                            }}
+                            className="
+                              bg-blue-600
+                              hover:bg-blue-700
+                              text-white
+                              px-3
+                              py-1
+                              rounded-lg
+                            "
+                          >
+                            Edit
+                          </button>
+
+                          <button
+                            onClick={() =>
+                              toggleApplication(
+                                application.id
+                              )
+                            }
+                            className="
+                              bg-gray-600
+                              hover:bg-gray-700
+                              text-white
+                              px-3
+                              py-1
+                              rounded-lg
+                            "
+                          >
+                            {application.is_active
+                              ? "Hide"
+                              : "Show"}
                           </button>
           
                         </div>
