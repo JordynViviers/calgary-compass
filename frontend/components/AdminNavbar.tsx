@@ -11,7 +11,6 @@ export default function AdminNavbar() {
         <div className="flex items-center justify-between h-20">
 
           {/* Logo */}
-
           <Link
             href="/"
             className="flex items-center gap-3"
@@ -34,43 +33,48 @@ export default function AdminNavbar() {
           </Link>
 
           {/* Admin Navigation */}
-      <nav className="relative z-10 flex justify-between items-center px-10 py-6">
-        <Link href="/admin" className="text-2xl font-bold text-red-700">
-          Calgary Compass <span className="text-black">Admin</span>
-        </Link>
-        <div className="flex gap-8 text-lg font-medium">
-          <Link
-            href="/admin/technologies"
-            className="hover:text-red-700 transition"
-          >
-            Technologies
-          </Link>
-          <Link
-            href="/admin/events"
-            className="hover:text-red-700 transition"
-          >
-            In-Person Events
-          </Link>
-          <Link
-            href="/admin/community-input"
-            className="hover:text-red-700 transition"
-          >
-            Community Input
-          </Link>
-          <Link
-            href="/admin/applications"
-            className="hover:text-red-700 transition"
-          >
-            Applications
-          </Link>
-          <Link
-            href="/admin/techApplications"
-            className="hover:text-red-700 transition"
-          >
-            Technology Applications
-          </Link>
+          <nav className="flex items-center gap-8 text-lg font-medium">
+
+            <Link
+              href="/admin/technologies"
+              className="hover:text-red-700 transition"
+            >
+              Technologies
+            </Link>
+
+            <Link
+              href="/admin/events"
+              className="hover:text-red-700 transition"
+            >
+              In-Person Events
+            </Link>
+
+            <Link
+              href="/admin/community-input"
+              className="hover:text-red-700 transition"
+            >
+              Community Input
+            </Link>
+
+            <Link
+              href="/admin/applications"
+              className="hover:text-red-700 transition"
+            >
+              Applications
+            </Link>
+
+            <Link
+              href="/admin/techApplications"
+              className="hover:text-red-700 transition"
+            >
+              Technology Applications
+            </Link>
+
+          </nav>
+
         </div>
-      </nav>
+
+      </div>
 
     </header>
   );
