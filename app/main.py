@@ -1513,7 +1513,8 @@ def submit_challenge_vote(
 
     db_vote = CalgaryChallengeVote(
         stakeholder=vote.stakeholder,
-        challenge=vote.challenge
+        challenge=vote.challenge,
+        rank=vote.rank
     )
 
     db.add(db_vote)
