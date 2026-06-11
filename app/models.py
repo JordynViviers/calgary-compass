@@ -294,6 +294,8 @@ class CalgaryChallengeVote(Base):
 
     challenge = Column(String)
 
+    rank = Column(Integer)
+
     created_at = Column(
         DateTime(timezone=True),
         server_default=func.now()
@@ -302,3 +304,6 @@ class CalgaryChallengeVote(Base):
 class CalgaryChallengeVoteRequest(BaseModel):
     stakeholder: str
     challenge: str
+    rank: int
+
+
