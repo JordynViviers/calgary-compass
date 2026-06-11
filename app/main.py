@@ -23,6 +23,8 @@ from app.models import (
     TechnologyCandidate, 
     CalgaryChallengeVote,
     CalgaryChallengeVoteRequest,
+    TechnologyApplication,
+    TechnologyApplicationRequest,
 )
 
 from app.crud import (
@@ -1562,4 +1564,32 @@ def challenge_summary(
         }
         for r in results
     ]
+
+@app.get("/technology-applications")
+def get_applications(
+    db: Session = Depends(get_db)
+):
+    return db.query(
+        TechnologyApplication
+    ).all()
+
+@app.post("/technology-applications")
+def create_application(
+    data: TechnologyApplicationRequest,
+    db: Session = Depends(get_db)
+):
+
+    application = TechnologyApplication(
+        technology_id=data.technology_id,
+        name=data.name,
+        description=data.description
+    )
+
+    db.add(application)
+
+    db.commit()
+
+    db.refresh(application)
+
+    return application
     }
