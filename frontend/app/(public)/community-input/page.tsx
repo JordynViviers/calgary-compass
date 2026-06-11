@@ -393,7 +393,9 @@ export default function CommunityInputPage() {
 
                 
               </div>
-            ))}
+            );
+
+          })}
           </div>
 
           {!sector && (
