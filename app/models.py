@@ -284,3 +284,21 @@ class TechnologyCandidateRequest(BaseModel):
     summary: str | None = None
     source: str | None = None
     confidence: int | None = None
+
+class CalgaryChallengeVote(Base):
+    __tablename__ = "calgary_challenge_votes"
+
+    id = Column(Integer, primary_key=True)
+
+    stakeholder = Column(String)
+
+    challenge = Column(String)
+
+    created_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now()
+    )
+
+class CalgaryChallengeVoteRequest(BaseModel):
+    stakeholder: str
+    challenge: str
