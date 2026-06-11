@@ -24,6 +24,9 @@ export default function TechApplicationsPage() {
   const [editingName, setEditingName] =
     useState("");
 
+  const [editingTechnologyId, setEditingTechnologyId] =
+    useState<number>(0);
+
   const [applicationName, setApplicationName] =
     useState("");
 
@@ -149,22 +152,37 @@ export default function TechApplicationsPage() {
   }
 
   async function saveApplication() {
-
-    await axios.put(
-      `${API_URL}/technology-applications/${editingId}`,
-      {
-        technology_id:
-          application.technology_id,
   
-        name: editingName,
+    try {
   
-        description: "",
-      }
-    );
+      await axios.put(
+        `${API_URL}/technology-applications/${editingId}`,
+        {
+          technology_id:
+            editingTechnologyId,
   
-    setEditingId(null);
+          name:
+            editingName,
   
-    loadData();
+          description: "",
+        }
+      );
+  
+      setEditingId(null);
+  
+      setEditingName("");
+  
+      loadData();
+  
+    } catch (error) {
+  
+      console.error(error);
+  
+      alert(
+        "Failed to update application."
+      );
+  
+    }
   }
 
   function getTechnologyName(
@@ -385,15 +403,19 @@ export default function TechApplicationsPage() {
 
                           <button
                             onClick={() => {
-                          
+
                               setEditingId(
                                 application.id
                               );
-                          
+                            
                               setEditingName(
                                 application.name
                               );
-                          
+                            
+                              setEditingTechnologyId(
+                                application.technology_id
+                              );
+                            
                             }}
                             className="
                               bg-blue-600
