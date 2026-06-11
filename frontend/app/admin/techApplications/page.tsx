@@ -129,6 +129,29 @@ export default function TechApplicationsPage() {
     }
   }
 
+  async function toggleApplication(
+    applicationId: number
+  ) {
+  
+    try {
+  
+      await axios.post(
+        `${API_URL}/technology-applications/${applicationId}/toggle`
+      );
+  
+      loadData();
+  
+    } catch (error) {
+  
+      console.error(error);
+  
+      alert(
+        "Failed to update application."
+      );
+  
+    }
+  }
+  
   async function deleteApplication(
     applicationId: number
   ) {
