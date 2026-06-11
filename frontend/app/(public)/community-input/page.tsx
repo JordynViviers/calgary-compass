@@ -55,94 +55,121 @@ export default function CommunityInputPage() {
         : [...previous, challenge]
     );
   }
+
   async function handleSubmit() {
-  try {
+    try {
 
-    console.log("Selected Challenges:");
-    console.log(selectedChallenges);
+      // Save challenge selections
 
-    console.log("Other Challenge:");
-    console.log(otherChallenge);
+      for (const challenge of selectedChallenges) {
 
-    for (const technology of technologies) {
-
-      const techRatings =
-        ratings[technology.name];
-
-      if (!techRatings) {
-        continue;
+        await axios.post(
+          `${API_URL}/challenge-vote`,
+          {
+            stakeholder: sector,
+            challenge: challenge,
+          }
+        );
       }
 
-      await axios.post(
-        `${API_URL}/vote`,
-        {
-          technology_id: technology.id,
-          stakeholder: sector,
+      // Save custom challenge
 
-          financial_sustainability: Number(
-            techRatings[
-              "Financial Sustainability"
-            ] || 0
-          ),
+      if (otherChallenge.trim()) {
 
-          operational_excellence: Number(
-            techRatings[
-              "Operational Excellence"
-            ] || 0
-          ),
+        await axios.post(
+          `${API_URL}/challenge-vote`,
+          {
+            stakeholder: sector,
+            challenge: otherChallenge,
+          }
+        );
+      }
 
-          innovation_agility: Number(
-            techRatings[
-              "Innovation and Agility"
-            ] || 0
-          ),
+      // Save technology ratings
 
-          trusted_governance: Number(
-            techRatings[
-              "Trusted and Transparent Governance"
-            ] || 0
-          ),
+      for (const technology of technologies) {
 
-          people_culture: Number(
-            techRatings[
-              "People and Culture First"
-            ] || 0
-          ),
+        const techRatings =
+          ratings[technology.name];
+
+        if (!techRatings) {
+          continue;
         }
+
+        await axios.post(
+          `${API_URL}/vote`,
+          {
+            technology_id: technology.id,
+            stakeholder: sector,
+
+            financial_sustainability: Number(
+              techRatings[
+                "Financial Sustainability"
+              ] || 0
+            ),
+
+            operational_excellence: Number(
+              techRatings[
+                "Operational Excellence"
+              ] || 0
+            ),
+
+            innovation_agility: Number(
+              techRatings[
+                "Innovation and Agility"
+              ] || 0
+            ),
+
+            trusted_governance: Number(
+              techRatings[
+                "Trusted and Transparent Governance"
+              ] || 0
+            ),
+
+            people_culture: Number(
+              techRatings[
+                "People and Culture First"
+              ] || 0
+            ),
+          }
+        );
+      }
+
+      // Save community signal
+
+      if (signals.trim()) {
+
+        await axios.post(
+          `${API_URL}/community-signal`,
+          {
+            stakeholder: sector,
+            signal_text: signals,
+          }
+        );
+      }
+
+      alert(
+        "Community input submitted successfully!"
+      );
+
+      // Reset form
+
+      setRatings({});
+      setSignals("");
+      setSector("");
+
+      setSelectedChallenges([]);
+      setOtherChallenge("");
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Failed to submit community input."
       );
     }
-
-    if (signals.trim()) {
-
-      await axios.post(
-        `${API_URL}/community-signal`,
-        {
-          stakeholder: sector,
-          signal_text: signals,
-        }
-      );
-    }
-
-    alert(
-      "Community input submitted successfully!"
-    );
-
-    setRatings({});
-    setSignals("");
-    setSector("");
-
-    setSelectedChallenges([]);
-    setOtherChallenge("");
-
-  } catch (error) {
-
-    console.error(error);
-
-    alert(
-      "Failed to submit community input."
-    );
   }
-}
   
   return (
     <main className="min-h-screen bg-gray-50 text-black">
