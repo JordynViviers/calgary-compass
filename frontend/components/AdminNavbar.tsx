@@ -63,30 +63,14 @@ export default function AdminNavbar() {
           >
             Applications
           </Link>
+          <Link
+            href="/admin/techApplications"
+            className="hover:text-red-700 transition"
+          >
+            Technology Applications
+          </Link>
         </div>
       </nav>
-
-          {/* CTA Button */}
-
-          <Link
-            href="/community-input"
-            className="
-              bg-red-600
-              hover:bg-red-700
-              text-white
-              px-6
-              py-3
-              rounded-lg
-              font-semibold
-              transition
-            "
-          >
-            Community Input
-          </Link>
-
-        </div>
-
-      </div>
 
     </header>
   );
