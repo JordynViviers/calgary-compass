@@ -39,20 +39,38 @@ export default function CommunityInputPage() {
       fifth: "",
     });
   const [otherChallenge, setOtherChallenge] = useState("");
+  const [applications, setApplications] = useState<any[]>([]);
 
   const [ratings, setRatings] = useState<Record<string, Record<string, string>>>(
     {}
   );
 
   useEffect(() => {
+  
     axios
       .get(`${API_URL}/technologies`)
       .then((response) => {
         setTechnologies(response.data);
       })
       .catch((error) => {
-        console.error("Failed to load technologies", error);
+        console.error(
+          "Failed to load technologies",
+          error
+        );
       });
+  
+    axios
+      .get(`${API_URL}/technology-applications`)
+      .then((response) => {
+        setApplications(response.data);
+      })
+      .catch((error) => {
+        console.error(
+          "Failed to load applications",
+          error
+        );
+      });
+  
   }, []);
 
   function updateRating(
