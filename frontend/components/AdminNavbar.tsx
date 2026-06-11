@@ -13,7 +13,7 @@ export default function AdminNavbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3"
+            className="flex items-center gap-3 mr-auto"
           >
             <img
               src="/compass-logo.png"
@@ -26,7 +26,7 @@ export default function AdminNavbar() {
                 CALGARY
               </p>
 
-              <p className="text-3xl font-bold text-gray-800">
+              <p className="text-2xl font-bold text-gray-900">
                 COMPASS
               </p>
             </div>
