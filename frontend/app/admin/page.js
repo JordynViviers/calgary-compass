@@ -140,6 +140,18 @@ export default function AdminHome() {
               </p>
             </Link>
 
+            <Link
+              href="/admin/techApplications"
+              className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-red-300 transition"
+            >
+              <h2 className="text-2xl font-bold text-red-700 mb-2">
+                Technology Applications
+              </h2>
+              <p className="text-gray-600">
+                View and edit the applications of each technology. 
+              </p>
+            </Link>
+
           </div>
         </div>
       </section>
