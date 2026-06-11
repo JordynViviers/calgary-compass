@@ -1566,15 +1566,16 @@ def challenge_summary(
     ]
 
 @app.get("/technology-applications")
-def get_applications(
+def get_technology_applications(
     db: Session = Depends(get_db)
 ):
+
     return db.query(
         TechnologyApplication
     ).all()
 
 @app.post("/technology-applications")
-def create_application(
+def create_technology_application(
     data: TechnologyApplicationRequest,
     db: Session = Depends(get_db)
 ):
@@ -1592,4 +1593,32 @@ def create_application(
     db.refresh(application)
 
     return application
+
+@app.delete(
+    "/technology-applications/{application_id}"
+)
+def delete_technology_application(
+    application_id: int,
+    db: Session = Depends(get_db)
+):
+
+    application = db.query(
+        TechnologyApplication
+    ).filter(
+        TechnologyApplication.id
+        == application_id
+    ).first()
+
+    if not application:
+        return {
+            "error": "Application not found"
+        }
+
+    db.delete(application)
+
+    db.commit()
+
+    return {
+        "message": "Deleted"
     }
+
