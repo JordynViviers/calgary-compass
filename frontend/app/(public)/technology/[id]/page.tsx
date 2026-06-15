@@ -201,13 +201,13 @@ export default function TechnologyDetailPage() {
 
 const communityAverage =
   comparison
-    ? (
+    ? Math.round( (
         comparison.human.financial_sustainability +
         comparison.human.operational_excellence +
         comparison.human.people_culture +
         comparison.human.trusted_governance +
         comparison.human.innovation_agility
-      ) / 5
+      ) / 5 )
     : 0;
 
 const weightedAverage =
