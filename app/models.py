@@ -26,8 +26,6 @@ class Technology(Base):
 
     description = Column(String)
 
-    current_status = Column(String)
-
     is_active = Column(Boolean, default=True)
 
     sources = relationship(
@@ -136,7 +134,6 @@ class VoteRequest(BaseModel):
 class TechnologyRequest(BaseModel):
     name: str
     description: str
-    current_status: str
     is_active: bool = True
     
 class CommunitySignalRequest(BaseModel):
