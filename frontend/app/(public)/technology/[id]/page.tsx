@@ -246,24 +246,17 @@ const weightedAverage =
 
       </div>
 
-      {/* AI SUMMARY */}
+      {/* DESCRIPTION */}
 
       <div className="border border-gray-500 rounded-2xl p-8 shadow-sm mb-10 bg-white">
 
         <h2 className="text-3xl font-semibold text-red-700 mb-6">
+          Description
+        </h2>
 
-          {/* DESCRIPTION */}
-
-          <div className="border border-gray-500 rounded-2xl p-8 shadow-sm mb-10 bg-white">
-
-            <h2 className="text-3xl font-semibold text-red-700 mb-6">
-              Description
-            </h2>
-
-            <p className="text-gray-600 leading-relaxed text-lg">
-              {technology.description}
-            </p>
-          </div>
+        <p className="text-gray-600 leading-relaxed text-lg">
+          {technology.description}
+        </p>
 
       </div>
 
