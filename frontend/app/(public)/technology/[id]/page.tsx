@@ -252,34 +252,18 @@ const weightedAverage =
 
         <h2 className="text-3xl font-semibold text-red-700 mb-6">
 
-          AI Summary
+          {/* DESCRIPTION */}
 
-        </h2>
+          <div className="border border-gray-500 rounded-2xl p-8 shadow-sm mb-10 bg-white">
 
-        <p className="text-gray-600 leading-relaxed text-lg">
+            <h2 className="text-3xl font-semibold text-red-700 mb-6">
+              Description
+            </h2>
 
-          {technology.name} is an emerging technology
-          with potential applications in civic technology,
-          smart infrastructure, and municipal governance.
-          Cities and public organizations may use this
-          technology to improve operational efficiency,
-          enhance public services, support planning
-          decisions, and strengthen community engagement.
-
-          <br /><br />
-
-          Example use cases may include transportation
-          planning, environmental monitoring, infrastructure
-          management, public safety systems, digital public
-          services, or urban analytics initiatives.
-
-          <br /><br />
-
-          These examples are illustrative only and do not
-          represent the full range of possible applications
-          for this technology.
-
-        </p>
+            <p className="text-gray-600 leading-relaxed text-lg">
+              {technology.description}
+            </p>
+          </div>
 
       </div>
 
