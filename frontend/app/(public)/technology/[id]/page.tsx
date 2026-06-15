@@ -234,15 +234,6 @@ const weightedAverage =
           {technology.name}
         </h1>
 
-        <p className="text-xl text-gray-500 mb-4">
-          {technology.description}
-        </p>
-
-        <span className="bg-gray-500 text-red-700 px-4 py-2 rounded-full text-sm font-semibold border border-red-200">
-
-          {technology.current_status}
-
-        </span>
 
       </div>
 
