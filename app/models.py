@@ -317,6 +317,8 @@ class TechnologyApplication(Base):
 
     description = Column(Text)
 
+    status = Column(String)
+
     is_active = Column(
         Boolean,
         default=True
