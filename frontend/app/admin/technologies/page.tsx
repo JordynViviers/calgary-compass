@@ -47,8 +47,7 @@ export default function AdminPage() {
           `${API_URL}/technology/${editingId}`,
           {
             name,
-            description,
-            current_status: status,
+            description
           }
         );
 
@@ -58,8 +57,7 @@ export default function AdminPage() {
           `${API_URL}/technology`,
           {
             name,
-            description,
-            current_status: status,
+            description
           }
         );
 
@@ -174,9 +172,6 @@ export default function AdminPage() {
       technology.description
     );
 
-    setStatus(
-      technology.current_status
-    );
 
     window.scrollTo({
       top: 0,
@@ -300,10 +295,6 @@ export default function AdminPage() {
                     <h3 className="text-xl font-semibold text-red-700">
                       {technology.name}
                     </h3>
-
-                    <p className="text-gray-500">
-                      {technology.current_status}
-                    </p>
 
                     <p
                       className={
