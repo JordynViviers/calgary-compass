@@ -714,7 +714,6 @@ def update_technology(
 
     tech.name = data.name
     tech.description = data.description
-    tech.current_status = data.current_status
     tech.is_active = data.is_active
 
     db.commit()
