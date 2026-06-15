@@ -9,7 +9,6 @@ const API_URL = "https://calgary-compass-api.onrender.com";
 export default function AdminPage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("Identified");
 
   const [editingId, setEditingId] =
     useState<number | null>(null);
@@ -36,7 +35,6 @@ export default function AdminPage() {
   const clearForm = () => {
     setName("");
     setDescription("");
-    setStatus("Identified");
     setEditingId(null);
   };
 
@@ -223,23 +221,6 @@ export default function AdminPage() {
           }
         />
 
-        <label className="block mb-2 font-medium">
-          Status
-        </label>
-
-        <select
-          className="w-full border border-gray-300 rounded-xl p-3 mb-6 bg-white text-black focus:outline-none focus:ring-2 focus:ring-red-400"
-          value={status}
-          onChange={(e) =>
-            setStatus(e.target.value)
-          }
-        >
-          <option>Identified</option>
-          <option>Under Review</option>
-          <option>Pilot Approved</option>
-          <option>Active Pilot</option>
-          <option>Completed</option>
-        </select>
 
         <div className="flex gap-3">
 
