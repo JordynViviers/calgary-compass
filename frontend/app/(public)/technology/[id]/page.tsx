@@ -272,19 +272,64 @@ const weightedAverage =
           Description
         </h2>
 
-        <h2>Technology Applications</h2>
-          {applications.map((app) => (
-            <div key={app.id}>
-              <h3>{app.name}</h3>
-              <p>{app.status}</p>
-            </div>
-          ))}
-
         <p className="text-gray-600 leading-relaxed text-lg">
           {technology.description}
         </p>
 
       </div>
+
+      {applications.length > 0 && (
+
+  <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
+
+    <h2 className="text-3xl font-semibold text-red-700 mb-6">
+      Technology Applications
+    </h2>
+
+    <div className="space-y-4">
+
+      {applications.map((app: any) => (
+
+        <div
+          key={app.id}
+          className="
+            border
+            border-gray-200
+            rounded-xl
+            p-4
+          "
+        >
+
+          <div className="flex justify-between items-center">
+
+            <h3 className="font-semibold text-lg">
+              {app.name}
+            </h3>
+
+            <span
+              className="
+                px-3
+                py-1
+                rounded-full
+                bg-red-100
+                text-red-700
+                text-sm
+              "
+            >
+              {app.status}
+            </span>
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  </div>
+
+)}
 
       {/* COMMUNITY INPUT BUTTON */}
 
