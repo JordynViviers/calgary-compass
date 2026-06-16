@@ -201,24 +201,28 @@ export default function TechnologyDetailPage() {
 
 const communityAverage =
   comparison
-    ? Math.round( (
-        comparison.human.financial_sustainability +
-        comparison.human.operational_excellence +
-        comparison.human.people_culture +
-        comparison.human.trusted_governance +
-        comparison.human.innovation_agility
-      ) / 5 )
+    ? Math.round(
+        (
+          comparison.human.financial_sustainability +
+          comparison.human.operational_excellence +
+          comparison.human.people_culture +
+          comparison.human.trusted_governance +
+          comparison.human.innovation_agility
+        ) / 5
+      )
     : 0;
 
 const weightedAverage =
   weightedScores
-    ? (
-        weightedScores.financial_sustainability +
-        weightedScores.operational_excellence +
-        weightedScores.people_culture +
-        weightedScores.trusted_governance +
-        weightedScores.innovation_agility
-      ) / 5
+    ? Math.round(
+        (
+          weightedScores.financial_sustainability +
+          weightedScores.operational_excellence +
+          weightedScores.people_culture +
+          weightedScores.trusted_governance +
+          weightedScores.innovation_agility
+        ) / 5
+      )
     : 0;
 
 
