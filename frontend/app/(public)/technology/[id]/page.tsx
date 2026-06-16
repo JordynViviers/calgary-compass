@@ -200,13 +200,13 @@ export default function TechnologyDetailPage() {
 
   const aiAverage =
   aiEvaluation
-    ? (
+    ? Math.round((
         aiEvaluation.financial_sustainability +
         aiEvaluation.operational_excellence +
         aiEvaluation.people_culture +
         aiEvaluation.trusted_governance +
         aiEvaluation.innovation_agility
-      ) / 5
+      ) / 5 )
     : 0;
 
 const communityAverage =
@@ -443,7 +443,7 @@ const weightedAverage =
 
                 <p className="text-4xl font-bold text-black">
 
-                  {aiAverage.toFixed(1)}/10
+                  {aiAverage}/10
 
                 </p>
 
@@ -487,27 +487,27 @@ const weightedAverage =
 
                 <div>
                   Financial Sustainability:{" "}
-                  {comparison.human.financial_sustainability.toFixed(1)}/10
+                  {comparison.human.financial_sustainability}/10
                 </div>
 
                 <div>
                   Operational Excellence:{" "}
-                  {comparison.human.operational_excellence.toFixed(1)}/10
+                  {comparison.human.operational_excellence}/10
                 </div>
 
                 <div>
                   People & Culture:{" "}
-                  {comparison.human.people_culture.toFixed(1)}/10
+                  {comparison.human.people_culture}/10
                 </div>
 
                 <div>
                   Trusted Governance:{" "}
-                  {comparison.human.trusted_governance.toFixed(1)}/10
+                  {comparison.human.trusted_governance}/10
                 </div>
 
                 <div>
                   Innovation & Agility:{" "}
-                  {comparison.human.innovation_agility.toFixed(1)}/10
+                  {comparison.human.innovation_agility}/10
                 </div>
 
               </div>
@@ -533,7 +533,7 @@ const weightedAverage =
               <div className="mt-6">
 
                 <p className="text-4xl font-bold text-black">
-                  {communityAverage.toFixed(1)}/10
+                  {communityAverage}/10
                 </p>
 
                 <p className="text-gray-500 mt-1">
@@ -614,7 +614,7 @@ const weightedAverage =
               <div className="mt-6">
 
                 <p className="text-4xl font-bold text-black">
-                  {weightedAverage.toFixed(1)}/10
+                  {weightedAverage}/10
                 </p>
 
                 <p className="text-gray-500 mt-1">
