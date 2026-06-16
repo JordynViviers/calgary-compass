@@ -325,9 +325,12 @@ class TechnologyApplication(Base):
     )
 
 class TechnologyApplicationRequest(BaseModel):
+    technology_id: int
+
     name: str
     description: str = ""
     status: str = "Assess"
+
     organization: str = ""
     location: str = ""
 
