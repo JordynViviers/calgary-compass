@@ -7,7 +7,7 @@ export default function Home() {
     <main className="relative min-h-screen bg-white text-black overflow-hidden">
       {/* HERO */}
       <section
-        className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-cover bg-center"
+        className="relative min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden bg-cover bg-center"
         style={{
           backgroundImage: "url(/calgary-bg.png)",
         }}
@@ -16,7 +16,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-white/80"></div>
 
         {/* Background Compass */}
-        <div className="absolute inset-y-0 right-0 w-1/2 flex items-center justify-center pointer-events-none translate-y-[18px]">
+        <div className="hidden md:flex absolute inset-y-0 right-0 w-1/2 items-center justify-center pointer-events-none translate-y-[18px]">
           <div className="relative w-[90vw] max-w-[620px] aspect-square opacity-15">
             <div className="absolute inset-0 rounded-full border-[6px] border-red-700" />
             <div className="absolute inset-10 rounded-full border-2 border-red-700" />
@@ -60,33 +60,33 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl w-full mx-auto px-6">
+        <div className="relative z-10 max-w-7xl w-full mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-left">
-              <h1 className="text-5xl md:text-7xl font-semibold tracking-tight text-black mb-5">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold tracking-tight text-black mb-5">
                 Calgary Compass
               </h1>
 
-              <p className="text-xl md:text-2xl font-medium text-black mb-6">
+              <p className="text-lg sm:text-xl md:text-2xl font-medium text-black mb-6">
                 AI-powered civic intelligence for evaluating emerging
                 technologies.
               </p>
 
-              <p className="text-base md:text-lg text-black leading-relaxed max-w-xl mb-10">
+              <p className="text-sm sm:text-base md:text-lg text-black leading-relaxed max-w-xl mb-8 md:mb-10">
                 A platform for governments, industry, academia, and citizens to
                 collaborate on foresight, governance analytics, and technology
                 evaluation for smarter cities.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <Link href="/technologies">
-                  <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-semibold transition">
+                  <button className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-semibold transition">
                     Explore Technologies
                   </button>
                 </Link>
 
                 <Link href="/community-input">
-                  <button className="border border-gray-300 text-black hover:border-gray-500 px-6 py-3 rounded-xl font-semibold transition bg-white/70">
+                  <button className="w-full sm:w-auto border border-gray-300 text-black hover:border-gray-500 px-6 py-3 rounded-xl font-semibold transition bg-white/70">
                     Get Involved
                   </button>
                 </Link>
@@ -100,7 +100,7 @@ export default function Home() {
 
       {/* VALUE STRIP */}
       <section className="border-t border-gray-100 bg-white py-16">
-        <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center">
+        <div className="max-w-5xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 text-center">
           <div className="bg-white border-t-4 border-red-700 rounded-2xl p-6 shadow-sm">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Evaluate Technologies
@@ -137,7 +137,7 @@ export default function Home() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-semibold text-gray-900 mb-3">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-3">
               Calgary Compass at a Glance
             </h2>
 
@@ -147,9 +147,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
-              <p className="text-5xl font-bold text-red-700">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm text-center">
+              <p className="text-3xl md:text-5xl font-bold text-red-700">
                 50+
               </p>
 
@@ -158,8 +158,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
-              <p className="text-5xl font-bold text-red-700">
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm text-center">
+              <p className="text-3xl md:text-5xl font-bold text-red-700">
                 500+
               </p>
 
@@ -168,8 +168,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
-              <p className="text-5xl font-bold text-red-700">
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm text-center"><
+              <p className="text-3xl md:text-5xl font-bold text-red-700">
                 20+
               </p>
 
@@ -178,8 +178,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
-              <p className="text-5xl font-bold text-red-700">
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm text-center">
+              <p className="text-3xl md:text-5xl font-bold text-red-700">
                 10+
               </p>
 
@@ -194,12 +194,12 @@ export default function Home() {
       {/* FEATURED CTA */}
       <section className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="bg-gradient-to-r from-red-700 to-red-600 rounded-3xl p-12 md:p-16 text-white shadow-xl">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="bg-gradient-to-r from-red-700 to-red-600 rounded-3xl p-6 md:p-16 text-white shadow-xl">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               Help Shape Calgary&apos;s Future
             </h2>
 
-            <p className="text-xl max-w-3xl mb-8 leading-relaxed">
+            <p className="text-base md:text-xl max-w-3xl mb-8 leading-relaxed">
               Join citizens, researchers, industry leaders, and city staff in
               exploring emerging technologies, evaluating smart city
               initiatives, and helping build a more innovative Calgary.
