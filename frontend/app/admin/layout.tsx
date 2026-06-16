@@ -18,20 +18,6 @@ export default function AdminLayout({
       {pathname !== "/admin" && (
         <div className="max-w-7xl mx-auto px-6 pt-4">
 
-          <Link
-            href="/admin"
-            className="
-              inline-flex
-              items-center
-              text-sm
-              text-gray-600
-              hover:text-red-700
-              transition
-            "
-          >
-            ← Back to Dashboard
-          </Link>
-        
         </div>
       )}
 
