@@ -1584,15 +1584,13 @@ def create_technology_application(
     application = TechnologyApplication(
         technology_id=data.technology_id,
         name=data.name,
-        description=data.description
+        description=data.description,
+        status=data.status
     )
 
     db.add(application)
-
     db.commit()
-
     db.refresh(application)
-
     return application
 
 @app.delete(
@@ -1645,19 +1643,16 @@ def update_technology_application(
         }
 
     application.name = data.name
-
+    application.status = data.status
     application.description = (
         data.description
     )
-
     application.technology_id = (
         data.technology_id
     )
 
     db.commit()
-
     db.refresh(application)
-
     return application
 
 @app.post(
