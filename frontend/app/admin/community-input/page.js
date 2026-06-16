@@ -88,6 +88,67 @@ export default function AdminCommunityInputPage() {
     })
     .sort((a, b) => b.count - a.count);
 
+  const clearAllResponses = async () => {
+  
+    const confirmed = confirm(
+      "Delete ALL community responses?"
+    );
+  
+    if (!confirmed) return;
+  
+    try {
+  
+      await axios.delete(
+        `${API_URL}/community-input`
+      );
+  
+      loadData();
+  
+    } catch (error) {
+  
+      console.error(error);
+  
+      alert(
+        "Failed to clear responses."
+      );
+  
+    }
+  
+  };
+  
+  
+  const deleteResponse = async (
+    responseId: number
+  ) => {
+  
+    const confirmed = confirm(
+      "Delete this response?"
+    );
+  
+    if (!confirmed) return;
+  
+    try {
+  
+      await axios.delete(
+        `${API_URL}/community-input/${responseId}`
+      );
+  
+      loadData();
+  
+    } catch (error) {
+  
+      console.error(error);
+  
+      alert(
+        "Failed to delete response."
+      );
+
+      
+  
+    }
+  
+  };
+
   return (
     <main className="min-h-screen bg-gray-50 text-black">
       <div className="h-2 bg-red-700 w-full"></div>
@@ -103,6 +164,20 @@ export default function AdminCommunityInputPage() {
               {votes.length} ratings · {signals.length} written responses
             </p>
           </div>
+          <button
+            onClick={clearAllResponses}
+            className="
+              bg-red-700
+              hover:bg-red-800
+              text-white
+              px-5
+              py-3
+              rounded-xl
+            "
+          >
+            Clear All Responses
+          </button>
+              
           <button
             onClick={loadResults}
             disabled={loading}
@@ -224,6 +299,24 @@ export default function AdminCommunityInputPage() {
                             : s.is_public === false
                               ? "Show"
                               : "Hide"}
+                        </button>
+
+                        <button
+                          onClick={() =>
+                            deleteResponse(
+                              response.id
+                            )
+                          }
+                          className="
+                            bg-red-600
+                            hover:bg-red-700
+                            text-white
+                            px-3
+                            py-1
+                            rounded-lg
+                          "
+                        >
+                          Delete
                         </button>
                       </div>
                       <p className="text-gray-900 whitespace-pre-wrap">
