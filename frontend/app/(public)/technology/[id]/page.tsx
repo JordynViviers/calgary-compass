@@ -300,12 +300,22 @@ const weightedAverage =
           "
         >
 
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-start">
 
-            <h3 className="font-semibold text-lg">
-              {app.name}
-            </h3>
-
+            <div>
+          
+              <h3 className="font-semibold text-lg">
+                {app.name}
+              </h3>
+          
+              {app.description && (
+                <p className="text-gray-600 mt-2">
+                  {app.description}
+                </p>
+              )}
+          
+            </div>
+          
             <span
               className="
                 px-3
