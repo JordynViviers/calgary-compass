@@ -1685,5 +1685,18 @@ def toggle_application(
         "message": "Updated"
     }
 
-
+@app.get("/technologies/{technology_id}/applications")
+def get_technology_applications(
+    technology_id: int,
+    db: Session = Depends(get_db)
+):
+    return (
+        db.query(TechnologyApplication)
+        .filter(
+            TechnologyApplication.technology_id
+            == technology_id,
+            TechnologyApplication.is_active == True
+        )
+        .all()
+    )
 
