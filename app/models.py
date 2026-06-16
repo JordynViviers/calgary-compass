@@ -325,11 +325,11 @@ class TechnologyApplication(Base):
     )
 
 class TechnologyApplicationRequest(BaseModel):
-    technology_id: int
-
     name: str
-
     description: str = ""
+    status: str = "Assess"
+    organization: str = ""
+    location: str = ""
 
 class ApplicationSupportVote(Base):
     __tablename__ = "application_support_votes"
