@@ -226,13 +226,13 @@ export default function CommunityInputPage() {
     <main className="min-h-screen bg-gray-50 text-black">
       <div className="h-2 bg-red-700 w-full"></div>
 
-      <div className="max-w-7xl mx-auto px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-12">
         <section className="text-center mb-16">
-          <h1 className="text-6xl font-bold text-red-700 mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold text-red-700 mb-4">
             Community Input
           </h1>
 
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+          <p className="text-base md:text-xl text-gray-700 max-w-3xl mx-auto">
             Rate how emerging technologies align with Calgary&apos;s smart city
             governance priorities.
           </p>
@@ -242,7 +242,7 @@ export default function CommunityInputPage() {
           </div>
         </section>
 
-        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-12">
+        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 md:p-8 mb-8 md:mb-12">
           <h2 className="text-3xl font-bold text-red-700 mb-3">
             Section 1: Technology Ratings
           </h2>
@@ -405,7 +405,7 @@ export default function CommunityInputPage() {
           )}
         </section>
 
-        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-12">
+        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 md:p-8 mb-8 md:mb-12">
 
           <h2 className="text-3xl font-bold text-red-700 mb-3">
             Section 2: Calgary Challenges
@@ -500,7 +500,7 @@ export default function CommunityInputPage() {
           </div>
 
         </section>
-        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-12">
+        <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 md:p-8 mb-8 md:mb-12">
           <h2 className="text-3xl font-bold text-red-700 mb-3">
             Section 3: Community Concerns and Signals
           </h2>
