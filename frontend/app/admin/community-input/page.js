@@ -119,7 +119,7 @@ export default function AdminCommunityInputPage() {
   
   
   const deleteResponse = async (
-    responseId: number
+    responseId
   ) => {
   
     const confirmed = confirm(
@@ -143,12 +143,14 @@ export default function AdminCommunityInputPage() {
       alert(
         "Failed to delete response."
       );
-
-      
   
     }
   
   };
+  
+  
+  
+
 
   return (
     <main className="min-h-screen bg-gray-50 text-black">
@@ -305,7 +307,7 @@ export default function AdminCommunityInputPage() {
                         <button
                           onClick={() =>
                             deleteResponse(
-                              response.id
+                              s.id
                             )
                           }
                           className="
