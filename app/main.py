@@ -1700,3 +1700,53 @@ def get_technology_applications(
         .all()
     )
 
+@app.delete(
+    "/community-input/{response_id}"
+)
+def delete_community_input(
+    response_id: int,
+    db: Session = Depends(get_db)
+):
+
+    response = db.query(
+        CommunitySignal
+    ).filter(
+        CommunitySignal.id == response_id
+    ).first()
+
+    if not response:
+        return {
+            "error":
+                "Response not found"
+        }
+
+    db.delete(response)
+
+    db.commit()
+
+    return {
+        "message":
+            "Response deleted"
+    }
+
+@app.delete(
+    "/community-input"
+)
+def clear_community_input(
+    db: Session = Depends(get_db)
+):
+
+    db.query(
+        CommunitySignal
+    ).delete()
+
+    db.commit()
+
+    return {
+        "message":
+            "All responses deleted"
+    }
+
+
+
+
