@@ -285,43 +285,46 @@ export default function AdminCommunityInputPage() {
                               Hidden
                             </span>
                           )}
-                        </div>
-                        <button
-                          onClick={() =>
-                            toggleSignalVisibility(s.id, s.is_public !== false)
-                          }
-                          disabled={togglingId === s.id}
-                          className={`text-sm px-3 py-1 rounded-lg font-medium transition ${
-                            s.is_public === false
-                              ? "bg-green-600 text-white hover:bg-green-700"
-                              : "bg-red-600 text-white hover:bg-red-700"
-                          } disabled:opacity-60`}
-                        >
-                          {togglingId === s.id
-                            ? "Updating…"
-                            : s.is_public === false
+                        <div className="flex gap-2">
+
+                          <button
+                            onClick={() =>
+                              toggleSignalVisibility(
+                                s.id,
+                                s.is_public !== false
+                              )
+                            }
+                            disabled={togglingId === s.id}
+                            className={`text-sm px-3 py-1 rounded-lg font-medium transition ${
+                              s.is_public === false
+                                ? "bg-green-600 text-white hover:bg-green-700"
+                                : "bg-red-600 text-white hover:bg-red-700"
+                            } disabled:opacity-60`}
+                          >
+                            {togglingId === s.id
+                              ? "Updating..."
+                              : s.is_public === false
                               ? "Show"
                               : "Hide"}
-                        </button>
-
-                        <button
-                          onClick={() =>
-                            deleteResponse(
-                              s.id
-                            )
-                          }
-                          className="
-                            bg-red-600
-                            hover:bg-red-700
-                            text-white
-                            px-3
-                            py-1
-                            rounded-lg
-                          "
-                        >
-                          Delete
-                        </button>
-                      </div>
+                          </button>
+                        
+                          <button
+                            onClick={() =>
+                              deleteResponse(s.id)
+                            }
+                            className="
+                              bg-red-600
+                              hover:bg-red-700
+                              text-white
+                              px-3
+                              py-1
+                              rounded-lg
+                            "
+                          >
+                            Delete
+                          </button>
+                        
+                        </div>
                       <p className="text-gray-900 whitespace-pre-wrap">
                         {s.signal_text}
                       </p>
