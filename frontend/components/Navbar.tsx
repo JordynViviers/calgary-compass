@@ -164,6 +164,7 @@ export default function Navbar() {
 
             <Link
               href="/"
+              onClick={() => setMenuOpen(false)}
               className="font-medium text-gray-800"
             >
               {t.home}
@@ -172,6 +173,7 @@ export default function Navbar() {
             <Link
               href="/about"
               className="font-medium text-gray-800"
+              onClick={() => setMenuOpen(false)}
             >
               {t.about}
             </Link>
@@ -179,6 +181,7 @@ export default function Navbar() {
             <Link
               href="/technologies"
               className="font-medium text-gray-800"
+              onClick={() => setMenuOpen(false)}
             >
               {t.technologies}
             </Link>
@@ -186,6 +189,7 @@ export default function Navbar() {
             <Link
               href="/events"
               className="font-medium text-gray-800"
+              onClick={() => setMenuOpen(false)}
             >
               {t.events}
             </Link>
@@ -200,6 +204,7 @@ export default function Navbar() {
             <Link
               href="/foresight"
               className="font-medium text-gray-800"
+              onClick={() => setMenuOpen(false)}
             >
               {t.foresight}
             </Link>
@@ -207,6 +212,7 @@ export default function Navbar() {
             <Link
               href="/analytics"
               className="font-medium text-gray-800"
+              onClick={() => setMenuOpen(false)}
             >
               {t.analytics}
             </Link>
