@@ -275,18 +275,24 @@ export default function AdminCommunityInputPage() {
                           : "bg-white border-gray-200"
                       }`}
                     >
-                      <div className="flex flex-wrap justify-between items-start gap-3 mb-3">
+                      <div className="flex justify-between items-start mb-3">
+
                         <div className="flex gap-2 items-center">
+                      
                           <p className="text-xs uppercase tracking-wide text-gray-500">
                             {s.stakeholder || "Unknown sector"}
                           </p>
+                      
                           {s.is_public === false && (
                             <span className="bg-gray-400 text-white text-xs px-2 py-1 rounded font-semibold">
                               Hidden
                             </span>
                           )}
+                      
+                        </div>
+                      
                         <div className="flex gap-2">
-
+                      
                           <button
                             onClick={() =>
                               toggleSignalVisibility(
@@ -307,7 +313,7 @@ export default function AdminCommunityInputPage() {
                               ? "Show"
                               : "Hide"}
                           </button>
-                        
+                      
                           <button
                             onClick={() =>
                               deleteResponse(s.id)
@@ -323,8 +329,11 @@ export default function AdminCommunityInputPage() {
                           >
                             Delete
                           </button>
-                        
+                      
                         </div>
+                      
+                      </div>
+                      
                       <p className="text-gray-900 whitespace-pre-wrap">
                         {s.signal_text}
                       </p>
