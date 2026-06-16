@@ -229,19 +229,6 @@ export default function TechApplicationsPage() {
 
           </div>
 
-          <Link
-            href="/admin"
-            className="
-              bg-gray-100
-              hover:bg-gray-200
-              px-5
-              py-3
-              rounded-xl
-            "
-          >
-            ← Back to Dashboard
-          </Link>
-
         </div>
 
         <div
