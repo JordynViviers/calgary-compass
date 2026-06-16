@@ -123,6 +123,7 @@ export default function Navbar() {
                 transition
                 shadow-sm
               "
+              onClick={() => setMenuOpen(false)}
             >
               Community Input
             </Link>
