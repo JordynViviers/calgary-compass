@@ -33,8 +33,14 @@ export default function TechApplicationsPage() {
   const [applicationName, setApplicationName] =
     useState("");
 
+  const [applicationDescription,setApplicationDescription] = 
+    useState("");
+
   const [status, setStatus] =
-  useState("Assess");
+    useState("Assess");
+
+  const [editingDescription, setEditingDescription] =
+    useState("");
 
   useEffect(() => {
     loadData();
@@ -102,9 +108,13 @@ export default function TechApplicationsPage() {
         {
           technology_id:
             Number(technologyId),
+      
           name:
             applicationName,
-          description: "",
+      
+          description:
+            applicationDescription,
+      
           status:
             status,
         }
@@ -158,11 +168,13 @@ export default function TechApplicationsPage() {
         {
           technology_id:
             editingTechnologyId,
-          name:
-            editingName,
-          description: "",
-          status:
-            editingStatus,
+      
+          name: editingName,
+      
+          description:
+            editingDescription,
+      
+          status: editingStatus,
         }
       );
   
@@ -242,7 +254,114 @@ export default function TechApplicationsPage() {
             mb-8
           "
         >
+          <div className="mb-8">
 
+            <h2 className="text-2xl font-bold mb-6">
+              Create Application
+            </h2>
+          
+            <div className="space-y-4">
+          
+              <select
+                value={technologyId}
+                onChange={(e) =>
+                  setTechnologyId(e.target.value)
+                }
+                className="
+                  w-full
+                  border
+                  border-gray-300
+                  rounded-xl
+                  p-3
+                "
+              >
+                <option value="">
+                  Select Technology
+                </option>
+          
+                {technologies.map((technology) => (
+                  <option
+                    key={technology.id}
+                    value={technology.id}
+                  >
+                    {technology.name}
+                  </option>
+                ))}
+              </select>
+          
+              <input
+                value={applicationName}
+                onChange={(e) =>
+                  setApplicationName(
+                    e.target.value
+                  )
+                }
+                placeholder="Application Name"
+                className="
+                  w-full
+                  border
+                  border-gray-300
+                  rounded-xl
+                  p-3
+                "
+              />
+          
+              <textarea
+                value={applicationDescription}
+                onChange={(e) =>
+                  setApplicationDescription(
+                    e.target.value
+                  )
+                }
+                rows={4}
+                placeholder="
+                  Describe this technology application
+                "
+                className="
+                  w-full
+                  border
+                  border-gray-300
+                  rounded-xl
+                  p-3
+                "
+              />
+          
+              <select
+                value={status}
+                onChange={(e) =>
+                  setStatus(e.target.value)
+                }
+                className="
+                  w-full
+                  border
+                  border-gray-300
+                  rounded-xl
+                  p-3
+                "
+              >
+                <option>Adopt</option>
+                <option>Assess</option>
+                <option>Aware</option>
+                <option>In Progress</option>
+              </select>
+          
+              <button
+                onClick={createApplication}
+                className="
+                  bg-red-600
+                  hover:bg-red-700
+                  text-white
+                  px-5
+                  py-3
+                  rounded-xl
+                "
+              >
+                Create Application
+              </button>
+          
+            </div>
+          
+          </div>
           <h2 className="text-2xl font-bold mb-6">
             Existing Applications
           </h2>
@@ -319,6 +438,10 @@ export default function TechApplicationsPage() {
           
                                   setEditingName(
                                     application.name
+                                  );
+
+                                  setEditingDescription(
+                                    application.description || ""
                                   );
           
                                   setEditingStatus(
@@ -417,6 +540,28 @@ export default function TechApplicationsPage() {
                                   rounded-xl
                                   p-3
                                   mb-3
+                                "
+                              />
+
+                              <textarea
+                                value={editingDescription}
+                                onChange={(e) =>
+                                  setEditingDescription(
+                                    e.target.value
+                                  )
+                                }
+                                rows={4}
+                                className="
+                                  w-full
+                                  border
+                                  border-gray-300
+                                  rounded-xl
+                                  p-3
+                                  mb-3
+                                "
+                                placeholder="
+                                  Describe how this technology
+                                  application could be used
                                 "
                               />
           
