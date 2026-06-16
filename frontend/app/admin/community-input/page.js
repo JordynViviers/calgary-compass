@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
@@ -102,7 +103,7 @@ export default function AdminCommunityInputPage() {
         `${API_URL}/community-input`
       );
   
-      loadData();
+      loadResults();
   
     } catch (error) {
   
@@ -133,7 +134,7 @@ export default function AdminCommunityInputPage() {
         `${API_URL}/community-input/${responseId}`
       );
   
-      loadData();
+      loadResults();
   
     } catch (error) {
   
