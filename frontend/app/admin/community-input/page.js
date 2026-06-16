@@ -161,13 +161,28 @@ export default function AdminCommunityInputPage() {
         <div className="flex justify-between items-start mb-8">
 
           <div>
+
+            <Link
+              href="/admin"
+              className="
+                inline-block
+                text-red-700
+                font-medium
+                hover:underline
+                mb-3
+              "
+            >
+              ← Admin Dashboard
+            </Link>
+          
             <h1 className="text-4xl font-bold text-red-700">
               Community Input
             </h1>
-        
+          
             <p className="text-gray-600 mt-1">
               {votes.length} ratings · {signals.length} written responses
             </p>
+          
           </div>
         
           <div className="flex gap-3">
