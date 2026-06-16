@@ -373,11 +373,91 @@ export default function TechApplicationsPage() {
           
             </ul>
           
+        </div>
+
+        {editingId !== null && (
+          <div className="bg-yellow-50 border rounded-xl p-4 mb-6">
+        
+            <h3 className="font-bold mb-3">
+              Edit Technology Application
+            </h3>
+        
+            <input
+              value={editingName}
+              onChange={(e) =>
+                setEditingName(e.target.value)
+              }
+              className="
+                w-full
+                border
+                border-gray-300
+                rounded-xl
+                p-3
+                mb-3
+              "
+            />
+        
+            <select
+              value={editingStatus}
+              onChange={(e) =>
+                setEditingStatus(e.target.value)
+              }
+              className="
+                w-full
+                border
+                border-gray-300
+                rounded-xl
+                p-3
+                mb-3
+              "
+            >
+              <option>Adopt</option>
+              <option>Assess</option>
+              <option>Aware</option>
+              <option>In Progress</option>
+            </select>
+        
+            <div className="flex gap-2">
+        
+              <button
+                onClick={saveApplication}
+                className="
+                  bg-green-600
+                  hover:bg-green-700
+                  text-white
+                  px-4
+                  py-2
+                  rounded-lg
+                "
+              >
+                Save Changes
+              </button>
+        
+              <button
+                onClick={() => {
+                  setEditingId(null);
+                  setEditingName("");
+                }}
+                className="
+                  bg-gray-500
+                  hover:bg-gray-600
+                  text-white
+                  px-4
+                  py-2
+                  rounded-lg
+                "
+              >
+                Cancel
+              </button>
+        
+            </div>
+        
           </div>
-          
-          <h2 className="text-2xl font-bold mb-6">
-            Existing Applications
-          </h2>
+        )}
+        
+        <h2 className="text-2xl font-bold mb-6">
+          Existing Applications
+        </h2>
           
           <div className="space-y-8">
           
@@ -443,19 +523,19 @@ export default function TechApplicationsPage() {
                         
                             <button
                               onClick={() => {
-                        
-                                setEditingId(
-                                  application.id
+                                setEditingId(application.id);
+                              
+                                setEditingName(
+                                  application.name
                                 );
-                        
+                              
                                 setEditingStatus(
                                   application.status || "Assess"
                                 );
-                        
+                              
                                 setEditingTechnologyId(
                                   application.technology_id
                                 );
-                        
                               }}
                               className="
                                 bg-yellow-500
