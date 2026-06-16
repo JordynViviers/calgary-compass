@@ -123,7 +123,6 @@ export default function Navbar() {
                 transition
                 shadow-sm
               "
-              onClick={() => setMenuOpen(false)}
             >
               Community Input
             </Link>
@@ -161,6 +160,7 @@ export default function Navbar() {
               border-gray-200
               pt-4
             "
+            
           >
 
             <Link
@@ -231,6 +231,7 @@ export default function Navbar() {
                 font-semibold
                 transition
               "
+              onClick={() => setMenuOpen(false)}
             >
               Community Input
             </Link>
