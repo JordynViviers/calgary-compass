@@ -237,9 +237,6 @@ export default function CommunityInputPage() {
             governance priorities.
           </p>
 
-          <div className="mt-6 inline-block bg-red-50 border border-red-200 text-red-700 px-6 py-3 rounded-xl font-medium">
-            1 is the lowest ranking and 10 is the highest ranking.
-          </div>
         </section>
 
         <section className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 md:p-8 mb-8 md:mb-12">
@@ -249,7 +246,7 @@ export default function CommunityInputPage() {
 
           <p className="text-gray-700 mb-8">
             First, tell us which sector you represent. Then rate each technology
-            from 1 to 10 across the five governance criteria.
+            from 1 to 10 across the five governance criteria. (1 is lowesr and 10 is highest)
           </p>
 
           <div className="mb-10">
@@ -297,7 +294,7 @@ export default function CommunityInputPage() {
                 <h3 className="text-2xl font-bold text-red-700 mb-6">
                   {technology.name}
                   {technology.description && (
-                    <p className="text-gray-600 mb-6">
+                    <p className="text-sm md:text-base text-gray-600 mb-6">
                       {technology.description}
                     </p>
                   )}
