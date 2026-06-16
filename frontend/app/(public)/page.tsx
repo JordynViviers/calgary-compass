@@ -168,11 +168,11 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm text-center"><
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm text-center">
               <p className="text-3xl md:text-5xl font-bold text-red-700">
                 20+
               </p>
-
+            
               <p className="mt-3 text-gray-600">
                 Signals & Trends
               </p>
