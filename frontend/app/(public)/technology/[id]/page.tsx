@@ -150,9 +150,9 @@ export default function TechnologyDetailPage() {
 
     return (
 
-      <main className="min-h-screen p-10 bg-white text-black">
+      <main className="min-h-screen p-4 md:p-10 bg-white text-black">
 
-        <h1 className="text-3xl text-red-700">
+        <h1 className="text-3xl md:text-5xl font-bold text-red-700 mb-3">
           Loading technology...
         </h1>
 
@@ -251,13 +251,13 @@ const weightedAverage =
 
   return (
 
-    <main className="min-h-screen p-10 bg-white text-black">
+    <main className="min-h-screen p-4 md:p-10 bg-white text-black">
 
       {/* HEADER */}
 
       <div className="mb-10">
 
-        <h1 className="text-5xl font-bold text-red-700 mb-3">
+        <h1 className="text-3xl md:text-5xl font-bold text-red-700 mb-3">
           {technology.name}
         </h1>
 
@@ -266,13 +266,13 @@ const weightedAverage =
 
       {/* DESCRIPTION */}
 
-      <div className="border border-gray-500 rounded-2xl p-8 shadow-sm mb-10 bg-white">
+      <div className="border border-gray-300 rounded-2xl p-4 md:p-8 shadow-sm mb-8 md:mb-10 bg-white">
 
-        <h2 className="text-3xl font-semibold text-red-700 mb-6">
+        <h2 className="text-2xl md:text-3xl font-semibold text-red-700 mb-4 md:mb-6">
           Description
         </h2>
 
-        <p className="text-gray-600 leading-relaxed text-lg">
+        <p className="text-gray-600 leading-relaxed text-base md:text-lg">
           {technology.description}
         </p>
 
@@ -280,9 +280,9 @@ const weightedAverage =
 
       {applications.length > 0 && (
 
-  <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
+  <div className="border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm mb-8 md:mb-10 bg-white">
 
-    <h2 className="text-3xl font-semibold text-red-700 mb-6">
+    <h2 className="text-2xl md:text-3xl font-semibold text-red-700 mb-4 md:mb-6">
       Technology Applications
     </h2>
 
@@ -300,7 +300,7 @@ const weightedAverage =
           "
         >
 
-          <div className="flex justify-between items-start">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3">
 
             <div>
           
@@ -318,12 +318,15 @@ const weightedAverage =
           
             <span
               className="
+                self-start
+                md:self-auto
                 px-3
                 py-1
                 rounded-full
                 bg-red-100
                 text-red-700
                 text-sm
+                whitespace-nowrap
               "
             >
               {app.status}
@@ -349,7 +352,7 @@ const weightedAverage =
           href="/community-input"
         >
 
-          <button className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl text-white font-semibold transition">
+          <button className="w-full md:w-auto bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl text-white font-semibold transition">
 
             Provide Community Feedback
 
@@ -371,7 +374,16 @@ const weightedAverage =
 
         {comparison ? (
 
-          <div style={{ width: "100%", height: 500 }}>
+          <div
+            style={{
+              width: "100%",
+              height:
+                typeof window !== "undefined" &&
+                window.innerWidth < 768
+                  ? 350
+                  : 500
+            }}
+          >
 
             <ResponsiveContainer width="98%" height="100%">
 
@@ -397,7 +409,7 @@ const weightedAverage =
                 <YAxis
                   dataKey="category"
                   type="category"
-                  width={130}
+                  width={90}
                 />
 
                 <Tooltip />
@@ -436,13 +448,13 @@ const weightedAverage =
 
       {/* ASSESSMENTS */}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
 
         {/* AI ASSESSMENT */}
 
-        <div className="border border-gray-200 rounded-2xl p-6 shadow-sm bg-white">
+        <div className="border border-gray-200 rounded-2xl p-4 md:p-6 shadow-sm bg-white">
 
-          <h2 className="text-2xl font-bold text-red-700 mb-6">
+          <h2 className="text-xl md:text-2xl font-bold text-red-700 mb-4 md:mb-6">
 
             AI Assessment
 
