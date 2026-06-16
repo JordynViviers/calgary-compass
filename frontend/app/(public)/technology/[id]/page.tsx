@@ -36,6 +36,19 @@ export default function TechnologyDetailPage() {
   const [aiEvaluation, setAiEvaluation] =
     useState<any>(null);
 
+  const [applications, setApplications] =
+    useState([]);
+  
+  useEffect(() => {
+    axios
+      .get(
+        `${API_URL}/technologies/${id}/applications`
+      )
+      .then((res) =>
+        setApplications(res.data)
+      );
+  }, [id]);
+
   const [loading, setLoading] =
     useState(true);
 
@@ -258,6 +271,14 @@ const weightedAverage =
         <h2 className="text-3xl font-semibold text-red-700 mb-6">
           Description
         </h2>
+
+        <h2>Technology Applications</h2>
+          {applications.map((app) => (
+            <div key={app.id}>
+              <h3>{app.name}</h3>
+              <p>{app.status}</p>
+            </div>
+          ))}
 
         <p className="text-gray-600 leading-relaxed text-lg">
           {technology.description}
