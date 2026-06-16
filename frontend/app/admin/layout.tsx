@@ -16,21 +16,22 @@ export default function AdminLayout({
       <AdminNavbar />
 
       {pathname !== "/admin" && (
-        <div className="max-w-7xl mx-auto px-6 pt-6">
+        <div className="max-w-7xl mx-auto px-6 pt-4">
+
           <Link
             href="/admin"
             className="
               inline-flex
               items-center
-              gap-2
-              text-red-700
-              font-semibold
-              hover:text-red-800
+              text-sm
+              text-gray-600
+              hover:text-red-700
               transition
             "
           >
-            ← Back to Admin Dashboard
+            ← Back to Dashboard
           </Link>
+        
         </div>
       )}
 
