@@ -158,36 +158,56 @@ export default function AdminCommunityInputPage() {
 
       <div className="max-w-5xl mx-auto px-8 py-12">
 
-        <div className="flex justify-between items-start mb-3">
+        <div className="flex justify-between items-start mb-8">
+
           <div>
             <h1 className="text-4xl font-bold text-red-700">
               Community Input
             </h1>
+        
             <p className="text-gray-600 mt-1">
               {votes.length} ratings · {signals.length} written responses
             </p>
           </div>
-          <button
-            onClick={clearAllResponses}
-            className="
-              bg-red-700
-              hover:bg-red-800
-              text-white
-              px-5
-              py-3
-              rounded-xl
-            "
-          >
-            Clear All Responses
-          </button>
-              
-          <button
-            onClick={loadResults}
-            disabled={loading}
-            className="border-2 border-red-700 text-red-700 px-4 py-2 rounded-xl font-semibold hover:bg-red-700 hover:text-white transition disabled:opacity-60"
-          >
-            {loading ? "Refreshing…" : "Refresh"}
-          </button>
+        
+          <div className="flex gap-3">
+        
+            <button
+              onClick={clearAllResponses}
+              className="
+                bg-red-700
+                hover:bg-red-800
+                text-white
+                px-5
+                py-3
+                rounded-xl
+              "
+            >
+              Clear All Responses
+            </button>
+        
+            <button
+              onClick={loadResults}
+              disabled={loading}
+              className="
+                border-2
+                border-red-700
+                text-red-700
+                px-4
+                py-2
+                rounded-xl
+                font-semibold
+                hover:bg-red-700
+                hover:text-white
+                transition
+                disabled:opacity-60
+              "
+            >
+              {loading ? "Refreshing…" : "Refresh"}
+            </button>
+        
+          </div>
+        
         </div>
 
         {error && (
