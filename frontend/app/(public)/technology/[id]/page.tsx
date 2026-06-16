@@ -152,38 +152,48 @@ export default function TechnologyDetailPage() {
     ? [
         {
           category: "Financial",
-          Human:
-            comparison.human?.financial_sustainability ?? 0,
-          AI:
+          Human: Math.round(
+            comparison.human?.financial_sustainability ?? 0
+          ),
+          AI: Math.round(
             comparison.ai?.financial_sustainability ?? 0
+          )
         },
         {
           category: "Operations",
-          Human:
-            comparison.human?.operational_excellence ?? 0,
-          AI:
+          Human: Math.round(
+            comparison.human?.operational_excellence ?? 0
+          ),
+          AI: Math.round(
             comparison.ai?.operational_excellence ?? 0
+          )
         },
         {
           category: "People",
-          Human:
-            comparison.human?.people_culture ?? 0,
-          AI:
+          Human: Math.round(
+            comparison.human?.people_culture ?? 0
+          ),
+          AI: Math.round(
             comparison.ai?.people_culture ?? 0
+          )
         },
         {
           category: "Governance",
-          Human:
-            comparison.human?.trusted_governance ?? 0,
-          AI:
+          Human: Math.round(
+            comparison.human?.trusted_governance ?? 0
+          ),
+          AI: Math.round(
             comparison.ai?.trusted_governance ?? 0
+          )
         },
         {
           category: "Innovation",
-          Human:
-            comparison.human?.innovation_agility ?? 0,
-          AI:
+          Human: Math.round(
+            comparison.human?.innovation_agility ?? 0
+          ),
+          AI: Math.round(
             comparison.ai?.innovation_agility ?? 0
+          )
         }
       ]
     : [];
