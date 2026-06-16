@@ -37,7 +37,7 @@ export default function TechnologyDetailPage() {
     useState<any>(null);
 
   const [applications, setApplications] =
-    useState([]);
+    useState<any[]>([]);
   
   useEffect(() => {
     axios
