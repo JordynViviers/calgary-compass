@@ -561,7 +561,7 @@ def comparison(
 
         "safe_city":
             sum(
-                v.transportation_network
+                v.safe_city
                 for v in votes
             ) / len(votes),
 
@@ -583,7 +583,7 @@ def comparison(
                 for v in votes
             ) / len(votes),
 
-        "trusted_governanc":
+        "trusted_governance":
             sum(
                 v.trusted_governance
                 for v in votes
@@ -593,7 +593,7 @@ def comparison(
     ai = {
 
         "reliable_infrastructure":
-            ai_eval.reliable_infrastructure
+            ai_eval.reliable_infrastructure,
 
         "safe_city":
             ai_eval.safe_city,
