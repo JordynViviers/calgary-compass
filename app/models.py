@@ -300,6 +300,10 @@ class CalgaryChallengeVote(Base):
         server_default=func.now()
     )
 
+class CalgaryChallengeVoteRequest(BaseModel):
+    stakeholder: str
+    challenge: str
+    rank: int
 
 class TechnologyApplication(Base):
     __tablename__ = "technology_applications"
