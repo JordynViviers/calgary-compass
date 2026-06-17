@@ -332,7 +332,6 @@ class TechnologyApplicationRequest(BaseModel):
 
     name: str
     description: str = ""
-    status: str = "Assess"
 
     organization: str = ""
     location: str = ""
