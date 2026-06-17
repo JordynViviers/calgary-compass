@@ -93,11 +93,36 @@ export default function CommunityInputPage() {
     console.log("SUBMIT CLICKED");
   
     try {
-  
-      console.log("challengeRanking:", challengeRanking);
-      console.log("sector:", sector);
-      console.log("technologies:", technologies);
-      console.log("ratings:", ratings);
+      for (const technology of technologies) {
+
+        const techRatings =
+          ratings[technology.name];
+      
+        if (!techRatings) {
+      
+          alert(
+            `Please rate all criteria for ${technology.name}.`
+          );
+      
+          return;
+        }
+      
+        for (const criterion of criteria) {
+      
+          const value = Number(
+            techRatings[criterion] || 0
+          );
+      
+          if (value === 0) {
+      
+            alert(
+              `Please rate "${criterion}" for ${technology.name}.`
+            );
+      
+            return;
+          }
+        }
+      }
   
       // Save ranked Calgary challenges
   
@@ -409,7 +434,7 @@ export default function CommunityInputPage() {
                           <span>1</span>
 
                           <span className="font-bold text-red-700 text-lg">
-                            {ratings[technology.name]?.[criterion] || 1}
+                            {ratings[technology.name]?.[criterion] || 0}
                           </span>
 
                           <span>10</span>
@@ -417,12 +442,12 @@ export default function CommunityInputPage() {
 
                         <input
                           type="range"
-                          min="1"
+                          min="0"
                           max="10"
                           step="1"
                           disabled={!sector}
                           value={
-                            ratings[technology.name]?.[criterion] || 1
+                            ratings[technology.name]?.[criterion] || 0
                           }
                           onChange={(event) =>
                             updateRating(
