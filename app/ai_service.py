@@ -147,11 +147,12 @@ OUTPUT REQUIREMENTS
 Return JSON ONLY with:
 
 1. Scores (1-10):
-- financial_sustainability
-- operational_excellence
-- people_culture
+- reliable_infrastructure
+- safe_city
+- transportation_network
+- community_wellbeing
+- balanced_growth
 - trusted_governance
-- innovation_agility
 
 2. Analysis Fields:
 - summary: 2-3 sentence high level assessment
@@ -168,11 +169,12 @@ RETURN FORMAT EXAMPLE
 ========================
 
 {
-  "financial_sustainability": 7,
-  "operational_excellence": 8,
-  "people_culture": 6,
-  "trusted_governance": 7,
-  "innovation_agility": 8,
+  "reliable_infrastructure": 7,
+  "safe_city": 8,
+  "transportation_network": 6,
+  "community_wellbeing": 7,
+  "balanced_growth": 8,
+  "trusted_governance": 8,
 
   "summary": "...",
 
@@ -197,11 +199,12 @@ RETURN FORMAT EXAMPLE
         print("AI ERROR:", e)
 
         return {
-            "financial_sustainability": 5,
-            "operational_excellence": 5,
-            "people_culture": 5,
+            "reliable_infrastructure": 5,
+            "safe_city": 5,
+            "transportation_network": 5,
+            "community_wellbeing": 5,
+            "balanced_growth": 5,
             "trusted_governance": 5,
-            "innovation_agility": 5,
 
             "summary": "AI evaluation failed.",
 
