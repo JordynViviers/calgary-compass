@@ -239,20 +239,23 @@ def ai_evaluate_technology(
 
         technology_id=technology.id,
 
-        financial_sustainability=
-            ai_result["financial_sustainability"],
+        reliable_infrastructure=
+            ai_result["reliable_infrastructure"],
 
-        operational_excellence=
-            ai_result["operational_excellence"],
+        safe_city=
+            ai_result["safe_city"],
 
-        people_culture=
-            ai_result["people_culture"],
+        transportation_network=
+            ai_result["transportation_network"],
+
+        community_wellbeing=
+            ai_result["community_wellbeing"],
+
+        balanced_growth=
+            ai_result["balanced_growth"],
 
         trusted_governance=
             ai_result["trusted_governance"],
-
-        innovation_agility=
-            ai_result["innovation_agility"],
 
         summary=
             ai_result.get("summary", ""),
@@ -302,20 +305,23 @@ def submit_vote(
         stakeholder=
             data.stakeholder,
 
-        financial_sustainability=
-            data.financial_sustainability,
+        reliable_infrastructure=
+            data.reliable_infrastructure,
 
-        operational_excellence=
-            data.operational_excellence,
+        safe_city=
+            data.safe_city,
 
-        people_culture=
-            data.people_culture,
+        transportation_network=
+            data.transportation_network,
+
+        community_wellbeing=
+            data.community_wellbeing,
+
+        balanced_growth=
+            data.balanced_growth, 
 
         trusted_governance=
-            data.trusted_governance,
-
-        innovation_agility=
-            data.innovation_agility
+            data.trusted_governance, 
     )
 
 
@@ -358,20 +364,23 @@ def get_votes(
             "stakeholder":
                 vote.stakeholder,
 
-            "financial_sustainability":
-                vote.financial_sustainability,
+            "reliable_infrastructure":
+                vote.reliable_infrastructure,
 
-            "operational_excellence":
-                vote.operational_excellence,
+            "safe_city":
+                vote.safe_city,
 
-            "people_culture":
-                vote.people_culture,
+            "transportation_network":
+                vote.transportation_network,
+
+            "community_wellbeing":
+                vote.community_wellbeing,
+
+            "balanced_growth":
+                vote.balanced_growth,
 
             "trusted_governance":
                 vote.trusted_governance,
-
-            "innovation_agility":
-                vote.innovation_agility
 
         })
 
@@ -407,23 +416,37 @@ def weighted_scores(
                 "Missing data"
         }
 
-    financial_avg = (
+    reliability_avg = (
         sum(
-            v.financial_sustainability
+            v.reliable_infrastructure
             for v in votes
         ) / len(votes)
     )
 
-    operational_avg = (
+    safety_avg = (
         sum(
-            v.operational_excellence
+            v.safe_city
             for v in votes
         ) / len(votes)
     )
 
-    people_avg = (
+    transportation_avg = (
         sum(
-            v.people_culture
+            v.transportation_network
+            for v in votes
+        ) / len(votes)
+    )
+
+    wellbeing_avg = (
+        sum(
+            v.community_wellbeing
+            for v in votes
+        ) / len(votes)
+    )
+
+    growth_avg = (
+        sum(
+            v.balanced_growth
             for v in votes
         ) / len(votes)
     )
@@ -435,41 +458,54 @@ def weighted_scores(
         ) / len(votes)
     )
 
-    innovation_avg = (
-        sum(
-            v.innovation_agility
-            for v in votes
-        ) / len(votes)
-    )
-
     return {
 
-        "financial_sustainability":
+        "reliable_infrastructure":
             round(
                 (
-                    financial_avg * 0.5
+                    reliability_avg * 0.5
                 ) + (
-                    ai_eval.financial_sustainability * 0.5
+                    ai_eval.reliable_infrastructure * 0.5
                 ),
                 2
             ),
 
-        "operational_excellence":
+        "safe_city":
             round(
                 (
-                    operational_avg * 0.5
+                    safety_avg * 0.5
                 ) + (
-                    ai_eval.operational_excellence * 0.5
+                    ai_eval.safe_city * 0.5
                 ),
                 2
             ),
 
-        "people_culture":
+        "transportation_network":
             round(
                 (
-                    people_avg * 0.5
+                    transportation_avg * 0.5
                 ) + (
-                    ai_eval.people_culture * 0.5
+                    ai_eval.transportation_network * 0.5
+                ),
+                2
+            ),
+
+        "community_wellbeing":
+            round(
+                (
+                    wellbeing_avg * 0.5
+                ) + (
+                    ai_eval.community_wellbeing * 0.5
+                ),
+                2
+            ),
+
+        "balanced_growth":
+            round(
+                (
+                    growth_avg * 0.5
+                ) + (
+                    ai_eval.balanced_growth * 0.5
                 ),
                 2
             ),
@@ -480,16 +516,6 @@ def weighted_scores(
                     governance_avg * 0.5
                 ) + (
                     ai_eval.trusted_governance * 0.5
-                ),
-                2
-            ),
-
-        "innovation_agility":
-            round(
-                (
-                    innovation_avg * 0.5
-                ) + (
-                    ai_eval.innovation_agility * 0.5
                 ),
                 2
             ),
@@ -527,53 +553,62 @@ def comparison(
 
     human = {
 
-        "financial_sustainability":
+        "reliable_infrastructure":
             sum(
-                v.financial_sustainability
+                v.reliable_infrastructure
                 for v in votes
             ) / len(votes),
 
-        "operational_excellence":
+        "safe_city":
             sum(
-                v.operational_excellence
+                v.transportation_network
                 for v in votes
             ) / len(votes),
 
-        "people_culture":
+        "transportation_network":
             sum(
-                v.people_culture
+                v.transportation_network
                 for v in votes
             ) / len(votes),
 
-        "trusted_governance":
+        "community_wellbeing":
+            sum(
+                v.community_wellbeing
+                for v in votes
+            ) / len(votes),
+
+        "balanced_growth":
+            sum(
+                v.balanced_growth
+                for v in votes
+            ) / len(votes),
+
+        "trusted_governanc":
             sum(
                 v.trusted_governance
-                for v in votes
-            ) / len(votes),
-
-        "innovation_agility":
-            sum(
-                v.innovation_agility
                 for v in votes
             ) / len(votes),
     }
 
     ai = {
 
-        "financial_sustainability":
-            ai_eval.financial_sustainability,
+        "reliable_infrastructure":
+            ai_eval.reliable_infrastructure
 
-        "operational_excellence":
-            ai_eval.operational_excellence,
+        "safe_city":
+            ai_eval.safe_city,
 
-        "people_culture":
-            ai_eval.people_culture,
+        "transportation_network":
+            ai_eval.transportation_network,
+
+        "community_wellbeing":
+            ai_eval.community_wellbeing,
+
+        "balanced_growth":
+            ai_eval.balanced_growth,
 
         "trusted_governance":
             ai_eval.trusted_governance,
-
-        "innovation_agility":
-            ai_eval.innovation_agility,
     }
 
     return {
