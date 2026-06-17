@@ -90,11 +90,16 @@ export default function CommunityInputPage() {
 
 
   async function handleSubmit() {
-    console.log("1");
+    console.log("SUBMIT CLICKED");
   
     try {
   
-      console.log("2");
+      console.log("challengeRanking:", challengeRanking);
+      console.log("sector:", sector);
+      console.log("technologies:", technologies);
+      console.log("ratings:", ratings);
+  
+      // Save ranked Calgary challenges
   
       const rankings = [
         challengeRanking.first,
@@ -104,15 +109,16 @@ export default function CommunityInputPage() {
         challengeRanking.fifth,
       ];
   
-      console.log("3", rankings);
+      console.log("Rankings array:", rankings);
   
       for (let i = 0; i < rankings.length; i++) {
   
-        console.log("4", i);
-  
         if (!rankings[i]) continue;
   
-        console.log("5", rankings[i]);
+        console.log(
+          "Posting challenge vote:",
+          rankings[i]
+        );
   
         await axios.post(
           `${API_URL}/challenge-vote`,
@@ -122,21 +128,22 @@ export default function CommunityInputPage() {
             rank: i + 1,
           }
         );
+  
+        console.log(
+          "Challenge vote posted:",
+          rankings[i]
+        );
       }
   
-      console.log("6");
-  
-    } catch (error) {
-  
-      console.error("FULL ERROR", error);
-  
-    }
-  }
-
       // Save custom challenge
-
+  
       if (otherChallenge.trim()) {
-        console.log("About to post challenge vote");
+  
+        console.log(
+          "Posting custom challenge:",
+          otherChallenge
+        );
+  
         await axios.post(
           `${API_URL}/challenge-vote`,
           {
@@ -145,8 +152,12 @@ export default function CommunityInputPage() {
             rank: 99,
           }
         );
+  
+        console.log(
+          "Custom challenge posted"
+        );
       }
-
+  
       // Save technology ratings
   
       for (const technology of technologies) {
@@ -157,7 +168,12 @@ export default function CommunityInputPage() {
         if (!techRatings) {
           continue;
         }
-        console.log("About to post technology vote");
+  
+        console.log(
+          "Posting technology vote:",
+          technology.name
+        );
+  
         await axios.post(
           `${API_URL}/vote`,
           {
@@ -193,7 +209,7 @@ export default function CommunityInputPage() {
                 "Balanced Growth and Evolving Neighbourhoods"
               ] || 0
             ),
-
+  
             trusted_governance: Number(
               techRatings[
                 "Trusted and Collaborative Government"
@@ -201,11 +217,20 @@ export default function CommunityInputPage() {
             ),
           }
         );
+  
+        console.log(
+          "Technology vote posted:",
+          technology.name
+        );
       }
   
       // Save community signals
   
       if (signals.trim()) {
+  
+        console.log(
+          "Posting community signal"
+        );
   
         await axios.post(
           `${API_URL}/community-signal`,
@@ -213,6 +238,10 @@ export default function CommunityInputPage() {
             stakeholder: sector,
             signal_text: signals,
           }
+        );
+  
+        console.log(
+          "Community signal posted"
         );
       }
   
@@ -237,15 +266,28 @@ export default function CommunityInputPage() {
       setOtherChallenge("");
   
     } catch (error) {
-    
-      console.error("FULL ERROR:", error);
-    
+  
+      console.error(
+        "FULL ERROR:",
+        error
+      );
+  
       if (axios.isAxiosError(error)) {
-        console.error("Status:", error.response?.status);
-        console.error("Data:", error.response?.data);
+  
+        console.error(
+          "Status:",
+          error.response?.status
+        );
+  
+        console.error(
+          "Data:",
+          error.response?.data
+        );
       }
-    
-      alert("Failed to submit community input.");
+  
+      alert(
+        "Failed to submit community input."
+      );
     }
   }
   return (
