@@ -664,7 +664,7 @@ const weightedAverage =
                   {" "}
                   {comparison.human.trusted_governance}/10
                 </div>
-
+              </div>
               <div className="mt-6">
 
                 <h3 className="text-lg font-semibold text-red-700 mb-2">
