@@ -90,11 +90,12 @@ export default function CommunityInputPage() {
 
 
   async function handleSubmit() {
-    console.log("SUBMIT CLICKED");
+    console.log("1");
+  
     try {
-
-      // Save ranked Calgary challenges
-
+  
+      console.log("2");
+  
       const rankings = [
         challengeRanking.first,
         challengeRanking.second,
@@ -102,11 +103,17 @@ export default function CommunityInputPage() {
         challengeRanking.fourth,
         challengeRanking.fifth,
       ];
-
+  
+      console.log("3", rankings);
+  
       for (let i = 0; i < rankings.length; i++) {
-
+  
+        console.log("4", i);
+  
         if (!rankings[i]) continue;
-
+  
+        console.log("5", rankings[i]);
+  
         await axios.post(
           `${API_URL}/challenge-vote`,
           {
@@ -116,6 +123,15 @@ export default function CommunityInputPage() {
           }
         );
       }
+  
+      console.log("6");
+  
+    } catch (error) {
+  
+      console.error("FULL ERROR", error);
+  
+    }
+  }
 
       // Save custom challenge
 
