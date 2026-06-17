@@ -231,6 +231,7 @@ export default function CommunityInputPage() {
     
       alert("Failed to submit community input.");
     }
+  }
   return (
     <main className="min-h-screen bg-gray-50 text-black">
       <div className="h-2 bg-red-700 w-full"></div>
