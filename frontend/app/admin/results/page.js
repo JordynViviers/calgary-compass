@@ -6,11 +6,12 @@ import { useState, useEffect } from "react";
 const API_URL = "https://calgary-compass-api.onrender.com";
 
 const CRITERIA = [
-  { key: "financial_sustainability", label: "Financial Sustainability" },
-  { key: "operational_excellence", label: "Operational Excellence" },
-  { key: "innovation_agility", label: "Innovation and Agility" },
-  { key: "trusted_governance", label: "Trusted and Transparent Governance" },
-  { key: "people_culture", label: "People and Culture First" },
+  { key: "reliable_infrastructure", label: "Reliable and Sustainable Infrastructure" },
+  { key: "safe_city", label: "Safe City" },
+  { key: "transportation_network", label: "Functional Transportation Network" },
+  { key: "community_wellbeing", label: "Community Livability and Well-being" },
+  { key: "balanced_growth", label: "Balanced Growth and Evolving Neighbourhoods" },
+  { key: "trusted_governance", label: "Trusted and Collaborative Government" },
 ];
 
 export default function SurveyResultsPage() {
