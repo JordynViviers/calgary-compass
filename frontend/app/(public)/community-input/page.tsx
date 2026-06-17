@@ -409,7 +409,7 @@ export default function CommunityInputPage() {
                           <span>1</span>
 
                           <span className="font-bold text-red-700 text-lg">
-                            {ratings[technology.name]?.[criterion] || 5}
+                            {ratings[technology.name]?.[criterion] || 1}
                           </span>
 
                           <span>10</span>
@@ -422,7 +422,7 @@ export default function CommunityInputPage() {
                           step="1"
                           disabled={!sector}
                           value={
-                            ratings[technology.name]?.[criterion] || 5
+                            ratings[technology.name]?.[criterion] || 1
                           }
                           onChange={(event) =>
                             updateRating(
