@@ -32,21 +32,23 @@ def create_vote(
     db: Session,
     technology_id: int,
     stakeholder: str,
-    financial_sustainability: int,
-    operational_excellence: int,
-    people_culture: int,
-    trusted_governance: int,
-    innovation_agility: int
+    reliable_infrastructure: int,
+    safe_city: int,
+    transportation_network: int,
+    community_wellbeing: int,
+    balanced_growth: int, 
+    trusted_governance: int, 
 ):
 
     vote = Vote(
         technology_id=technology_id,
         stakeholder=stakeholder,
-        financial_sustainability=financial_sustainability,
-        operational_excellence=operational_excellence,
-        people_culture=people_culture,
+        reliable_infrastructure=reliable_infrastructure,
+        safe_city=safe_city,
+        transportation_network=transportation_network,
+        community_wellbeing=community_wellbeing,
+        balanced_growth=balanced_growth, 
         trusted_governance=trusted_governance,
-        innovation_agility=innovation_agility
     )
 
     db.add(vote)
@@ -59,11 +61,12 @@ def create_vote(
 def create_ai_evaluation(
     db: Session,
     technology_id: int,
-    financial_sustainability: int,
-    operational_excellence: int,
-    people_culture: int,
-    trusted_governance: int,
-    innovation_agility: int,
+    reliable_infrastructure: int,
+    safe_city: int,
+    transportation_network: int,
+    community_wellbeing: int,
+    balanced_growth: int, 
+    trusted_governance: int, 
     summary: str,
     technology_summary: str,
     calgary_problem: str,
@@ -74,11 +77,12 @@ def create_ai_evaluation(
 
     evaluation = AIEvaluation(
         technology_id=technology_id,
-        financial_sustainability=financial_sustainability,
-        operational_excellence=operational_excellence,
-        people_culture=people_culture,
+        reliable_infrastructure=reliable_infrastructure,
+        safe_city=safe_city,
+        transportation_network=transportation_network,
+        community_wellbeing=community_wellbeing,
+        balanced_growth=balanced_growth, 
         trusted_governance=trusted_governance,
-        innovation_agility=innovation_agility,
         summary=summary,
         technology_summary=technology_summary,
         calgary_problem=calgary_problem,
