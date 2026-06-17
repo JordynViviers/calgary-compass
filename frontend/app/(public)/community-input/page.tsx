@@ -120,7 +120,7 @@ export default function CommunityInputPage() {
       // Save custom challenge
 
       if (otherChallenge.trim()) {
-
+        console.log("About to post challenge vote");
         await axios.post(
           `${API_URL}/challenge-vote`,
           {
@@ -141,7 +141,7 @@ export default function CommunityInputPage() {
         if (!techRatings) {
           continue;
         }
-  
+        console.log("About to post technology vote");
         await axios.post(
           `${API_URL}/vote`,
           {
@@ -221,15 +221,16 @@ export default function CommunityInputPage() {
       setOtherChallenge("");
   
     } catch (error) {
-  
-      console.error(error);
-  
-      alert(
-        "Failed to submit community input."
-      );
+    
+      console.error("FULL ERROR:", error);
+    
+      if (axios.isAxiosError(error)) {
+        console.error("Status:", error.response?.status);
+        console.error("Data:", error.response?.data);
+      }
+    
+      alert("Failed to submit community input.");
     }
-  }
-  
   return (
     <main className="min-h-screen bg-gray-50 text-black">
       <div className="h-2 bg-red-700 w-full"></div>
