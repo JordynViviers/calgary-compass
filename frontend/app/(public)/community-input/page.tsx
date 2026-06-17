@@ -161,10 +161,17 @@ export default function CommunityInputPage() {
       // Save technology ratings
   
       for (const technology of technologies) {
-  
+
         const techRatings =
           ratings[technology.name];
-  
+      
+        console.log(
+          "Technology:",
+          technology.name,
+          "Ratings:",
+          techRatings
+        );
+      
         if (!techRatings) {
           continue;
         }
