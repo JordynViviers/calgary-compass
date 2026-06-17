@@ -61,11 +61,12 @@ class AIEvaluation(Base):
     id = Column(Integer, primary_key=True)
     technology_id = Column(Integer, ForeignKey("technologies.id"))
     # scores
-    financial_sustainability = Column(Integer)
-    operational_excellence = Column(Integer)
-    people_culture = Column(Integer)
-    trusted_governance = Column(Integer)
-    innovation_agility = Column(Integer)
+    reliable_infrastructure = Column(Integer)
+    safe_city = Column(Integer)
+    transportation_network = Column(Integer)
+    community_wellbeing = Column(Integer)
+    balanced_growth = Column(Integer)
+    trusted_government = Column(Integer)
     # existing summary
     summary = Column(String)
     # NEW AI ANALYSIS FIELDS
@@ -125,11 +126,12 @@ class Event(Base):
 class VoteRequest(BaseModel):
     technology_id: int
     stakeholder: str
-    financial_sustainability: int
-    operational_excellence: int
-    people_culture: int
-    trusted_governance: int
-    innovation_agility: int
+    reliable_infrastructure: int
+    safe_city: int
+    transportation_network: int
+    community_wellbeing: int
+    balanced_growth: int
+    trusted_government: int
     
 class TechnologyRequest(BaseModel):
     name: str
