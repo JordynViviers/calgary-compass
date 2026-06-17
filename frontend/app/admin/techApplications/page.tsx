@@ -24,8 +24,7 @@ export default function TechApplicationsPage() {
   const [editingName, setEditingName] =
     useState("");
 
-  const [editingStatus, setEditingStatus] =
-  useState("Assess");
+
 
   const [editingTechnologyId, setEditingTechnologyId] =
     useState<number>(0);
@@ -35,9 +34,6 @@ export default function TechApplicationsPage() {
 
   const [applicationDescription,setApplicationDescription] = 
     useState("");
-
-  const [status, setStatus] =
-    useState("Assess");
 
   const [editingDescription, setEditingDescription] =
     useState("");
@@ -115,8 +111,6 @@ export default function TechApplicationsPage() {
           description:
             applicationDescription,
       
-          status:
-            status,
         }
       );
       setApplicationName("");
@@ -174,7 +168,6 @@ export default function TechApplicationsPage() {
           description:
             editingDescription,
       
-          status: editingStatus,
         }
       );
   
@@ -313,24 +306,6 @@ export default function TechApplicationsPage() {
                 "
               />
           
-              <select
-                value={status}
-                onChange={(e) =>
-                  setStatus(e.target.value)
-                }
-                className="
-                  w-full
-                  border
-                  border-gray-300
-                  rounded-xl
-                  p-3
-                "
-              >
-                <option>Adopt</option>
-                <option>Assess</option>
-                <option>Aware</option>
-                <option>In Progress</option>
-              </select>
           
               <button
                 onClick={createApplication}
@@ -408,10 +383,7 @@ export default function TechApplicationsPage() {
                               <div className="font-medium">
                                 {application.name}
                               </div>
-          
-                              <div className="text-sm text-gray-500">
-                                {application.status}
-                              </div>
+        
           
                             </div>
           
@@ -431,9 +403,6 @@ export default function TechApplicationsPage() {
                                     application.description || ""
                                   );
           
-                                  setEditingStatus(
-                                    application.status || "Assess"
-                                  );
           
                                   setEditingTechnologyId(
                                     application.technology_id
@@ -552,27 +521,6 @@ export default function TechApplicationsPage() {
                                 "
                               />
           
-                              <select
-                                value={editingStatus}
-                                onChange={(e) =>
-                                  setEditingStatus(
-                                    e.target.value
-                                  )
-                                }
-                                className="
-                                  w-full
-                                  border
-                                  border-gray-300
-                                  rounded-xl
-                                  p-3
-                                  mb-3
-                                "
-                              >
-                                <option>Adopt</option>
-                                <option>Assess</option>
-                                <option>Aware</option>
-                                <option>In Progress</option>
-                              </select>
           
                               <div className="flex gap-2">
           
