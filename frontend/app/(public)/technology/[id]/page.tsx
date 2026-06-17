@@ -164,32 +164,51 @@ export default function TechnologyDetailPage() {
   const chartData = comparison
     ? [
         {
-          category: "Financial",
+          category: "Reliability",
           Human: Math.round(
-            comparison.human?.financial_sustainability ?? 0
+            comparison.human?.reliable_infrastructure ?? 0
           ),
           AI: Math.round(
-            comparison.ai?.financial_sustainability ?? 0
+            comparison.ai?.reliable_infrastructure ?? 0
           )
         },
         {
-          category: "Operations",
+          category: "Safety",
           Human: Math.round(
-            comparison.human?.operational_excellence ?? 0
+            comparison.human?.safe_city ?? 0
           ),
           AI: Math.round(
-            comparison.ai?.operational_excellence ?? 0
+            comparison.ai?.safe_city ?? 0
           )
         },
         {
-          category: "People",
+          category: "Transportation",
           Human: Math.round(
-            comparison.human?.people_culture ?? 0
+            comparison.human?.transportation_network ?? 0
           ),
           AI: Math.round(
-            comparison.ai?.people_culture ?? 0
+            comparison.ai?.transportation_network ?? 0
           )
         },
+        {
+          category: "Wellbeing",
+          Human: Math.round(
+            comparison.human?.community_wellbeing ?? 0
+          ),
+          AI: Math.round(
+            comparison.ai?.community_wellbeing ?? 0
+          )
+        },
+        {
+          category: "Growth",
+          Human: Math.round(
+            comparison.human?.balanced_growth ?? 0
+          ),
+          AI: Math.round(
+            comparison.ai?.balanced_growth ?? 0
+          )
+        },
+
         {
           category: "Governance",
           Human: Math.round(
@@ -198,40 +217,33 @@ export default function TechnologyDetailPage() {
           AI: Math.round(
             comparison.ai?.trusted_governance ?? 0
           )
-        },
-        {
-          category: "Innovation",
-          Human: Math.round(
-            comparison.human?.innovation_agility ?? 0
-          ),
-          AI: Math.round(
-            comparison.ai?.innovation_agility ?? 0
-          )
         }
       ]
     : [];
 
   const aiAverage =
-  aiEvaluation
-    ? Math.round((
-        aiEvaluation.financial_sustainability +
-        aiEvaluation.operational_excellence +
-        aiEvaluation.people_culture +
-        aiEvaluation.trusted_governance +
-        aiEvaluation.innovation_agility
-      ) / 5 )
-    : 0;
+    aiEvaluation
+      ? Math.round((
+          aiEvaluation.reliable_infrastructure +
+          aiEvaluation.safe_city +
+          aiEvaluation.transportation_network +
+          aiEvaluation.community_wellbeing +
+          aiEvaluation.balanced_growth + 
+          aiEvaluation.trusted_governance
+        ) / 6 )
+      : 0;
 
 const communityAverage =
   comparison
     ? Math.round(
         (
-          comparison.human.financial_sustainability +
-          comparison.human.operational_excellence +
-          comparison.human.people_culture +
-          comparison.human.trusted_governance +
-          comparison.human.innovation_agility
-        ) / 5
+          comparison.human.reliable_infrastructure +
+          comparison.human.safe_city +
+          comparison.human.transportation_network +
+          comparison.human.community_wellbeing +
+          comparison.human.balanced_growth + 
+          comparison.human.trusted_governance
+        ) / 6 )
       )
     : 0;
 
@@ -239,12 +251,13 @@ const weightedAverage =
   weightedScores
     ? Math.round(
         (
-          weightedScores.financial_sustainability +
-          weightedScores.operational_excellence +
-          weightedScores.people_culture +
-          weightedScores.trusted_governance +
-          weightedScores.innovation_agility
-        ) / 5
+          weightedScores.reliable_infrastructure +
+          weightedScores.safe_city +
+          weightedScores.transportation_network +
+          weightedScores.community_wellbeing +
+          weightedScores.balanced_growth + 
+          weightedScores.trusted_governance
+        ) / 6 )
       )
     : 0;
 
@@ -449,6 +462,43 @@ const weightedAverage =
       {/* ASSESSMENTS */}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="border border-gray-200 rounded-2xl p-6 mb-8 bg-gray-50">
+
+          <h3 className="text-xl font-semibold text-red-700 mb-3">
+            How Technologies Are Evaluated
+          </h3>
+        
+          <p className="text-gray-700 mb-4">
+            Calgary Compass evaluates technologies using Calgary City
+            Council's six strategic priorities.
+          </p>
+        
+          <ul className="list-disc pl-6 text-gray-700 space-y-2">
+        
+            <li>Reliable and Sustainable Infrastructure</li>
+        
+            <li>Safe City</li>
+        
+            <li>Functional Transportation Network</li>
+        
+            <li>Community Livability and Well-being</li>
+        
+            <li>Balanced Growth and Evolving Neighbourhoods</li>
+        
+            <li>Trusted and Collaborative Government</li>
+        
+          </ul>
+        
+          <a
+            href="https://www.calgary.ca/council/council-priorities.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-4 text-red-700 font-semibold hover:underline"
+          >
+            Learn more about Calgary's Council Priorities →
+          </a>
+        
+        </div>
 
         {/* AI ASSESSMENT */}
 
@@ -467,33 +517,39 @@ const weightedAverage =
               <div className="space-y-3 text-gray-700">
 
                 <div>
-                  Financial Sustainability:
+                  Reliable Infrastructure:
                   {" "}
-                  {aiEvaluation.financial_sustainability}/10
+                  {aiEvaluation.reliable_infrastructure}/10
                 </div>
 
                 <div>
-                  Operational Excellence:
+                  Safe City:
                   {" "}
-                  {aiEvaluation.operational_excellence}/10
+                  {aiEvaluation.safe_city}/10
                 </div>
 
                 <div>
-                  People & Culture:
+                  Transportation Network:
                   {" "}
-                  {aiEvaluation.people_culture}/10
+                  {aiEvaluation.transportation_network}/10
+                </div>
+
+                <div>
+                  Community Well-being
+                  {" "}
+                  {aiEvaluation.community_wellbeing}/10
+                </div>
+
+                <div>
+                  Balanced Growth:
+                  {" "}
+                  {aiEvaluation.balanced_growth}/10
                 </div>
 
                 <div>
                   Trusted Governance:
                   {" "}
                   {aiEvaluation.trusted_governance}/10
-                </div>
-
-                <div>
-                  Innovation & Agility:
-                  {" "}
-                  {aiEvaluation.innovation_agility}/10
                 </div>
 
               </div>
@@ -574,31 +630,40 @@ const weightedAverage =
               <div className="space-y-3 text-gray-700">
 
                 <div>
-                  Financial Sustainability:{" "}
-                  {comparison.human.financial_sustainability}/10
+                  Reliable Infrastructure:
+                  {" "}
+                  {comparison.human.reliable_infrastructure}/10
                 </div>
 
                 <div>
-                  Operational Excellence:{" "}
-                  {comparison.human.operational_excellence}/10
+                  Safe City:
+                  {" "}
+                  {comparison.human.safe_city}/10
                 </div>
 
                 <div>
-                  People & Culture:{" "}
-                  {comparison.human.people_culture}/10
+                  Transportation Network:
+                  {" "}
+                  {comparison.human.transportation_network}/10
                 </div>
 
                 <div>
-                  Trusted Governance:{" "}
+                  Community Well-being
+                  {" "}
+                  {comparison.human.community_wellbeing}/10
+                </div>
+
+                <div>
+                  Balanced Growth:
+                  {" "}
+                  {comparison.human.balanced_growth}/10
+                </div>
+
+                <div>
+                  Trusted Governance:
+                  {" "}
                   {comparison.human.trusted_governance}/10
                 </div>
-
-                <div>
-                  Innovation & Agility:{" "}
-                  {comparison.human.innovation_agility}/10
-                </div>
-
-              </div>
 
               <div className="mt-6">
 
@@ -659,28 +724,39 @@ const weightedAverage =
               <div className="space-y-3 text-gray-700">
 
                 <div>
-                  Financial Sustainability:{" "}
-                  {weightedScores.financial_sustainability}/10
+                  Reliable Infrastructure:
+                  {" "}
+                  {weightedScores.reliable_infrastructure}/10
                 </div>
 
                 <div>
-                  Operational Excellence:{" "}
-                  {weightedScores.operational_excellence}/10
+                  Safe City:
+                  {" "}
+                  {weightedScores.safe_city}/10
                 </div>
 
                 <div>
-                  People & Culture:{" "}
-                  {weightedScores.people_culture}/10
+                  Transportation Network:
+                  {" "}
+                  {weightedScores.transportation_network}/10
                 </div>
 
                 <div>
-                  Trusted Governance:{" "}
+                  Community Well-being
+                  {" "}
+                  {weightedScores.community_wellbeing}/10
+                </div>
+
+                <div>
+                  Balanced Growth:
+                  {" "}
+                  {weightedScores.balanced_growth}/10
+                </div>
+
+                <div>
+                  Trusted Governance:
+                  {" "}
                   {weightedScores.trusted_governance}/10
-                </div>
-
-                <div>
-                  Innovation & Agility:{" "}
-                  {weightedScores.innovation_agility}/10
                 </div>
 
               </div>
