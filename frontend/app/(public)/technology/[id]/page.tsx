@@ -257,7 +257,6 @@ const weightedAverage =
           weightedScores.balanced_growth + 
           weightedScores.trusted_governance
         ) / 6 )
-      )
     : 0;
 
 
