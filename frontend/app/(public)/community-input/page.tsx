@@ -6,24 +6,25 @@ import axios from "axios";
 const API_URL = "https://calgary-compass-api.onrender.com";
 
 const criteria = [
-  "Financial Sustainability",
-  "Operational Excellence",
-  "Innovation and Agility",
-  "Trusted and Transparent Governance",
-  "People and Culture First",
+  "Reliable and Sustainable Infrastructure",
+  "Safe City",
+  "Functional Transportation Network",
+  "Community Livability and Well-being",
+  "Balanced Growth and Evolving Neighbourhoods",
+  "Trusted and Collaborative Government",
 ];
 
 const challengeOptions = [
-  "Housing Affordability",
-  "Transportation & Traffic",
-  "Climate Resilience",
-  "Public Safety",
-  "Infrastructure Maintenance",
-  "Economic Diversification",
-  "Downtown Revitalization",
-  "Accessibility & Inclusion",
-  "Digital Services",
-  "Water Management",
+  "Infrastructure, traffic and roads",
+  "Crime, safety and policing",
+  "Growth and planning",
+  "Transit",
+  "Homelessness, poverty and affordable housing",
+  "Economy",
+  "Water supply/infrastructure",
+  "Environment & Waste Management",
+  "Recreation and parks",
+  "Education",
 ];
 
 export default function CommunityInputPage() {
@@ -146,33 +147,39 @@ export default function CommunityInputPage() {
             technology_id: technology.id,
             stakeholder: sector,
   
-            financial_sustainability: Number(
+            reliable_infrastructure: Number(
               techRatings[
-                "Financial Sustainability"
+                "Reliable and Sustainable Infrastructure"
               ] || 0
             ),
   
-            operational_excellence: Number(
+            safe_city: Number(
               techRatings[
-                "Operational Excellence"
+                "Safe City"
               ] || 0
             ),
   
-            innovation_agility: Number(
+            transportation_network: Number(
               techRatings[
-                "Innovation and Agility"
+                "Functional Transportation Network"
               ] || 0
             ),
   
-            trusted_governance: Number(
+            community_wellbeing: Number(
               techRatings[
-                "Trusted and Transparent Governance"
+                "Community Livability and Well-being"
               ] || 0
             ),
   
-            people_culture: Number(
+            balanced_growth: Number(
               techRatings[
-                "People and Culture First"
+                "Balanced Growth and Evolving Neighbourhoods"
+              ] || 0
+            ),
+
+            trusted_government: Number(
+              techRatings[
+                "Trusted and Collaborative Government"
               ] || 0
             ),
           }
@@ -233,8 +240,7 @@ export default function CommunityInputPage() {
           </h1>
 
           <p className="text-base md:text-xl text-gray-700 max-w-3xl mx-auto">
-            Rate how emerging technologies align with Calgary&apos;s smart city
-            governance priorities.
+            Rate how emerging technologies align with Calgary Council Priorities. 
           </p>
 
         </section>
@@ -246,7 +252,7 @@ export default function CommunityInputPage() {
 
           <p className="text-gray-700 mb-8">
             First, tell us which sector you represent. Then rate each technology
-            from 1 to 10 across the five governance criteria. (1 is lowesr and 10 is highest)
+            from 1 to 10 across the six priorities. (1 is lowest and 10 is highest)
           </p>
 
           <div className="mb-10">
@@ -291,16 +297,38 @@ export default function CommunityInputPage() {
                   key={technology.id}
                   className="border border-gray-200 rounded-2xl p-6 bg-gray-50"
                 >
-                <h3 className="text-2xl font-bold text-red-700 mb-6">
-                  {technology.name}
-                  {technology.description && (
-                    <p className="text-sm md:text-base text-gray-600 mb-6">
-                      {technology.description}
+                  <h3 className="text-2xl font-bold text-red-700 mb-6">
+                    {technology.name}
+                    {technology.description && (
+                      <p className="text-sm md:text-base text-gray-600 mb-6">
+                        {technology.description}
+                      </p>
+                    )}
+                  </h3>
+                
+                  <div className="mb-8 p-6 bg-red-50 border border-red-200 rounded-xl">
+                
+                    <h3 className="text-lg font-semibold text-red-700 mb-2">
+                      Calgary Council Priorities
+                    </h3>
+                
+                    <p className="text-gray-700 mb-3">
+                      Technologies are evaluated based on Calgary City Council's
+                      priority areas.
                     </p>
-                  )}
-                </h3>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                    <a
+                      href="https://www.calgary.ca/council/council-priorities.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-red-700 font-semibold hover:underline"
+                    >
+                      Learn more about Calgary's Council Priorities →
+                    </a>
+                
+                  </div>
+                
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {criteria.map((criterion) => (
                     <div key={criterion}>
                       <label className="block font-semibold mb-2">
