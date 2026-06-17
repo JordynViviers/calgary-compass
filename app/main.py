@@ -1764,9 +1764,7 @@ def delete_community_input(
             "Response deleted"
     }
 
-@app.delete(
-    "/community-input"
-)
+@app.delete("/community-input")
 def clear_community_input(
     db: Session = Depends(get_db)
 ):
@@ -1775,13 +1773,15 @@ def clear_community_input(
         CommunitySignal
     ).delete()
 
+    db.query(
+        Vote
+    ).delete()
+
     db.commit()
 
     return {
         "message":
-            "All responses deleted"
+            "All community responses and ratings deleted"
     }
-
-
 
 
