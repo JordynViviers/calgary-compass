@@ -244,7 +244,6 @@ const communityAverage =
           comparison.human.balanced_growth + 
           comparison.human.trusted_governance
         ) / 6 )
-      )
     : 0;
 
 const weightedAverage =
