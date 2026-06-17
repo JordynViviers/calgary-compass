@@ -177,7 +177,7 @@ export default function CommunityInputPage() {
               ] || 0
             ),
 
-            trusted_government: Number(
+            trusted_governance: Number(
               techRatings[
                 "Trusted and Collaborative Government"
               ] || 0
