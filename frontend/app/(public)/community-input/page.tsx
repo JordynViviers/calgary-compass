@@ -90,6 +90,7 @@ export default function CommunityInputPage() {
 
 
   async function handleSubmit() {
+    console.log("SUBMIT CLICKED");
     try {
 
       // Save ranked Calgary challenges
