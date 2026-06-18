@@ -264,15 +264,33 @@ const weightedAverage =
 
     <main className="min-h-screen p-4 md:p-10 bg-white text-black">
 
-      {/* HEADER */}
+      {/* HERO */}
 
-      <div className="mb-10">
-
-        <h1 className="text-3xl md:text-5xl font-bold text-red-700 mb-3">
+      <div
+        className="
+          bg-white
+          border
+          border-gray-200
+          rounded-3xl
+          p-8
+          md:p-12
+          mb-10
+          shadow-sm
+        "
+      >
+      
+        <p className="text-red-700 font-semibold uppercase tracking-wider mb-2">
+          Emerging Technology
+        </p>
+      
+        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
           {technology.name}
         </h1>
-
-
+      
+        <p className="text-lg text-gray-600 max-w-4xl">
+          {technology.description}
+        </p>
+      
       </div>
 
       {/* DESCRIPTION */}
@@ -363,16 +381,77 @@ const weightedAverage =
           href="/community-input"
         >
 
-          <button className="w-full md:w-auto bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl text-white font-semibold transition">
-
-            Provide Community Feedback
-
+          <button
+            className="
+              bg-red-700
+              hover:bg-red-800
+              text-white
+              px-8
+              py-4
+              rounded-xl
+              font-semibold
+              shadow-md
+              transition
+            "
+          >
+            Participate in Technology Assessment
           </button>
 
         </Link>
 
       </div>
 
+      <div className="grid md:grid-cols-3 gap-6 mb-10">
+
+        <div className="compass-card p-6 text-center">
+      
+          <p className="text-gray-500 mb-2">
+            AI Assessment
+          </p>
+      
+          <p className="text-5xl font-bold text-red-700">
+            {aiAverage}
+          </p>
+      
+          <p className="text-gray-500">
+            out of 10
+          </p>
+      
+        </div>
+      
+        <div className="compass-card p-6 text-center">
+      
+          <p className="text-gray-500 mb-2">
+            Community Assessment
+          </p>
+      
+          <p className="text-5xl font-bold text-red-700">
+            {communityAverage}
+          </p>
+      
+          <p className="text-gray-500">
+            out of 10
+          </p>
+      
+        </div>
+      
+        <div className="compass-card p-6 text-center">
+      
+          <p className="text-gray-500 mb-2">
+            Combined Assessment
+          </p>
+      
+          <p className="text-5xl font-bold text-red-700">
+            {weightedAverage}
+          </p>
+      
+          <p className="text-gray-500">
+            out of 10
+          </p>
+      
+        </div>
+      
+      </div>
       {/* AI VS COMMUNITY */}
 
       <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
@@ -514,42 +593,48 @@ const weightedAverage =
 
               <div className="space-y-3 text-gray-700">
 
-                <div>
-                  Reliable Infrastructure:
-                  {" "}
-                  {aiEvaluation.reliable_infrastructure}/10
+                <div className="flex justify-between">
+                  <span>Reliable Infrastructure</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.reliable_infrastructure}/10
+                  </span>
                 </div>
-
-                <div>
-                  Safe City:
-                  {" "}
-                  {aiEvaluation.safe_city}/10
+              
+                <div className="flex justify-between">
+                  <span>Safe City</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.safe_city}/10
+                  </span>
                 </div>
-
-                <div>
-                  Transportation Network:
-                  {" "}
-                  {aiEvaluation.transportation_network}/10
+              
+                <div className="flex justify-between">
+                  <span>Transportation Network</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.transportation_network}/10
+                  </span>
                 </div>
-
-                <div>
-                  Community Well-being
-                  {" "}
-                  {aiEvaluation.community_wellbeing}/10
+              
+                <div className="flex justify-between">
+                  <span>Community Well-being</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.community_wellbeing}/10
+                  </span>
                 </div>
-
-                <div>
-                  Balanced Growth:
-                  {" "}
-                  {aiEvaluation.balanced_growth}/10
+              
+                <div className="flex justify-between">
+                  <span>Balanced Growth</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.balanced_growth}/10
+                  </span>
                 </div>
-
-                <div>
-                  Trusted Governance:
-                  {" "}
-                  {aiEvaluation.trusted_governance}/10
+              
+                <div className="flex justify-between">
+                  <span>Trusted Governance</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.trusted_governance}/10
+                  </span>
                 </div>
-
+              
               </div>
 
               <div className="mt-6">
@@ -627,41 +712,48 @@ const weightedAverage =
 
               <div className="space-y-3 text-gray-700">
 
-                <div>
-                  Reliable Infrastructure:
-                  {" "}
-                  {comparison.human.reliable_infrastructure}/10
+                <div className="flex justify-between">
+                  <span>Reliable Infrastructure</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.reliable_infrastructure}/10
+                  </span>
                 </div>
-
-                <div>
-                  Safe City:
-                  {" "}
-                  {comparison.human.safe_city}/10
+              
+                <div className="flex justify-between">
+                  <span>Safe City</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.safe_city}/10
+                  </span>
                 </div>
-
-                <div>
-                  Transportation Network:
-                  {" "}
-                  {comparison.human.transportation_network}/10
+              
+                <div className="flex justify-between">
+                  <span>Transportation Network</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.transportation_network}/10
+                  </span>
                 </div>
-
-                <div>
-                  Community Well-being
-                  {" "}
-                  {comparison.human.community_wellbeing}/10
+              
+                <div className="flex justify-between">
+                  <span>Community Well-being</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.community_wellbeing}/10
+                  </span>
                 </div>
-
-                <div>
-                  Balanced Growth:
-                  {" "}
-                  {comparison.human.balanced_growth}/10
+              
+                <div className="flex justify-between">
+                  <span>Balanced Growth</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.balanced_growth}/10
+                  </span>
                 </div>
-
-                <div>
-                  Trusted Governance:
-                  {" "}
-                  {comparison.human.trusted_governance}/10
+              
+                <div className="flex justify-between">
+                  <span>Trusted Governance</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.trusted_governance}/10
+                  </span>
                 </div>
+              
               </div>
               <div className="mt-6">
 
@@ -721,42 +813,48 @@ const weightedAverage =
 
               <div className="space-y-3 text-gray-700">
 
-                <div>
-                  Reliable Infrastructure:
-                  {" "}
-                  {weightedScores.reliable_infrastructure}/10
+                <div className="flex justify-between">
+                  <span>Reliable Infrastructure</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.reliable_infrastructure}/10
+                  </span>
                 </div>
-
-                <div>
-                  Safe City:
-                  {" "}
-                  {weightedScores.safe_city}/10
+              
+                <div className="flex justify-between">
+                  <span>Safe City</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.safe_city}/10
+                  </span>
                 </div>
-
-                <div>
-                  Transportation Network:
-                  {" "}
-                  {weightedScores.transportation_network}/10
+              
+                <div className="flex justify-between">
+                  <span>Transportation Network</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.transportation_network}/10
+                  </span>
                 </div>
-
-                <div>
-                  Community Well-being
-                  {" "}
-                  {weightedScores.community_wellbeing}/10
+              
+                <div className="flex justify-between">
+                  <span>Community Well-being</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.community_wellbeing}/10
+                  </span>
                 </div>
-
-                <div>
-                  Balanced Growth:
-                  {" "}
-                  {weightedScores.balanced_growth}/10
+              
+                <div className="flex justify-between">
+                  <span>Balanced Growth</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.balanced_growth}/10
+                  </span>
                 </div>
-
-                <div>
-                  Trusted Governance:
-                  {" "}
-                  {weightedScores.trusted_governance}/10
+              
+                <div className="flex justify-between">
+                  <span>Trusted Governance</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.trusted_governance}/10
+                  </span>
                 </div>
-
+              
               </div>
 
               <div className="mt-6">
