@@ -9,6 +9,8 @@ const API_URL = "https://calgary-compass-api.onrender.com";
 export default function AdminPage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [heroImage, setHeroImage] =
+    useState("");
 
   const [editingId, setEditingId] =
     useState<number | null>(null);
@@ -218,6 +220,25 @@ export default function AdminPage() {
             setDescription(
               e.target.value
             )
+          }
+        />
+
+        <label className="block mb-2 font-medium">
+          Hero Image
+        </label>
+        
+        <input
+          className="
+            w-full
+            border
+            border-gray-300
+            rounded-xl
+            p-3
+            mb-6
+          "
+          value={heroImage}
+          onChange={(e) =>
+            setHeroImage(e.target.value)
           }
         />
 
