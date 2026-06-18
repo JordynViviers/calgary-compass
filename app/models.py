@@ -350,10 +350,26 @@ class ApplicationSupportVote(Base):
 
     supported = Column(Boolean)
 
+class ChallengeApplicationLink(Base):
+    __tablename__ = "challenge_application_links"
+
+    id = Column(Integer, primary_key=True)
+
+    challenge = Column(String, nullable=False)
+
+    application_id = Column(
+        Integer,
+        ForeignKey("technology_applications.id"),
+        nullable=False
+    )
+
+    strength = Column(Integer, default=5)
 
 
-
-
+class ChallengeApplicationLinkRequest(BaseModel):
+    challenge: str
+    application_id: int
+    strength: int = 5
 
 
 
