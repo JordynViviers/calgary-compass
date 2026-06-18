@@ -8,13 +8,15 @@ const API_URL =
 
 const CHALLENGES = [
   "Infrastructure, Traffic and Roads",
-  "Homelessness, Poverty and Affordable Housing",
+  "Crime, Safety and Policing",
   "Growth and Planning",
+  "Transit",
+  "Homelessness, Poverty and Affordable Housing",
   "Economy",
-  "Education",
+  "Water Supply/Infrastructure",
+  "Environment and Waste Management",
   "Recreation and Parks",
-  "Environment and Climate",
-  "Public Safety",
+  "Education",
 ];
 
 export default function ChallengeMappingPage() {
