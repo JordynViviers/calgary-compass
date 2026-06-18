@@ -1839,6 +1839,27 @@ def delete_challenge_application_link(
         "message": "Deleted"
     }
 
+@app.get("/challenge-explorer")
+def challenge_explorer(
+    db: Session = Depends(get_db)
+):
 
+    challenges = db.query(
+        ChallengeApplicationLink
+    ).all()
+
+    applications = db.query(
+        TechnologyApplication
+    ).all()
+
+    technologies = db.query(
+        Technology
+    ).all()
+
+    return {
+        "links": challenges,
+        "applications": applications,
+        "technologies": technologies,
+    }
 
 
