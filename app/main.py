@@ -118,7 +118,6 @@ def create_new_technology(
         db,
         name=data.name,
         description=data.description,
-        current_status=data.current_status
     )
 
     try:
@@ -1620,7 +1619,6 @@ def create_technology_application(
         technology_id=data.technology_id,
         name=data.name,
         description=data.description,
-        status=data.status
     )
 
     db.add(application)
@@ -1678,7 +1676,6 @@ def update_technology_application(
         }
 
     application.name = data.name
-    application.status = data.status
     application.description = (
         data.description
     )
