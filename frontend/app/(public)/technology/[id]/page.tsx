@@ -27,6 +27,9 @@ export default function TechnologyDetailPage() {
   const [technology, setTechnology] =
     useState<any>(null);
 
+  const [evidence, setEvidence] =
+  useState<any>(null);
+
   const [weightedScores, setWeightedScores] =
     useState<any>(null);
 
