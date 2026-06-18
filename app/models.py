@@ -31,7 +31,7 @@ class Technology(Base):
     sources = relationship(
         "Source",
         backref="technology",
-        cascade="all, delete-orphan"
+        cascade="all, delete-orphan",
 
     hero_image = Column(String)
     ) 
