@@ -26,11 +26,12 @@ export default function Navbar() {
     translations.English;
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
+      <div className="h-1 bg-red-700 w-full" />
 
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-        <div className="flex items-center h-20">
+        <div className="flex items-center h-24">
 
           {/* Logo */}
           <Link
@@ -44,11 +45,11 @@ export default function Navbar() {
             />
 
             <div>
-              <p className="text-red-700 text-xs md:text-sm tracking-wider">
+              <p className="text-red-700 text-xs tracking-[0.25em] font-medium">
                 CALGARY
               </p>
 
-              <p className="text-lg md:text-2xl font-bold text-gray-900">
+              <p className="text-xl md:text-3xl font-bold text-gray-900 leading-none">
                 COMPASS
               </p>
             </div>
@@ -61,49 +62,119 @@ export default function Navbar() {
 
               <Link
                 href="/"
-                className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
+                className="
+                  text-sm
+                  font-medium
+                  text-gray-700
+                  hover:text-red-700
+                  transition
+                  pb-1
+                  border-b-2
+                  border-transparent
+                  hover:border-red-700
+                "
               >
                 {t.home}
               </Link>
 
               <Link
                 href="/about"
-                className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
+                className="
+                  text-sm
+                  font-medium
+                  text-gray-700
+                  hover:text-red-700
+                  transition
+                  pb-1
+                  border-b-2
+                  border-transparent
+                  hover:border-red-700
+                "
               >
                 {t.about}
               </Link>
 
               <Link
                 href="/technologies"
-                className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
+                className="
+                  text-sm
+                  font-medium
+                  text-gray-700
+                  hover:text-red-700
+                  transition
+                  pb-1
+                  border-b-2
+                  border-transparent
+                  hover:border-red-700
+                "
               >
                 {t.technologies}
               </Link>
 
               <Link
                 href="/events"
-                className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
+                className="
+                  text-sm
+                  font-medium
+                  text-gray-700
+                  hover:text-red-700
+                  transition
+                  pb-1
+                  border-b-2
+                  border-transparent
+                  hover:border-red-700
+                "
               >
                 {t.events}
               </Link>
 
               <Link
                 href="/signals"
-                className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
+                className="
+                  text-sm
+                  font-medium
+                  text-gray-700
+                  hover:text-red-700
+                  transition
+                  pb-1
+                  border-b-2
+                  border-transparent
+                  hover:border-red-700
+                "
               >
                 {t.signals}
               </Link>
 
               <Link
                 href="/foresight"
-                className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
+                className="
+                  text-sm
+                  font-medium
+                  text-gray-700
+                  hover:text-red-700
+                  transition
+                  pb-1
+                  border-b-2
+                  border-transparent
+                  hover:border-red-700
+                "
               >
                 {t.foresight}
               </Link>
 
               <Link
                 href="/analytics"
-                className="text-sm font-semibold text-gray-800 hover:text-red-700 transition"
+                className="
+                  text-sm
+                  font-medium
+                  text-gray-700
+                  hover:text-red-700
+                  transition
+                  pb-1
+                  border-b-2
+                  border-transparent
+                  hover:border-red-700
+                "
               >
                 {t.analytics}
               </Link>
@@ -113,8 +184,10 @@ export default function Navbar() {
             <Link
               href="/community-input"
               className="
-                bg-red-600
-                hover:bg-red-700
+                bg-red-700
+                hover:bg-red-800
+                shadow-md
+                hover:shadow-lg
                 text-white
                 px-6
                 py-3
