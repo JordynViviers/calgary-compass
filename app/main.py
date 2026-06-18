@@ -25,6 +25,8 @@ from app.models import (
     CalgaryChallengeVoteRequest,
     TechnologyApplication,
     TechnologyApplicationRequest,
+    ChallengeApplicationLink,
+    ChallengeApplicationLinkRequest,
 )
 
 from app.crud import (
