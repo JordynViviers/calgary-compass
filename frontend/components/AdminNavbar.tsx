@@ -144,7 +144,6 @@ export default function AdminNavbar() {
               Tech Applications
             </Link>
 
-            </Link>
 
             <Link
               href="/admin/challenge-mapping"
