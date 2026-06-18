@@ -345,21 +345,6 @@ const weightedAverage =
           
             </div>
           
-            <span
-              className="
-                self-start
-                md:self-auto
-                px-3
-                py-1
-                rounded-full
-                bg-red-100
-                text-red-700
-                text-sm
-                whitespace-nowrap
-              "
-            >
-              {app.status}
-            </span>
 
           </div>
 
