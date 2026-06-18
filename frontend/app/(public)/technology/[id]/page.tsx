@@ -293,6 +293,23 @@ const weightedAverage =
       
       </div>
 
+      {technology.hero_image && (
+
+        <img
+          src={technology.hero_image}
+          alt={technology.name}
+          className="
+            w-full
+            h-[400px]
+            object-cover
+            rounded-3xl
+            mb-10
+            shadow-sm
+          "
+        />
+      
+      )}
+
       {/* DESCRIPTION */}
 
       <div className="border border-gray-300 rounded-2xl p-4 md:p-8 shadow-sm mb-8 md:mb-10 bg-white">
