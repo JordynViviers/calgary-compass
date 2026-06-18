@@ -118,6 +118,7 @@ def create_new_technology(
         db,
         name=data.name,
         description=data.description,
+        hero_image=data.hero_image,
     )
 
     try:
@@ -749,6 +750,7 @@ def update_technology(
     tech.name = data.name
     tech.description = data.description
     tech.is_active = data.is_active
+    technology.hero_image = data.hero_image
 
     db.commit()
 
