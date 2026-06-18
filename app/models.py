@@ -32,6 +32,8 @@ class Technology(Base):
         "Source",
         backref="technology",
         cascade="all, delete-orphan"
+
+    hero_image = Column(String)
     ) 
     
 class Vote(Base):
@@ -138,6 +140,7 @@ class TechnologyRequest(BaseModel):
     name: str
     description: str
     is_active: bool = True
+    hero_image: str = ""
     
 class CommunitySignalRequest(BaseModel):
     stakeholder: str
