@@ -348,6 +348,28 @@ export default function CommunityInputPage() {
             from 1 to 10 across the six priorities. (1 is lowest and 10 is highest)
           </p>
 
+          <div className="mb-8 p-6 bg-red-50 border border-red-200 rounded-xl">
+                
+            <h3 className="text-lg font-semibold text-red-700 mb-2">
+              Calgary Council Priorities
+            </h3>
+                
+            <p className="text-gray-700 mb-3">
+              Technologies are evaluated based on Calgary City Council's
+              priority areas.
+            </p>
+                
+            <a
+              href="https://www.calgary.ca/council/council-priorities.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-700 font-semibold hover:underline"
+            >
+              Learn more about Calgary's Council Priorities →
+            </a>
+                
+          </div>
+
           <div className="mb-10">
             <label className="block text-xl font-semibold mb-3">
               Which sector do you represent?
@@ -399,27 +421,6 @@ export default function CommunityInputPage() {
                     )}
                   </h3>
                 
-                  <div className="mb-8 p-6 bg-red-50 border border-red-200 rounded-xl">
-                
-                    <h3 className="text-lg font-semibold text-red-700 mb-2">
-                      Calgary Council Priorities
-                    </h3>
-                
-                    <p className="text-gray-700 mb-3">
-                      Technologies are evaluated based on Calgary City Council's
-                      priority areas.
-                    </p>
-                
-                    <a
-                      href="https://www.calgary.ca/council/council-priorities.html"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-red-700 font-semibold hover:underline"
-                    >
-                      Learn more about Calgary's Council Priorities →
-                    </a>
-                
-                  </div>
                 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {criteria.map((criterion) => (
