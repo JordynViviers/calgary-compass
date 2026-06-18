@@ -19,7 +19,39 @@ import {
 const API_URL =
   "https://calgary-compass-api.onrender.com";
 
+function getApplicationIcon(
+  name: string
+) {
+
+  const text = name.toLowerCase();
+
+  if (text.includes("housing"))
+    return "🏘";
+
+  if (text.includes("transport"))
+    return "🚍";
+
+  if (text.includes("mobility"))
+    return "🚍";
+
+  if (text.includes("health"))
+    return "⚕";
+
+  if (text.includes("education"))
+    return "🎓";
+
+  if (text.includes("emergency"))
+    return "🚨";
+
+  if (text.includes("infrastructure"))
+    return "🏗";
+
+  return "🏛";
+}
+
 export default function TechnologyDetailPage() {
+
+
 
   const params = useParams();
   const id = params.id;
@@ -130,6 +162,23 @@ export default function TechnologyDetailPage() {
             err
           );
 
+        }
+
+        try {
+
+          const evidenceRes = await axios.get(
+            `${API_URL}/technology/${id}/evidence`
+          );
+        
+          setEvidence(evidenceRes.data);
+        
+        } catch (err) {
+        
+          console.error(
+            "Evidence failed:",
+            err
+          );
+        
         }
 
       } catch (err) {
@@ -313,20 +362,22 @@ const weightedAverage =
       
       )}
 
-      {/* DESCRIPTION */}
+      {aiEvaluation?.global_examples && (
 
-      <div className="border border-gray-300 rounded-2xl p-4 md:p-8 shadow-sm mb-8 md:mb-10 bg-white">
-
-        <h2 className="text-2xl md:text-3xl font-semibold text-red-700 mb-4 md:mb-6">
-          Description
-        </h2>
-
-        <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-          {technology.description}
-        </p>
-
-      </div>
-
+        <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
+      
+          <h2 className="text-3xl font-semibold text-red-700 mb-6">
+            Global Examples
+          </h2>
+      
+          <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+            {aiEvaluation.global_examples}
+          </p>
+      
+        </div>
+      
+      )}
+      
       {applications.length > 0 && (
 
   <div className="border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm mb-8 md:mb-10 bg-white">
@@ -342,10 +393,14 @@ const weightedAverage =
         <div
           key={app.id}
           className="
+            bg-gray-50
             border
             border-gray-200
-            rounded-xl
-            p-4
+            rounded-2xl
+            p-5
+            hover:bg-white
+            hover:shadow-md
+            transition
           "
         >
 
@@ -354,6 +409,8 @@ const weightedAverage =
             <div>
           
               <h3 className="font-semibold text-lg">
+                {getApplicationIcon(app.name)}
+                {" "}
                 {app.name}
               </h3>
           
