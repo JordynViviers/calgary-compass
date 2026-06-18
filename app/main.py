@@ -1783,4 +1783,60 @@ def clear_community_input(
             "All community responses and ratings deleted"
     }
 
+@app.post("/challenge-application-link")
+def create_challenge_application_link(
+    data: ChallengeApplicationLinkRequest,
+    db: Session = Depends(get_db)
+):
+
+    link = ChallengeApplicationLink(
+        challenge=data.challenge,
+        application_id=data.application_id,
+        strength=data.strength
+    )
+
+    db.add(link)
+
+    db.commit()
+
+    db.refresh(link)
+
+    return link
+
+@app.get("/challenge-application-links")
+def get_challenge_application_links(
+    db: Session = Depends(get_db)
+):
+
+    return db.query(
+        ChallengeApplicationLink
+    ).all()
+
+@app.delete(
+    "/challenge-application-link/{link_id}"
+)
+def delete_challenge_application_link(
+    link_id: int,
+    db: Session = Depends(get_db)
+):
+
+    link = db.query(
+        ChallengeApplicationLink
+    ).filter(
+        ChallengeApplicationLink.id == link_id
+    ).first()
+
+    if not link:
+        return {"error": "Not found"}
+
+    db.delete(link)
+
+    db.commit()
+
+    return {
+        "message": "Deleted"
+    }
+
+
+
 
