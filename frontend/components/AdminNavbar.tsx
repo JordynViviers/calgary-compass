@@ -144,6 +144,25 @@ export default function AdminNavbar() {
               Tech Applications
             </Link>
 
+            </Link>
+
+            <Link
+              href="/admin/challenge-mapping"
+              className="
+                text-sm
+                font-medium
+                text-gray-700
+                hover:text-red-700
+                border-b-2
+                border-transparent
+                hover:border-red-700
+                pb-1
+                transition
+              "
+            >
+              Challenge Mapping
+            </Link>
+
           </nav>
 
           {/* Public Site Button */}
