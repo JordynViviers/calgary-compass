@@ -491,6 +491,105 @@ const weightedAverage =
           <h2 className="text-3xl font-semibold text-red-700 mb-6">
             Technology Impact
           </h2>
+
+          <div className="mb-8">
+
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+              Impact Matrix
+            </h3>
+          
+            <div className="overflow-hidden rounded-2xl border border-gray-200">
+          
+              <div className="grid grid-cols-2 bg-gray-100 font-semibold">
+          
+                <div className="p-4">
+                  Challenge
+                </div>
+          
+                <div className="p-4">
+                  Impact Level
+                </div>
+          
+              </div>
+          
+              {Object.entries(impactData)
+                .sort(
+                  (a: any, b: any) =>
+                    b[1].score -
+                    a[1].score
+                )
+                .map(
+                  (
+                    [challenge, data]: any
+                  ) => {
+          
+                    const dots =
+                      Math.min(
+                        Math.ceil(
+                          data.score / 3
+                        ),
+                        5
+                      );
+          
+                    return (
+          
+                      <div
+                        key={challenge}
+                        className="
+                          grid
+                          grid-cols-2
+                          border-t
+                          border-gray-200
+                        "
+                      >
+          
+                        <div className="p-4 font-medium">
+                          {challenge}
+                        </div>
+          
+                        <div className="p-4 flex items-center gap-2">
+          
+                          <div className="flex gap-1">
+          
+                            {[1, 2, 3, 4, 5].map(
+                              (dot) => (
+          
+                                <div
+                                  key={dot}
+                                  className={`
+                                    w-4
+                                    h-4
+                                    rounded-full
+          
+                                    ${
+                                      dot <= dots
+                                        ? "bg-red-700"
+                                        : "bg-gray-200"
+                                    }
+                                  `}
+                                />
+          
+                              )
+                            )}
+          
+                          </div>
+          
+                          <span className="text-sm text-gray-500 ml-2">
+                            {data.score}
+                          </span>
+          
+                        </div>
+          
+                      </div>
+          
+                    );
+          
+                  }
+                )}
+          
+            </div>
+          
+          </div>
       
           <p className="text-gray-600 mb-6">
             Based on community challenge mappings,
