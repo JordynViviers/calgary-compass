@@ -70,6 +70,9 @@ export default function TechnologyDetailPage() {
 
   const [aiEvaluation, setAiEvaluation] =
     useState<any>(null);
+  
+  const [impactData, setImpactData] =
+    useState<any>(null);
 
   const [applications, setApplications] =
     useState<any[]>([]);
@@ -94,7 +97,25 @@ export default function TechnologyDetailPage() {
     const fetchAll = async () => {
 
       setLoading(true);
-
+      try {
+      
+        const impactRes =
+          await axios.get(
+            `${API_URL}/technology/${id}/impact`
+          );
+      
+        setImpactData(
+          impactRes.data
+        );
+      
+      } catch (err) {
+      
+        console.error(
+          "Impact fetch failed:",
+          err
+        );
+      
+      }
       try {
 
         const techRes = await axios.get(
@@ -435,6 +456,107 @@ const weightedAverage =
 
 )}
 
+      {impactData && (
+
+        <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
+      
+          <h2 className="text-3xl font-semibold text-red-700 mb-6">
+            Technology Impact
+          </h2>
+      
+          <p className="text-gray-600 mb-6">
+            Based on community challenge mappings,
+            this technology appears most relevant
+            to the following Calgary priorities.
+          </p>
+      
+          <div className="space-y-5">
+      
+            {Object.entries(impactData)
+              .sort(
+                (a: any, b: any) =>
+                  b[1].score -
+                  a[1].score
+              )
+              .map(
+                ([challenge, data]: any) => {
+      
+                  const width =
+                    Math.min(
+                      data.score * 10,
+                      100
+                    );
+      
+                  return (
+      
+                    <div
+                      key={challenge}
+                    >
+      
+                      <div className="flex justify-between mb-2">
+      
+                        <span className="font-semibold">
+                          {challenge}
+                        </span>
+      
+                        <span className="font-bold text-red-700">
+                          {data.score}
+                        </span>
+      
+                      </div>
+      
+                      <div className="h-4 bg-gray-200 rounded-full overflow-hidden mb-3">
+      
+                        <div
+                          className="h-full bg-red-700"
+                          style={{
+                            width:
+                              `${width}%`
+                          }}
+                        />
+      
+                      </div>
+      
+                      <div className="flex flex-wrap gap-2">
+      
+                        {data.applications.map(
+                          (
+                            application: string
+                          ) => (
+      
+                            <span
+                              key={
+                                application
+                              }
+                              className="
+                                bg-red-50
+                                text-red-700
+                                px-3
+                                py-1
+                                rounded-full
+                                text-sm
+                              "
+                            >
+                              {application}
+                            </span>
+      
+                          )
+                        )}
+      
+                      </div>
+      
+                    </div>
+      
+                  );
+      
+                }
+              )}
+      
+          </div>
+      
+        </div>
+      
+      )}
       {/* COMMUNITY INPUT BUTTON */}
 
       <div className="mb-10">
