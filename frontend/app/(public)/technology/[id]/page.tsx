@@ -383,6 +383,34 @@ const weightedAverage =
       
       )}
 
+      {/* COMMUNITY INPUT BUTTON */}
+
+      <div className="mb-10">
+
+        <Link
+          href="/community-input"
+        >
+
+          <button
+            className="
+              bg-red-700
+              hover:bg-red-800
+              text-white
+              px-8
+              py-4
+              rounded-xl
+              font-semibold
+              shadow-md
+              transition
+            "
+          >
+            Participate in Technology Assessment
+          </button>
+
+        </Link>
+
+      </div>
+
       {aiEvaluation?.global_examples && (
 
         <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
@@ -557,33 +585,7 @@ const weightedAverage =
         </div>
       
       )}
-      {/* COMMUNITY INPUT BUTTON */}
-
-      <div className="mb-10">
-
-        <Link
-          href="/community-input"
-        >
-
-          <button
-            className="
-              bg-red-700
-              hover:bg-red-800
-              text-white
-              px-8
-              py-4
-              rounded-xl
-              font-semibold
-              shadow-md
-              transition
-            "
-          >
-            Participate in Technology Assessment
-          </button>
-
-        </Link>
-
-      </div>
+      
 
       <div className="grid md:grid-cols-3 gap-6 mb-10">
 
