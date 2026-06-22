@@ -1935,3 +1935,54 @@ def challenge_solutions(
         )
 
     return result
+
+@app.get(
+    "/technology/{technology_id}/impact"
+)
+def technology_impact(
+    technology_id: int,
+    db: Session = Depends(get_db)
+):
+
+    applications = db.query(
+        TechnologyApplication
+    ).filter(
+        TechnologyApplication.technology_id
+        == technology_id
+    ).all()
+
+    impact = {}
+
+    for application in applications:
+
+        links = db.query(
+            ChallengeApplicationLink
+        ).filter(
+            ChallengeApplicationLink.application_id
+            == application.id
+        ).all()
+
+        for link in links:
+
+            if link.challenge not in impact:
+
+                impact[
+                    link.challenge
+                ] = {
+                    "score": 0,
+                    "applications": []
+                }
+
+            impact[
+                link.challenge
+            ]["score"] += link.strength
+
+            impact[
+                link.challenge
+            ]["applications"].append(
+                application.name
+            )
+
+    return impact
+
+
