@@ -1862,4 +1862,76 @@ def challenge_explorer(
         "technologies": technologies,
     }
 
+@app.get("/challenge-solutions")
+def challenge_solutions(
+    db: Session = Depends(get_db)
+):
 
+    links = db.query(
+        ChallengeApplicationLink
+    ).all()
+
+    applications = db.query(
+        TechnologyApplication
+    ).all()
+
+    technologies = db.query(
+        Technology
+    ).all()
+
+    result = {}
+
+    for link in links:
+
+        application = next(
+            (
+                a
+                for a in applications
+                if a.id ==
+                link.application_id
+            ),
+            None
+        )
+
+        if not application:
+            continue
+
+        technology = next(
+            (
+                t
+                for t in technologies
+                if t.id ==
+                application.technology_id
+            ),
+            None
+        )
+
+        if not technology:
+            continue
+
+        if link.challenge not in result:
+
+            result[
+                link.challenge
+            ] = []
+
+        result[
+            link.challenge
+        ].append(
+            {
+                "technology_id":
+                    technology.id,
+                "technology_name":
+                    technology.name,
+                "hero_image":
+                    technology.hero_image,
+                "application_name":
+                    application.name,
+                "application_description":
+                    application.description,
+                "strength":
+                    link.strength,
+            }
+        )
+
+    return result
