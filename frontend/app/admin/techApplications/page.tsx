@@ -35,6 +35,12 @@ export default function TechApplicationsPage() {
   const [applicationDescription,setApplicationDescription] = 
     useState("");
 
+  const [solutionExplanation,setSolutionExplanation] =
+    useState("");
+
+  const [editingSolutionExplanation,setEditingSolutionExplanation] =
+    useState("");
+
   const [editingDescription, setEditingDescription] =
     useState("");
 
@@ -110,10 +116,15 @@ export default function TechApplicationsPage() {
       
           description:
             applicationDescription,
+
+          solution_explanation:
+            solutionExplanation,
       
         }
       );
       setApplicationName("");
+      setApplicationDescription("");
+      setSolutionExplanation("");
       loadData();
     } catch (error) {
       console.error(error);
@@ -167,6 +178,9 @@ export default function TechApplicationsPage() {
       
           description:
             editingDescription,
+
+          solution_explanation:
+            editingSolutionExplanation,
       
         }
       );
@@ -305,6 +319,30 @@ export default function TechApplicationsPage() {
                   p-3
                 "
               />
+
+              <label className="block font-medium">
+                How does this help solve the problem?
+              </label>
+              
+              <textarea
+                value={solutionExplanation}
+                onChange={(e) =>
+                  setSolutionExplanation(
+                    e.target.value
+                  )
+                }
+                rows={4}
+                placeholder="
+                  Explain how this application could help address community challenges
+                "
+                className="
+                  w-full
+                  border
+                  border-gray-300
+                  rounded-xl
+                  p-3
+                "
+              />
           
           
               <button
@@ -401,6 +439,10 @@ export default function TechApplicationsPage() {
 
                                   setEditingDescription(
                                     application.description || ""
+                                  );
+
+                                  setEditingSolutionExplanation(
+                                    application.solution_explanation || ""
                                   );
           
           
@@ -518,6 +560,29 @@ export default function TechApplicationsPage() {
                                 placeholder="
                                   Describe how this technology
                                   application could be used
+                                "
+                              />
+
+                              <textarea
+                                value={
+                                  editingSolutionExplanation
+                                }
+                                onChange={(e) =>
+                                  setEditingSolutionExplanation(
+                                    e.target.value
+                                  )
+                                }
+                                rows={4}
+                                className="
+                                  w-full
+                                  border
+                                  border-gray-300
+                                  rounded-xl
+                                  p-3
+                                  mb-3
+                                "
+                                placeholder="
+                                  Explain how this application helps solve community challenges
                                 "
                               />
           
