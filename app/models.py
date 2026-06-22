@@ -323,7 +323,7 @@ class TechnologyApplication(Base):
 
     description = Column(Text)
 
-    status = Column(String)
+    solution_explanation = Column(Text)
 
     is_active = Column(
         Boolean,
