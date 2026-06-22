@@ -9,29 +9,41 @@ const API_URL =
 function getChallengeIcon(
   challenge: string
 ) {
+
   const text =
     challenge.toLowerCase();
 
-  if (text.includes("housing"))
-    return "🏘";
+  if (
+    text.includes("housing")
+  ) return "🏘";
 
-  if (text.includes("traffic"))
-    return "🚍";
+  if (
+    text.includes("traffic")
+  ) return "🚍";
 
-  if (text.includes("economy"))
-    return "💼";
+  if (
+    text.includes("economy")
+  ) return "💼";
 
-  if (text.includes("education"))
-    return "🎓";
+  if (
+    text.includes("education")
+  ) return "🎓";
 
-  if (text.includes("environment"))
-    return "🌳";
+  if (
+    text.includes("environment")
+  ) return "🌳";
 
-  if (text.includes("safety"))
-    return "🚨";
+  if (
+    text.includes("crime")
+  ) return "🚨";
 
-  if (text.includes("growth"))
-    return "🏗";
+  if (
+    text.includes("safety")
+  ) return "🚨";
+
+  if (
+    text.includes("growth")
+  ) return "🏗";
 
   return "🏛";
 }
@@ -41,8 +53,8 @@ export default function AnalyticsPage() {
   const [challengeSummary, setChallengeSummary] =
     useState<any[]>([]);
 
-  const [explorerData, setExplorerData] =
-    useState<any>(null);
+  const [solutions, setSolutions] =
+    useState<any>({});
 
   const [selectedChallenge, setSelectedChallenge] =
     useState("");
@@ -69,41 +81,26 @@ export default function AnalyticsPage() {
 
         }
 
-      })
-      .catch((err) =>
-        console.error(err)
-      );
+      });
 
     axios
       .get(
-        `${API_URL}/challenge-explorer`
+        `${API_URL}/challenge-solutions`
       )
       .then((res) => {
 
-        setExplorerData(
+        setSolutions(
           res.data
         );
 
-      })
-      .catch((err) =>
-        console.error(err)
-      );
+      });
 
   }, []);
 
-  const getApplicationsForChallenge =
-    () => {
-
-      if (!explorerData)
-        return [];
-
-      return explorerData.links.filter(
-        (link: any) =>
-          link.challenge ===
-          selectedChallenge
-      );
-
-    };
+  const technologies =
+    solutions[
+      selectedChallenge
+    ] || [];
 
   return (
 
@@ -123,14 +120,14 @@ export default function AnalyticsPage() {
 
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Explore the challenges identified
-            by Calgarians and discover the
-            technologies and applications that
-            may help address them.
+            by Calgarians and discover
+            technologies that may help
+            address them.
           </p>
 
         </section>
 
-        {/* SUMMARY CARDS */}
+        {/* TOP STATS */}
 
         <div className="grid md:grid-cols-3 gap-6 mb-12">
 
@@ -149,13 +146,14 @@ export default function AnalyticsPage() {
           <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
 
             <p className="text-gray-500 mb-2">
-              Applications Mapped
+              Technologies Linked
             </p>
 
             <p className="text-5xl font-bold text-red-700">
               {
-                explorerData?.links
-                  ?.length || 0
+                Object.values(
+                  solutions
+                ).flat().length
               }
             </p>
 
@@ -164,13 +162,20 @@ export default function AnalyticsPage() {
           <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
 
             <p className="text-gray-500 mb-2">
-              Technologies Tracked
+              Community Responses
             </p>
 
             <p className="text-5xl font-bold text-red-700">
               {
-                explorerData?.technologies
-                  ?.length || 0
+                challengeSummary.reduce(
+                  (
+                    sum,
+                    challenge
+                  ) =>
+                    sum +
+                    challenge.votes,
+                  0
+                )
               }
             </p>
 
@@ -178,58 +183,58 @@ export default function AnalyticsPage() {
 
         </div>
 
-        {/* CHALLENGE CARDS */}
+        {/* PRIORITY RANKINGS */}
 
-        <h2 className="text-3xl font-bold text-red-700 mb-6">
-          Community Priorities
-        </h2>
+        <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm mb-12">
 
-        <div className="grid md:grid-cols-3 gap-4 mb-12">
+          <h2 className="text-3xl font-bold text-red-700 mb-8">
+            Calgary Priority Rankings
+          </h2>
 
-          {challengeSummary.map(
-            (
-              challenge,
-              index
-            ) => (
+          <div className="space-y-4">
 
-              <button
-                key={
-                  challenge.challenge
-                }
-                onClick={() =>
-                  setSelectedChallenge(
+            {challengeSummary.map(
+              (
+                challenge,
+                index
+              ) => (
+
+                <button
+                  key={
                     challenge.challenge
-                  )
-                }
-                className={`
-                  p-6
-                  rounded-2xl
-                  border
-                  text-left
-                  transition
-
-                  ${
-                    selectedChallenge ===
-                    challenge.challenge
-
-                      ? "bg-red-700 text-white shadow-lg"
-
-                      : "bg-white hover:shadow-md"
                   }
-                `}
-              >
+                  onClick={() =>
+                    setSelectedChallenge(
+                      challenge.challenge
+                    )
+                  }
+                  className={`
+                    w-full
+                    text-left
+                    p-5
+                    rounded-2xl
+                    transition
 
-                <div className="flex items-center gap-3 mb-3">
+                    ${
+                      selectedChallenge ===
+                      challenge.challenge
 
-                  <div
-                    className={`
-                      w-8
-                      h-8
+                        ? "bg-red-700 text-white"
+
+                        : "bg-gray-50 hover:bg-white hover:shadow-md"
+                    }
+                  `}
+                >
+
+                  <div className="flex items-center gap-4">
+
+                    <div className={`
+                      w-10
+                      h-10
                       rounded-full
                       flex
                       items-center
                       justify-center
-                      text-sm
                       font-bold
 
                       ${
@@ -240,232 +245,194 @@ export default function AnalyticsPage() {
 
                           : "bg-red-700 text-white"
                       }
-                    `}
-                  >
-                    {index + 1}
+                    `}>
+                      {index + 1}
+                    </div>
+
+                    <div className="text-3xl">
+                      {
+                        getChallengeIcon(
+                          challenge.challenge
+                        )
+                      }
+                    </div>
+
+                    <div className="flex-1">
+
+                      <div className="font-bold text-lg">
+
+                        {
+                          challenge.challenge
+                        }
+
+                      </div>
+
+                      <div className="text-sm opacity-80">
+
+                        Average Rank:
+                        {" "}
+                        {
+                          challenge.average_rank
+                        }
+
+                        {" • "}
+
+                        Votes:
+                        {" "}
+                        {
+                          challenge.votes
+                        }
+
+                      </div>
+
+                    </div>
+
                   </div>
 
-                  <span className="text-2xl">
-                    {
-                      getChallengeIcon(
-                        challenge.challenge
-                      )
-                    }
-                  </span>
+                </button>
 
-                </div>
-
-                <h3 className="font-bold text-lg mb-3">
-
-                  {
-                    challenge.challenge
-                  }
-
-                </h3>
-
-                <p className="text-sm">
-
-                  Average Rank:
-                  {" "}
-                  {
-                    challenge.average_rank
-                  }
-
-                </p>
-
-                <p className="text-sm">
-
-                  Votes:
-                  {" "}
-                  {
-                    challenge.votes
-                  }
-
-                </p>
-
-              </button>
-
-            )
-          )}
-
-        </div>
-
-        {/* EXPLORER */}
-
-        <div className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm">
-
-          <div className="mb-8">
-
-            <p className="text-gray-500 text-sm mb-2">
-
-              Challenge
-
-              <span className="mx-2">
-                →
-              </span>
-
-              Application
-
-              <span className="mx-2">
-                →
-              </span>
-
-              Technology
-
-            </p>
-
-            <h2 className="text-4xl font-bold text-red-700">
-
-              {selectedChallenge}
-
-            </h2>
+              )
+            )}
 
           </div>
 
-          {getApplicationsForChallenge()
-            .length === 0 ? (
+        </div>
 
-            <div className="text-center py-12">
+        {/* SOLUTIONS */}
+
+        <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
+
+          <h2 className="text-4xl font-bold text-red-700 mb-3">
+
+            {
+              getChallengeIcon(
+                selectedChallenge
+              )
+            }
+
+            {" "}
+
+            {selectedChallenge}
+
+          </h2>
+
+          <p className="text-gray-600 mb-10">
+
+            Technologies and applications
+            that may help address this
+            challenge.
+
+          </p>
+
+          {technologies.length === 0 ? (
+
+            <div className="text-center py-16">
 
               <p className="text-xl text-gray-500">
-                No applications have been
-                linked to this challenge yet.
+
+                No technologies have been
+                linked yet.
+
               </p>
 
             </div>
 
           ) : (
 
-            <div className="space-y-8">
+            <div className="grid md:grid-cols-2 gap-6">
 
-              {getApplicationsForChallenge()
-                .map((link: any) => {
+              {technologies.map(
+                (
+                  item: any,
+                  index: number
+                ) => (
 
-                  const application =
-                    explorerData
-                      .applications
-                      .find(
-                        (a: any) =>
-                          a.id ===
-                          link.application_id
-                      );
+                  <div
+                    key={index}
+                    className="
+                      border
+                      border-gray-200
+                      rounded-3xl
+                      overflow-hidden
+                      bg-white
+                      shadow-sm
+                    "
+                  >
 
-                  if (
-                    !application
-                  ) return null;
+                    {item.hero_image && (
 
-                  const technology =
-                    explorerData
-                      .technologies
-                      .find(
-                        (t: any) =>
-                          t.id ===
-                          application.technology_id
-                      );
+                      <img
+                        src={
+                          item.hero_image
+                        }
+                        alt={
+                          item.technology_name
+                        }
+                        className="
+                          w-full
+                          h-56
+                          object-cover
+                        "
+                      />
 
-                  return (
+                    )}
 
-                    <div
-                      key={link.id}
-                      className="
-                        border
-                        border-gray-200
-                        rounded-3xl
-                        p-6
-                        bg-gray-50
-                      "
-                    >
+                    <div className="p-6">
 
-                      <div className="flex items-center justify-between mb-4">
+                      <div className="flex justify-between items-center mb-4">
 
                         <h3 className="text-2xl font-bold">
 
                           {
-                            application.name
+                            item.technology_name
                           }
 
                         </h3>
 
-                        <span className="bg-red-700 text-white px-4 py-2 rounded-full text-sm font-medium">
+                        <span className="bg-red-700 text-white px-3 py-1 rounded-full text-sm">
 
                           Strength:
                           {" "}
                           {
-                            link.strength
+                            item.strength
                           }
 
                         </span>
 
                       </div>
 
-                      <p className="text-gray-700 leading-relaxed mb-6">
+                      <div className="bg-gray-50 rounded-2xl p-4">
 
-                        {
-                          application.description
-                        }
+                        <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">
 
-                      </p>
+                          Example Application
 
-                      {technology && (
+                        </p>
 
-                        <div className="border-t pt-6">
+                        <p className="font-semibold">
 
-                          <p className="text-sm text-gray-500 mb-4">
+                          {
+                            item.application_name
+                          }
 
-                            Enabled by Technology
+                        </p>
 
-                          </p>
+                        <p className="text-gray-600 mt-2">
 
-                          <div className="flex items-center gap-4">
+                          {
+                            item.application_description
+                          }
 
-                            {technology.hero_image && (
+                        </p>
 
-                              <img
-                                src={
-                                  technology.hero_image
-                                }
-                                alt={
-                                  technology.name
-                                }
-                                className="
-                                  w-20
-                                  h-20
-                                  rounded-2xl
-                                  object-cover
-                                "
-                              />
-
-                            )}
-
-                            <div>
-
-                              <h4 className="text-xl font-bold">
-
-                                {
-                                  technology.name
-                                }
-
-                              </h4>
-
-                              <p className="text-gray-500">
-
-                                Emerging Smart City Technology
-
-                              </p>
-
-                            </div>
-
-                          </div>
-
-                        </div>
-
-                      )}
+                      </div>
 
                     </div>
 
-                  );
+                  </div>
 
-                })}
+                )
+              )}
 
             </div>
 
