@@ -391,24 +391,10 @@ const weightedAverage =
         </div>
       )}
 
-      <div
-        className="
-          bg-white
-          border
-          border-gray-200
-          rounded-3xl
-          p-8
-          md:p-12
-          mb-10
-          shadow-sm
-        "
-      >
-
-      
-        <p className="text-lg text-gray-600 max-w-4xl">
+      <div className="bg-white rounded-3xl border border-gray-200 p-10 mb-12 shadow-sm">
+        <p className="text-xl text-gray-700 leading-relaxed">
           {technology.description}
         </p>
-      
       </div>
       {/* COMMUNITY INPUT BUTTON */}
 
