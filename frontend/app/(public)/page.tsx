@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Users, Compass, MessageSquare } from "lucide-react";
 
 export default function Home() {
   return (
@@ -133,6 +134,65 @@ export default function Home() {
         </div>
       </section>
 
+      {/* HOW IT WORKS */}
+      <section className="py-20 bg-gray-50 border-t border-gray-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
+              How Calgary Compass Works
+            </h2>
+      
+            <p className="text-gray-600 max-w-3xl mx-auto">
+              Calgary Compass connects community priorities, technology exploration,
+              and evidence-informed discussion to support conversations about
+              innovation in Calgary.
+            </p>
+          </div>
+      
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
+              <Users className="w-10 h-10 text-red-700 mb-4" />
+      
+              <h3 className="text-xl font-semibold mb-3">
+                Community Priorities
+              </h3>
+      
+              <p className="text-gray-600 leading-relaxed">
+                Residents identify challenges, opportunities, and issues that matter
+                most to Calgary.
+              </p>
+            </div>
+      
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
+              <Compass className="w-10 h-10 text-red-700 mb-4" />
+      
+              <h3 className="text-xl font-semibold mb-3">
+                Technology Exploration
+              </h3>
+      
+              <p className="text-gray-600 leading-relaxed">
+                Technologies are explored through research, evidence, and practical
+                applications.
+              </p>
+            </div>
+      
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
+              <MessageSquare className="w-10 h-10 text-red-700 mb-4" />
+      
+              <h3 className="text-xl font-semibold mb-3">
+                Community Insights
+              </h3>
+      
+              <p className="text-gray-600 leading-relaxed">
+                Feedback helps connect technologies to local priorities and areas of
+                community interest.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
       {/* STATS */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
