@@ -18,7 +18,7 @@ export default function Home() {
 
         {/* BACKGROUND COMPASS */}
         <div className="hidden md:flex absolute inset-y-0 right-0 w-1/2 items-center justify-center pointer-events-none translate-y-[18px]">
-          <div className="relative w-[90vw] max-w-[620px] aspect-square opacity-15">
+          <div className="relative w-[90vw] max-w-[620px] aspect-square">
         
             {/* RINGS */}
             <div className="absolute inset-0 rounded-full border-[6px] border-red-700" />
@@ -28,15 +28,48 @@ export default function Home() {
             <div className="absolute inset-20 rounded-full border border-red-700 opacity-40" />
         
             {/* AXES */}
-            <div className="absolute left-1/2 top-0 h-full w-[2px] bg-red-700 -translate-x-1/2" />
-        
-            <div className="absolute top-1/2 left-0 w-full h-[2px] bg-red-700 -translate-y-1/2" />
-        
-            <div className="absolute inset-0 rotate-45">
-              <div className="absolute left-1/2 top-0 h-full w-px bg-red-700 opacity-40 -translate-x-1/2" />
-        
-              <div className="absolute top-1/2 left-0 w-full h-px bg-red-700 opacity-40 -translate-y-1/2" />
-            </div>
+
+            {/* Vertical */}
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              style={{
+                width: "2px",
+                height: "72%",
+                backgroundColor: "#b91c1c",
+              }}
+            />
+            
+            {/* Horizontal */}
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              style={{
+                height: "2px",
+                width: "72%",
+                backgroundColor: "#b91c1c",
+              }}
+            />
+            
+            {/* Diagonal Axis 1 */}
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45"
+              style={{
+                width: "72%",
+                height: "1px",
+                backgroundColor: "#b91c1c",
+                opacity: 0.35,
+              }}
+            />
+            
+            {/* Diagonal Axis 2 */}
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45"
+              style={{
+                width: "72%",
+                height: "1px",
+                backgroundColor: "#b91c1c",
+                opacity: 0.35,
+              }}
+            />
         
             {/* TICK MARKS */}
             {Array.from({ length: 48 }).map((_, i) => (
@@ -60,22 +93,22 @@ export default function Home() {
             ))}
         
             {/* DIRECTIONS */}
-            <span className="absolute top-4 left-1/2 -translate-x-1/2 text-3xl font-bold text-red-700">
+            <span className="absolute top-4 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700 bg-white px-3">
               N
             </span>
-        
-            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-3xl font-bold text-red-700">
+            
+            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700 bg-white px-3">
               S
             </span>
-        
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-3xl font-bold text-red-700">
+            
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700 bg-white px-3">
               W
             </span>
-        
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-3xl font-bold text-red-700">
+            
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700 bg-white px-3">
               E
             </span>
-        
+                    
             {/* NEEDLE */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div
