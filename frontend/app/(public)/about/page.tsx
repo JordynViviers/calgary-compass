@@ -17,7 +17,7 @@ export default function AboutPage() {
       {/* HERO */}
       <section className="px-6 py-20 border-b border-gray-200">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-red-700 mb-6">
             About Calgary Compass
           </h1>
 
@@ -26,7 +26,7 @@ export default function AboutPage() {
             emerging technologies. The platform provides a space for residents,
             researchers, and decision-makers to explore technologies, identify
             community challenges, and contribute insights that can support
-            future planning and innovation in Calgary.
+            innovation and informed discussion in Calgary.
           </p>
         </div>
       </section>
@@ -46,7 +46,7 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
-              <Users className="w-10 h-10 mb-4 text-blue-600" />
+              <Users className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Community Challenges
               </h3>
@@ -57,7 +57,7 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
-              <Compass className="w-10 h-10 mb-4 text-blue-600" />
+              <Compass className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Technology Exploration
               </h3>
@@ -68,7 +68,7 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
-              <Database className="w-10 h-10 mb-4 text-blue-600" />
+              <Database className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Evidence & Research
               </h3>
@@ -79,7 +79,7 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
-              <Lightbulb className="w-10 h-10 mb-4 text-blue-600" />
+              <Lightbulb className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Community Insights
               </h3>
@@ -104,11 +104,11 @@ export default function AboutPage() {
               Research Sources
             </h3>
 
-            <ul className="space-y-3 text-lg text-gray-700 mb-6">
-              <li>• OpenAlex</li>
-              <li>• Semantic Scholar</li>
-              <li>• Community Submissions</li>
-              <li>• Technology Evaluations</li>
+            <ul className="list-disc pl-6 space-y-3 text-lg text-gray-700 mb-6">
+              <li>OpenAlex</li>
+              <li>Semantic Scholar</li>
+              <li>Community Submissions</li>
+              <li>Technology Evaluations</li>
             </ul>
 
             <p className="text-gray-600 leading-relaxed">
@@ -131,7 +131,7 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
-              <MessageSquare className="w-10 h-10 mb-4 text-blue-600" />
+              <MessageSquare className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Community Voice
               </h3>
@@ -142,7 +142,7 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
-              <ShieldCheck className="w-10 h-10 mb-4 text-blue-600" />
+              <ShieldCheck className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Evidence-Informed Discussions
               </h3>
@@ -153,7 +153,7 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
-              <MapPinned className="w-10 h-10 mb-4 text-blue-600" />
+              <MapPinned className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Local Relevance
               </h3>
