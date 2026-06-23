@@ -231,6 +231,13 @@ def ai_evaluate_technology(
         technology.description
     )
 
+    if "error" in ai_result:
+    
+        return {
+            "error":
+                ai_result["error"]
+        }
+
     # =========================
     # SAVE TO DATABASE
     # =========================
