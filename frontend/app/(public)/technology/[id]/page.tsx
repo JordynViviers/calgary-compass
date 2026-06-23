@@ -367,29 +367,51 @@ const weightedAverage =
       </div>
 
       {technology.hero_image && (
-        <div className="flex justify-center mb-10">
+        <div className="relative mb-12 overflow-hidden rounded-3xl">
+          
+          <img
+            src={technology.hero_image}
+            alt={technology.name}
+            className="
+              w-full
+              h-[350px]
+              object-cover
+            "
+          />
+      
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/50" />
+      
+          {/* Text */}
           <div
             className="
-              w-64
-              h-64
-              rounded-full
-              overflow-hidden
-              border-4
-              border-red-700
-              shadow-xl
-              bg-white
+              absolute
+              inset-0
+              flex
+              flex-col
+              justify-center
+              items-center
+              text-center
+              px-8
             "
           >
-            <img
-              src={technology.hero_image}
-              alt={technology.name}
+            <p className="text-red-400 font-semibold tracking-widest uppercase mb-3">
+              Emerging Technology
+            </p>
+      
+            <h2
               className="
-                w-full
-                h-full
-                object-cover
+                text-5xl
+                md:text-6xl
+                font-bold
+                text-white
+                mb-4
               "
-            />
+            >
+              {technology.name}
+            </h2>
           </div>
+      
         </div>
       )}
 
