@@ -17,46 +17,180 @@ export default function Home() {
         <div className="absolute inset-0 bg-white/80"></div>
 
         {/* Background Compass */}
-        <div className="hidden md:flex absolute inset-y-0 right-0 w-1/2 items-center justify-center pointer-events-none translate-y-[18px]">
-          <div className="relative w-[90vw] max-w-[620px] aspect-square opacity-15">
-            <div className="absolute inset-0 rounded-full border-[6px] border-red-700" />
-            <div className="absolute inset-10 rounded-full border-2 border-red-700" />
-            <div className="absolute left-1/2 top-0 h-full w-[2px] bg-red-700 -translate-x-1/2" />
-            <div className="absolute top-1/2 left-0 w-full h-[2px] bg-red-700 -translate-y-1/2" />
-
+        {/* TECH COMPASS */}
+        <div className="hidden lg:flex absolute inset-y-0 right-0 w-1/2 items-center justify-center pointer-events-none">
+        
+          <div className="relative w-[600px] h-[600px]">
+        
+            {/* OUTER RINGS */}
+            <div className="absolute inset-0 rounded-full border-[4px] border-red-700 opacity-40" />
+        
+            <div className="absolute inset-10 rounded-full border-2 border-dashed border-red-700 opacity-30" />
+        
+            <div className="absolute inset-24 rounded-full border border-red-700 opacity-25" />
+        
+            {/* COMPASS AXES */}
+            <div className="absolute left-1/2 top-0 h-full w-px bg-red-700 opacity-30 -translate-x-1/2" />
+        
+            <div className="absolute top-1/2 left-0 w-full h-px bg-red-700 opacity-30 -translate-y-1/2" />
+        
             <div className="absolute inset-0 rotate-45">
-              <div className="absolute left-1/2 top-0 h-full w-[1px] bg-red-700 -translate-x-1/2" />
-              <div className="absolute top-1/2 left-0 w-full h-[1px] bg-red-700 -translate-y-1/2" />
+              <div className="absolute left-1/2 top-0 h-full w-px bg-red-700 opacity-20 -translate-x-1/2" />
+              <div className="absolute top-1/2 left-0 w-full h-px bg-red-700 opacity-20 -translate-y-1/2" />
             </div>
-
-            <span className="absolute top-4 left-1/2 -translate-x-1/2 text-3xl font-bold text-red-700">
-              N
-            </span>
-
-            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-3xl font-bold text-red-700">
-              S
-            </span>
-
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-3xl font-bold text-red-700">
-              W
-            </span>
-
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-3xl font-bold text-red-700">
-              E
-            </span>
-          </div>
-
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div
-              className="relative w-[90vw] max-w-[620px] aspect-square"
-              style={{ animation: "spin 12s ease-in-out infinite" }}
+        
+            {/* TECHNOLOGY NODES */}
+        
+            <div className="absolute top-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
+              <div className="w-4 h-4 bg-red-700 rounded-full animate-pulse" />
+              <span className="mt-2 text-xs font-semibold text-red-700">
+                RESEARCH
+              </span>
+            </div>
+        
+            <div className="absolute right-10 top-1/2 -translate-y-1/2 flex flex-col items-center">
+              <div className="w-4 h-4 bg-red-700 rounded-full animate-pulse" />
+              <span className="mt-2 text-xs font-semibold text-red-700">
+                ANALYTICS
+              </span>
+            </div>
+        
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
+              <div className="w-4 h-4 bg-red-700 rounded-full animate-pulse" />
+              <span className="mt-2 text-xs font-semibold text-red-700">
+                COMMUNITY
+              </span>
+            </div>
+        
+            <div className="absolute left-10 top-1/2 -translate-y-1/2 flex flex-col items-center">
+              <div className="w-4 h-4 bg-red-700 rounded-full animate-pulse" />
+              <span className="mt-2 text-xs font-semibold text-red-700">
+                TECHNOLOGY
+              </span>
+            </div>
+        
+            {/* INNER NODES */}
+        
+            <div className="absolute top-[30%] left-[35%] w-3 h-3 bg-red-700 rounded-full animate-pulse" />
+            <div className="absolute top-[35%] right-[30%] w-3 h-3 bg-red-700 rounded-full animate-pulse" />
+            <div className="absolute bottom-[30%] left-[30%] w-3 h-3 bg-red-700 rounded-full animate-pulse" />
+            <div className="absolute bottom-[35%] right-[35%] w-3 h-3 bg-red-700 rounded-full animate-pulse" />
+        
+            {/* CONNECTION LINES */}
+        
+            <svg
+              className="absolute inset-0 w-full h-full"
+              viewBox="0 0 600 600"
             >
-              <div className="absolute left-1/2 top-1/2 w-0 h-0 border-l-[14px] border-r-[14px] border-b-[180px] border-l-transparent border-r-transparent border-b-red-700 -translate-x-1/2 -translate-y-full" />
-
-              <div className="absolute left-1/2 top-1/2 w-0 h-0 border-l-[14px] border-r-[14px] border-t-[180px] border-l-transparent border-r-transparent border-t-gray-500 -translate-x-1/2" />
-
-              <div className="absolute left-1/2 top-1/2 w-6 h-6 bg-red-700 rounded-full -translate-x-1/2 -translate-y-1/2" />
+              <line
+                x1="300"
+                y1="300"
+                x2="300"
+                y2="60"
+                stroke="#b91c1c"
+                strokeWidth="1"
+                opacity="0.4"
+              />
+        
+              <line
+                x1="300"
+                y1="300"
+                x2="540"
+                y2="300"
+                stroke="#b91c1c"
+                strokeWidth="1"
+                opacity="0.4"
+              />
+        
+              <line
+                x1="300"
+                y1="300"
+                x2="300"
+                y2="540"
+                stroke="#b91c1c"
+                strokeWidth="1"
+                opacity="0.4"
+              />
+        
+              <line
+                x1="300"
+                y1="300"
+                x2="60"
+                y2="300"
+                stroke="#b91c1c"
+                strokeWidth="1"
+                opacity="0.4"
+              />
+        
+              <line
+                x1="300"
+                y1="300"
+                x2="210"
+                y2="180"
+                stroke="#b91c1c"
+                strokeWidth="1"
+                opacity="0.3"
+              />
+        
+              <line
+                x1="300"
+                y1="300"
+                x2="390"
+                y2="210"
+                stroke="#b91c1c"
+                strokeWidth="1"
+                opacity="0.3"
+              />
+        
+              <line
+                x1="300"
+                y1="300"
+                x2="180"
+                y2="390"
+                stroke="#b91c1c"
+                strokeWidth="1"
+                opacity="0.3"
+              />
+        
+              <line
+                x1="300"
+                y1="300"
+                x2="390"
+                y2="390"
+                stroke="#b91c1c"
+                strokeWidth="1"
+                opacity="0.3"
+              />
+            </svg>
+        
+            {/* CENTER HUB */}
+        
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="
+                w-28
+                h-28
+                rounded-full
+                bg-white/70
+                backdrop-blur-md
+                border-2
+                border-red-700
+                shadow-lg
+                flex
+                items-center
+                justify-center
+              ">
+                <div className="text-center">
+                  <div className="text-red-700 font-bold text-lg">
+                    Calgary
+                  </div>
+        
+                  <div className="text-xs text-gray-600">
+                    Compass
+                  </div>
+                </div>
+              </div>
             </div>
+        
           </div>
         </div>
 
