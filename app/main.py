@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from app.database import engine, SessionLocal
+from fastapi.staticfiles import StaticFiles
 from app.models import (
     Technology,
     Vote,
