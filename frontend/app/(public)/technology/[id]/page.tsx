@@ -339,50 +339,25 @@ const weightedAverage =
 
       {/* HERO */}
 
-      <div
-        className="
-          bg-white
-          border
-          border-gray-200
-          rounded-3xl
-          p-8
-          md:p-12
-          mb-10
-          shadow-sm
-        "
-      >
       
-        <p className="text-red-700 font-semibold uppercase tracking-wider mb-2">
-          Emerging Technology
-        </p>
-      
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-          {technology.name}
-        </h1>
-      
-        <p className="text-lg text-gray-600 max-w-4xl">
-          {technology.description}
-        </p>
-      
-      </div>
 
       {technology.hero_image && (
         <div className="relative mb-12 overflow-hidden rounded-3xl">
-          
+      
           <img
             src={technology.hero_image}
             alt={technology.name}
             className="
               w-full
-              h-[350px]
+              h-[550px]
               object-cover
             "
           />
       
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50" />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/60" />
       
-          {/* Text */}
+          {/* Text Overlay */}
           <div
             className="
               absolute
@@ -395,26 +370,46 @@ const weightedAverage =
               px-8
             "
           >
-            <p className="text-red-400 font-semibold tracking-widest uppercase mb-3">
+            <p className="text-red-400 font-semibold tracking-[0.25em] uppercase mb-4">
               Emerging Technology
             </p>
       
-            <h2
+            <h1
               className="
                 text-5xl
-                md:text-6xl
+                md:text-7xl
                 font-bold
                 text-white
-                mb-4
+                drop-shadow-lg
+                max-w-5xl
               "
             >
               {technology.name}
-            </h2>
+            </h1>
           </div>
       
         </div>
       )}
 
+      <div
+        className="
+          bg-white
+          border
+          border-gray-200
+          rounded-3xl
+          p-8
+          md:p-12
+          mb-10
+          shadow-sm
+        "
+      >
+
+      
+        <p className="text-lg text-gray-600 max-w-4xl">
+          {technology.description}
+        </p>
+      
+      </div>
       {/* COMMUNITY INPUT BUTTON */}
 
       <div className="mb-10">
