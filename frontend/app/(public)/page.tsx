@@ -94,7 +94,7 @@ export default function Home() {
                   style={{
                     width: "2px",
                     height: i % 4 === 0 ? "18px" : "8px",
-                    transform: "translateY(-45%)",
+                    transform: "translateY(-200px)",
                     opacity: i % 4 === 0 ? 0.8 : 0.3,
                   }}
                 />
