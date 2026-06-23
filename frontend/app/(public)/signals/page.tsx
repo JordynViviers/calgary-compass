@@ -44,7 +44,7 @@ export default function SignalsPage() {
 
       {/* HERO */}
       <section className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-8 py-16">
+        <div className="max-w-6xl mx-auto text-center"> 
           <h1 className="text-5xl md:text-6xl font-bold text-red-700 mb-4">
             Signals & Observations
           </h1>
