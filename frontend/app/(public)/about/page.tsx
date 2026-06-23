@@ -16,19 +16,25 @@ export default function AboutPage() {
     <main className="min-h-screen bg-white">
       <div className="h-2 bg-red-700 w-full"></div>
       {/* HERO */}
-      <section className="bg-gradient-to-br from-red-700 to-red-600 text-white px-6 py-24">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-6xl md:text-7xl font-bold mb-6">
-            About Calgary Compass
+      <section className="px-6 py-24 border-b border-gray-200">
+        <div className="max-w-6xl mx-auto">
+      
+          <div className="inline-block px-4 py-2 rounded-full bg-red-50 text-red-700 font-medium mb-6">
+            Calgary Compass
+          </div>
+      
+          <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 max-w-4xl">
+            Connecting Community Priorities and Emerging Technologies
           </h1>
-
-          <p className="text-xl text-red-50 max-w-4xl leading-relaxed">
-            Calgary Compass bridges the gap between community priorities and
-            emerging technologies. The platform provides a space for residents,
-            researchers, and decision-makers to explore technologies, identify
-            community challenges, and contribute insights that can support
-            innovation and informed discussion in Calgary.
+      
+          <p className="text-xl text-gray-600 max-w-3xl leading-relaxed">
+            Calgary Compass bridges the gap between community priorities and emerging
+            technologies. The platform provides a space for residents, researchers,
+            and decision-makers to explore technologies, identify community
+            challenges, and contribute insights that support innovation and informed
+            discussion in Calgary.
           </p>
+      
         </div>
       </section>
 
