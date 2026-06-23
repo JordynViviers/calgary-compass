@@ -93,19 +93,19 @@ export default function Home() {
             ))}
         
             {/* DIRECTIONS */}
-            <span className="absolute top-4 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700 bg-white px-3">
+            <span className="absolute top-4 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
               N
             </span>
             
-            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700 bg-white px-3">
+            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
               S
             </span>
             
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700 bg-white px-3">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
               W
             </span>
             
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700 bg-white px-3">
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
               E
             </span>
                     
