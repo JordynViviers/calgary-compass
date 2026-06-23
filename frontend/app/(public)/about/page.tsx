@@ -16,13 +16,13 @@ export default function AboutPage() {
     <main className="min-h-screen bg-white">
       <div className="h-2 bg-red-700 w-full"></div>
       {/* HERO */}
-      <section className="px-6 py-20 border-b border-gray-200">
+      <section className="bg-gradient-to-br from-red-700 to-red-600 text-white px-6 py-24">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold text-red-700 mb-6">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6">
             About Calgary Compass
           </h1>
 
-          <p className="text-xl text-gray-600 max-w-4xl leading-relaxed">
+          <p className="text-xl text-red-50 max-w-4xl leading-relaxed">
             Calgary Compass bridges the gap between community priorities and
             emerging technologies. The platform provides a space for residents,
             researchers, and decision-makers to explore technologies, identify
@@ -35,7 +35,7 @@ export default function AboutPage() {
       {/* HOW IT WORKS */}
       <section className="px-6 py-20">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
+          <h2 className="text-4xl font-bold text-red-700 text-center mb-4">
             How Calgary Compass Works
           </h2>
 
@@ -96,12 +96,12 @@ export default function AboutPage() {
       {/* DATA SOURCES */}
       <section className="bg-gray-50 px-6 py-20">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-bold mb-8">
+          <h2 className="text-4xl font-bold text-red-700 mb-8">
             Our Data Sources
           </h2>
 
           <div className="bg-white border border-gray-200 rounded-2xl p-8">
-            <h3 className="text-2xl font-semibold mb-4">
+            <h3 className="text-xl font-semibold mb-4">
               Research Sources
             </h3>
 
@@ -126,12 +126,12 @@ export default function AboutPage() {
       {/* WHY IT MATTERS */}
       <section className="px-6 py-20">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">
+          <h2 className="text-4xl font-bold text-red-700 text-center mb-12">
             Why It Matters
           </h2>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
+            <div className="bg-white border border-gray-200 border-t-4 border-t-red-700 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
               <MessageSquare className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Community Voice
@@ -142,7 +142,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
+            <div className="bg-white border border-gray-200 border-t-4 border-t-red-700 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
               <ShieldCheck className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Evidence-Informed Discussions
@@ -153,7 +153,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
+            <div className="bg-white border border-gray-200 border-t-4 border-t-red-700 rounded-2xl p-8 shadow-sm hover:shadow-md transition">
               <MapPinned className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Local Relevance
@@ -168,9 +168,9 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-gray-900 text-white px-6 py-20">
+      <section className="bg-red-700 text-white px-6 py-20">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">
+          <h2 className="text-4xl font-bold text-red-700 mb-6">
             Get Involved
           </h2>
 
