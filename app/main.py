@@ -1,9 +1,8 @@
-from fastapi import FastAPI, Depends, UploadFile, File
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from app.database import engine, SessionLocal
-from fastapi.staticfiles import StaticFiles
 from app.models import (
     Technology,
     Vote,
@@ -41,7 +40,6 @@ from app.services.openalex import search_openalex
 import requests
 import os
 import json
-import shutil
 
 from openai import OpenAI
 from pydantic import BaseModel
@@ -79,13 +77,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-os.makedirs("uploads", exist_ok=True)
 
-app.mount(
-    "/uploads",
-    StaticFiles(directory="uploads"),
-    name="uploads"
-)
 # =========================
 # DB SESSION
 # =========================
@@ -2007,20 +1999,4 @@ def technology_impact(
 
     return impact
 
-@app.post("/upload-image")
-async def upload_image(
-    file: UploadFile = File(...)
-):
-    file_path = f"uploads/{file.filename}"
-
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(
-            file.file,
-            buffer
-        )
-
-    return {
-        "image_url":
-        f"/uploads/{file.filename}"
-    }
 
