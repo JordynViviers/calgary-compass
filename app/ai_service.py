@@ -98,20 +98,33 @@ Abstract: {p['abstract']}
 # =====================================================
 # MAIN AI FUNCTION (CIVIC INTELLIGENCE ENGINE)
 # =====================================================
-def evaluate_technology(technology_name, technology_description):
+def evaluate_technology(
+    technology_name,
+    technology_description
+):
+
+    query = (
+        f"{technology_name} "
+        "smart city urban infrastructure governance"
+    )
+
+    openalex = search_openalex(query)
+
+    semantic = search_semantic_scholar(query)
+
+    context = build_research_context(
+        openalex,
+        semantic
+    )
 
     try:
 
-        query = f"{technology_name} smart city urban infrastructure governance"
-
-        openalex = search_openalex(query)
-        semantic = search_semantic_scholar(query)
-
-        context = build_research_context(openalex, semantic)
-
         response = client.chat.completions.create(
+
             model="gpt-4.1-mini",
+
             messages=[
+
                 {
                     "role": "system",
                     "content": """
@@ -121,15 +134,18 @@ You evaluate technologies for real-world municipal deployment.
 
 Return ONLY valid JSON.
 
-Be precise, realistic, and evidence-based.
+Use evidence from the supplied research context whenever possible.
+
+Scores must be realistic and should not all be identical unless strongly justified.
 """
                 },
+
                 {
                     "role": "user",
                     "content": f"""
 Evaluate this technology for municipal use in Calgary.
 
-Technology Name:
+Technology:
 {technology_name}
 
 Description:
@@ -138,79 +154,126 @@ Description:
 ========================
 RESEARCH CONTEXT
 ========================
+
 {context}
 
 ========================
-OUTPUT REQUIREMENTS
+RETURN JSON ONLY
 ========================
 
-Return JSON ONLY with:
-
-1. Scores (1-10):
-- reliable_infrastructure
-- safe_city
-- transportation_network
-- community_wellbeing
-- balanced_growth
-- trusted_governance
-
-2. Analysis Fields:
-- summary: 2-3 sentence high level assessment
-- technology_summary: what the technology does (plain language)
-- calgary_problem: what municipal challenge in Calgary it solves
-- global_examples: real cities using similar systems (be factual, no hallucinations)
-- implementation_statistics: measurable outcomes (cost, efficiency, emissions, safety, etc.)
-- governance_recommendation: one of [pilot, scale, monitor, avoid]
-
-If data is uncertain, explicitly say so.
-
-========================
-RETURN FORMAT EXAMPLE
-========================
-
-{
-  "reliable_infrastructure": 7,
-  "safe_city": 8,
-  "transportation_network": 6,
-  "community_wellbeing": 7,
-  "balanced_growth": 8,
-  "trusted_governance": 8,
+{{
+  "reliable_infrastructure": integer 1-10,
+  "safe_city": integer 1-10,
+  "transportation_network": integer 1-10,
+  "community_wellbeing": integer 1-10,
+  "balanced_growth": integer 1-10,
+  "trusted_governance": integer 1-10,
 
   "summary": "...",
 
   "technology_summary": "...",
+
   "calgary_problem": "...",
+
   "global_examples": "...",
+
   "implementation_statistics": "...",
-  "governance_recommendation": "pilot"
-}
+
+  "governance_recommendation":
+      "pilot" | "scale" | "monitor" | "avoid"
+}}
 """
                 }
             ],
-            response_format={"type": "json_object"}
+
+            response_format={
+                "type": "json_object"
+            }
+
         )
 
-        content = response.choices[0].message.content
+        content = (
+            response
+            .choices[0]
+            .message
+            .content
+        )
 
-        return json.loads(content)
+        print(
+            "========== AI RESPONSE =========="
+        )
+
+        print(content)
+
+        print(
+            "================================="
+        )
+
+        result = json.loads(content)
+
+        required_fields = [
+
+            "reliable_infrastructure",
+            "safe_city",
+            "transportation_network",
+            "community_wellbeing",
+            "balanced_growth",
+            "trusted_governance",
+
+            "summary",
+            "technology_summary",
+            "calgary_problem",
+            "global_examples",
+            "implementation_statistics",
+            "governance_recommendation"
+        ]
+
+        missing = [
+
+            field
+            for field in required_fields
+            if field not in result
+
+        ]
+
+        if missing:
+
+            raise Exception(
+                f"Missing fields: {missing}"
+            )
+
+        return result
 
     except Exception as e:
 
-        print("AI ERROR:", e)
+        print(
+            "========== AI ERROR =========="
+        )
+
+        print(e)
+
+        print(
+            "=============================="
+        )
 
         return {
-            "reliable_infrastructure": 5,
-            "safe_city": 5,
-            "transportation_network": 5,
-            "community_wellbeing": 5,
-            "balanced_growth": 5,
-            "trusted_governance": 5,
 
-            "summary": "AI evaluation failed.",
+            "error": str(e),
+
+            "reliable_infrastructure": 0,
+            "safe_city": 0,
+            "transportation_network": 0,
+            "community_wellbeing": 0,
+            "balanced_growth": 0,
+            "trusted_governance": 0,
+
+            "summary":
+                f"AI evaluation failed: {e}",
 
             "technology_summary": "",
             "calgary_problem": "",
             "global_examples": "",
             "implementation_statistics": "",
-            "governance_recommendation": "monitor"
+            "governance_recommendation":
+                "monitor"
         }
