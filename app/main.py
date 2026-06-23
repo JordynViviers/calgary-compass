@@ -537,7 +537,10 @@ def comparison(
     ai_eval = db.query(
         AIEvaluation
     ).filter(
-        AIEvaluation.technology_id == technology_id
+        AIEvaluation.technology_id
+        == technology_id
+    ).order_by(
+        AIEvaluation.id.desc()
     ).first()
 
     votes = db.query(
