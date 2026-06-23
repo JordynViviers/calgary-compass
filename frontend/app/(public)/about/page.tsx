@@ -19,10 +19,6 @@ export default function AboutPage() {
       <section className="px-6 py-24 border-b border-gray-200">
         <div className="max-w-5xl mx-auto text-center">
       
-          <div className="inline-block px-4 py-2 rounded-full bg-red-50 text-red-700 font-medium mb-6">
-            Calgary Compass
-          </div>
-      
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
             About Calgary Compass
           </h1>
