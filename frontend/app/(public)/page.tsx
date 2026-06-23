@@ -18,7 +18,7 @@ export default function Home() {
 
         {/* BACKGROUND COMPASS */}
         <div className="hidden md:flex absolute inset-y-0 right-0 w-1/2 items-center justify-center pointer-events-none translate-y-[18px]">
-          <div className="relative w-[90vw] max-w-[540px] aspect-square">
+          <div className="relative w-[90vw] max-w-[460px] aspect-square">
         
             {/* RINGS */}
             {/* Outer Ring */}
