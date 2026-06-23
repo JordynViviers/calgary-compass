@@ -21,11 +21,20 @@ export default function Home() {
           <div className="relative w-[90vw] max-w-[620px] aspect-square">
         
             {/* RINGS */}
-            <div className="absolute inset-0 rounded-full border-[6px] border-red-700" />
-        
-            <div className="absolute inset-10 rounded-full border-2 border-red-700" />
-        
-            <div className="absolute inset-20 rounded-full border border-red-700 opacity-40" />
+            {/* Outer Ring */}
+            <div className="absolute inset-0 rounded-full border-[5px] border-red-700" />
+            
+            {/* Ring 2 */}
+            <div className="absolute inset-8 rounded-full border border-gray-400 opacity-70" />
+            
+            {/* Ring 3 */}
+            <div className="absolute inset-16 rounded-full border-2 border-dashed border-red-700 opacity-60" />
+            
+            {/* Ring 4 */}
+            <div className="absolute inset-28 rounded-full border border-gray-300 opacity-60" />
+            
+            {/* Ring 5 */}
+            <div className="absolute inset-40 rounded-full border border-dashed border-gray-400 opacity-50" />
         
             {/* AXES */}
 
@@ -93,19 +102,19 @@ export default function Home() {
             ))}
         
             {/* DIRECTIONS */}
-            <span className="absolute top-4 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
+            <span className="absolute -top-12 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
               N
             </span>
             
-            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
+            <span className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
               S
             </span>
             
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
+            <span className="absolute -left-12 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
               W
             </span>
             
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
+            <span className="absolute -right-12 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
               E
             </span>
                     
