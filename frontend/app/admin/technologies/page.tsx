@@ -250,6 +250,22 @@ export default function AdminPage() {
           }
         />
 
+        {heroImage && (
+          <img
+            src={heroImage}
+            alt="Preview"
+            className="
+              w-full
+              h-48
+              object-cover
+              rounded-xl
+              border
+              border-gray-200
+              mb-6
+            "
+          />
+        )}
+
 
         <div className="flex gap-3">
 
