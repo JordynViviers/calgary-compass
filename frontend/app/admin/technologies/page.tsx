@@ -38,6 +38,7 @@ export default function AdminPage() {
     setName("");
     setDescription("");
     setEditingId(null);
+    setHeroImage("");
   };
 
   const submitTechnology = async () => {
@@ -47,7 +48,9 @@ export default function AdminPage() {
           `${API_URL}/technology/${editingId}`,
           {
             name,
-            description
+            description,
+            hero_image: heroImage, 
+            is_active: true
           }
         );
 
@@ -57,7 +60,8 @@ export default function AdminPage() {
           `${API_URL}/technology`,
           {
             name,
-            description
+            description, 
+            hero_image: heroImage, 
           }
         );
 
@@ -170,6 +174,10 @@ export default function AdminPage() {
 
     setDescription(
       technology.description
+    );
+
+    setHeroImage(
+      technology.hero_image || ""
     );
 
 
