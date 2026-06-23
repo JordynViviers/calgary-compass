@@ -14,6 +14,7 @@ import {
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white">
+      <div className="h-2 bg-red-700 w-full"></div>
       {/* HERO */}
       <section className="px-6 py-20 border-b border-gray-200">
         <div className="max-w-5xl mx-auto">
