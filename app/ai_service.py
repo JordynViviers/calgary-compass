@@ -260,12 +260,12 @@ RETURN JSON ONLY
 
             "error": str(e),
 
-            "reliable_infrastructure": 0,
-            "safe_city": 0,
-            "transportation_network": 0,
-            "community_wellbeing": 0,
-            "balanced_growth": 0,
-            "trusted_governance": 0,
+            "reliable_infrastructure": None,
+            "safe_city": None,
+            "transportation_network": None,
+            "community_wellbeing": None,
+            "balanced_growth": None,
+            "trusted_governance": None,
 
             "summary":
                 f"AI evaluation failed: {e}",
