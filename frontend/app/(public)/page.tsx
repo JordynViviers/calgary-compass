@@ -94,7 +94,7 @@ export default function Home() {
                   style={{
                     width: "2px",
                     height: i % 4 === 0 ? "18px" : "8px",
-                    transform: "translateY(-305px)",
+                    transform: "translateY(-255px)",
                     opacity: i % 4 === 0 ? 0.8 : 0.3,
                   }}
                 />
@@ -394,13 +394,6 @@ export default function Home() {
               Get Involved
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* Bottom Badge */}
-      <section className="bg-white pb-16 text-center">
-        <div className="inline-flex items-center px-5 py-2 rounded-full border border-red-100 bg-red-50 text-red-700 text-sm font-medium">
-          Smart City Intelligence Platform
         </div>
       </section>
 
