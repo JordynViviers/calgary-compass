@@ -403,6 +403,8 @@ def weighted_scores(
         AIEvaluation
     ).filter(
         AIEvaluation.technology_id == technology_id
+    ).order_by(
+        AIEvaluation.id.desc()
     ).first()
 
     votes = db.query(
@@ -636,6 +638,8 @@ def get_ai_evaluation(
         AIEvaluation
     ).filter(
         AIEvaluation.technology_id == technology_id
+    ).order_by(
+        AIEvaluation.id.desc()
     ).first()
 
     if not evaluation:
@@ -755,7 +759,7 @@ def update_technology(
     tech.name = data.name
     tech.description = data.description
     tech.is_active = data.is_active
-    technology.hero_image = data.hero_image
+    tech.hero_image = data.hero_image
 
     db.commit()
 
