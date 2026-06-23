@@ -737,6 +737,51 @@ const weightedAverage =
         </div>
       
       </div>
+
+      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-red-50">
+        <h2 className="text-3xl font-semibold text-red-700 mb-4">
+          Assessment Overview
+        </h2>
+      
+        <p className="text-gray-700 leading-relaxed">
+          Calgary Compass combines AI-supported evaluation with community input to
+          provide a balanced perspective on each technology.
+        </p>
+      
+        <div className="grid md:grid-cols-3 gap-4 mt-6">
+          <div className="bg-white rounded-xl p-4">
+            <h3 className="font-semibold text-red-700 mb-2">
+              AI Assessment
+            </h3>
+      
+            <p className="text-gray-600 text-sm">
+              Evaluates the technology against Calgary's strategic priorities using
+              research and evidence sources.
+            </p>
+          </div>
+      
+          <div className="bg-white rounded-xl p-4">
+            <h3 className="font-semibold text-red-700 mb-2">
+              Community Assessment
+            </h3>
+      
+            <p className="text-gray-600 text-sm">
+              Reflects how community participants score the technology across the
+              same evaluation criteria.
+            </p>
+          </div>
+      
+          <div className="bg-white rounded-xl p-4">
+            <h3 className="font-semibold text-red-700 mb-2">
+              Combined Assessment
+            </h3>
+      
+            <p className="text-gray-600 text-sm">
+              Integrates AI evaluation and community feedback into a single score.
+            </p>
+          </div>
+        </div>
+      </div>
       {/* AI VS COMMUNITY */}
 
       <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
