@@ -48,7 +48,7 @@ export default function AboutPage() {
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+            <div className="bg-white border border-gray-200 border-t-4 border-t-red-700 rounded-2xl p-6 shadow-sm hover:shadow-md transition">
               <Users className="w-10 h-10 mb-4 text-red-700" />
               <h3 className="text-xl font-semibold mb-3">
                 Community Challenges
