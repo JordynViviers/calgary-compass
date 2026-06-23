@@ -65,8 +65,8 @@ def create_ai_evaluation(
     safe_city: int,
     transportation_network: int,
     community_wellbeing: int,
-    balanced_growth: int, 
-    trusted_governance: int, 
+    balanced_growth: int,
+    trusted_governance: int,
     summary: str,
     technology_summary: str,
     calgary_problem: str,
@@ -75,24 +75,83 @@ def create_ai_evaluation(
     governance_recommendation: str
 ):
 
-    evaluation = AIEvaluation(
-        technology_id=technology_id,
-        reliable_infrastructure=reliable_infrastructure,
-        safe_city=safe_city,
-        transportation_network=transportation_network,
-        community_wellbeing=community_wellbeing,
-        balanced_growth=balanced_growth, 
-        trusted_governance=trusted_governance,
-        summary=summary,
-        technology_summary=technology_summary,
-        calgary_problem=calgary_problem,
-        global_examples=global_examples,
-        implementation_statistics=implementation_statistics,
-        governance_recommendation=governance_recommendation
-    )
+    evaluation = db.query(
+        AIEvaluation
+    ).filter(
+        AIEvaluation.technology_id
+        == technology_id
+    ).first()
 
-    db.add(evaluation)
+    if evaluation:
+
+        evaluation.reliable_infrastructure = (
+            reliable_infrastructure
+        )
+
+        evaluation.safe_city = (
+            safe_city
+        )
+
+        evaluation.transportation_network = (
+            transportation_network
+        )
+
+        evaluation.community_wellbeing = (
+            community_wellbeing
+        )
+
+        evaluation.balanced_growth = (
+            balanced_growth
+        )
+
+        evaluation.trusted_governance = (
+            trusted_governance
+        )
+
+        evaluation.summary = summary
+
+        evaluation.technology_summary = (
+            technology_summary
+        )
+
+        evaluation.calgary_problem = (
+            calgary_problem
+        )
+
+        evaluation.global_examples = (
+            global_examples
+        )
+
+        evaluation.implementation_statistics = (
+            implementation_statistics
+        )
+
+        evaluation.governance_recommendation = (
+            governance_recommendation
+        )
+
+    else:
+
+        evaluation = AIEvaluation(
+            technology_id=technology_id,
+            reliable_infrastructure=reliable_infrastructure,
+            safe_city=safe_city,
+            transportation_network=transportation_network,
+            community_wellbeing=community_wellbeing,
+            balanced_growth=balanced_growth,
+            trusted_governance=trusted_governance,
+            summary=summary,
+            technology_summary=technology_summary,
+            calgary_problem=calgary_problem,
+            global_examples=global_examples,
+            implementation_statistics=implementation_statistics,
+            governance_recommendation=governance_recommendation
+        )
+
+        db.add(evaluation)
+
     db.commit()
+
     db.refresh(evaluation)
 
     return evaluation
