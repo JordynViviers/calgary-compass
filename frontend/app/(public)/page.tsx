@@ -16,156 +16,128 @@ export default function Home() {
         {/* Translucent Overlay */}
         <div className="absolute inset-0 bg-white/80"></div>
 
-        {/* TECH COMPASS */}
-        <div className="relative w-[90vw] max-w-[700px] aspect-square">
-
-          {/* ROTATING OUTER RING */}
-          <div
-            className="absolute inset-0 rounded-full border-[5px] border-red-700"
-            style={{
-              animation: "ringRotate 45s linear infinite",
-            }}
-          />
+        {/* BACKGROUND COMPASS */}
+        <div className="hidden md:flex absolute inset-y-0 right-0 w-1/2 items-center justify-center pointer-events-none translate-y-[18px]">
+          <div className="relative w-[90vw] max-w-[620px] aspect-square opacity-15">
         
-          {/* SECONDARY RINGS */}
-          <div className="absolute inset-8 rounded-full border border-red-700 opacity-80" />
+            {/* RINGS */}
+            <div className="absolute inset-0 rounded-full border-[6px] border-red-700" />
         
-          <div
-            className="absolute inset-16 rounded-full border-2 border-dashed border-red-700 opacity-70"
-            style={{
-              animation: "ringRotateReverse 30s linear infinite",
-            }}
-          />
+            <div className="absolute inset-10 rounded-full border-2 border-red-700" />
         
-          <div className="absolute inset-28 rounded-full border border-red-700 opacity-60" />
+            <div className="absolute inset-20 rounded-full border border-red-700 opacity-40" />
         
-          <div className="absolute inset-40 rounded-full border border-dashed border-red-700 opacity-50" />
+            {/* AXES */}
+            <div className="absolute left-1/2 top-0 h-full w-[2px] bg-red-700 -translate-x-1/2" />
         
-          {/* AXES */}
-          <div className="absolute left-1/2 top-0 h-full w-px bg-red-700 opacity-40 -translate-x-1/2" />
+            <div className="absolute top-1/2 left-0 w-full h-[2px] bg-red-700 -translate-y-1/2" />
         
-          <div className="absolute top-1/2 left-0 w-full h-px bg-red-700 opacity-40 -translate-y-1/2" />
+            <div className="absolute inset-0 rotate-45">
+              <div className="absolute left-1/2 top-0 h-full w-px bg-red-700 opacity-40 -translate-x-1/2" />
         
-          <div className="absolute inset-0 rotate-45">
-            <div className="absolute left-1/2 top-0 h-full w-px bg-red-700 opacity-20 -translate-x-1/2" />
-            <div className="absolute top-1/2 left-0 w-full h-px bg-red-700 opacity-20 -translate-y-1/2" />
-          </div>
-        
-          {/* PRECISION MARKINGS */}
-          {Array.from({ length: 72 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute left-1/2 top-1/2"
-              style={{
-                transform: `translate(-50%, -50%) rotate(${i * 5}deg)`,
-              }}
-            >
-              <div
-                className="bg-red-700"
-                style={{
-                  width: "2px",
-                  height: i % 3 === 0 ? "18px" : "8px",
-                  transform: "translateY(-335px)",
-                  opacity: i % 3 === 0 ? 0.9 : 0.35,
-                }}
-              />
+              <div className="absolute top-1/2 left-0 w-full h-px bg-red-700 opacity-40 -translate-y-1/2" />
             </div>
-          ))}
         
-          {/* SIGNAL NODES */}
-          <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-4 h-4 bg-red-700 rounded-full animate-pulse shadow-[0_0_15px_rgba(185,28,28,0.7)]" />
-        
-          <div className="absolute top-[25%] right-[15%] w-4 h-4 bg-red-700 rounded-full animate-pulse shadow-[0_0_15px_rgba(185,28,28,0.7)]" />
-        
-          <div className="absolute bottom-[18%] right-[25%] w-4 h-4 bg-red-700 rounded-full animate-pulse shadow-[0_0_15px_rgba(185,28,28,0.7)]" />
-        
-          <div className="absolute bottom-[20%] left-[20%] w-4 h-4 bg-red-700 rounded-full animate-pulse shadow-[0_0_15px_rgba(185,28,28,0.7)]" />
-        
-          <div className="absolute top-[30%] left-[18%] w-4 h-4 bg-red-700 rounded-full animate-pulse shadow-[0_0_15px_rgba(185,28,28,0.7)]" />
-        
-          {/* CARDINAL DIRECTIONS */}
-          <span className="absolute top-3 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
-            N
-          </span>
-        
-          <span className="absolute bottom-3 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
-            S
-          </span>
-        
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
-            W
-          </span>
-        
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
-            E
-          </span>
-        
-          {/* NEEDLE */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div
-              className="relative w-full h-full"
-              style={{
-                animation: "compassFloat 10s ease-in-out infinite",
-              }}
-            >
-              {/* NORTH */}
+            {/* TICK MARKS */}
+            {Array.from({ length: 48 }).map((_, i) => (
               <div
-                className="
-                  absolute
-                  left-1/2
-                  top-1/2
-                  w-0
-                  h-0
-                  border-l-[18px]
-                  border-r-[18px]
-                  border-b-[220px]
-                  border-l-transparent
-                  border-r-transparent
-                  border-b-red-700
-                  -translate-x-1/2
-                  -translate-y-full
-                  drop-shadow-[0_0_20px_rgba(185,28,28,0.5)]
-                "
-              />
-        
-              {/* SOUTH */}
-              <div
-                className="
-                  absolute
-                  left-1/2
-                  top-1/2
-                  w-0
-                  h-0
-                  border-l-[18px]
-                  border-r-[18px]
-                  border-t-[220px]
-                  border-l-transparent
-                  border-r-transparent
-                  border-t-gray-500
-                  -translate-x-1/2
-                "
-              />
-        
-              {/* HUB */}
-              <div
-                className="
-                  absolute
-                  left-1/2
-                  top-1/2
-                  w-14
-                  h-14
-                  rounded-full
-                  border-[5px]
-                  border-red-700
-                  bg-white
-                  -translate-x-1/2
-                  -translate-y-1/2
-                  shadow-[0_0_30px_rgba(185,28,28,0.45)]
-                "
+                key={i}
+                className="absolute left-1/2 top-1/2"
+                style={{
+                  transform: `translate(-50%, -50%) rotate(${i * 7.5}deg)`,
+                }}
               >
-                <div className="absolute inset-2 rounded-full bg-red-700" />
+                <div
+                  className="bg-red-700"
+                  style={{
+                    width: "2px",
+                    height: i % 4 === 0 ? "18px" : "8px",
+                    transform: "translateY(-305px)",
+                    opacity: i % 4 === 0 ? 0.8 : 0.3,
+                  }}
+                />
+              </div>
+            ))}
+        
+            {/* DIRECTIONS */}
+            <span className="absolute top-4 left-1/2 -translate-x-1/2 text-3xl font-bold text-red-700">
+              N
+            </span>
+        
+            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-3xl font-bold text-red-700">
+              S
+            </span>
+        
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-3xl font-bold text-red-700">
+              W
+            </span>
+        
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-3xl font-bold text-red-700">
+              E
+            </span>
+        
+            {/* NEEDLE */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div
+                className="relative w-full h-full"
+                style={{
+                  animation: "compassFloat 8s ease-in-out infinite",
+                }}
+              >
+                <div
+                  className="
+                    absolute
+                    left-1/2
+                    top-1/2
+                    w-0
+                    h-0
+                    border-l-[14px]
+                    border-r-[14px]
+                    border-b-[190px]
+                    border-l-transparent
+                    border-r-transparent
+                    border-b-red-700
+                    -translate-x-1/2
+                    -translate-y-full
+                    drop-shadow-[0_0_12px_rgba(185,28,28,0.4)]
+                  "
+                />
+        
+                <div
+                  className="
+                    absolute
+                    left-1/2
+                    top-1/2
+                    w-0
+                    h-0
+                    border-l-[14px]
+                    border-r-[14px]
+                    border-t-[190px]
+                    border-l-transparent
+                    border-r-transparent
+                    border-t-gray-500
+                    -translate-x-1/2
+                  "
+                />
+        
+                {/* HUB */}
+                <div
+                  className="
+                    absolute
+                    left-1/2
+                    top-1/2
+                    w-8
+                    h-8
+                    bg-red-700
+                    rounded-full
+                    -translate-x-1/2
+                    -translate-y-1/2
+                    shadow-[0_0_20px_rgba(185,28,28,0.5)]
+                  "
+                />
               </div>
             </div>
+        
           </div>
         </div>
         {/* Hero Content */}
@@ -391,13 +363,18 @@ export default function Home() {
       </section>
 
       <style>{`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          20% { transform: rotate(45deg); }
-          40% { transform: rotate(-20deg); }
-          60% { transform: rotate(120deg); }
-          80% { transform: rotate(75deg); }
-          100% { transform: rotate(360deg); }
+        @keyframes compassFloat {
+          0% {
+            transform: rotate(-10deg);
+          }
+      
+          50% {
+            transform: rotate(12deg);
+          }
+      
+          100% {
+            transform: rotate(-10deg);
+          }
         }
       `}</style>
     </main>
