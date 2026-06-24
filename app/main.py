@@ -1824,7 +1824,20 @@ def create_challenge_application_link(
     data: ChallengeApplicationLinkRequest,
     db: Session = Depends(get_db)
 ):
-
+    existing = (
+        db.query(ChallengeApplicationLink)
+        .filter(
+            ChallengeApplicationLink.challenge == data.challenge,
+            ChallengeApplicationLink.application_id == data.application_id
+        )
+        .first()
+    )
+    
+    if existing:
+        raise HTTPException(
+            status_code=400,
+            detail="Mapping already exists."
+        )
     link = ChallengeApplicationLink(
         challenge=data.challenge,
         application_id=data.application_id,
