@@ -92,17 +92,6 @@ export default function CompassLoader() {
         Loading...
       </p>
 
-      <style jsx>{`
-        @keyframes compass-spin {
-          from {
-            transform: rotate(0deg);
-          }
-
-          to {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
 
     </div>
   );
