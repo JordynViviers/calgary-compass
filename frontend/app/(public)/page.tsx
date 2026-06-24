@@ -22,7 +22,7 @@ export default function Home() {
         
             {/* RINGS */}
             {/* Outer Ring */}
-            <div className="absolute inset-0 rounded-full border-[5px] border-red-700" />
+            <div className="absolute inset-0 rounded-full border-[5px] border-gray-500" />
             
             {/* Ring 2 */}
             <div className="absolute inset-8 rounded-full border border-gray-400 opacity-70" />
@@ -102,19 +102,19 @@ export default function Home() {
             ))}
         
             {/* DIRECTIONS */}
-            <span className="absolute -top-12 left-1/2 -translate-x-1/2 text-4xl font-bold text-gray-400">
+            <span className="absolute -top-12 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
               N
             </span>
             
-            <span className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-4xl font-bold text-gray-400">
+            <span className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
               S
             </span>
             
-            <span className="absolute -left-12 top-1/2 -translate-y-1/2 text-4xl font-bold text-gray-400">
+            <span className="absolute -left-12 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
               W
             </span>
             
-            <span className="absolute -right-12 top-1/2 -translate-y-1/2 text-4xl font-bold text-gray-400">
+            <span className="absolute -right-12 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
               E
             </span>
                     
