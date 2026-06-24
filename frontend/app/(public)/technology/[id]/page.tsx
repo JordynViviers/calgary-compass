@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import CompassLoader from "@/components/CompassLoader";
 
 import {
   BarChart,
