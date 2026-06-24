@@ -223,7 +223,7 @@ export default function TechnologyDetailPage() {
 
     return (
 
-      <main className="min-h-screen p-4 md:p-10 bg-white text-white">
+      <main className="min-h-screen p-4 md:p-10 bg-white text-black">
 
         <h1 className="text-3xl md:text-5xl font-bold text-red-700 mb-3">
           Loading technology...
@@ -376,13 +376,13 @@ const weightedAverage =
             </p>
       
             <h1
-              className="
-                text-5xl
-                md:text-7xl
-                font-bold
-                text-white
-                drop-shadow-2xl
-              "
+              style={{
+                color: "white",
+                backgroundColor: "red",
+                padding: "20px",
+                zIndex: 999,
+                position: "relative",
+              }}
             >
               {technology.name}
             </h1>
