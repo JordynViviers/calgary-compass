@@ -29,14 +29,14 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="h-1 bg-red-700 w-full" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="w-full px-8 lg:px-12 xl:px-16">
 
-        <div className="flex items-center h-24">
+        <div className="flex items-center justify-between h-24 w-full">
 
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3 mr-auto"
+            className="flex items-center gap-4"
           >
             <img
               src="/compass-logo.png"
@@ -58,7 +58,7 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
 
-            <nav className="flex items-center gap-5">
+            <nav className="flex items-center gap-7 xl:gap-8">
 
               <Link
                 href="/"
@@ -190,8 +190,8 @@ export default function Navbar() {
                 shadow-md
                 hover:shadow-lg
                 text-white
-                px-6
-                py-3
+                px-7
+                py-3.5
                 rounded-xl
                 font-semibold
                 transition
