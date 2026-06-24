@@ -57,12 +57,12 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
 
-            <nav className="flex items-center gap-7 xl:gap-8">
+            <nav className="flex items-center gap-4 xl:gap-8">
 
               <Link
                 href="/"
                 className="
-                  text-sm
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -79,7 +79,7 @@ export default function Navbar() {
               <Link
                 href="/about"
                 className="
-                  text-sm
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -96,7 +96,7 @@ export default function Navbar() {
               <Link
                 href="/technologies"
                 className="
-                  text-sm
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -113,7 +113,7 @@ export default function Navbar() {
               <Link
                 href="/analytics"
                 className="
-                  text-sm
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -130,7 +130,7 @@ export default function Navbar() {
               <Link
                 href="/signals"
                 className="
-                  text-sm
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -147,7 +147,7 @@ export default function Navbar() {
               <Link
                 href="/foresight"
                 className="
-                  text-sm
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -165,7 +165,7 @@ export default function Navbar() {
               <Link
                 href="/events"
                 className="
-                  text-sm
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
