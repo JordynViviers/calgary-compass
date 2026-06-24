@@ -102,19 +102,19 @@ export default function Home() {
             ))}
         
             {/* DIRECTIONS */}
-            <span className="absolute -top-12 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
+            <span className="absolute -top-12 left-1/2 -translate-x-1/2 text-4xl font-bold text-gray-400">
               N
             </span>
             
-            <span className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-4xl font-bold text-red-700">
+            <span className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-4xl font-bold text-gray-400">
               S
             </span>
             
-            <span className="absolute -left-12 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
+            <span className="absolute -left-12 top-1/2 -translate-y-1/2 text-4xl font-bold text-gray-400">
               W
             </span>
             
-            <span className="absolute -right-12 top-1/2 -translate-y-1/2 text-4xl font-bold text-red-700">
+            <span className="absolute -right-12 top-1/2 -translate-y-1/2 text-4xl font-bold text-gray-400">
               E
             </span>
                     
@@ -141,7 +141,6 @@ export default function Home() {
                     border-b-red-700
                     -translate-x-1/2
                     -translate-y-full
-                    drop-shadow-[0_0_12px_rgba(185,28,28,0.4)]
                   "
                 />
         
