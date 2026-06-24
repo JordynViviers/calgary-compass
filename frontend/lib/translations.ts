@@ -5,7 +5,7 @@ export const translations = {
     about: "About",
     foresight: "Foresight",
     technologies: "Explore Technologies",
-    analytics: "Analytics",
+    analytics: "Community Analytics",
     signals: "Signals",
     events: "Events",
     apply: "Apply",
