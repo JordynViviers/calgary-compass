@@ -1,8 +1,80 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function AdminHome() {
+  const [authenticated, setAuthenticated] =
+    useState(false);
+
+  const [password, setPassword] =
+    useState("");
+
+  if (!authenticated) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-white px-6">
+
+        <div className="w-full max-w-md border border-gray-200 rounded-2xl p-8 shadow-sm bg-white">
+
+          <h1 className="text-3xl font-bold text-red-700 mb-2">
+            Admin Access
+          </h1>
+
+          <p className="text-gray-600 mb-6">
+            Enter password to access Calgary Compass administration.
+          </p>
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
+            className="
+              w-full
+              border
+              border-gray-300
+              rounded-xl
+              p-3
+              mb-4
+              focus:outline-none
+              focus:ring-2
+              focus:ring-red-400
+            "
+          />
+
+          <button
+            onClick={() => {
+              if (
+                password ===
+                "Touse26"
+              ) {
+                setAuthenticated(true);
+              } else {
+                alert("Incorrect password");
+              }
+            }}
+            className="
+              w-full
+              bg-red-600
+              hover:bg-red-700
+              text-white
+              rounded-xl
+              p-3
+              font-semibold
+              transition
+            "
+          >
+            Login
+          </button>
+
+        </div>
+
+      </main>
+    );
+  }
+
   return (
     <main className="relative min-h-screen bg-white text-black overflow-hidden">
 
