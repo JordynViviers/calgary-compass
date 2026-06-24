@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { Search } from "lucide-react";
+import CompassLoader from "@/components/CompassLoader";
 
 const API_URL = "https://calgary-compass-api.onrender.com";
 
