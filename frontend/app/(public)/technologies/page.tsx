@@ -38,7 +38,6 @@ export default function TechnologiesPage() {
 
   if (loading) {
     return <CompassLoader />;
-    );
   }
 
   return (
