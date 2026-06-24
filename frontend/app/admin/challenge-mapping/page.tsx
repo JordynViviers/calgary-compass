@@ -166,7 +166,7 @@ export default function ChallengeMappingPage() {
 
       {/* APPLICATION LIBRARY */}
 
-      <div className="mb-12">
+      <div className="sticky top-28 z-10 bg-white pb-6 mb-12">
 
         <h2 className="text-3xl font-bold text-red-700 mb-6">
           Applications Library
