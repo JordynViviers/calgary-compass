@@ -31,21 +31,21 @@ export default function Navbar() {
 
       <div className="w-full px-8 lg:px-12 xl:px-16">
 
-        <div className="flex items-center justify-between h-24 w-full">
+        <div className="flex items-center justify-between h-24 w-full gap-12">
 
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-4"
+            className="flex items-center gap-3 shrink-0"
           >
             <img
               src="/compass-logo.png"
               alt="Calgary Compass"
-              className="h-14 md:h-16 w-auto"
+              className="h-12 md:h-14 w-auto"
             />
 
-            <div className="leading-none">
-              <p className="text-red-700 text-sm tracking-[0.3em] font-medium mb-1">
+            <div className="leading-tight">
+              <p className="text-red-700 text-sm tracking-[0.25em] font-medium mb-0">
                 CALGARY
               </p>
             
@@ -63,7 +63,7 @@ export default function Navbar() {
               <Link
                 href="/"
                 className="
-                  text-base
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -80,7 +80,7 @@ export default function Navbar() {
               <Link
                 href="/about"
                 className="
-                  text-base
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -97,7 +97,7 @@ export default function Navbar() {
               <Link
                 href="/technologies"
                 className="
-                  text-base
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -114,7 +114,7 @@ export default function Navbar() {
               <Link
                 href="/analytics"
                 className="
-                  text-base
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -131,7 +131,7 @@ export default function Navbar() {
               <Link
                 href="/signals"
                 className="
-                  text-base
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -148,7 +148,7 @@ export default function Navbar() {
               <Link
                 href="/foresight"
                 className="
-                  text-base
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -166,7 +166,7 @@ export default function Navbar() {
               <Link
                 href="/events"
                 className="
-                  text-base
+                  text-[17px]
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -190,8 +190,8 @@ export default function Navbar() {
                 shadow-md
                 hover:shadow-lg
                 text-white
-                px-7
-                py-3.5
+                px-6
+                py-3
                 rounded-xl
                 font-semibold
                 transition
