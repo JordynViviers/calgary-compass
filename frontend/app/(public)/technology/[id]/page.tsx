@@ -355,13 +355,14 @@ const weightedAverage =
           />
       
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/60 z-10" />
       
           {/* Text Overlay */}
           <div
             className="
               absolute
               inset-0
+              z-20
               flex
               flex-col
               justify-center
@@ -380,8 +381,7 @@ const weightedAverage =
                 md:text-7xl
                 font-bold
                 text-white
-                drop-shadow-lg
-                max-w-5xl
+                drop-shadow-2xl
               "
             >
               {technology.name}
