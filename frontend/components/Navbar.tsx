@@ -112,7 +112,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/events"
+                href="/analytics"
                 className="
                   text-sm
                   font-medium
@@ -125,9 +125,9 @@ export default function Navbar() {
                   hover:border-red-700
                 "
               >
-                {t.events}
+                {t.analytics}
               </Link>
-
+              
               <Link
                 href="/signals"
                 className="
@@ -162,8 +162,9 @@ export default function Navbar() {
                 {t.foresight}
               </Link>
 
+
               <Link
-                href="/analytics"
+                href="/events"
                 className="
                   text-sm
                   font-medium
@@ -176,7 +177,7 @@ export default function Navbar() {
                   hover:border-red-700
                 "
               >
-                {t.analytics}
+                {t.events}
               </Link>
 
             </nav>
