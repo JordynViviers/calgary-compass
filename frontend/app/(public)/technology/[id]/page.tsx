@@ -377,12 +377,15 @@ const weightedAverage =
       
             <h1
               style={{
-                color: "white",
-                backgroundColor: "red",
-                padding: "20px",
-                zIndex: 999,
-                position: "relative",
+                color: "#ffffff",
               }}
+              className="
+                text-5xl
+                md:text-7xl
+                font-bold
+                drop-shadow-2xl
+                max-w-5xl
+              "
             >
               {technology.name}
             </h1>
