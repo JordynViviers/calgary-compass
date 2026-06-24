@@ -113,7 +113,8 @@ export default function Footer() {
           href="/admin"
           className="
             text-xs
-            text-gray-500
+            font-bold
+            text-white
             hover:text-red-400
             transition
           "
