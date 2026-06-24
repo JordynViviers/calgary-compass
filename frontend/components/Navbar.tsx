@@ -41,15 +41,15 @@ export default function Navbar() {
             <img
               src="/compass-logo.png"
               alt="Calgary Compass"
-              className="h-10 md:h-12 w-auto"
+              className="h-14 md:h-16 w-auto"
             />
 
-            <div>
-              <p className="text-red-700 text-xs tracking-[0.25em] font-medium">
+            <div className="leading-none">
+              <p className="text-red-700 text-sm tracking-[0.3em] font-medium mb-1">
                 CALGARY
               </p>
-
-              <p className="text-xl md:text-3xl font-bold text-gray-900 leading-none">
+            
+              <p className="text-3xl md:text-4xl font-bold text-gray-900">
                 COMPASS
               </p>
             </div>
@@ -63,7 +63,7 @@ export default function Navbar() {
               <Link
                 href="/"
                 className="
-                  text-sm
+                  text-base
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -80,7 +80,7 @@ export default function Navbar() {
               <Link
                 href="/about"
                 className="
-                  text-sm
+                  text-base
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -97,7 +97,7 @@ export default function Navbar() {
               <Link
                 href="/technologies"
                 className="
-                  text-sm
+                  text-base
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -114,7 +114,7 @@ export default function Navbar() {
               <Link
                 href="/analytics"
                 className="
-                  text-sm
+                  text-base
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -131,7 +131,7 @@ export default function Navbar() {
               <Link
                 href="/signals"
                 className="
-                  text-sm
+                  text-base
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -148,7 +148,7 @@ export default function Navbar() {
               <Link
                 href="/foresight"
                 className="
-                  text-sm
+                  text-base
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -166,7 +166,7 @@ export default function Navbar() {
               <Link
                 href="/events"
                 className="
-                  text-sm
+                  text-base
                   font-medium
                   text-gray-700
                   hover:text-red-700
