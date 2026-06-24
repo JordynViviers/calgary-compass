@@ -223,7 +223,7 @@ export default function TechnologyDetailPage() {
 
     return (
 
-      <main className="min-h-screen p-4 md:p-10 bg-white text-black">
+      <main className="min-h-screen p-4 md:p-10 bg-white text-white">
 
         <h1 className="text-3xl md:text-5xl font-bold text-red-700 mb-3">
           Loading technology...
