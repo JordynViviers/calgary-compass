@@ -1322,7 +1322,9 @@ def get_admin_technologies(
     db: Session = Depends(get_db),
     _: None = Depends(verify_admin)
 ):
-
+    return db.query(
+        Technology
+    ).all()
 
 @app.post("/technology-candidates")
 def create_candidate(
