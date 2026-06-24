@@ -49,7 +49,7 @@ export default function Navbar() {
                 CALGARY
               </p>
             
-              <p className="text-3xl md:text-4xl font-bold text-gray-900">
+              <p className="text-3xl md:text-2xl font-bold text-gray-900">
                 COMPASS
               </p>
             </div>
