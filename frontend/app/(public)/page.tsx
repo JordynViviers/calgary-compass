@@ -22,7 +22,7 @@ export default function Home() {
         
             {/* RINGS */}
             {/* Outer Ring */}
-            <div className="absolute inset-0 rounded-full border-[5px] border-gray-500" />
+            <div className="absolute inset-0 rounded-full border-[5px] border-gray-700" />
             
             {/* Ring 2 */}
             <div className="absolute inset-8 rounded-full border border-gray-400 opacity-70" />
