@@ -41,14 +41,13 @@ export default function Navbar() {
             <img
               src="/compass-logo.png"
               alt="Calgary Compass"
-              className="h-12 md:h-14 w-auto"
+              className="h-16 md:h-20 w-auto"
             />
 
             <div className="leading-tight">
-              <p className="text-red-700 text-sm tracking-[0.25em] font-medium mb-0">
-                CALGARY
+              <p className="text-red-700 text-xs tracking-[0.25em] font-medium">
+                  CALGARY
               </p>
-            
               <p className="text-3xl md:text-2xl font-bold text-gray-900">
                 COMPASS
               </p>
