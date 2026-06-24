@@ -27,11 +27,8 @@ export default function ChallengeMappingPage() {
   const [links, setLinks] =
     useState<any[]>([]);
 
-  const [challenge, setChallenge] =
-    useState("");
-
-  const [applicationId, setApplicationId] =
-    useState("");
+  const [draggedApplication, setDraggedApplication] =
+    useState<any>(null);
 
   const loadApplications = async () => {
 
@@ -76,20 +73,23 @@ export default function ChallengeMappingPage() {
 
   }, []);
 
-  const createLink = async () => {
+  const createDragMapping = async (
+    challenge: string,
+    applicationId: number
+  ) => {
 
-    if (!challenge) {
+    const duplicate =
+      links.find(
+        (link) =>
+          link.challenge === challenge &&
+          link.application_id ===
+            applicationId
+      );
 
-      alert("Select a challenge");
+    if (duplicate) {
 
       return;
-    }
 
-    if (!applicationId) {
-
-      alert("Select an application");
-
-      return;
     }
 
     try {
@@ -99,15 +99,10 @@ export default function ChallengeMappingPage() {
         {
           challenge,
           application_id:
-            Number(applicationId),
+            applicationId,
           strength: 5,
         }
       );
-
-      alert("Link created!");
-
-      setChallenge("");
-      setApplicationId("");
 
       loadLinks();
 
@@ -116,7 +111,7 @@ export default function ChallengeMappingPage() {
       console.error(error);
 
       alert(
-        "Failed to create link."
+        "Failed to create mapping."
       );
 
     }
@@ -154,9 +149,8 @@ export default function ChallengeMappingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-black p-10">
 
-      {/* Title */}
+    <main className="min-h-screen bg-white text-black p-10">
 
       <h1 className="text-5xl font-bold text-red-700 mb-8">
         Challenge Mapping
@@ -164,211 +158,199 @@ export default function ChallengeMappingPage() {
 
       <p className="text-gray-600 mb-10 max-w-3xl">
         Connect Calgary challenges to
-        technology applications. These
-        relationships will power the
-        Analytics Explorer and help
-        identify which technologies may
-        support community priorities.
+        technology applications.
+        Drag applications into challenge
+        areas to create relationships
+        that power the Analytics Explorer.
       </p>
 
-      {/* Create Mapping */}
+      {/* APPLICATION LIBRARY */}
 
-      <div className="max-w-3xl bg-white border border-gray-200 rounded-2xl p-6 shadow-sm mb-10">
+      <div className="mb-12">
 
-        <h2 className="text-2xl font-semibold text-red-700 mb-6">
-          Create Mapping
+        <h2 className="text-3xl font-bold text-red-700 mb-6">
+          Applications Library
         </h2>
 
-        <label className="block mb-2 font-medium">
-          Community Challenge
-        </label>
+        <div className="flex flex-wrap gap-3">
 
-        <select
-          value={challenge}
-          onChange={(e) =>
-            setChallenge(
-              e.target.value
-            )
-          }
-          className="
-            w-full
-            border
-            border-gray-300
-            rounded-xl
-            p-3
-            mb-6
-          "
-        >
+          {applications.map((app) => (
 
-          <option value="">
-            Select Challenge
-          </option>
+            <div
+              key={app.id}
+              draggable
+              onDragStart={() =>
+                setDraggedApplication(app)
+              }
+              className="
+                bg-white
+                border
+                border-gray-200
+                rounded-xl
+                px-4
+                py-3
+                shadow-sm
+                cursor-grab
+                hover:shadow-md
+                transition
+              "
+            >
+              {app.name}
+            </div>
 
-          {CHALLENGES.map(
-            (item) => (
+          ))}
 
-              <option
-                key={item}
-                value={item}
-              >
-                {item}
-              </option>
-
-            )
-          )}
-
-        </select>
-
-        <label className="block mb-2 font-medium">
-          Technology Application
-        </label>
-
-        <select
-          value={applicationId}
-          onChange={(e) =>
-            setApplicationId(
-              e.target.value
-            )
-          }
-          className="
-            w-full
-            border
-            border-gray-300
-            rounded-xl
-            p-3
-            mb-6
-          "
-        >
-
-          <option value="">
-            Select Application
-          </option>
-
-          {applications.map(
-            (app) => (
-
-              <option
-                key={app.id}
-                value={app.id}
-              >
-                {app.name}
-              </option>
-
-            )
-          )}
-
-        </select>
-
-        <button
-          onClick={createLink}
-          className="
-            bg-red-600
-            hover:bg-red-700
-            text-white
-            px-6
-            py-3
-            rounded-xl
-            font-semibold
-            transition
-          "
-        >
-          Create Mapping
-        </button>
+        </div>
 
       </div>
 
-      {/* Existing Mappings */}
+      {/* CHALLENGE MAPPING */}
 
       <div>
 
         <h2 className="text-3xl font-bold text-red-700 mb-6">
-          Existing Mappings
+          Challenge Mapping
         </h2>
 
-        {links.length === 0 ? (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          <p className="text-gray-500">
-            No mappings found.
-          </p>
+          {CHALLENGES.map(
+            (challenge) => {
 
-        ) : (
-
-          <div className="space-y-4">
-
-            {links.map((link) => {
-
-              const application =
-                applications.find(
-                  (app) =>
-                    app.id ===
-                    link.application_id
+              const challengeLinks =
+                links.filter(
+                  (link) =>
+                    link.challenge ===
+                    challenge
                 );
 
               return (
 
                 <div
-                  key={link.id}
+                  key={challenge}
+                  onDragOver={(e) =>
+                    e.preventDefault()
+                  }
+                  onDrop={() => {
+
+                    if (
+                      !draggedApplication
+                    ) {
+                      return;
+                    }
+
+                    createDragMapping(
+                      challenge,
+                      draggedApplication.id
+                    );
+
+                  }}
                   className="
+                    bg-white
                     border
                     border-gray-200
                     rounded-2xl
-                    p-5
-                    flex
-                    justify-between
-                    items-center
-                    bg-white
+                    p-6
                     shadow-sm
+                    min-h-[250px]
                   "
                 >
 
-                  <div>
+                  <h3 className="text-xl font-semibold text-red-700 mb-4">
+                    {challenge}
+                  </h3>
 
-                    <div className="font-semibold text-lg">
+                  <div className="space-y-3">
 
-                      {link.challenge}
+                    {challengeLinks.length ===
+                      0 && (
 
-                      <span className="mx-3 text-gray-400">
-                        →
-                      </span>
+                      <div
+                        className="
+                          border-2
+                          border-dashed
+                          border-gray-300
+                          rounded-xl
+                          p-6
+                          text-center
+                          text-gray-400
+                        "
+                      >
+                        Drag applications
+                        here
+                      </div>
 
-                      {application?.name ||
-                        "Unknown Application"}
+                    )}
 
-                    </div>
+                    {challengeLinks.map(
+                      (link) => {
+
+                        const application =
+                          applications.find(
+                            (app) =>
+                              app.id ===
+                              link.application_id
+                          );
+
+                        return (
+
+                          <div
+                            key={link.id}
+                            className="
+                              bg-gray-50
+                              border
+                              border-gray-200
+                              rounded-xl
+                              px-4
+                              py-3
+                              flex
+                              justify-between
+                              items-center
+                            "
+                          >
+
+                            <span>
+                              {application?.name ||
+                                "Unknown Application"}
+                            </span>
+
+                            <button
+                              onClick={() =>
+                                deleteLink(
+                                  link.id
+                                )
+                              }
+                              className="
+                                text-red-600
+                                hover:text-red-700
+                                font-medium
+                              "
+                            >
+                              Remove
+                            </button>
+
+                          </div>
+
+                        );
+
+                      }
+                    )}
 
                   </div>
-
-                  <button
-                    onClick={() =>
-                      deleteLink(
-                        link.id
-                      )
-                    }
-                    className="
-                      bg-red-600
-                      hover:bg-red-700
-                      text-white
-                      px-4
-                      py-2
-                      rounded-xl
-                      font-medium
-                    "
-                  >
-                    Delete
-                  </button>
 
                 </div>
 
               );
 
-            })}
+            }
+          )}
 
-          </div>
-
-        )}
+        </div>
 
       </div>
 
     </main>
+
   );
+
 }
