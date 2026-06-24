@@ -427,79 +427,554 @@ const weightedAverage =
 
       </div>
 
-      {aiEvaluation?.global_examples && (
+      {/* ASSESSMENT OVERVIEW */}
+      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-red-50">
+        <h2 className="text-3xl font-semibold text-red-700 mb-4">
+          Assessment Overview
+        </h2>
+      
+        <p className="text-gray-700 leading-relaxed">
+          Calgary Compass combines AI-supported evaluation with community input to
+          provide a balanced perspective on each technology.
+        </p>
+      
+        <div className="grid md:grid-cols-3 gap-4 mt-6">
+          <div className="bg-white rounded-xl p-4">
+            <h3 className="font-semibold text-red-700 mb-2">
+              AI Assessment
+            </h3>
+      
+            <p className="text-gray-600 text-sm">
+              Evaluates the technology against Calgary's strategic priorities using
+              research and evidence sources.
+            </p>
+          </div>
+      
+          <div className="bg-white rounded-xl p-4">
+            <h3 className="font-semibold text-red-700 mb-2">
+              Community Assessment
+            </h3>
+      
+            <p className="text-gray-600 text-sm">
+              Reflects how community participants score the technology across the
+              same evaluation criteria.
+            </p>
+          </div>
+      
+          <div className="bg-white rounded-xl p-4">
+            <h3 className="font-semibold text-red-700 mb-2">
+              Combined Assessment
+            </h3>
+      
+            <p className="text-gray-600 text-sm">
+              Integrates AI evaluation and community feedback into a single score.
+            </p>
+          </div>
+        </div>
+      </div>
 
-        <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
+      {/* HOW TECHNOLOGIES ARE MANAGED */}
+      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-gray-50">
+
+          <h3 className="text-xl font-semibold text-red-700 mb-3">
+            How Technologies Are Evaluated
+          </h3>
+        
+          <p className="text-gray-700 mb-4">
+            Calgary Compass evaluates technologies using Calgary City
+            Council's six strategic priorities.
+          </p>
+        
+          <ul className="list-disc pl-6 text-gray-700 space-y-2">
+        
+            <li>Reliable and Sustainable Infrastructure</li>
+        
+            <li>Safe City</li>
+        
+            <li>Functional Transportation Network</li>
+        
+            <li>Community Livability and Well-being</li>
+        
+            <li>Balanced Growth and Evolving Neighbourhoods</li>
+        
+            <li>Trusted and Collaborative Government</li>
+        
+          </ul>
+        
+          <a
+            href="https://www.calgary.ca/council/council-priorities.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-4 text-red-700 font-semibold hover:underline"
+          >
+            Learn more about Calgary's Council Priorities →
+          </a>
+        
+        </div>
+
+      {/* AI VS COMMUNITY */}
+
+      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
+
+        <h2 className="text-3xl font-semibold text-red-700 mb-6">
+
+          AI vs Community Comparison
+
+        </h2>
+
+        {comparison ? (
+
+          <div
+            style={{
+              width: "100%",
+              height:
+                typeof window !== "undefined" &&
+                window.innerWidth < 768
+                  ? 350
+                  : 500
+            }}
+          >
+
+            <ResponsiveContainer width="98%" height="100%">
+
+              <BarChart
+                data={chartData}
+                layout="vertical"
+                margin={{
+                  top: 20,
+                  right: 30,
+                  left: 60,
+                  bottom: 20
+                }}
+              >
+
+                <CartesianGrid strokeDasharray="3 3" />
+
+                <XAxis
+                  type="number"
+                  domain={[0, 10]}
+                  tickCount={11}
+                />
+
+                <YAxis
+                  dataKey="category"
+                  type="category"
+                  width={90}
+                />
+
+                <Tooltip />
+
+                <Legend />
+
+                <Bar
+                  dataKey="Human"
+                  fill="#dc2626"
+                  radius={[0, 6, 6, 0]}
+                />
+
+                <Bar
+                  dataKey="AI"
+                  fill="#6b7280"
+                  radius={[0, 6, 6, 0]}
+                />
+
+              </BarChart>
+
+            </ResponsiveContainer>
+
+          </div>
+
+        ) : (
+
+          <p className="text-gray-500">
+
+            Waiting for community votes.
+
+          </p>
+
+        )}
+
+      </div>
+
+      {/* ASSESSMENT SUMMARIES */}
+      <div className="grid md:grid-cols-3 gap-6 mb-10">
+
+        <div className="compass-card p-6 text-center">
       
-          <h2 className="text-3xl font-semibold text-red-700 mb-6">
-            Global Examples
-          </h2>
+          <p className="text-gray-500 mb-2">
+            AI Assessment
+          </p>
       
-          <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-            {aiEvaluation.global_examples}
+          <p className="text-5xl font-bold text-red-700">
+            {aiAverage}
+          </p>
+      
+          <p className="text-gray-500">
+            out of 10
           </p>
       
         </div>
       
-      )}
+        <div className="compass-card p-6 text-center">
       
-      {applications.length > 0 && (
+          <p className="text-gray-500 mb-2">
+            Community Assessment
+          </p>
+      
+          <p className="text-5xl font-bold text-red-700">
+            {communityAverage}
+          </p>
+      
+          <p className="text-gray-500">
+            out of 10
+          </p>
+      
+        </div>
+      
+        <div className="compass-card p-6 text-center">
+      
+          <p className="text-gray-500 mb-2">
+            Combined Assessment
+          </p>
+      
+          <p className="text-5xl font-bold text-red-700">
+            {weightedAverage}
+          </p>
+      
+          <p className="text-gray-500">
+            out of 10
+          </p>
+      
+        </div>
+      
+      </div>
 
-  <div className="border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm mb-8 md:mb-10 bg-white">
+      {/* ASSESSMENTS */}
 
-    <h2 className="text-2xl md:text-3xl font-semibold text-red-700 mb-4 md:mb-6">
-      Technology Applications
-    </h2>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+        
 
-    <div className="space-y-4">
+        {/* AI ASSESSMENT */}
 
-      {applications.map((app: any) => (
+        <div className="border border-gray-200 rounded-2xl p-4 md:p-6 shadow-sm bg-white">
 
-        <div
-          key={app.id}
-          className="
-            bg-gray-50
-            border
-            border-gray-200
-            rounded-2xl
-            p-5
-            hover:bg-white
-            hover:shadow-md
-            transition
-          "
-        >
+          <h2 className="text-xl md:text-2xl font-bold text-red-700 mb-4 md:mb-6">
 
-          <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3">
+            AI Assessment
 
-            <div>
-          
-              <h3 className="font-semibold text-lg">
-                {getApplicationIcon(app.name)}
-                {" "}
-                {app.name}
-              </h3>
-          
-              {app.description && (
-                <p className="text-gray-600 mt-2">
-                  {app.description}
+          </h2>
+
+          {aiEvaluation ? (
+
+            <>
+
+              <div className="space-y-3 text-gray-700">
+
+                <div className="flex justify-between">
+                  <span>Reliable Infrastructure</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.reliable_infrastructure}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Safe City</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.safe_city}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Transportation Network</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.transportation_network}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Community Well-being</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.community_wellbeing}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Balanced Growth</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.balanced_growth}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Trusted Governance</span>
+                  <span className="font-bold text-red-700">
+                    {aiEvaluation.trusted_governance}/10
+                  </span>
+                </div>
+              
+              </div>
+
+              <div className="mt-6">
+
+                <h3 className="text-lg font-semibold text-red-700 mb-2">
+
+                  Assessment Explanation
+
+                </h3>
+
+                <p className="text-gray-600 leading-relaxed">
+
+                  The AI assessment for {technology.name}
+                  reflects its expected value for municipal
+                  operations, public impact, governance,
+                  and long-term innovation potential.
+
+                  <br /><br />
+
+                  Higher scores indicate stronger projected
+                  benefits in areas such as efficiency,
+                  scalability, service delivery, and smart
+                  city integration, while lower scores
+                  reflect potential challenges related to
+                  cost, implementation complexity,
+                  governance, or public trust.
+
                 </p>
-              )}
-          
-            </div>
-          
 
-          </div>
+              </div>
+
+              <div className="mt-6">
+
+                <p className="text-4xl font-bold text-black">
+
+                  {aiAverage}/10
+
+                </p>
+
+                <p className="text-gray-500 mt-1">
+
+                  Average AI Score
+
+                </p>
+
+              </div>
+
+            </>
+
+          ) : (
+
+            <p className="text-gray-500">
+
+              AI assessment not available yet.
+
+            </p>
+
+          )}
 
         </div>
 
-      ))}
+        {/* COMMUNITY ASSESSMENT */}
 
-    </div>
+        <div className="border border-gray-200 rounded-2xl p-6 shadow-sm bg-white">
 
-  </div>
+          <h2 className="text-xl md:text-2xl font-bold text-red-700 mb-4 md:mb-6">
 
-)}
+            Community Assessment
 
+          </h2>
+
+          {comparison ? (
+
+            <>
+
+              <div className="space-y-3 text-gray-700">
+
+                <div className="flex justify-between">
+                  <span>Reliable Infrastructure</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.reliable_infrastructure}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Safe City</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.safe_city}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Transportation Network</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.transportation_network}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Community Well-being</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.community_wellbeing}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Balanced Growth</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.balanced_growth}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Trusted Governance</span>
+                  <span className="font-bold text-red-700">
+                    {comparison.human.trusted_governance}/10
+                  </span>
+                </div>
+              
+              </div>
+              <div className="mt-6">
+
+                <h3 className="text-lg font-semibold text-red-700 mb-2">
+                  Community Participation
+                </h3>
+
+                <p className="text-gray-600">
+                  Community votes represent the aggregated
+                  perspectives of platform participants.
+                </p>
+
+                <p className="mt-4 text-gray-700 font-medium">
+                  Total Community Participants:{" "}
+                  {comparison?.vote_count ?? 0}
+                </p>
+
+              </div>
+
+              <div className="mt-6">
+
+                <p className="text-4xl font-bold text-black">
+                  {communityAverage}/10
+                </p>
+
+                <p className="text-gray-500 mt-1">
+                  Average Community Score
+                </p>
+
+              </div>
+
+            </>
+
+          ) : (
+
+            <p className="text-gray-500">
+              Community assessment not available yet.
+            </p>
+
+          )}
+
+        </div>
+
+        {/* WEIGHTED ASSESSMENT */}
+
+        <div className="border border-gray-200 rounded-2xl p-6 shadow-sm bg-white">
+
+          <h2 className="text-xl md:text-2xl font-bold text-red-700 mb-4 md:mb-6">
+
+            Weighted Assessment
+
+          </h2>
+
+          {weightedScores ? (
+
+            <>
+
+              <div className="space-y-3 text-gray-700">
+
+                <div className="flex justify-between">
+                  <span>Reliable Infrastructure</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.reliable_infrastructure}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Safe City</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.safe_city}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Transportation Network</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.transportation_network}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Community Well-being</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.community_wellbeing}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Balanced Growth</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.balanced_growth}/10
+                  </span>
+                </div>
+              
+                <div className="flex justify-between">
+                  <span>Trusted Governance</span>
+                  <span className="font-bold text-red-700">
+                    {weightedScores.trusted_governance}/10
+                  </span>
+                </div>
+              
+              </div>
+
+              <div className="mt-6">
+
+                <h3 className="text-lg font-semibold text-red-700 mb-2">
+                  Combined Assessment
+                </h3>
+
+                <p className="text-gray-600">
+                  These scores combine AI evaluation and
+                  community voting using the platform's
+                  weighting methodology.
+                </p>
+
+              </div>
+
+              <div className="mt-6">
+
+                <p className="text-4xl font-bold text-black">
+                  {weightedAverage}/10
+                </p>
+
+                <p className="text-gray-500 mt-1">
+                  Weighted Score
+                </p>
+
+              </div>
+
+            </>
+
+          ) : (
+
+            <p className="text-gray-500">
+              Weighted assessment not available yet.
+            </p>
+
+          )}
+
+        </div>
+
+      </div>
+
+      {/* TECHNOLOGY IMPACT */}
       {impactData && (
 
         <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
@@ -700,548 +1175,81 @@ const weightedAverage =
         </div>
       
       )}
-      
 
-      <div className="grid md:grid-cols-3 gap-6 mb-10">
+  {/* TECHNOLOGY APPLICATIONS */}
+  {applications.length > 0 && (
+      <div className="border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm mb-8 md:mb-10 bg-white">
 
-        <div className="compass-card p-6 text-center">
-      
-          <p className="text-gray-500 mb-2">
-            AI Assessment
-          </p>
-      
-          <p className="text-5xl font-bold text-red-700">
-            {aiAverage}
-          </p>
-      
-          <p className="text-gray-500">
-            out of 10
-          </p>
-      
-        </div>
-      
-        <div className="compass-card p-6 text-center">
-      
-          <p className="text-gray-500 mb-2">
-            Community Assessment
-          </p>
-      
-          <p className="text-5xl font-bold text-red-700">
-            {communityAverage}
-          </p>
-      
-          <p className="text-gray-500">
-            out of 10
-          </p>
-      
-        </div>
-      
-        <div className="compass-card p-6 text-center">
-      
-          <p className="text-gray-500 mb-2">
-            Combined Assessment
-          </p>
-      
-          <p className="text-5xl font-bold text-red-700">
-            {weightedAverage}
-          </p>
-      
-          <p className="text-gray-500">
-            out of 10
-          </p>
-      
-        </div>
-      
-      </div>
-
-      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-red-50">
-        <h2 className="text-3xl font-semibold text-red-700 mb-4">
-          Assessment Overview
-        </h2>
-      
-        <p className="text-gray-700 leading-relaxed">
-          Calgary Compass combines AI-supported evaluation with community input to
-          provide a balanced perspective on each technology.
-        </p>
-      
-        <div className="grid md:grid-cols-3 gap-4 mt-6">
-          <div className="bg-white rounded-xl p-4">
-            <h3 className="font-semibold text-red-700 mb-2">
-              AI Assessment
-            </h3>
-      
-            <p className="text-gray-600 text-sm">
-              Evaluates the technology against Calgary's strategic priorities using
-              research and evidence sources.
-            </p>
-          </div>
-      
-          <div className="bg-white rounded-xl p-4">
-            <h3 className="font-semibold text-red-700 mb-2">
-              Community Assessment
-            </h3>
-      
-            <p className="text-gray-600 text-sm">
-              Reflects how community participants score the technology across the
-              same evaluation criteria.
-            </p>
-          </div>
-      
-          <div className="bg-white rounded-xl p-4">
-            <h3 className="font-semibold text-red-700 mb-2">
-              Combined Assessment
-            </h3>
-      
-            <p className="text-gray-600 text-sm">
-              Integrates AI evaluation and community feedback into a single score.
-            </p>
-          </div>
-        </div>
-      </div>
-      {/* AI VS COMMUNITY */}
-
-      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
-
-        <h2 className="text-3xl font-semibold text-red-700 mb-6">
-
-          AI vs Community Comparison
-
-        </h2>
-
-        {comparison ? (
-
+      <h2 className="text-3xl font-semibold text-red-700 mb-6">
+        Technology Applications
+      </h2>
+        
+      <div className="space-y-4">
+  
+        {applications.map((app: any) => (
+  
           <div
-            style={{
-              width: "100%",
-              height:
-                typeof window !== "undefined" &&
-                window.innerWidth < 768
-                  ? 350
-                  : 500
-            }}
+            key={app.id}
+            className="
+              bg-gray-50
+              border
+              border-gray-200
+              rounded-2xl
+              p-5
+              hover:bg-white
+              hover:shadow-md
+              transition
+            "
           >
-
-            <ResponsiveContainer width="98%" height="100%">
-
-              <BarChart
-                data={chartData}
-                layout="vertical"
-                margin={{
-                  top: 20,
-                  right: 30,
-                  left: 60,
-                  bottom: 20
-                }}
-              >
-
-                <CartesianGrid strokeDasharray="3 3" />
-
-                <XAxis
-                  type="number"
-                  domain={[0, 10]}
-                  tickCount={11}
-                />
-
-                <YAxis
-                  dataKey="category"
-                  type="category"
-                  width={90}
-                />
-
-                <Tooltip />
-
-                <Legend />
-
-                <Bar
-                  dataKey="Human"
-                  fill="#dc2626"
-                  radius={[0, 6, 6, 0]}
-                />
-
-                <Bar
-                  dataKey="AI"
-                  fill="#6b7280"
-                  radius={[0, 6, 6, 0]}
-                />
-
-              </BarChart>
-
-            </ResponsiveContainer>
-
+  
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3">
+  
+              <div>
+            
+                <h3 className="font-semibold text-lg">
+                  {getApplicationIcon(app.name)}
+                  {" "}
+                  {app.name}
+                </h3>
+            
+                {app.description && (
+                  <p className="text-gray-600 mt-2">
+                    {app.description}
+                  </p>
+                )}
+            
+              </div>
+            
+  
+            </div>
+  
           </div>
-
-        ) : (
-
-          <p className="text-gray-500">
-
-            Waiting for community votes.
-
-          </p>
-
-        )}
-
+  
+        ))}
+  
       </div>
+  
+    </div>
+  )}
 
-      {/* ASSESSMENTS */}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-        <div className="border border-gray-200 rounded-2xl p-6 mb-8 bg-gray-50">
+      {/* GLOBAL EXAMPLES */}
+      {aiEvaluation?.global_examples && (
 
-          <h3 className="text-xl font-semibold text-red-700 mb-3">
-            How Technologies Are Evaluated
-          </h3>
-        
-          <p className="text-gray-700 mb-4">
-            Calgary Compass evaluates technologies using Calgary City
-            Council's six strategic priorities.
+        <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
+      
+          <h2 className="text-3xl font-semibold text-red-700 mb-6">
+            Global Examples
+          </h2>
+      
+          <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+            {aiEvaluation.global_examples}
           </p>
-        
-          <ul className="list-disc pl-6 text-gray-700 space-y-2">
-        
-            <li>Reliable and Sustainable Infrastructure</li>
-        
-            <li>Safe City</li>
-        
-            <li>Functional Transportation Network</li>
-        
-            <li>Community Livability and Well-being</li>
-        
-            <li>Balanced Growth and Evolving Neighbourhoods</li>
-        
-            <li>Trusted and Collaborative Government</li>
-        
-          </ul>
-        
-          <a
-            href="https://www.calgary.ca/council/council-priorities.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-4 text-red-700 font-semibold hover:underline"
-          >
-            Learn more about Calgary's Council Priorities →
-          </a>
-        
+      
         </div>
-
-        {/* AI ASSESSMENT */}
-
-        <div className="border border-gray-200 rounded-2xl p-4 md:p-6 shadow-sm bg-white">
-
-          <h2 className="text-xl md:text-2xl font-bold text-red-700 mb-4 md:mb-6">
-
-            AI Assessment
-
-          </h2>
-
-          {aiEvaluation ? (
-
-            <>
-
-              <div className="space-y-3 text-gray-700">
-
-                <div className="flex justify-between">
-                  <span>Reliable Infrastructure</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.reliable_infrastructure}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Safe City</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.safe_city}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Transportation Network</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.transportation_network}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Community Well-being</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.community_wellbeing}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Balanced Growth</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.balanced_growth}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Trusted Governance</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.trusted_governance}/10
-                  </span>
-                </div>
-              
-              </div>
-
-              <div className="mt-6">
-
-                <h3 className="text-lg font-semibold text-red-700 mb-2">
-
-                  Assessment Explanation
-
-                </h3>
-
-                <p className="text-gray-600 leading-relaxed">
-
-                  The AI assessment for {technology.name}
-                  reflects its expected value for municipal
-                  operations, public impact, governance,
-                  and long-term innovation potential.
-
-                  <br /><br />
-
-                  Higher scores indicate stronger projected
-                  benefits in areas such as efficiency,
-                  scalability, service delivery, and smart
-                  city integration, while lower scores
-                  reflect potential challenges related to
-                  cost, implementation complexity,
-                  governance, or public trust.
-
-                </p>
-
-              </div>
-
-              <div className="mt-6">
-
-                <p className="text-4xl font-bold text-black">
-
-                  {aiAverage}/10
-
-                </p>
-
-                <p className="text-gray-500 mt-1">
-
-                  Average AI Score
-
-                </p>
-
-              </div>
-
-            </>
-
-          ) : (
-
-            <p className="text-gray-500">
-
-              AI assessment not available yet.
-
-            </p>
-
-          )}
-
-        </div>
-
-        {/* COMMUNITY ASSESSMENT */}
-
-        <div className="border border-gray-200 rounded-2xl p-6 shadow-sm bg-white">
-
-          <h2 className="text-2xl font-bold text-red-700 mb-6">
-
-            Community Assessment
-
-          </h2>
-
-          {comparison ? (
-
-            <>
-
-              <div className="space-y-3 text-gray-700">
-
-                <div className="flex justify-between">
-                  <span>Reliable Infrastructure</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.reliable_infrastructure}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Safe City</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.safe_city}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Transportation Network</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.transportation_network}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Community Well-being</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.community_wellbeing}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Balanced Growth</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.balanced_growth}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Trusted Governance</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.trusted_governance}/10
-                  </span>
-                </div>
-              
-              </div>
-              <div className="mt-6">
-
-                <h3 className="text-lg font-semibold text-red-700 mb-2">
-                  Community Participation
-                </h3>
-
-                <p className="text-gray-600">
-                  Community votes represent the aggregated
-                  perspectives of platform participants.
-                </p>
-
-                <p className="mt-4 text-gray-700 font-medium">
-                  Total Community Participants:{" "}
-                  {comparison?.vote_count ?? 0}
-                </p>
-
-              </div>
-
-              <div className="mt-6">
-
-                <p className="text-4xl font-bold text-black">
-                  {communityAverage}/10
-                </p>
-
-                <p className="text-gray-500 mt-1">
-                  Average Community Score
-                </p>
-
-              </div>
-
-            </>
-
-          ) : (
-
-            <p className="text-gray-500">
-              Community assessment not available yet.
-            </p>
-
-          )}
-
-        </div>
-
-        {/* WEIGHTED ASSESSMENT */}
-
-        <div className="border border-gray-200 rounded-2xl p-6 shadow-sm bg-white">
-
-          <h2 className="text-2xl font-bold text-red-700 mb-6">
-
-            Weighted Assessment
-
-          </h2>
-
-          {weightedScores ? (
-
-            <>
-
-              <div className="space-y-3 text-gray-700">
-
-                <div className="flex justify-between">
-                  <span>Reliable Infrastructure</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.reliable_infrastructure}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Safe City</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.safe_city}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Transportation Network</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.transportation_network}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Community Well-being</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.community_wellbeing}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Balanced Growth</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.balanced_growth}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Trusted Governance</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.trusted_governance}/10
-                  </span>
-                </div>
-              
-              </div>
-
-              <div className="mt-6">
-
-                <h3 className="text-lg font-semibold text-red-700 mb-2">
-                  Combined Assessment
-                </h3>
-
-                <p className="text-gray-600">
-                  These scores combine AI evaluation and
-                  community voting using the platform's
-                  weighting methodology.
-                </p>
-
-              </div>
-
-              <div className="mt-6">
-
-                <p className="text-4xl font-bold text-black">
-                  {weightedAverage}/10
-                </p>
-
-                <p className="text-gray-500 mt-1">
-                  Weighted Score
-                </p>
-
-              </div>
-
-            </>
-
-          ) : (
-
-            <p className="text-gray-500">
-              Weighted assessment not available yet.
-            </p>
-
-          )}
-
-        </div>
-
-      </div>
+      
+      )}
+      
 
     </main>
   );
