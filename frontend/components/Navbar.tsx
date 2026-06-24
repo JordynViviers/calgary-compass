@@ -36,7 +36,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3 shrink-0"
+            className="flex items-center gap-2 shrink-0"
           >
             <img
               src="/compass-logo.png"
@@ -63,7 +63,7 @@ export default function Navbar() {
               <Link
                 href="/"
                 className="
-                  text-[17px]
+                  text-sm
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -80,7 +80,7 @@ export default function Navbar() {
               <Link
                 href="/about"
                 className="
-                  text-[17px]
+                  text-sm
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -97,7 +97,7 @@ export default function Navbar() {
               <Link
                 href="/technologies"
                 className="
-                  text-[17px]
+                  text-sm
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -114,7 +114,7 @@ export default function Navbar() {
               <Link
                 href="/analytics"
                 className="
-                  text-[17px]
+                  text-sm
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -131,7 +131,7 @@ export default function Navbar() {
               <Link
                 href="/signals"
                 className="
-                  text-[17px]
+                  text-sm
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -148,7 +148,7 @@ export default function Navbar() {
               <Link
                 href="/foresight"
                 className="
-                  text-[17px]
+                  text-sm
                   font-medium
                   text-gray-700
                   hover:text-red-700
@@ -166,7 +166,7 @@ export default function Navbar() {
               <Link
                 href="/events"
                 className="
-                  text-[17px]
+                  text-sm
                   font-medium
                   text-gray-700
                   hover:text-red-700
