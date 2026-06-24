@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -77,6 +77,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+ADMIN_PASSWORD = os.getenv(
+    "ADMIN_PASSWORD",
+    "ChangeMeImmediately"
+)
+
+def verify_admin(
+    x_admin_password: str = Header(None)
+):
+    if x_admin_password != ADMIN_PASSWORD:
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized"
+        )
 
 # =========================
 # DB SESSION
@@ -111,9 +124,10 @@ def root():
 # =========================
 
 @app.post("/technology")
-def create_new_technology(
-    data: TechnologyRequest,
-    db: Session = Depends(get_db)
+def create_technology(
+    data: TechnologyCreate,
+    db: Session = Depends(get_db),
+    _: None = Depends(verify_admin)
 ):
 
     technology = create_technology(
@@ -204,7 +218,8 @@ def get_technologies(
 @app.post("/technology/{technology_id}/ai-evaluate")
 def ai_evaluate_technology(
     technology_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    _: None = Depends(verify_admin)
 ):
 
     technology = db.query(
@@ -692,7 +707,8 @@ def get_technology(
 @app.delete("/technology/{technology_id}")
 def delete_technology(
     technology_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    _: None = Depends(verify_admin)
 ):
 
     tech = db.query(
@@ -746,7 +762,9 @@ def update_technology(
 
     data: TechnologyRequest,
 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    
+    _: None = Depends(verify_admin)
 
 ):
 
@@ -1246,7 +1264,8 @@ def collect_sources(
 @app.put("/technology/{technology_id}/hide")
 def hide_technology(
     technology_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    _: None = Depends(verify_admin)
 ):
 
     tech = db.query(
@@ -1273,7 +1292,8 @@ def hide_technology(
 @app.put("/technology/{technology_id}/show")
 def show_technology(
     technology_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    _: None = Depends(verify_admin)
 ):
 
     tech = db.query(
@@ -1298,12 +1318,10 @@ def show_technology(
     }
 
 @app.get("/admin/technologies")
-def get_all_technologies(
-    db: Session = Depends(get_db)
+def get_admin_technologies(
+    db: Session = Depends(get_db),
+    _: None = Depends(verify_admin)
 ):
-    return db.query(
-        Technology
-    ).all()
 
 
 @app.post("/technology-candidates")
