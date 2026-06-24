@@ -5,6 +5,7 @@ import {
 } from "react-icons/fa";
 
 import { FaXTwitter } from "react-icons/fa6";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -107,7 +108,19 @@ export default function Footer() {
         </div>
 
       </div>
-
+      <div className="mt-8 text-center">
+        <Link
+          href="/admin"
+          className="
+            text-xs
+            text-gray-500
+            hover:text-red-400
+            transition
+          "
+        >
+          Admin Access
+        </Link>
+      </div>
     </footer>
   );
 }
