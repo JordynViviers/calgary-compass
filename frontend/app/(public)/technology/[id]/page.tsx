@@ -1038,6 +1038,15 @@ const weightedAverage =
                         : data.score >= 5
                         ? "bg-red-500"
                         : "bg-red-200";
+            
+                  const label =
+                    data.score >= 8
+                        ? "High Impact"
+                        : data.score >= 5
+                        ? "Moderate Impact"
+                        : "Emerging";
+
+
       
                   return(
       
@@ -1057,29 +1066,28 @@ const weightedAverage =
       
                           </h3>
       
-                          <span
-      
-                          className={`
-      
-                          px-3
-      
-                          py-1
-      
-                          rounded-full
-      
-                          text-white
-      
-                          font-semibold
-      
-                          ${colour}
-      
-                          `}
-      
-                          >
-      
-                              {data.score}/10
-      
-                          </span>
+                          <div className="text-right">
+
+                            <span
+                                className={`
+                                    inline-block
+                                    px-3
+                                    py-1
+                                    rounded-full
+                                    text-white
+                                    text-sm
+                                    font-semibold
+                                    ${colour}
+                                `}
+                            >
+                                {label}
+                            </span>
+                        
+                            <p className="mt-2 text-lg font-bold text-gray-800">
+                                {data.score}/10
+                            </p>
+                        
+                        </div>
       
                       </div>
       
