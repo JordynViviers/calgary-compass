@@ -153,7 +153,12 @@ export default function TechnologyDetailPage() {
           const scoreRes = await axios.get(
             `${API_URL}/technology/${id}/weighted-scores`
           );
-
+          
+          console.log(
+            "Weighted Response:",
+            scoreRes.data
+          );
+          
           if (!scoreRes.data.error) {
             setWeightedScores(scoreRes.data);
           }
@@ -172,11 +177,15 @@ export default function TechnologyDetailPage() {
           const compRes = await axios.get(
             `${API_URL}/technology/${id}/comparison`
           );
-
+          
+          console.log(
+            "Comparison Response:",
+            compRes.data
+          );
+          
           if (!compRes.data.error) {
             setComparison(compRes.data);
           }
-
         } catch (err) {
 
           console.error(
