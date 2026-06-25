@@ -2033,3 +2033,20 @@ def technology_impact(
     return impact
 
 
+@app.post("/admin/login")
+def admin_login(
+    x_admin_password: str = Header(None)
+):
+
+    if x_admin_password != ADMIN_PASSWORD:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Incorrect password"
+        )
+
+    return {
+        "success": True
+    }
+
+
