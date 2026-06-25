@@ -351,10 +351,10 @@ export default function AdminHome() {
                 View and edit the applications of each technology. 
               </p>
             </Link>
-
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Animation Styles */}
       <style>{`
