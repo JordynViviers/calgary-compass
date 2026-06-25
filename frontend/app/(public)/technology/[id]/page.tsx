@@ -974,205 +974,170 @@ const weightedAverage =
 
       </div>
 
-      {/* TECHNOLOGY IMPACT */}
+      {/* COMMUNITY CHALLENGE IMPACT */}
+
       {impactData && (
-
-        <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
       
-          <h2 className="text-3xl font-semibold text-red-700 mb-6">
-            Technology Impact
-          </h2>
-
-          <div className="mb-8">
-
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
-              Impact Matrix
-            </h3>
-          
-            <div className="overflow-hidden rounded-2xl border border-gray-200">
-          
-              <div className="grid grid-cols-2 bg-gray-100 font-semibold">
-          
-                <div className="p-4">
-                  Challenge
-                </div>
-          
-                <div className="p-4">
-                  Impact Level
-                </div>
-          
+      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
+      
+          <div className="flex justify-between items-center mb-8">
+      
+              <div>
+      
+                  <h2 className="text-3xl font-bold text-red-700">
+      
+                      Community Challenge Impact
+      
+                  </h2>
+      
+                  <p className="text-gray-600 mt-2">
+      
+                      Estimated impact across Calgary's community challenges based on community priorities and mapped technology applications.
+      
+                  </p>
+      
               </div>
-          
-              {Object.entries(impactData)
-                .sort(
-                  (a: any, b: any) =>
-                    b[1].score -
-                    a[1].score
-                )
-                .map(
-                  (
-                    [challenge, data]: any
-                  ) => {
-          
-                    const dots =
-                      Math.min(
-                        Math.ceil(
-                          data.score / 3
-                        ),
-                        5
-                      );
-          
-                    return (
-          
-                      <div
-                        key={challenge}
-                        className="
-                          grid
-                          grid-cols-2
-                          border-t
-                          border-gray-200
-                        "
-                      >
-          
-                        <div className="p-4 font-medium">
-                          {challenge}
-                        </div>
-          
-                        <div className="p-4 flex items-center gap-2">
-          
-                          <div className="flex gap-1">
-          
-                            {[1, 2, 3, 4, 5].map(
-                              (dot) => (
-          
-                                <div
-                                  key={dot}
-                                  className={`
-                                    w-4
-                                    h-4
-                                    rounded-full
-          
-                                    ${
-                                      dot <= dots
-                                        ? "bg-red-700"
-                                        : "bg-gray-200"
-                                    }
-                                  `}
-                                />
-          
-                              )
-                            )}
-          
-                          </div>
-          
-                          <span className="text-sm text-gray-500 ml-2">
-                            {data.score}
-                          </span>
-          
-                        </div>
-          
-                      </div>
-          
-                    );
-          
-                  }
-                )}
-          
-            </div>
-          
+      
+              <div className="text-right">
+      
+                  <div className="text-5xl font-bold text-red-700">
+      
+                      {Object.keys(impactData).length}
+      
+                  </div>
+      
+                  <div className="text-gray-500">
+      
+                      Challenges Supported
+      
+                  </div>
+      
+              </div>
+      
           </div>
       
-          <p className="text-gray-600 mb-6">
-            Based on community challenge mappings,
-            this technology appears most relevant
-            to the following Calgary priorities.
-          </p>
+          <div className="grid lg:grid-cols-2 gap-6">
       
-          <div className="space-y-5">
+              {Object.entries(impactData)
       
-            {Object.entries(impactData)
               .sort(
-                (a: any, b: any) =>
-                  b[1].score -
-                  a[1].score
+      
+                  (a:any,b:any)=>
+      
+                  b[1].score-a[1].score
+      
               )
-              .map(
-                ([challenge, data]: any) => {
       
-                  const width =
-                    Math.min(
-                      data.score * 10,
-                      100
-                    );
+              .map(([challenge,data]:any)=>{
       
-                  return (
+                  const width=Math.min(data.score*10,100);
       
-                    <div
-                      key={challenge}
-                    >
+                  const colour =
+                    data.score >= 8
+                        ? "bg-red-700"
+                        : data.score >= 5
+                        ? "bg-red-500"
+                        : "bg-red-200";
       
-                      <div className="flex justify-between mb-2">
+                  return(
       
-                        <span className="font-semibold">
-                          {challenge}
-                        </span>
+                  <div
       
-                        <span className="font-bold text-red-700">
-                          {data.score}
-                        </span>
+                  key={challenge}
+      
+                  className="rounded-2xl border border-gray-200 p-6 hover:shadow-md transition"
+      
+                  >
+      
+                      <div className="flex justify-between items-start mb-4">
+      
+                          <h3 className="font-bold text-xl">
+      
+                              {challenge}
+      
+                          </h3>
+      
+                          <span
+      
+                          className={`
+      
+                          px-3
+      
+                          py-1
+      
+                          rounded-full
+      
+                          text-white
+      
+                          font-semibold
+      
+                          ${colour}
+      
+                          `}
+      
+                          >
+      
+                              {data.score}/10
+      
+                          </span>
       
                       </div>
       
-                      <div className="h-4 bg-gray-200 rounded-full overflow-hidden mb-3">
+                      <div className="h-3 bg-gray-200 rounded-full overflow-hidden mb-5">
       
-                        <div
-                          className="h-full bg-red-700"
+                          <div
+      
+                          className={`${colour} h-full transition-all duration-700`}
+      
                           style={{
-                            width:
-                              `${width}%`
+      
+                              width:`${width}%`
+      
                           }}
-                        />
+      
+                          />
+      
+                      </div>
+      
+                      <div className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+      
+                          Supporting Applications
       
                       </div>
       
                       <div className="flex flex-wrap gap-2">
       
-                        {data.applications.map(
-                          (
-                            application: string
-                          ) => (
+                      {data.applications.map(
       
-                            <span
-                              key={
-                                application
-                              }
-                              className="
-                                bg-red-50
-                                text-red-700
-                                px-3
-                                py-1
-                                rounded-full
-                                text-sm
-                              "
-                            >
-                              {application}
-                            </span>
+                          (application:string)=>(
+      
+                          <span
+      
+                          key={application}
+      
+                          className="bg-red-50 border border-red-200 text-red-700 px-3 py-1 rounded-full text-sm"
+      
+                          >
+      
+                          {application}
+      
+                          </span>
       
                           )
-                        )}
+      
+                      )}
       
                       </div>
       
-                    </div>
+                  </div>
       
                   );
       
-                }
-              )}
+              })}
       
           </div>
       
-        </div>
+      </div>
       
       )}
 
