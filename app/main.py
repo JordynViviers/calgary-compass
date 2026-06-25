@@ -1983,13 +1983,16 @@ def challenge_solutions(
 
     return result
 
-@app.get(
-    "/technology/{technology_id}/impact"
-)
+@app.get("/technology/{technology_id}/impact")
 def technology_impact(
     technology_id: int,
     db: Session = Depends(get_db)
 ):
+
+    weighted = weighted_scores(
+        technology_id,
+        db
+    )
 
     applications = db.query(
         TechnologyApplication
@@ -1999,6 +2002,59 @@ def technology_impact(
     ).all()
 
     impact = {}
+
+    challenge_weights = {
+
+        "Infrastructure, Traffic and Roads": [
+            "reliable_infrastructure",
+            "transportation_network",
+        ],
+
+        "Crime, Safety and Policing": [
+            "safe_city",
+            "trusted_governance",
+        ],
+
+        "Growth and Planning": [
+            "balanced_growth",
+            "reliable_infrastructure",
+        ],
+
+        "Transit": [
+            "transportation_network",
+            "reliable_infrastructure",
+        ],
+
+        "Homelessness, Poverty and Affordable Housing": [
+            "community_wellbeing",
+            "balanced_growth",
+        ],
+
+        "Economy": [
+            "balanced_growth",
+            "trusted_governance",
+        ],
+
+        "Water Supply/Infrastructure": [
+            "reliable_infrastructure",
+            "community_wellbeing",
+        ],
+
+        "Environment and Waste Management": [
+            "community_wellbeing",
+            "balanced_growth",
+        ],
+
+        "Recreation and Parks": [
+            "community_wellbeing",
+        ],
+
+        "Education": [
+            "community_wellbeing",
+            "trusted_governance",
+        ],
+
+    }
 
     for application in applications:
 
@@ -2013,22 +2069,59 @@ def technology_impact(
 
             if link.challenge not in impact:
 
-                impact[
-                    link.challenge
-                ] = {
+                priorities = challenge_weights.get(
+                    link.challenge,
+                    []
+                )
+
+                if priorities:
+
+                    base_score = sum(
+                        weighted[p]
+                        for p in priorities
+                    ) / len(priorities)
+
+                else:
+
+                    base_score = 5
+
+                impact[link.challenge] = {
+
                     "score": 0,
+
                     "applications": []
+
                 }
 
-            impact[
-                link.challenge
-            ]["score"] += link.strength
+            impact[link.challenge]["score"] += base_score
 
-            impact[
+            if application.name not in impact[
                 link.challenge
-            ]["applications"].append(
-                application.name
-            )
+            ]["applications"]:
+
+                impact[
+                    link.challenge
+                ]["applications"].append(
+                    application.name
+                )
+
+    if not impact:
+
+        return {}
+
+    max_score = max(
+        item["score"]
+        for item in impact.values()
+    )
+
+    for item in impact.values():
+
+        item["score"] = round(
+            item["score"] /
+            max_score *
+            10,
+            1
+        )
 
     return impact
 
