@@ -4,7 +4,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 
-const API_URL = "https://calgary-compass-api.onrender.com";
+import {
+  API_URL,
+  getAdminConfig,
+} from "@/lib/admin";
 
 export default function AdminPage() {
   const [name, setName] = useState("");
@@ -21,7 +24,8 @@ export default function AdminPage() {
   const loadTechnologies = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/admin/technologies`
+        `${API_URL}/admin/technologies`,
+        getAdminConfig()
       );
 
       setTechnologies(response.data);
@@ -51,7 +55,8 @@ export default function AdminPage() {
             description,
             hero_image: heroImage, 
             is_active: true
-          }
+          },
+          getAdminConfig()
         );
 
         alert("Technology updated!");
@@ -62,7 +67,8 @@ export default function AdminPage() {
             name,
             description, 
             hero_image: heroImage, 
-          }
+          },
+          getAdminConfig()
         );
 
         alert("Technology created!");
@@ -87,7 +93,8 @@ export default function AdminPage() {
 
     try {
       await axios.delete(
-        `${API_URL}/technology/${technologyId}`
+        `${API_URL}/technology/${technologyId}`,
+        getAdminConfig()
       );
 
       alert("Technology deleted!");
@@ -106,7 +113,9 @@ export default function AdminPage() {
   ) => {
     try {
       await axios.put(
-        `${API_URL}/technology/${technologyId}/hide`
+        `${API_URL}/technology/${technologyId}/hide`, 
+        {}, 
+        getAdminConfig()
       );
 
       alert("Technology hidden!");
@@ -126,7 +135,9 @@ export default function AdminPage() {
   ) => {
     try {
       await axios.put(
-        `${API_URL}/technology/${technologyId}/show`
+        `${API_URL}/technology/${technologyId}/show`, 
+        {},
+        getAdminConfig()
       );
 
       alert("Technology restored!");
@@ -146,7 +157,9 @@ export default function AdminPage() {
   ) => {
     try {
       await axios.post(
-        `${API_URL}/technology/${technologyId}/ai-evaluate`
+        `${API_URL}/technology/${technologyId}/ai-evaluate`, 
+        {},
+        getAdminConfig()
       );
 
       alert(
