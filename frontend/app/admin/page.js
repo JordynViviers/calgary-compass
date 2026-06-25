@@ -1,14 +1,128 @@
 "use client";
 
 import Link from "next/link";
+import axios from "axios";
 import { useState, useEffect } from "react";
 
+const API_URL =
+  "https://calgary-compass-api.onrender.com";
+
 export default function AdminHome() {
+
   const [authenticated, setAuthenticated] =
     useState(false);
 
+  const [loading, setLoading] =
+    useState(true);
+
   const [password, setPassword] =
     useState("");
+
+  useEffect(() => {
+
+    const savedPassword =
+      localStorage.getItem(
+        "adminPassword"
+      );
+
+    if (!savedPassword) {
+
+      setLoading(false);
+
+      return;
+
+    }
+
+    axios.post(
+
+      `${API_URL}/admin/login`,
+
+      {},
+
+      {
+        headers: {
+          "x-admin-password":
+            savedPassword,
+        },
+      }
+
+    )
+
+    .then(() => {
+
+      setAuthenticated(true);
+
+      setLoading(false);
+
+    })
+
+    .catch(() => {
+
+      localStorage.removeItem(
+        "adminPassword"
+      );
+
+      setLoading(false);
+
+    });
+
+  }, []);
+
+  const login = async () => {
+
+    try {
+
+      await axios.post(
+
+        `${API_URL}/admin/login`,
+
+        {},
+
+        {
+          headers: {
+            "x-admin-password":
+              password,
+          },
+        }
+
+      );
+
+      localStorage.setItem(
+        "adminPassword",
+        password
+      );
+
+      setAuthenticated(true);
+
+    }
+
+    catch {
+
+      alert(
+        "Incorrect password"
+      );
+
+    }
+
+  };
+
+  const logout = () => {
+
+    localStorage.removeItem(
+      "adminPassword"
+    );
+
+    setAuthenticated(false);
+
+    setPassword("");
+
+  };
+
+  if (loading) {
+
+    return null;
+
+  }
 
   if (!authenticated) {
     return (
@@ -45,16 +159,7 @@ export default function AdminHome() {
           />
 
           <button
-            onClick={() => {
-              if (
-                password ===
-                "Touse26"
-              ) {
-                setAuthenticated(true);
-              } else {
-                alert("Incorrect password");
-              }
-            }}
+            onClick={login}
             className="
               w-full
               bg-red-600
@@ -142,7 +247,30 @@ export default function AdminHome() {
         </div>
 
         {/* Foreground Content */}
-        <div className="relative z-10 max-w-5xl w-full text-center">
+        <div className="relative z-10 max-w-5xl w-full">
+        
+          {/* Logout */}
+          <div className="flex justify-end mb-6">
+        
+            <button
+              onClick={logout}
+              className="
+                bg-gray-700
+                hover:bg-gray-800
+                text-white
+                px-5
+                py-2
+                rounded-xl
+                font-medium
+                transition
+              "
+            >
+              Logout
+            </button>
+        
+          </div>
+        
+          <div className="text-center">
           <h1 className="text-6xl font-bold mb-4">
             Calgary Compass
           </h1>
