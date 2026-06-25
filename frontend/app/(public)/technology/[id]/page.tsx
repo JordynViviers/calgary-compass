@@ -434,8 +434,8 @@ const weightedAverage =
         </h2>
       
         <p className="text-gray-700 leading-relaxed">
-          Calgary Compass combines AI-supported evaluation with community input to
-          provide a balanced perspective on each technology.
+          Calgary Compass weighs AI-supported evaluation with community input to
+          provide a balanced perspective on each technology. The current weight metric is 50-50.
         </p>
       
         <div className="grid md:grid-cols-3 gap-4 mt-6">
@@ -446,7 +446,7 @@ const weightedAverage =
       
             <p className="text-gray-600 text-sm">
               Evaluates the technology against Calgary's strategic priorities using
-              research and evidence sources.
+              OpenAlex to gather data from scholarly reviewed papers on emerging technologies.
             </p>
           </div>
       
@@ -457,7 +457,7 @@ const weightedAverage =
       
             <p className="text-gray-600 text-sm">
               Reflects how community participants score the technology across the
-              same evaluation criteria.
+              same evaluation criteria as AI is evaluating. 
             </p>
           </div>
       
@@ -840,7 +840,7 @@ const weightedAverage =
 
                 <p className="text-gray-600">
                   Community votes represent the aggregated
-                  perspectives of platform participants.
+                  perspectives of survey participants.
                 </p>
 
                 <p className="mt-4 text-gray-700 font-medium">
@@ -943,7 +943,7 @@ const weightedAverage =
                 <p className="text-gray-600">
                   These scores combine AI evaluation and
                   community voting using the platform's
-                  weighting methodology.
+                  weighting methodology (50-50).
                 </p>
 
               </div>
