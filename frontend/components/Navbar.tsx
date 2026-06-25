@@ -144,23 +144,6 @@ export default function Navbar() {
                 {t.signals}
               </Link>
 
-              <Link
-                href="/foresight"
-                className="
-                  text-[15px]
-                  font-medium
-                  text-gray-700
-                  hover:text-red-700
-                  transition
-                  pb-1
-                  border-b-2
-                  border-transparent
-                  hover:border-red-700
-                "
-              >
-                {t.foresight}
-              </Link>
-
 
               <Link
                 href="/events"
