@@ -11,6 +11,8 @@ load_dotenv(BASE_DIR / ".env")
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
+print("DATABASE_URL =", DATABASE_URL)
+
 if DATABASE_URL is None:
     raise RuntimeError(
         f"DATABASE_URL not found. Expected .env at: {BASE_DIR / '.env'}"
