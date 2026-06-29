@@ -293,6 +293,11 @@ class CalgaryChallengeVote(Base):
 
     id = Column(Integer, primary_key=True)
 
+    submission_id = Column(
+        String,
+        index=True
+    )
+
     stakeholder = Column(String)
 
     challenge = Column(String)
