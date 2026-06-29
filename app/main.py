@@ -2167,4 +2167,112 @@ def admin_login(
         "success": True
     }
 
+@app.post("/community-submission")
+def submit_community_submission(
+    submission: CommunitySubmissionRequest,
+    db: Session = Depends(get_db)
+):
+
+    # -------------------------
+    # Create one submission
+    # -------------------------
+
+    db_submission = CommunitySubmission(
+        stakeholder=submission.stakeholder
+    )
+
+    db.add(db_submission)
+
+    db.commit()
+
+    db.refresh(db_submission)
+
+    # -------------------------
+    # Save challenge rankings
+    # -------------------------
+
+    for ranking in submission.challenge_rankings:
+
+        db.add(
+
+            CalgaryChallengeVote(
+
+                submission_id=db_submission.id,
+
+                stakeholder=submission.stakeholder,
+
+                challenge=ranking.challenge,
+
+                rank=ranking.rank
+
+            )
+
+        )
+
+    # -------------------------
+    # Save technology votes
+    # -------------------------
+
+    for vote in submission.technology_votes:
+
+        db.add(
+
+            Vote(
+
+                submission_id=db_submission.id,
+
+                stakeholder=submission.stakeholder,
+
+                technology_id=vote.technology_id,
+
+                reliable_infrastructure=vote.reliable_infrastructure,
+
+                safe_city=vote.safe_city,
+
+                transportation_network=vote.transportation_network,
+
+                community_wellbeing=vote.community_wellbeing,
+
+                balanced_growth=vote.balanced_growth,
+
+                trusted_governance=vote.trusted_governance
+
+            )
+
+        )
+
+    # -------------------------
+    # Save community signal
+    # -------------------------
+
+    if (
+        submission.community_signal
+        and submission.community_signal.strip()
+    ):
+
+        db.add(
+
+            CommunitySignal(
+
+                submission_id=db_submission.id,
+
+                stakeholder=submission.stakeholder,
+
+                signal_text=submission.community_signal
+
+            )
+
+        )
+
+    db.commit()
+
+    return {
+
+        "message":
+            "Community submission saved.",
+
+        "submission_id":
+            db_submission.id
+
+    }
 
