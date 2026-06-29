@@ -50,11 +50,6 @@ class TechnologyCandidateRequest(BaseModel):
     source: str | None = None
     confidence: float | None = None
 
-# =========================
-# DATABASE INIT
-# =========================
-
-db
 
 
 # =========================
