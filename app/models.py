@@ -24,6 +24,8 @@ class Technology(Base):
 
     name = Column(String)
 
+    test_column = Column(String, nullable=True)
+
     description = Column(String)
 
     is_active = Column(Boolean, default=True)
