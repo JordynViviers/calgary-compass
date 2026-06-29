@@ -54,7 +54,7 @@ class TechnologyCandidateRequest(BaseModel):
 # DATABASE INIT
 # =========================
 
-Base.metadata.create_all(bind=engine)
+db
 
 
 # =========================
