@@ -2183,9 +2183,7 @@ def submit_community_submission(
 
     db.add(db_submission)
 
-    db.commit()
-
-    db.refresh(db_submission)
+    db.flush()
 
     # -------------------------
     # Save challenge rankings
