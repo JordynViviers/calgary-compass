@@ -27,6 +27,8 @@ from app.models import (
     TechnologyApplicationRequest,
     ChallengeApplicationLink,
     ChallengeApplicationLinkRequest,
+    CommunitySubmission, 
+    CommunitySubmissionRequest,
 )
 
 from app.crud import (
