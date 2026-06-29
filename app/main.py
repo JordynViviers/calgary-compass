@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, Header, HTTPException
+from fastapi import FastAPI, Depends, Header, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -1594,7 +1594,11 @@ def submit_challenge_vote(
     return {
         "message": "Challenge vote recorded"
     }
-
+@app.post("/community-submission")
+def submit_community_submission(
+    submission: CommunitySubmissionRequest = Body(...),
+    db: Session = Depends(get_db)
+):
 @app.get("/challenge-summary")
 def challenge_summary(
     db: Session = Depends(get_db)
