@@ -317,8 +317,10 @@ class CalgaryChallengeVote(Base):
     id = Column(Integer, primary_key=True)
 
     submission_id = Column(
-        String,
-        index=True
+        Integer,
+        ForeignKey("community_submissions.id"),
+        index=True,
+        nullable=True
     )
 
     stakeholder = Column(String)
