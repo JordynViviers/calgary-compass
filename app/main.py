@@ -1603,38 +1603,68 @@ def challenge_summary(
     db: Session = Depends(get_db)
 ):
 
-    results = (
-        db.query(
-            CalgaryChallengeVote.challenge,
-            func.avg(
-                CalgaryChallengeVote.rank
-            ).label("average_rank"),
-            func.count(
-                CalgaryChallengeVote.id
-            ).label("votes")
-        )
-        .group_by(
-            CalgaryChallengeVote.challenge
-        )
-        .order_by(
-            func.avg(
-                CalgaryChallengeVote.rank
-            )
-        )
-        .all()
-    )
+    official_challenges = [
 
-    return [
-        {
-            "challenge": r.challenge,
+        "Infrastructure, Traffic and Roads",
+
+        "Growth and Planning",
+
+        "Crime, Safety and Policing",
+
+        "Transit",
+
+        "Homelessness, Poverty and Affordable Housing",
+
+        "Economy",
+
+        "Water Supply/Infrastructure",
+
+        "Environment and Waste Management",
+
+        "Recreation and Parks",
+
+        "Education",
+
+    ]
+
+    results = []
+
+    for challenge in official_challenges:
+
+        votes = db.query(
+            CalgaryChallengeVote
+        ).filter(
+            CalgaryChallengeVote.challenge == challenge
+        ).all()
+
+        if len(votes) == 0:
+
+            continue
+
+        average_rank = sum(
+            vote.rank
+            for vote in votes
+        ) / len(votes)
+
+        results.append({
+
+            "challenge": challenge,
+
             "average_rank": round(
-                float(r.average_rank),
+                average_rank,
                 2
             ),
-            "votes": r.votes,
-        }
-        for r in results
-    ]
+
+            "votes": len(votes),
+
+        })
+
+    results.sort(
+        key=lambda x:
+        x["average_rank"]
+    )
+
+    return results
 
 @app.get("/technology-applications")
 def get_technology_applications(
