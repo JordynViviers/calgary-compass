@@ -34,7 +34,28 @@ class Technology(Base):
         cascade="all, delete-orphan")
 
     hero_image = Column(String)
-     
+# =========================
+# COMMUNITY SUBMISSIONS
+# =========================
+
+class CommunitySubmission(Base):
+    __tablename__ = "community_submissions"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    stakeholder = Column(
+        String,
+        nullable=False
+    )
+
+    created_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now()
+    )     
     
 class Vote(Base):
     __tablename__ = "votes"
