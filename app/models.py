@@ -399,6 +399,37 @@ class ChallengeApplicationLinkRequest(BaseModel):
     application_id: int
     strength: int = 5
 
+# =========================
+# COMMUNITY SUBMISSION
+# =========================
+
+class TechnologyVoteSubmission(BaseModel):
+    technology_id: int
+
+    reliable_infrastructure: int
+    safe_city: int
+    transportation_network: int
+    community_wellbeing: int
+    balanced_growth: int
+    trusted_governance: int
+
+
+class ChallengeRankingSubmission(BaseModel):
+    challenge: str
+    rank: int
+
+
+class CommunitySubmissionRequest(BaseModel):
+    stakeholder: str
+
+    technology_votes: list[TechnologyVoteSubmission]
+
+    challenge_rankings: list[
+        ChallengeRankingSubmission
+    ]
+
+    community_signal: str | None = None
+
 
 
 
