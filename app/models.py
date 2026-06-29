@@ -61,6 +61,7 @@ class Vote(Base):
     __tablename__ = "votes"
     id = Column(Integer, primary_key=True)
     technology_id = Column(Integer, ForeignKey("technologies.id"))
+    submission_id = Column(Integer, ForeignKey("community_submissions.id"))
     stakeholder = Column(String)
     reliable_infrastructure = Column(Integer)
     safe_city = Column(Integer)
@@ -105,6 +106,7 @@ class AIEvaluation(Base):
 class CommunitySignal(Base):
     __tablename__ = "community_signals"
     id = Column(Integer, primary_key=True)
+    submission_id = Column(Integer, ForeignKey("community_submissions.id"))
     stakeholder = Column(String)
     signal_text = Column(String)
 # =========================
