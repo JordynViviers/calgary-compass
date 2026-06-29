@@ -88,240 +88,267 @@ export default function CommunityInputPage() {
     }));
   }
 
-
   async function handleSubmit() {
+
     console.log("SUBMIT CLICKED");
   
     try {
+  
+      // ------------------------------------
+      // Validate technology ratings
+      // ------------------------------------
+  
       for (const technology of technologies) {
-
+  
         const techRatings =
           ratings[technology.name];
-      
+  
         if (!techRatings) {
-      
+  
           alert(
             `Please rate all criteria for ${technology.name}.`
           );
-      
+  
           return;
+  
         }
-      
+  
         for (const criterion of criteria) {
-      
+  
           const value = Number(
             techRatings[criterion] || 0
           );
-      
+  
           if (value === 0) {
-      
+  
             alert(
               `Please rate "${criterion}" for ${technology.name}.`
             );
-      
+  
             return;
+  
           }
+  
         }
+  
       }
   
-      // Save ranked Calgary challenges
+      // ------------------------------------
+      // Build challenge rankings
+      // ------------------------------------
   
-      const rankings = [
+      const challengeRankings = [
+  
         challengeRanking.first,
+  
         challengeRanking.second,
+  
         challengeRanking.third,
+  
         challengeRanking.fourth,
+  
         challengeRanking.fifth,
-      ];
   
-      console.log("Rankings array:", rankings);
+      ]
   
-      for (let i = 0; i < rankings.length; i++) {
+        .filter(
+          (challenge) => challenge
+        )
   
-        if (!rankings[i]) continue;
+        .map(
+          (
+            challenge,
+            index
+          ) => ({
   
-        console.log(
-          "Posting challenge vote:",
-          rankings[i]
+            challenge,
+  
+            rank:
+              index + 1,
+  
+          })
         );
   
-        await axios.post(
-          `${API_URL}/challenge-vote`,
-          {
-            stakeholder: sector,
-            challenge: rankings[i],
-            rank: i + 1,
+      if (
+        otherChallenge.trim()
+      ) {
+  
+        challengeRankings.push({
+  
+          challenge:
+            otherChallenge,
+  
+          rank: 99,
+  
+        });
+  
+      }
+  
+      // ------------------------------------
+      // Build technology votes
+      // ------------------------------------
+  
+      const technologyVotes =
+        technologies.map(
+          (technology) => {
+  
+            const techRatings =
+              ratings[
+                technology.name
+              ];
+  
+            return {
+  
+              technology_id:
+                technology.id,
+  
+              reliable_infrastructure:
+                Number(
+                  techRatings[
+                    "Reliable and Sustainable Infrastructure"
+                  ]
+                ),
+  
+              safe_city:
+                Number(
+                  techRatings[
+                    "Safe City"
+                  ]
+                ),
+  
+              transportation_network:
+                Number(
+                  techRatings[
+                    "Functional Transportation Network"
+                  ]
+                ),
+  
+              community_wellbeing:
+                Number(
+                  techRatings[
+                    "Community Livability and Well-being"
+                  ]
+                ),
+  
+              balanced_growth:
+                Number(
+                  techRatings[
+                    "Balanced Growth and Evolving Neighbourhoods"
+                  ]
+                ),
+  
+              trusted_governance:
+                Number(
+                  techRatings[
+                    "Trusted and Collaborative Government"
+                  ]
+                ),
+  
+            };
+  
           }
         );
   
-        console.log(
-          "Challenge vote posted:",
-          rankings[i]
-        );
-      }
+      // ------------------------------------
+      // Build one submission object
+      // ------------------------------------
   
-      // Save custom challenge
+      const submission = {
   
-      if (otherChallenge.trim()) {
+        stakeholder:
+          sector,
   
-        console.log(
-          "Posting custom challenge:",
-          otherChallenge
-        );
+        technology_votes:
+          technologyVotes,
   
-        await axios.post(
-          `${API_URL}/challenge-vote`,
-          {
-            stakeholder: sector,
-            challenge: otherChallenge,
-            rank: 99,
-          }
-        );
+        challenge_rankings:
+          challengeRankings,
   
-        console.log(
-          "Custom challenge posted"
-        );
-      }
+        community_signal:
+          signals,
   
-      // Save technology ratings
-  
-      for (const technology of technologies) {
+      };
 
-        const techRatings =
-          ratings[technology.name];
+      // ------------------------------------
+      // Submit the entire survey
+      // ------------------------------------
       
-        console.log(
-          "Technology:",
-          technology.name,
-          "Ratings:",
-          techRatings
+      console.log(
+        "Submitting community survey:",
+        submission
+      );
+      
+      const response =
+        await axios.post(
+          `${API_URL}/community-submission`,
+           submission
         );
       
-        if (!techRatings) {
-          continue;
-        }
-  
-        console.log(
-          "Posting technology vote:",
-          technology.name
-        );
-  
-        await axios.post(
-          `${API_URL}/vote`,
-          {
-            technology_id: technology.id,
-            stakeholder: sector,
-  
-            reliable_infrastructure: Number(
-              techRatings[
-                "Reliable and Sustainable Infrastructure"
-              ] || 0
-            ),
-  
-            safe_city: Number(
-              techRatings[
-                "Safe City"
-              ] || 0
-            ),
-  
-            transportation_network: Number(
-              techRatings[
-                "Functional Transportation Network"
-              ] || 0
-            ),
-  
-            community_wellbeing: Number(
-              techRatings[
-                "Community Livability and Well-being"
-              ] || 0
-            ),
-  
-            balanced_growth: Number(
-              techRatings[
-                "Balanced Growth and Evolving Neighbourhoods"
-              ] || 0
-            ),
-  
-            trusted_governance: Number(
-              techRatings[
-                "Trusted and Collaborative Government"
-              ] || 0
-            ),
-          }
-        );
-  
-        console.log(
-          "Technology vote posted:",
-          technology.name
-        );
-      }
-  
-      // Save community signals
-  
-      if (signals.trim()) {
-  
-        console.log(
-          "Posting community signal"
-        );
-  
-        await axios.post(
-          `${API_URL}/community-signal`,
-          {
-            stakeholder: sector,
-            signal_text: signals,
-          }
-        );
-  
-        console.log(
-          "Community signal posted"
-        );
-      }
-  
+      console.log(
+        "Submission complete:",
+        response.data
+      );
+      
       alert(
         "Community input submitted successfully!"
       );
-  
-      // Reset form
-  
-      setRatings({});
-      setSignals("");
-      setSector("");
-  
-      setChallengeRanking({
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-        fifth: "",
-      });
-  
-      setOtherChallenge("");
-  
-    } catch (error) {
-  
+    // ------------------------------------
+    // Reset the form
+    // ------------------------------------
+
+    setRatings({});
+
+    setSignals("");
+
+    setSector("");
+
+    setChallengeRanking({
+
+      first: "",
+
+      second: "",
+
+      third: "",
+
+      fourth: "",
+
+      fifth: "",
+
+    });
+
+    setOtherChallenge("");
+
+  } catch (error) {
+
+    console.error(
+      "FULL ERROR:",
+      error
+    );
+
+    if (
+      axios.isAxiosError(error)
+    ) {
+
       console.error(
-        "FULL ERROR:",
-        error
+        "Status:",
+        error.response?.status
       );
-  
-      if (axios.isAxiosError(error)) {
-  
-        console.error(
-          "Status:",
-          error.response?.status
-        );
-  
-        console.error(
-          "Data:",
-          error.response?.data
-        );
-      }
-  
-      alert(
-        "Failed to submit community input."
+
+      console.error(
+        "Data:",
+        error.response?.data
       );
+
     }
+
+    alert(
+      "Failed to submit community input."
+    );
+
   }
+
+}
+
   return (
     <main className="min-h-screen bg-gray-50 text-black">
       <div className="h-2 bg-red-700 w-full"></div>
