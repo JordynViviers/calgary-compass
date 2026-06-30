@@ -416,7 +416,7 @@ const weightedAverage =
           </p>
 
         {/* QUICK FACTS */}
-          <div className="grid md:grid-cols-4 gap-6"></div>
+          <div className="grid md:grid-cols-4 gap-6">
             <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
 
               <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
@@ -464,6 +464,7 @@ const weightedAverage =
 
           </div>
         </div>
+      </div>
           
       {/* COMMUNITY INPUT BUTTON */}
 
