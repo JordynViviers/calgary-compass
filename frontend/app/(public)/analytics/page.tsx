@@ -64,53 +64,41 @@ export default function AnalyticsPage() {
 
   useEffect(() => {
 
-    axios
-      .get(
-        `${API_URL}/challenge-summary`
-      )
-      .then((res) => {
+    Promise.all([
+      axios.get(`${API_URL}/challenge-summary`),
+      axios.get(`${API_URL}/community-summary`),
+      axios.get(`${API_URL}/challenge-solutions`)
+    ])
+      .then(([challengeRes, communityRes, solutionsRes]) => {
 
-        setChallengeSummary(
-          res.data
-        );
+        setChallengeSummary(challengeRes.data);
 
-        if (
-          res.data.length > 0
-        ) {
-
+        if (challengeRes.data.length > 0) {
           setSelectedChallenge(
-            res.data[0].challenge
+            challengeRes.data[0].challenge
           );
-
         }
 
-      });
-    
-    axios
-      .get(
-        `${API_URL}/community-summary`
-      )
-      .then((res) => {
-
         setCommunitySummary(
-          res.data
+          communityRes.data
         );
 
-      });
-    
-    axios
-      .get(
-        `${API_URL}/challenge-solutions`
-      )
-      .then((res) => {
-
         setSolutions(
-          res.data
+          solutionsRes.data
+        );
+
+      })
+      .catch((err) => {
+
+        console.error(
+          "Failed to load analytics:",
+          err
         );
 
       });
 
   }, []);
+    
 
   const technologies =
     solutions[
@@ -179,7 +167,7 @@ export default function AnalyticsPage() {
 
         {/* TOP STATS */}
 
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-4 gap-6 mb-12">
 
           <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
 
@@ -196,15 +184,15 @@ export default function AnalyticsPage() {
           <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
 
             <p className="text-gray-500 mb-2">
-              Technologies Linked
+              Technology Ratings
             </p>
 
             <p className="text-5xl font-bold text-red-700">
+
               {
-                Object.values(
-                  solutions
-                ).flat().length
+                communitySummary?.technology_votes ?? "—"
               }
+
             </p>
 
           </div>
@@ -212,18 +200,68 @@ export default function AnalyticsPage() {
           <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
 
             <p className="text-gray-500 mb-2">
-              Community Responses
+              Completed Surveys
             </p>
 
             <p className="text-5xl font-bold text-red-700">
 
               {
-                communitySummary
-                  ? communitySummary.total_surveys
-                  : "—"
+                communitySummary?.total_surveys ?? "—"
               }
 
             </p>
+
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
+
+            <p className="text-gray-500 mb-2">
+              Community Signals
+            </p>
+
+            <p className="text-5xl font-bold text-red-700">
+
+              {
+                communitySummary?.total_signals ?? "—"
+              }
+
+            </p>
+
+          </div>
+
+        </div>
+
+        {/* STAKEHOLDER BREAKDOWN */}
+
+        <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm mb-12">
+
+          <h2 className="text-3xl font-bold text-red-700 mb-6">
+            Survey Participants by Stakeholder
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-4">
+
+            {communitySummary?.stakeholders &&
+              Object.entries(
+                communitySummary.stakeholders
+              ).map(([stakeholder, count]) => (
+
+                <div
+                  key={stakeholder}
+                  className="bg-gray-50 rounded-2xl p-5"
+                >
+
+                  <p className="text-gray-500 text-sm">
+                    {stakeholder}
+                  </p>
+
+                  <p className="text-3xl font-bold text-red-700">
+                    {count as number}
+                  </p>
+
+                </div>
+
+              ))}
 
           </div>
 
