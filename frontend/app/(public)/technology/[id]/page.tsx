@@ -417,11 +417,7 @@ const weightedAverage =
 
         </div>
 
-      </div>
-
-      {/* QUICK FACTS */}
-
-      <div className="grid md:grid-cols-4 gap-6 mb-12">
+        {/* QUICK FACTS */}
 
         <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
 
@@ -576,15 +572,8 @@ const weightedAverage =
             Waiting for community votes.
           </p>
         )}
-      </div>
 
-     
-      
-
-
-
-      {/* ASSESSMENTS */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        {/* ASSESSMENTS */}
         
 
         {/* AI ASSESSMENT */}
