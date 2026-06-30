@@ -430,7 +430,7 @@ const weightedAverage =
           </p>
 
           <p className="text-4xl font-bold text-red-700">
-            {weightedScores.toFixed(1)}
+            {weightedScores}
           </p>
 
         </div>
