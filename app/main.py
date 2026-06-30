@@ -68,6 +68,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://calgary-compass-self.vercel.app",
+        "https://calgary-compass.com",
+        "https://www.calgary-compass.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
