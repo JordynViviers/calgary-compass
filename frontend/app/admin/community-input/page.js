@@ -12,7 +12,7 @@ const CRITERIA = [
   { key: "transportation_network", label: "Functional Transportation Network" },
   { key: "community_wellbeing", label: "Community Livability and Well-being" },
   { key: "balanced_growth", label: "Balanced Growth and Evolving Neighbourhoods" },
-  { key: "trusted_government", label: "Trusted and Collaborative Government" },
+  { key: "trusted_governance", label: "Trusted and Collaborative Government" },
 ];
 
 
