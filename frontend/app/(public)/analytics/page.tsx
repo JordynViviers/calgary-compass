@@ -130,40 +130,6 @@ export default function AnalyticsPage() {
 
         </section>
 
-        {/* KEY INSIGHTS */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-        
-          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-red-700 mb-2">
-              Community Priorities
-            </h3>
-        
-            <p className="text-gray-600">
-              Explore the highest-ranked challenges identified by Calgary residents and stakeholders.
-            </p>
-          </div>
-        
-          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-red-700 mb-2">
-              Technology Applications
-            </h3>
-        
-            <p className="text-gray-600">
-              Discover technologies and applications linked to local challenges and opportunities.
-            </p>
-          </div>
-        
-          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-red-700 mb-2">
-              Community-Informed Insights
-            </h3>
-        
-            <p className="text-gray-600">
-              Results reflect community input and help identify areas where technology may provide value.
-            </p>
-          </div>
-        
-        </div>
 
         {/* TOP STATS */}
 
