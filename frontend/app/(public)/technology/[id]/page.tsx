@@ -586,7 +586,7 @@ const weightedAverage =
 
         {/* ASSESSMENT CARDS */}
 
-        <div className="grid lg:grid-cols-2 gap-8 mt-10">
+        <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-8 mt-10">
 
           {/* ================= AI ASSESSMENT ================= */}
 
@@ -938,75 +938,6 @@ const weightedAverage =
           </div>
 
         </div>
-      </div>
-      {/* WHY CALGARY CARES */}
-
-      <div className="bg-white rounded-3xl border border-gray-200 shadow-sm mb-12 overflow-hidden">
-
-        <div className="border-b border-gray-200 px-10 py-6">
-
-          <h2 className="text-3xl font-bold text-red-700">
-            Why Calgary Cares
-          </h2>
-
-          <p className="text-gray-500 mt-2">
-            The strongest areas where this technology can support Calgary's long-term priorities.
-          </p>
-
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6 p-10">
-
-          <div className="bg-gray-50 rounded-2xl p-6">
-
-            <h3 className="font-bold text-lg mb-2">
-              Reliable Infrastructure
-            </h3>
-
-            <p className="text-gray-600">
-              Score: {weightedScores?.reliable_infrastructure ?? "—"}/10
-            </p>
-
-          </div>
-
-          <div className="bg-gray-50 rounded-2xl p-6">
-
-            <h3 className="font-bold text-lg mb-2">
-              Safe City
-            </h3>
-
-            <p className="text-gray-600">
-              Score: {weightedScores?.safe_city ?? "—"}/10
-            </p>
-
-          </div>
-
-          <div className="bg-gray-50 rounded-2xl p-6">
-
-            <h3 className="font-bold text-lg mb-2">
-              Transportation Network
-            </h3>
-
-            <p className="text-gray-600">
-              Score: {weightedScores?.transportation_network ?? "—"}/10
-            </p>
-
-          </div>
-
-          <div className="bg-gray-50 rounded-2xl p-6">
-
-            <h3 className="font-bold text-lg mb-2">
-              Community Wellbeing
-            </h3>
-
-            <p className="text-gray-600">
-              Score: {weightedScores?.community_wellbeing ?? "—"}/10
-            </p>
-
-          </div>
-
-        </div>
-
       </div>
 
       {/* COMMUNITY CHALLENGE IMPACT */}
