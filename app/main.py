@@ -570,6 +570,8 @@ def comparison(
         Vote.technology_id == technology_id
     ).all()
 
+    total_votes = len(votes)
+
     if not ai_eval or not votes:
 
         return {
@@ -640,6 +642,7 @@ def comparison(
     return {
         "human": human,
         "ai": ai
+        "total_votes:" total_votes
     }
 
 
