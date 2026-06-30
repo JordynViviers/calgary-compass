@@ -829,7 +829,7 @@ const weightedAverage =
 
           {/* ================= WEIGHTED ASSESSMENT ================= */}
 
-          <div className="mt-8 bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm">
+          <div className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm h-full flex flex-col">
 
             <div className="h-1 bg-red-700" />
 
