@@ -416,56 +416,61 @@ const weightedAverage =
           </p>
 
         {/* QUICK FACTS */}
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm h-1 bg-red-700 rounded-t-2xl">
+          <div className="grid md:grid-cols-4 gap-6 mt-10">
+            <div className="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden">
+              <div className="h-1 bg-red-700"/>
+              
 
-              <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
-                Weighted Score
-              </p>
+              <div className="p-6">
 
-              <p className="text-4xl font-bold text-red-700">
-                {weightedAverage}
-              </p>
+                <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+                  Weighted Score
+                </p>
+
+                <p className="text-4xl font-bold text-red-700">
+                  {weightedAverage}
+                </p>
+
+              </div>
+
+              <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
+                <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+                  Average community score
+                </p>
+                <p className="text-4xl font-bold text-red-700">
+                  {communityAverage}
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
+                <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+                  Community participants
+                </p>
+
+                <p className="text-4xl font-bold text-red-700">
+                  {comparison?.total_votes ?? "—"}
+                </p>
+
+              </div>
+
+              <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
+
+                <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+                  Applications
+                </p>
+
+                <p className="text-4xl font-bold text-red-700">
+                  {applications.length}
+                </p>
+
+              </div>
+
 
             </div>
-
-            <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
-              <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
-                Average community score
-              </p>
-              <p className="text-4xl font-bold text-red-700">
-                {communityAverage}
-              </p>
-            </div>
-            
-            <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
-              <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
-                Community participants
-              </p>
-
-              <p className="text-4xl font-bold text-red-700">
-                {comparison?.total_votes ?? "—"}
-              </p>
-
-            </div>
-
-            <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
-
-              <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
-                Applications
-              </p>
-
-              <p className="text-4xl font-bold text-red-700">
-                {applications.length}
-              </p>
-
-            </div>
-
-
           </div>
         </div>
       </div>
-          
+            
       {/* COMMUNITY INPUT BUTTON */}
 
       <div className="mb-10">
