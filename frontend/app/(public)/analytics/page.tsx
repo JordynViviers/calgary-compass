@@ -59,6 +59,9 @@ export default function AnalyticsPage() {
   const [selectedChallenge, setSelectedChallenge] =
     useState("");
 
+  const [communitySummary, setCommunitySummary] =
+    useState<any>(null);
+
   useEffect(() => {
 
     axios
@@ -82,7 +85,19 @@ export default function AnalyticsPage() {
         }
 
       });
+    
+    axios
+      .get(
+        `${API_URL}/community-summary`
+      )
+      .then((res) => {
 
+        setCommunitySummary(
+          res.data
+        );
+
+      });
+    
     axios
       .get(
         `${API_URL}/challenge-solutions`
@@ -201,17 +216,13 @@ export default function AnalyticsPage() {
             </p>
 
             <p className="text-5xl font-bold text-red-700">
+
               {
-                challengeSummary.reduce(
-                  (
-                    sum,
-                    challenge
-                  ) =>
-                    sum +
-                    challenge.votes,
-                  0
-                )
+                communitySummary
+                  ? communitySummary.total_surveys
+                  : "—"
               }
+
             </p>
 
           </div>
