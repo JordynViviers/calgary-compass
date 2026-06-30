@@ -185,6 +185,11 @@ export default function TechnologyDetailPage() {
           
           if (!compRes.data.error) {
             setComparison(compRes.data);
+
+              console.log(
+                "Comparison:",
+                compRes.data
+              );
           }
         } catch (err) {
 
@@ -339,8 +344,6 @@ const weightedAverage =
 
       {/* HERO */}
 
-      
-
       {technology.hero_image && (
         <div className="relative mb-12 overflow-hidden rounded-3xl">
       
@@ -394,11 +397,72 @@ const weightedAverage =
         </div>
       )}
 
-      <div className="bg-white rounded-3xl border border-gray-200 p-10 mb-12 shadow-sm">
-        <p className="text-xl text-gray-700 leading-relaxed">
-          {technology.description}
-        </p>
+      {/* TECHNOLOGY OVERVIEW */}
+
+      <div className="bg-white rounded-3xl border border-gray-200 shadow-sm mb-12 overflow-hidden">
+
+        <div className="border-b border-gray-200 px-10 py-6">
+
+          <h2 className="text-3xl font-bold text-red-700">
+            Technology Overview
+          </h2>
+
+        </div>
+
+        <div className="p-10">
+
+          <p className="text-xl leading-9 text-gray-700">
+            {technology.description}
+          </p>
+
+        </div>
+
       </div>
+
+      {/* QUICK FACTS */}
+
+      <div className="grid md:grid-cols-4 gap-6 mb-12">
+
+        <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
+
+          <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+            Weighted Score
+          </p>
+
+          <p className="text-4xl font-bold text-red-700">
+            {weightedScores.toFixed(1)}
+          </p>
+
+        </div>
+
+        <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
+
+          <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+            Community Rating
+          </p>
+
+          
+          <p className="text-gray-500 mt-2">
+            Survey responses
+          </p>
+
+        </div>
+
+        <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
+
+          <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+            Applications
+          </p>
+
+          <p className="text-4xl font-bold text-red-700">
+            {applications.length}
+          </p>
+
+        </div>
+
+
+      </div>
+      
       {/* COMMUNITY INPUT BUTTON */}
 
       <div className="mb-10">
@@ -426,91 +490,6 @@ const weightedAverage =
         </Link>
 
       </div>
-
-      {/* ASSESSMENT OVERVIEW */}
-      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-red-50">
-        <h2 className="text-3xl font-semibold text-red-700 mb-4">
-          Assessment Overview
-        </h2>
-      
-        <p className="text-gray-700 leading-relaxed">
-          Calgary Compass weighs AI-supported evaluation with community input to
-          provide a balanced perspective on each technology. The current weight metric is 50-50.
-        </p>
-      
-        <div className="grid md:grid-cols-3 gap-4 mt-6">
-          <div className="bg-white rounded-xl p-4">
-            <h3 className="font-semibold text-red-700 mb-2">
-              AI Assessment
-            </h3>
-      
-            <p className="text-gray-600 text-sm">
-              Evaluates the technology against Calgary's strategic priorities using
-              OpenAlex to gather data from scholarly reviewed papers on emerging technologies.
-            </p>
-          </div>
-      
-          <div className="bg-white rounded-xl p-4">
-            <h3 className="font-semibold text-red-700 mb-2">
-              Community Assessment
-            </h3>
-      
-            <p className="text-gray-600 text-sm">
-              Reflects how community participants score the technology across the
-              same evaluation criteria as AI is evaluating. 
-            </p>
-          </div>
-      
-          <div className="bg-white rounded-xl p-4">
-            <h3 className="font-semibold text-red-700 mb-2">
-              Combined Assessment
-            </h3>
-      
-            <p className="text-gray-600 text-sm">
-              Integrates AI evaluation and community feedback into a single score.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* HOW TECHNOLOGIES ARE MANAGED */}
-      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-gray-50">
-
-          <h3 className="text-xl font-semibold text-red-700 mb-3">
-            How Technologies Are Evaluated
-          </h3>
-        
-          <p className="text-gray-700 mb-4">
-            Calgary Compass evaluates technologies using Calgary City
-            Council's six strategic priorities.
-          </p>
-        
-          <ul className="list-disc pl-6 text-gray-700 space-y-2">
-        
-            <li>Reliable and Sustainable Infrastructure</li>
-        
-            <li>Safe City</li>
-        
-            <li>Functional Transportation Network</li>
-        
-            <li>Community Livability and Well-being</li>
-        
-            <li>Balanced Growth and Evolving Neighbourhoods</li>
-        
-            <li>Trusted and Collaborative Government</li>
-        
-          </ul>
-        
-          <a
-            href="https://www.calgary.ca/council/council-priorities.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-4 text-red-700 font-semibold hover:underline"
-          >
-            Learn more about Calgary's Council Priorities →
-          </a>
-        
-        </div>
 
       {/* AI VS COMMUNITY */}
 
@@ -567,7 +546,7 @@ const weightedAverage =
                 <Legend />
 
                 <Bar
-                  dataKey="Human"
+                  dataKey="Community"
                   fill="#dc2626"
                   radius={[0, 6, 6, 0]}
                 />
@@ -587,82 +566,41 @@ const weightedAverage =
         ) : (
 
           <p className="text-gray-500">
-
             Waiting for community votes.
-
           </p>
-
         )}
-
       </div>
 
-      {/* ASSESSMENT SUMMARIES */}
-      <div className="grid md:grid-cols-3 gap-6 mb-10">
+     
+      
 
-        <div className="compass-card p-6 text-center">
-      
-          <p className="text-gray-500 mb-2">
-            AI Assessment
-          </p>
-      
-          <p className="text-5xl font-bold text-red-700">
-            {aiAverage}
-          </p>
-      
-          <p className="text-gray-500">
-            out of 10
-          </p>
-      
-        </div>
-      
-        <div className="compass-card p-6 text-center">
-      
-          <p className="text-gray-500 mb-2">
-            Community Assessment
-          </p>
-      
-          <p className="text-5xl font-bold text-red-700">
-            {communityAverage}
-          </p>
-      
-          <p className="text-gray-500">
-            out of 10
-          </p>
-      
-        </div>
-      
-        <div className="compass-card p-6 text-center">
-      
-          <p className="text-gray-500 mb-2">
-            Combined Assessment
-          </p>
-      
-          <p className="text-5xl font-bold text-red-700">
-            {weightedAverage}
-          </p>
-      
-          <p className="text-gray-500">
-            out of 10
-          </p>
-      
-        </div>
-      
-      </div>
+
 
       {/* ASSESSMENTS */}
-
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
         
 
         {/* AI ASSESSMENT */}
-
         <div className="border border-gray-200 rounded-2xl p-4 md:p-6 shadow-sm bg-white">
-
           <h2 className="text-xl md:text-2xl font-bold text-red-700 mb-4 md:mb-6">
-
             AI Assessment
-
           </h2>
+
+          <div className="mt-6">
+
+            <p className="text-4xl font-bold text-black">
+
+              {aiAverage}/10
+
+            </p>
+
+            <p className="text-gray-500 mt-1">
+
+              Average AI Score
+
+            </p>
+
+          </div>
 
           {aiEvaluation ? (
 
@@ -714,51 +652,6 @@ const weightedAverage =
               
               </div>
 
-              <div className="mt-6">
-
-                <h3 className="text-lg font-semibold text-red-700 mb-2">
-
-                  Assessment Explanation
-
-                </h3>
-
-                <p className="text-gray-600 leading-relaxed">
-
-                  The AI assessment for {technology.name}
-                  reflects its expected value for municipal
-                  operations, public impact, governance,
-                  and long-term innovation potential.
-
-                  <br /><br />
-
-                  Higher scores indicate stronger projected
-                  benefits in areas such as efficiency,
-                  scalability, service delivery, and smart
-                  city integration, while lower scores
-                  reflect potential challenges related to
-                  cost, implementation complexity,
-                  governance, or public trust.
-
-                </p>
-
-              </div>
-
-              <div className="mt-6">
-
-                <p className="text-4xl font-bold text-black">
-
-                  {aiAverage}/10
-
-                </p>
-
-                <p className="text-gray-500 mt-1">
-
-                  Average AI Score
-
-                </p>
-
-              </div>
-
             </>
 
           ) : (
@@ -782,6 +675,18 @@ const weightedAverage =
             Community Assessment
 
           </h2>
+
+          <div className="mt-6">
+
+            <p className="text-4xl font-bold text-black">
+              {communityAverage}/10
+            </p>
+
+            <p className="text-gray-500 mt-1">
+              Average Community Score
+            </p>
+
+          </div>
 
           {comparison ? (
 
@@ -838,11 +743,6 @@ const weightedAverage =
                   Community Participation
                 </h3>
 
-                <p className="text-gray-600">
-                  Community votes represent the aggregated
-                  perspectives of survey participants.
-                </p>
-
                 <p className="mt-4 text-gray-700 font-medium">
                   Total Community Participants:{" "}
                   {comparison?.vote_count ?? 0}
@@ -850,17 +750,7 @@ const weightedAverage =
 
               </div>
 
-              <div className="mt-6">
-
-                <p className="text-4xl font-bold text-black">
-                  {communityAverage}/10
-                </p>
-
-                <p className="text-gray-500 mt-1">
-                  Average Community Score
-                </p>
-
-              </div>
+              
 
             </>
 
@@ -883,6 +773,18 @@ const weightedAverage =
             Weighted Assessment
 
           </h2>
+          <div className="mt-6">
+
+            <p className="text-4xl font-bold text-black">
+              {weightedAverage}/10
+            </p>
+
+            <p className="text-gray-500 mt-1">
+              Weighted Score
+            </p>
+
+          </div>
+
 
           {weightedScores ? (
 
@@ -934,32 +836,7 @@ const weightedAverage =
               
               </div>
 
-              <div className="mt-6">
-
-                <h3 className="text-lg font-semibold text-red-700 mb-2">
-                  Combined Assessment
-                </h3>
-
-                <p className="text-gray-600">
-                  These scores combine AI evaluation and
-                  community voting using the platform's
-                  weighting methodology (50-50).
-                </p>
-
-              </div>
-
-              <div className="mt-6">
-
-                <p className="text-4xl font-bold text-black">
-                  {weightedAverage}/10
-                </p>
-
-                <p className="text-gray-500 mt-1">
-                  Weighted Score
-                </p>
-
-              </div>
-
+              
             </>
 
           ) : (
@@ -969,6 +846,76 @@ const weightedAverage =
             </p>
 
           )}
+
+        </div>
+
+      </div>
+
+      {/* WHY CALGARY CARES */}
+
+      <div className="bg-white rounded-3xl border border-gray-200 shadow-sm mb-12 overflow-hidden">
+
+        <div className="border-b border-gray-200 px-10 py-6">
+
+          <h2 className="text-3xl font-bold text-red-700">
+            Why Calgary Cares
+          </h2>
+
+          <p className="text-gray-500 mt-2">
+            The strongest areas where this technology can support Calgary's long-term priorities.
+          </p>
+
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6 p-10">
+
+          <div className="bg-gray-50 rounded-2xl p-6">
+
+            <h3 className="font-bold text-lg mb-2">
+              Reliable Infrastructure
+            </h3>
+
+            <p className="text-gray-600">
+              Score: {weightedScores?.reliable_infrastructure ?? "—"}/10
+            </p>
+
+          </div>
+
+          <div className="bg-gray-50 rounded-2xl p-6">
+
+            <h3 className="font-bold text-lg mb-2">
+              Safe City
+            </h3>
+
+            <p className="text-gray-600">
+              Score: {weightedScores?.safe_city ?? "—"}/10
+            </p>
+
+          </div>
+
+          <div className="bg-gray-50 rounded-2xl p-6">
+
+            <h3 className="font-bold text-lg mb-2">
+              Transportation Network
+            </h3>
+
+            <p className="text-gray-600">
+              Score: {weightedScores?.transportation_network ?? "—"}/10
+            </p>
+
+          </div>
+
+          <div className="bg-gray-50 rounded-2xl p-6">
+
+            <h3 className="font-bold text-lg mb-2">
+              Community Wellbeing
+            </h3>
+
+            <p className="text-gray-600">
+              Score: {weightedScores?.community_wellbeing ?? "—"}/10
+            </p>
+
+          </div>
 
         </div>
 
@@ -1222,6 +1169,92 @@ const weightedAverage =
         </div>
       
       )}
+
+       {/* ASSESSMENT OVERVIEW */}
+      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-red-50">
+        <h2 className="text-3xl font-semibold text-red-700 mb-4">
+          Assessment Overview
+        </h2>
+      
+        <p className="text-gray-700 leading-relaxed">
+          Calgary Compass weighs AI-supported evaluation with community input to
+          provide a balanced perspective on each technology. The current weight metric is 50-50.
+        </p>
+      
+        <div className="grid md:grid-cols-3 gap-4 mt-6">
+          <div className="bg-white rounded-xl p-4">
+            <h3 className="font-semibold text-red-700 mb-2">
+              AI Assessment
+            </h3>
+      
+            <p className="text-gray-600 text-sm">
+              Evaluates the technology against Calgary's strategic priorities using
+              OpenAlex to gather data from scholarly reviewed papers on emerging technologies.
+            </p>
+          </div>
+      
+          <div className="bg-white rounded-xl p-4">
+            <h3 className="font-semibold text-red-700 mb-2">
+              Community Assessment
+            </h3>
+      
+            <p className="text-gray-600 text-sm">
+              Reflects how community participants score the technology across the
+              same evaluation criteria as AI is evaluating. 
+            </p>
+          </div>
+      
+          <div className="bg-white rounded-xl p-4">
+            <h3 className="font-semibold text-red-700 mb-2">
+              Combined Assessment
+            </h3>
+      
+            <p className="text-gray-600 text-sm">
+              Integrates AI evaluation and community feedback into a single score.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* HOW TECHNOLOGIES ARE MANAGED */}
+      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-gray-50">
+
+          <h3 className="text-xl font-semibold text-red-700 mb-3">
+            How Technologies Are Evaluated
+          </h3>
+        
+          <p className="text-gray-700 mb-4">
+            Calgary Compass evaluates technologies using Calgary City
+            Council's six strategic priorities.
+          </p>
+        
+          <ul className="list-disc pl-6 text-gray-700 space-y-2">
+        
+            <li>Reliable and Sustainable Infrastructure</li>
+        
+            <li>Safe City</li>
+        
+            <li>Functional Transportation Network</li>
+        
+            <li>Community Livability and Well-being</li>
+        
+            <li>Balanced Growth and Evolving Neighbourhoods</li>
+        
+            <li>Trusted and Collaborative Government</li>
+        
+          </ul>
+        
+          <a
+            href="https://www.calgary.ca/council/council-priorities.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-4 text-red-700 font-semibold hover:underline"
+          >
+            Learn more about Calgary's Council Priorities →
+          </a>
+        
+        </div>
+
       
 
     </main>
