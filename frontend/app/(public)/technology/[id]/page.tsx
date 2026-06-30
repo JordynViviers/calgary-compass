@@ -432,7 +432,7 @@ const weightedAverage =
                 </p>
 
               </div>
-
+            <div className="h-1 bg-red-700"/>
               <div className="p-6">
                 <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
                   Average community score
@@ -441,7 +441,7 @@ const weightedAverage =
                   {communityAverage}
                 </p>
               </div>
-              
+             <div className="h-1 bg-red-700"/>
               <div className="p-6">
                 <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
                   Community participants
@@ -452,7 +452,7 @@ const weightedAverage =
                 </p>
 
               </div>
-
+            <div className="h-1 bg-red-700"/>
               <div className="p-6">
 
                 <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
