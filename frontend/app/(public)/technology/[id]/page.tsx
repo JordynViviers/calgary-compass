@@ -429,6 +429,7 @@ const weightedAverage =
                   </p>
                 </div>
 
+            <div className="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden">
               <div className="h-1 bg-red-700"/>
                 <div className="p-6">
                   <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
@@ -438,6 +439,8 @@ const weightedAverage =
                     {communityAverage}
                   </p>
                 </div>
+
+            <div className="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden">   
               <div className="h-1 bg-red-700"/>
                 <div className="p-6">
                   <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
@@ -449,6 +452,8 @@ const weightedAverage =
                   </p>
 
                 </div>
+
+            <div className="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden">
               <div className="h-1 bg-red-700"/>
                 <div className="p-6">
 
