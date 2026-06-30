@@ -2382,3 +2382,66 @@ def submit_community_submission(
 
     }
 
+@app.get("/community-summary")
+def community_summary(
+    db: Session = Depends(get_db)
+):
+
+    total_surveys = db.query(
+        CommunitySubmission
+    ).count()
+
+    stakeholder_counts = (
+        db.query(
+            CommunitySubmission.stakeholder,
+            func.count(CommunitySubmission.id)
+        )
+        .group_by(
+            CommunitySubmission.stakeholder
+        )
+        .all()
+    )
+
+    total_signals = db.query(
+        CommunitySignal
+    ).count()
+
+    total_votes = db.query(
+        Vote
+    ).count()
+
+    latest_submission = (
+        db.query(
+            CommunitySubmission.created_at
+        )
+        .order_by(
+            CommunitySubmission.created_at.desc()
+        )
+        .first()
+    )
+
+    stakeholder_summary = {
+        stakeholder: count
+        for stakeholder, count in stakeholder_counts
+    }
+
+    return {
+
+        "total_surveys":
+            total_surveys,
+
+        "stakeholders":
+            stakeholder_summary,
+
+        "total_signals":
+            total_signals,
+
+        "technology_votes":
+            total_votes,
+
+        "last_submission":
+            latest_submission[0]
+            if latest_submission
+            else None
+
+    }
