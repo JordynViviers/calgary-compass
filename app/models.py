@@ -95,11 +95,11 @@ class AIEvaluation(Base):
     # existing summary
     summary = Column(String)
     # NEW AI ANALYSIS FIELDS
-    technology_summary = Column(String)
-    calgary_problem = Column(String)
-    global_examples = Column(String)
-    implementation_statistics = Column(String)
-    governance_recommendation = Column(String)
+    technology_summary = Column(Text)
+    calgary_problem = Column(Text)
+    global_examples = Column(Text)
+    implementation_statistics = Column(Text)
+    governance_recommendation = Column(Text)
 # =========================
 # COMMUNITY SIGNALS
 # =========================
