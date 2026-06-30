@@ -417,8 +417,7 @@ const weightedAverage =
 
         {/* QUICK FACTS */}
           <div className="grid md:grid-cols-4 gap-6">
-            <div className="h-1 bg-red-700 rounded-t-2xl">
-            <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
+            <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm h-1 bg-red-700 rounded-t-2xl">
 
               <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
                 Weighted Score
