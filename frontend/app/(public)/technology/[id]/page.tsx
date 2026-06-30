@@ -584,266 +584,361 @@ const weightedAverage =
           </p>
         )}
 
-        {/* ASSESSMENTS */}
-        
+        {/* ASSESSMENT CARDS */}
 
-        {/* AI ASSESSMENT */}
-        <div className="border border-gray-200 rounded-2xl p-4 md:p-6 shadow-sm bg-white">
-          <h2 className="text-xl md:text-2xl font-bold text-red-700 mb-4 md:mb-6">
-            AI Assessment
-          </h2>
+        <div className="grid lg:grid-cols-2 gap-8 mt-10">
 
-          <div className="mt-6">
+          {/* ================= AI ASSESSMENT ================= */}
 
-            <p className="text-4xl font-bold text-black">
+          <div className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm">
+            <div className="h-1 bg-red-700" />
 
-              {aiAverage}/10
+            <div className="p-8">
 
-            </p>
+              <div className="flex items-center justify-between mb-8">
 
-          </div>
+                <div>
+                  <p className="text-sm uppercase tracking-wider text-gray-500">
+                    AI Assessment
+                  </p>
 
-          {aiEvaluation ? (
+                  <h2 className="text-3xl font-bold text-gray-900 mt-1">
+                    Overall Score
+                  </h2>
+                </div>
 
-            <>
-
-              <div className="space-y-3 text-gray-700">
-
-                <div className="flex justify-between">
-                  <span>Reliable Infrastructure</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.reliable_infrastructure}/10
+                <div className="w-24 h-24 rounded-full bg-red-700 text-white flex flex-col items-center justify-center shadow-lg">
+                  <span className="text-3xl font-bold">
+                    {aiAverage}
+                  </span>
+                  <span className="text-sm">
+                    /10
                   </span>
                 </div>
-              
-                <div className="flex justify-between">
-                  <span>Safe City</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.safe_city}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Transportation Network</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.transportation_network}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Community Well-being</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.community_wellbeing}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Balanced Growth</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.balanced_growth}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Trusted Governance</span>
-                  <span className="font-bold text-red-700">
-                    {aiEvaluation.trusted_governance}/10
-                  </span>
-                </div>
-              
+
               </div>
 
-            </>
+              {aiEvaluation ? (
 
-          ) : (
+                <div className="space-y-6">
 
-            <p className="text-gray-500">
+                  {[
+                    {
+                      label: "Reliable Infrastructure",
+                      value: aiEvaluation.reliable_infrastructure,
+                    },
+                    {
+                      label: "Safe City",
+                      value: aiEvaluation.safe_city,
+                    },
+                    {
+                      label: "Transportation Network",
+                      value: aiEvaluation.transportation_network,
+                    },
+                    {
+                      label: "Community Well-being",
+                      value: aiEvaluation.community_wellbeing,
+                    },
+                    {
+                      label: "Balanced Growth",
+                      value: aiEvaluation.balanced_growth,
+                    },
+                    {
+                      label: "Trusted Governance",
+                      value: aiEvaluation.trusted_governance,
+                    },
+                  ].map((item) => (
 
-              AI assessment not available yet.
+                    <div key={item.label}>
 
-            </p>
+                      <div className="flex justify-between mb-2">
 
-          )}
+                        <span className="font-medium text-gray-700">
+                          {item.label}
+                        </span>
 
-        </div>
+                        <span className="font-bold text-red-700">
+                          {item.value}/10
+                        </span>
 
-        {/* COMMUNITY ASSESSMENT */}
+                      </div>
 
-        <div className="border border-gray-200 rounded-2xl p-6 shadow-sm bg-white">
+                      <div className="h-2 rounded-full bg-gray-200">
 
-          <h2 className="text-xl md:text-2xl font-bold text-red-700 mb-4 md:mb-6">
+                        <div
+                          className={`h-2 rounded-full transition-all duration-700 ${
+                            item.value >= 8 ? "bg-red-700" : "bg-gray-400"
+                          }`}
+                          style={{
+                            width: `${item.value * 10}%`,
+                          }}
+                        />
 
-            Community Assessment
+                      </div>
 
-          </h2>
+                    </div>
 
-          <div className="mt-6">
+                  ))}
 
-            <p className="text-4xl font-bold text-black">
-              {communityAverage}/10
-            </p>
-
-          </div>
-
-          {comparison ? (
-
-            <>
-
-              <div className="space-y-3 text-gray-700">
-
-                <div className="flex justify-between">
-                  <span>Reliable Infrastructure</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.reliable_infrastructure}/10
-                  </span>
                 </div>
-              
-                <div className="flex justify-between">
-                  <span>Safe City</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.safe_city}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Transportation Network</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.transportation_network}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Community Well-being</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.community_wellbeing}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Balanced Growth</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.balanced_growth}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Trusted Governance</span>
-                  <span className="font-bold text-red-700">
-                    {comparison.human.trusted_governance}/10
-                  </span>
-                </div>
-              
-              </div>
-              <div className="mt-6">
 
-                <h3 className="text-lg font-semibold text-red-700 mb-2">
-                  Community Participation
-                </h3>
+              ) : (
 
-                <p className="mt-4 text-gray-700 font-medium">
-                  Total Community Participants:{" "}
-                  {comparison?.vote_count ?? 0}
+                <p className="text-gray-500">
+                  AI assessment not available yet.
                 </p>
 
-              </div>
+              )}
 
-              
-
-            </>
-
-          ) : (
-
-            <p className="text-gray-500">
-              Community assessment not available yet.
-            </p>
-
-          )}
-
-        </div>
-
-        {/* WEIGHTED ASSESSMENT */}
-
-        <div className="border border-gray-200 rounded-2xl p-6 shadow-sm bg-white">
-
-          <h2 className="text-xl md:text-2xl font-bold text-red-700 mb-4 md:mb-6">
-
-            Weighted Assessment
-
-          </h2>
-          <div className="mt-6">
-
-            <p className="text-4xl font-bold text-black">
-              {weightedAverage}/10
-            </p>
+            </div>
 
           </div>
 
+          {/* ================= COMMUNITY ASSESSMENT ================= */}
 
-          {weightedScores ? (
+          <div className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm">
+            <div className="h-1 bg-red-700" />
 
-            <>
+            <div className="p-8">
 
-              <div className="space-y-3 text-gray-700">
+              <div className="flex items-center justify-between mb-8">
 
-                <div className="flex justify-between">
-                  <span>Reliable Infrastructure</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.reliable_infrastructure}/10
-                  </span>
+                <div>
+
+                  <p className="text-sm uppercase tracking-wider text-gray-500">
+                    Community Assessment
+                  </p>
+
+                  <h2 className="text-3xl font-bold text-gray-900 mt-1">
+                    Overall Score
+                  </h2>
+
                 </div>
-              
-                <div className="flex justify-between">
-                  <span>Safe City</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.safe_city}/10
+
+                <div className="w-24 h-24 rounded-full bg-red-700 text-white flex flex-col items-center justify-center shadow-lg">
+
+                  <span className="text-3xl font-bold">
+                    {communityAverage}
                   </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Transportation Network</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.transportation_network}/10
+
+                  <span className="text-sm">
+                    /10
                   </span>
+
                 </div>
-              
-                <div className="flex justify-between">
-                  <span>Community Well-being</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.community_wellbeing}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Balanced Growth</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.balanced_growth}/10
-                  </span>
-                </div>
-              
-                <div className="flex justify-between">
-                  <span>Trusted Governance</span>
-                  <span className="font-bold text-red-700">
-                    {weightedScores.trusted_governance}/10
-                  </span>
-                </div>
-              
+
               </div>
 
-              
-            </>
+              {comparison ? (
 
-          ) : (
+                <>
 
-            <p className="text-gray-500">
-              Weighted assessment not available yet.
-            </p>
+                  <div className="space-y-6">
 
-          )}
+                    {[
+                      {
+                        label: "Reliable Infrastructure",
+                        value: comparison.human.reliable_infrastructure,
+                      },
+                      {
+                        label: "Safe City",
+                        value: comparison.human.safe_city,
+                      },
+                      {
+                        label: "Transportation Network",
+                        value: comparison.human.transportation_network,
+                      },
+                      {
+                        label: "Community Well-being",
+                        value: comparison.human.community_wellbeing,
+                      },
+                      {
+                        label: "Balanced Growth",
+                        value: comparison.human.balanced_growth,
+                      },
+                      {
+                        label: "Trusted Governance",
+                        value: comparison.human.trusted_governance,
+                      },
+                    ].map((item) => (
+
+                      <div key={item.label}>
+
+                        <div className="flex justify-between mb-2">
+
+                          <span className="font-medium text-gray-700">
+                            {item.label}
+                          </span>
+
+                          <span className="font-bold text-red-700">
+                            {item.value}/10
+                          </span>
+
+                        </div>
+
+                        <div className="h-2 rounded-full bg-gray-200">
+
+                          <div
+                            className={`h-2 rounded-full transition-all duration-700 ${
+                              item.value >= 8 ? "bg-red-700" : "bg-gray-400"
+                            }`}
+                            style={{
+                              width: `${item.value * 10}%`,
+                            }}
+                          />
+
+                        </div>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-gray-200">
+
+                    <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+                      Community Participation
+                    </p>
+
+                    <p className="text-3xl font-bold text-gray-900">
+                      {comparison.vote_count}
+                    </p>
+
+                    <p className="text-gray-500">
+                      Total community participants
+                    </p>
+
+                  </div>
+
+                </>
+
+              ) : (
+
+                <p className="text-gray-500">
+                  Community assessment not available yet.
+                </p>
+
+              )}
+
+            </div>
+
+          </div>
 
         </div>
 
-      </div>
+        {/* ================= WEIGHTED ASSESSMENT ================= */}
 
+        <div className="mt-8 bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm">
+
+          <div className="h-1 bg-red-700" />
+
+          <div className="p-8">
+
+            <div className="flex items-center justify-between mb-8">
+
+              <div>
+
+                <p className="text-sm uppercase tracking-wider text-gray-500">
+                  Final Weighted Assessment
+                </p>
+
+                <h2 className="text-3xl font-bold text-gray-900 mt-1">
+                  Overall Score
+                </h2>
+
+              </div>
+
+              <div className="w-24 h-24 rounded-full bg-red-700 text-white flex flex-col items-center justify-center shadow-lg">
+
+                <span className="text-3xl font-bold">
+                  {weightedAverage}
+                </span>
+
+                <span className="text-sm">
+                  /10
+                </span>
+
+              </div>
+
+            </div>
+
+            {weightedScores ? (
+
+              <div className="grid md:grid-cols-2 gap-x-10 gap-y-6">
+
+                {[
+                  {
+                    label: "Reliable Infrastructure",
+                    value: weightedScores.reliable_infrastructure,
+                  },
+                  {
+                    label: "Safe City",
+                    value: weightedScores.safe_city,
+                  },
+                  {
+                    label: "Transportation Network",
+                    value: weightedScores.transportation_network,
+                  },
+                  {
+                    label: "Community Well-being",
+                    value: weightedScores.community_wellbeing,
+                  },
+                  {
+                    label: "Balanced Growth",
+                    value: weightedScores.balanced_growth,
+                  },
+                  {
+                    label: "Trusted Governance",
+                    value: weightedScores.trusted_governance,
+                  },
+                ].map((item) => (
+
+                  <div key={item.label}>
+
+                    <div className="flex justify-between mb-2">
+
+                      <span className="font-medium text-gray-700">
+                        {item.label}
+                      </span>
+
+                      <span className="font-bold text-red-700">
+                        {item.value}/10
+                      </span>
+
+                    </div>
+
+                    <div className="h-2 rounded-full bg-gray-200">
+
+                      <div
+                        className={`h-2 rounded-full transition-all duration-700 ${
+                          item.value >= 8 ? "bg-red-700" : "bg-gray-400"
+                        }`}
+                        style={{
+                          width: `${item.value * 10}%`,
+                        }}
+                      />
+
+                    </div>
+
+                  </div>
+
+                ))}
+
+              </div>
+
+            ) : (
+
+              <p className="text-gray-500">
+                Weighted assessment not available yet.
+              </p>
+
+            )}
+
+          </div>
+
+        </div>
+      </div>
       {/* WHY CALGARY CARES */}
 
       <div className="bg-white rounded-3xl border border-gray-200 shadow-sm mb-12 overflow-hidden">
