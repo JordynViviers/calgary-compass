@@ -1,9 +1,84 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Users, Compass, MessageSquare } from "lucide-react";
 
 export default function Home() {
+  const API_URL =
+  "https://calgary-compass-api.onrender.com";
+
+const [stats, setStats] = useState({
+
+  technologies: 0,
+
+  surveys: 0,
+
+  signals: 0,
+
+  events: 0
+
+});
+  useEffect(() => {
+
+    Promise.all([
+
+      axios.get(`${API_URL}/technologies`),
+
+      axios.get(`${API_URL}/community-summary`),
+
+      axios.get(`${API_URL}/events`)
+
+    ])
+
+      .then(([techRes, communityRes, eventRes]) => {
+
+        setStats({
+
+          technologies:
+            techRes.data.length,
+
+          surveys:
+            communityRes.data.total_surveys,
+
+          signals:
+            communityRes.data.total_signals,
+
+          events:
+            eventRes.data.length
+
+        });
+
+      })
+
+      .catch((err) => {
+
+        console.error(
+          "Failed to load homepage stats",
+          err
+        );
+
+      });
+
+  }, []);
+
+
+const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("/api/users");
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   return (
     <main className="relative min-h-screen bg-white text-black overflow-hidden">
       {/* HERO */}
@@ -331,7 +406,7 @@ export default function Home() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm text-center">
               <p className="text-3xl md:text-5xl font-bold text-red-700">
-                50+
+                {stats.technologies}
               </p>
 
               <p className="mt-3 text-gray-600">
@@ -341,17 +416,17 @@ export default function Home() {
 
             <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm text-center">
               <p className="text-3xl md:text-5xl font-bold text-red-700">
-                500+
+                {stats.surveys}
               </p>
 
               <p className="mt-3 text-gray-600">
-                Community Responses
+                Completed Surveys
               </p>
             </div>
 
             <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm text-center">
               <p className="text-3xl md:text-5xl font-bold text-red-700">
-                20+
+                {stats.signals}
               </p>
             
               <p className="mt-3 text-gray-600">
@@ -361,7 +436,7 @@ export default function Home() {
 
             <div className="bg-white border border-gray-200 rounded-2xl p-4 md:p-8 shadow-sm text-center">
               <p className="text-3xl md:text-5xl font-bold text-red-700">
-                10+
+                {stats.events}
               </p>
 
               <p className="mt-3 text-gray-600">
