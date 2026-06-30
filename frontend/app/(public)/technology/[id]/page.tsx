@@ -940,179 +940,180 @@ const weightedAverage =
           </div>
         </div>
       </div>
-      {/* COMMUNITY CHALLENGE IMPACT */}
+      {/* COMMUNITY CHALLENGE ALIGNMENT */}
 
       {impactData && (
-      
-      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
-      
-          <div className="flex justify-between items-center mb-8">
-      
-              <div>
-      
-                  <h2 className="text-3xl font-bold text-red-700">
-      
-                      Community Challenge Impact
-      
-                  </h2>
-      
-                  <p className="text-gray-600 mt-2">
-      
-                      Estimated impact across Calgary's community challenges based on community priorities and mapped technology applications.
-      
+
+      <div className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm mb-10">
+
+          <div className="h-1 bg-red-700" />
+
+          <div className="p-8">
+
+              <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 mb-10">
+
+                  <div>
+
+                      <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+                          Community Priorities
+                      </p>
+
+                      <h2 className="text-4xl font-bold text-gray-900">
+                          Community Challenge Alignment
+                      </h2>
+
+                      <p className="text-gray-600 mt-4 max-w-3xl leading-relaxed">
+
+                          Alignment scores are calculated by combining Calgary Compass
+                          community priorities with mapped technology applications.
+                          These scores represent how strongly this technology aligns
+                          with community-identified challenges rather than predicting
+                          future outcomes.
+
+                      </p>
+
+                  </div>
+
+                  <div className="text-center lg:text-right">
+
+                      <div className="text-6xl font-black text-red-700">
+                          {Object.keys(impactData).length}
+                      </div>
+
+                      <p className="uppercase tracking-wider text-gray-500 text-sm mt-2">
+                          Challenges Connected
+                      </p>
+
+                  </div>
+
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-8">
+
+                  {Object.entries(impactData)
+
+                  .sort((a:any,b:any)=>b[1].score-a[1].score)
+
+                  .map(([challenge,data]:any)=>{
+
+                      const width = Math.min(data.score*10,100);
+
+                      return(
+
+                      <div
+                          key={challenge}
+                          className="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden"
+                      >
+
+                          <div className="h-1 bg-red-700"/>
+
+                          <div className="p-6">
+
+                              <div className="flex justify-between items-start mb-6">
+
+                                  <div>
+
+                                      <h3 className="text-2xl font-bold text-gray-900">
+                                          {challenge}
+                                      </h3>
+
+                                      <p className="text-gray-500 mt-2">
+                                          Alignment with community priorities
+                                      </p>
+
+                                  </div>
+
+                                  <div className="text-right">
+
+                                      <div className="text-4xl font-black text-gray-900">
+                                          {data.score}
+                                      </div>
+
+                                      <div className="text-gray-500 text-sm">
+                                          /10
+                                      </div>
+
+                                  </div>
+
+                              </div>
+
+                              <div className="h-3 bg-gray-200 rounded-full overflow-hidden mb-8">
+
+                                  <div
+                                      className={`h-full rounded-full transition-all duration-700 ${
+                                          data.score >= 8
+                                              ? "bg-red-700"
+                                              : "bg-gray-400"
+                                      }`}
+                                      style={{
+                                          width:`${width}%`
+                                      }}
+                                  />
+
+                              </div>
+
+                              <div className="flex justify-between text-sm uppercase tracking-wider text-gray-500 mb-3">
+
+                                  <span>Supporting Applications</span>
+
+                                  <span>
+                                      {data.applications.length} mapped
+                                  </span>
+
+                              </div>
+
+                              <div className="flex flex-wrap gap-2">
+
+                                  {data.applications.map(
+                                      (application:string)=>(
+
+                                      <span
+                                          key={application}
+                                          className="px-3 py-1 rounded-full border border-red-200 bg-white text-red-700 text-sm"
+                                      >
+
+                                          {application}
+
+                                      </span>
+
+                                      )
+                                  )}
+
+                              </div>
+
+                          </div>
+
+                      </div>
+
+                      );
+
+                  })}
+
+              </div>
+
+              <div className="mt-10 pt-8 border-t border-gray-200">
+
+                  <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+                      How Alignment is Calculated
                   </p>
-      
+
+                  <p className="text-gray-600 leading-relaxed">
+
+                      Alignment scores are calculated by combining community
+                      priority ratings with mapped technology applications.
+                      Technologies that support applications connected to highly
+                      prioritized community challenges receive stronger alignment
+                      scores. These values are intended to support discussion and
+                      exploration rather than predict real-world impact.
+
+                  </p>
+
               </div>
-      
-              <div className="text-right">
-      
-                  <div className="text-5xl font-bold text-red-700">
-      
-                      {Object.keys(impactData).length}
-      
-                  </div>
-      
-                  <div className="text-gray-500">
-      
-                      Challenges Supported
-      
-                  </div>
-      
-              </div>
-      
+
           </div>
-      
-          <div className="grid lg:grid-cols-2 gap-6">
-      
-              {Object.entries(impactData)
-      
-              .sort(
-      
-                  (a:any,b:any)=>
-      
-                  b[1].score-a[1].score
-      
-              )
-      
-              .map(([challenge,data]:any)=>{
-      
-                  const width=Math.min(data.score*10,100);
-      
-                  const colour =
-                    data.score >= 8
-                        ? "bg-red-700"
-                        : data.score >= 5
-                        ? "bg-red-500"
-                        : "bg-red-200";
-            
-                  const label =
-                    data.score >= 8
-                        ? "High Impact"
-                        : data.score >= 5
-                        ? "Moderate Impact"
-                        : "Emerging";
 
-
-      
-                  return(
-      
-                  <div
-      
-                  key={challenge}
-      
-                  className="rounded-2xl border border-gray-200 p-6 hover:shadow-md transition"
-      
-                  >
-      
-                      <div className="flex justify-between items-start mb-4">
-      
-                          <h3 className="font-bold text-xl">
-      
-                              {challenge}
-      
-                          </h3>
-      
-                          <div className="text-right">
-
-                            <span
-                                className={`
-                                    inline-block
-                                    px-3
-                                    py-1
-                                    rounded-full
-                                    text-white
-                                    text-sm
-                                    font-semibold
-                                    ${colour}
-                                `}
-                            >
-                                {label}
-                            </span>
-                        
-                            <p className="mt-2 text-lg font-bold text-gray-800">
-                                {data.score}/10
-                            </p>
-                        
-                        </div>
-      
-                      </div>
-      
-                      <div className="h-3 bg-gray-200 rounded-full overflow-hidden mb-5">
-      
-                          <div
-      
-                          className={`${colour} h-full transition-all duration-700`}
-      
-                          style={{
-      
-                              width:`${width}%`
-      
-                          }}
-      
-                          />
-      
-                      </div>
-      
-                      <div className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-      
-                          Supporting Applications
-      
-                      </div>
-      
-                      <div className="flex flex-wrap gap-2">
-      
-                      {data.applications.map(
-      
-                          (application:string)=>(
-      
-                          <span
-      
-                          key={application}
-      
-                          className="bg-red-50 border border-red-200 text-red-700 px-3 py-1 rounded-full text-sm"
-      
-                          >
-      
-                          {application}
-      
-                          </span>
-      
-                          )
-      
-                      )}
-      
-                      </div>
-      
-                  </div>
-      
-                  );
-      
-              })}
-      
-          </div>
-      
       </div>
-      
+
       )}
 
   {/* TECHNOLOGY APPLICATIONS */}
