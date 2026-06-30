@@ -865,7 +865,7 @@ const weightedAverage =
 
               {weightedScores ? (
 
-                <div className="grid md:grid-cols-2 gap-x-10 gap-y-6">
+                <div className="space-y-6">
 
                   {[
                     {
