@@ -825,121 +825,121 @@ const weightedAverage =
 
           </div>
 
-        </div>
+        
 
-        {/* ================= WEIGHTED ASSESSMENT ================= */}
+          {/* ================= WEIGHTED ASSESSMENT ================= */}
 
-        <div className="mt-8 bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm">
+          <div className="mt-8 bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm">
 
-          <div className="h-1 bg-red-700" />
+            <div className="h-1 bg-red-700" />
 
-          <div className="p-8">
+            <div className="p-8">
 
-            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between mb-8">
 
-              <div>
+                <div>
 
-                <p className="text-sm uppercase tracking-wider text-gray-500">
-                  Final Weighted Assessment
+                  <p className="text-sm uppercase tracking-wider text-gray-500">
+                    Final Weighted Assessment
+                  </p>
+
+                  <h2 className="text-3xl font-bold text-gray-900 mt-1">
+                    Overall Score
+                  </h2>
+
+                </div>
+
+                <div className="w-24 h-24 rounded-full bg-red-700 text-white flex flex-col items-center justify-center shadow-lg">
+
+                  <span className="text-3xl font-bold">
+                    {weightedAverage}
+                  </span>
+
+                  <span className="text-sm">
+                    /10
+                  </span>
+
+                </div>
+
+              </div>
+
+              {weightedScores ? (
+
+                <div className="grid md:grid-cols-2 gap-x-10 gap-y-6">
+
+                  {[
+                    {
+                      label: "Reliable Infrastructure",
+                      value: weightedScores.reliable_infrastructure,
+                    },
+                    {
+                      label: "Safe City",
+                      value: weightedScores.safe_city,
+                    },
+                    {
+                      label: "Transportation Network",
+                      value: weightedScores.transportation_network,
+                    },
+                    {
+                      label: "Community Well-being",
+                      value: weightedScores.community_wellbeing,
+                    },
+                    {
+                      label: "Balanced Growth",
+                      value: weightedScores.balanced_growth,
+                    },
+                    {
+                      label: "Trusted Governance",
+                      value: weightedScores.trusted_governance,
+                    },
+                  ].map((item) => (
+
+                    <div key={item.label}>
+
+                      <div className="flex justify-between mb-2">
+
+                        <span className="font-medium text-gray-700">
+                          {item.label}
+                        </span>
+
+                        <span className="font-bold text-red-700">
+                          {item.value}/10
+                        </span>
+
+                      </div>
+
+                      <div className="h-2 rounded-full bg-gray-200">
+
+                        <div
+                          className={`h-2 rounded-full transition-all duration-700 ${
+                            item.value >= 8 ? "bg-red-700" : "bg-gray-400"
+                          }`}
+                          style={{
+                            width: `${item.value * 10}%`,
+                          }}
+                        />
+
+                      </div>
+
+                    </div>
+
+                  ))}
+
+                </div>
+
+              ) : (
+
+                <p className="text-gray-500">
+                  Weighted assessment not available yet.
                 </p>
 
-                <h2 className="text-3xl font-bold text-gray-900 mt-1">
-                  Overall Score
-                </h2>
-
-              </div>
-
-              <div className="w-24 h-24 rounded-full bg-red-700 text-white flex flex-col items-center justify-center shadow-lg">
-
-                <span className="text-3xl font-bold">
-                  {weightedAverage}
-                </span>
-
-                <span className="text-sm">
-                  /10
-                </span>
-
-              </div>
+              )}
 
             </div>
 
-            {weightedScores ? (
-
-              <div className="grid md:grid-cols-2 gap-x-10 gap-y-6">
-
-                {[
-                  {
-                    label: "Reliable Infrastructure",
-                    value: weightedScores.reliable_infrastructure,
-                  },
-                  {
-                    label: "Safe City",
-                    value: weightedScores.safe_city,
-                  },
-                  {
-                    label: "Transportation Network",
-                    value: weightedScores.transportation_network,
-                  },
-                  {
-                    label: "Community Well-being",
-                    value: weightedScores.community_wellbeing,
-                  },
-                  {
-                    label: "Balanced Growth",
-                    value: weightedScores.balanced_growth,
-                  },
-                  {
-                    label: "Trusted Governance",
-                    value: weightedScores.trusted_governance,
-                  },
-                ].map((item) => (
-
-                  <div key={item.label}>
-
-                    <div className="flex justify-between mb-2">
-
-                      <span className="font-medium text-gray-700">
-                        {item.label}
-                      </span>
-
-                      <span className="font-bold text-red-700">
-                        {item.value}/10
-                      </span>
-
-                    </div>
-
-                    <div className="h-2 rounded-full bg-gray-200">
-
-                      <div
-                        className={`h-2 rounded-full transition-all duration-700 ${
-                          item.value >= 8 ? "bg-red-700" : "bg-gray-400"
-                        }`}
-                        style={{
-                          width: `${item.value * 10}%`,
-                        }}
-                      />
-
-                    </div>
-
-                  </div>
-
-                ))}
-
-              </div>
-
-            ) : (
-
-              <p className="text-gray-500">
-                Weighted assessment not available yet.
-              </p>
-
-            )}
-
           </div>
-
         </div>
       </div>
-
       {/* COMMUNITY CHALLENGE IMPACT */}
 
       {impactData && (
