@@ -641,8 +641,8 @@ def comparison(
 
     return {
         "human": human,
-        "ai": ai
-        "total_votes:" total_votes
+        "ai": ai,
+        "total_votes": total_votes
     }
 
 

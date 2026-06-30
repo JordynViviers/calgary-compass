@@ -590,12 +590,6 @@ const weightedAverage =
 
             </p>
 
-            <p className="text-gray-500 mt-1">
-
-              Average AI Score
-
-            </p>
-
           </div>
 
           {aiEvaluation ? (
@@ -676,10 +670,6 @@ const weightedAverage =
 
             <p className="text-4xl font-bold text-black">
               {communityAverage}/10
-            </p>
-
-            <p className="text-gray-500 mt-1">
-              Average Community Score
             </p>
 
           </div>
@@ -773,10 +763,6 @@ const weightedAverage =
 
             <p className="text-4xl font-bold text-black">
               {weightedAverage}/10
-            </p>
-
-            <p className="text-gray-500 mt-1">
-              Weighted Score
             </p>
 
           </div>
