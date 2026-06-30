@@ -546,7 +546,7 @@ const weightedAverage =
                 <Legend />
 
                 <Bar
-                  dataKey="Community"
+                  dataKey="Human"
                   fill="#dc2626"
                   radius={[0, 6, 6, 0]}
                 />
