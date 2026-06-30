@@ -1167,7 +1167,7 @@ const weightedAverage =
       )}
 
        {/* ASSESSMENT OVERVIEW */}
-      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-red-50">
+      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-white">
         <h2 className="text-3xl font-semibold text-red-700 mb-4">
           Assessment Overview
         </h2>
@@ -1210,10 +1210,8 @@ const weightedAverage =
             </p>
           </div>
         </div>
-      </div>
 
-      {/* HOW TECHNOLOGIES ARE MANAGED */}
-      <div className="border border-gray-200 rounded-2xl p-8 shadow-sm mb-10 bg-gray-50">
+        {/* HOW TECHNOLOGIES ARE MANAGED */}
 
           <h3 className="text-xl font-semibold text-red-700 mb-3">
             How Technologies Are Evaluated
