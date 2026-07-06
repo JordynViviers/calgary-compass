@@ -164,6 +164,23 @@ export default function AdminNavbar() {
 
           </nav>
 
+          <Link
+              href="/admin/watchlist"
+              className="
+                text-sm
+                font-medium
+                text-gray-700
+                hover:text-red-700
+                border-b-2
+                border-transparent
+                hover:border-red-700
+                pb-1
+                transition
+              "
+            >
+              Technology Watchlist
+            </Link>
+
           {/* Public Site Button */}
           <Link
             href="/"
