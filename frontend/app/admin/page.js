@@ -341,6 +341,18 @@ export default function AdminHome() {
             </Link>
 
             <Link
+              href="/admin/challenge-mapping"
+              className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-red-300 transition"
+            >
+              <h2 className="text-2xl font-bold text-red-700 mb-2">
+                Challenge Mapping
+              </h2>
+              <p className="text-gray-600">
+                Connect technology applications to community challenges that they have the potential to solve.  
+              </p>
+            </Link>
+
+            <Link
               href="/admin/techApplications"
               className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-red-300 transition"
             >
