@@ -668,7 +668,7 @@ export default function TechnologyDetailPage() {
                         </span>
 
                         <span className="font-bold text-red-700">
-                          {item.value}/10
+                          {item.value.toFixed(1)}/10
                         </span>
 
                       </div>
@@ -781,9 +781,8 @@ export default function TechnologyDetailPage() {
                           </span>
 
                           <span className="font-bold text-red-700">
-                            {item.value}/10
+                            {item.value.toFixed(1)}/10
                           </span>
-
                         </div>
 
                         <div className="h-2 rounded-full bg-gray-200">
@@ -913,7 +912,7 @@ export default function TechnologyDetailPage() {
                         </span>
 
                         <span className="font-bold text-red-700">
-                          {item.value}/10
+                          {item.value.toFixed(1)}/10
                         </span>
 
                       </div>
