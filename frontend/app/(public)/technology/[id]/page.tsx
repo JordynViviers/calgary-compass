@@ -301,41 +301,51 @@ export default function TechnologyDetailPage() {
 
   const aiAverage =
     aiEvaluation
-      ? Math.round((
-          aiEvaluation.reliable_infrastructure +
-          aiEvaluation.safe_city +
-          aiEvaluation.transportation_network +
-          aiEvaluation.community_wellbeing +
-          aiEvaluation.balanced_growth + 
-          aiEvaluation.trusted_governance
-        ) / 6 )
+      ? Number(
+          (
+            (
+              aiEvaluation.reliable_infrastructure +
+              aiEvaluation.safe_city +
+              aiEvaluation.transportation_network +
+              aiEvaluation.community_wellbeing +
+              aiEvaluation.balanced_growth +
+              aiEvaluation.trusted_governance
+            ) / 6
+          ).toFixed(1)
+        )
       : 0;
-
-const communityAverage =
-  comparison
-    ? Math.round(
-        (
-          comparison.human.reliable_infrastructure +
-          comparison.human.safe_city +
-          comparison.human.transportation_network +
-          comparison.human.community_wellbeing +
-          comparison.human.balanced_growth + 
-          comparison.human.trusted_governance
-        ) / 6 )
-    : 0;
-
-const weightedAverage =
-  weightedScores
-    ? Math.round(
-        (
-          weightedScores.reliable_infrastructure +
-          weightedScores.safe_city +
-          weightedScores.transportation_network +
-          weightedScores.community_wellbeing +
-          weightedScores.balanced_growth + 
-          weightedScores.trusted_governance
-        ) / 6 )
-    : 0;
+  
+  const communityAverage =
+    comparison
+      ? Number(
+          (
+            (
+              comparison.human.reliable_infrastructure +
+              comparison.human.safe_city +
+              comparison.human.transportation_network +
+              comparison.human.community_wellbeing +
+              comparison.human.balanced_growth +
+              comparison.human.trusted_governance
+            ) / 6
+          ).toFixed(1)
+        )
+      : 0;
+  
+  const weightedAverage =
+    weightedScores
+      ? Number(
+          (
+            (
+              weightedScores.reliable_infrastructure +
+              weightedScores.safe_city +
+              weightedScores.transportation_network +
+              weightedScores.community_wellbeing +
+              weightedScores.balanced_growth +
+              weightedScores.trusted_governance
+            ) / 6
+          ).toFixed(1)
+        )
+      : 0;
 
 
   return (
