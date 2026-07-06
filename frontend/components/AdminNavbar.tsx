@@ -39,21 +39,6 @@ export default function AdminNavbar() {
 
             <div className="hidden md:block h-10 w-px bg-gray-300" />
 
-            <span
-              className="
-                hidden md:inline-flex
-                bg-red-100
-                text-red-700
-                px-3
-                py-1
-                rounded-full
-                text-sm
-                font-semibold
-              "
-            >
-              Admin Portal
-            </span>
-
           </div>
 
           {/* Navigation */}
