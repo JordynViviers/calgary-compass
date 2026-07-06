@@ -250,7 +250,7 @@ export default function AdminHome() {
         <div className="relative z-10 max-w-5xl w-full">
         
           {/* Logout */}
-          <div className="flex justify-end mb-6">
+          <div className="flex justify-end mt-8 mb-6">
         
             <button
               onClick={logout}
